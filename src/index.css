@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "BigNoodle";
+  src: url('./fonts/Bignoodle.ttf') format('truetype'); 
+}
+
+.font-bignoodle {
+  font-family: BigNoodleTitling;
+
+}

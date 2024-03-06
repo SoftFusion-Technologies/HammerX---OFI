@@ -1,0 +1,809 @@
+.box-padre {
+    height: auto;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.main1 .parrafos{
+    margin-top: -200px;
+}
+.parrafos h1 {
+    font-family: 'Oswald', sans-serif;
+    color: #ff7300;
+    font-weight: 400;
+    font-size: 80px;
+}
+.parrafos p {
+    margin-top: -30px;
+    font-size: 15px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn-main1 {
+    padding-top: 10vh;
+}
+.parrafos button {
+    font-family: 'Montserrat', sans-serif;
+    height: 35px;
+    width: 180px;
+    background-color: #ff7300;
+    border: none;
+    border-radius: 5px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.parrafos button:hover {
+    background-color: #be5600;
+    width: 200px;
+    color: white;
+}
+
+
+@media screen and (max-width:610px) {
+    .parrafos{
+        padding-top: -100px;
+    }
+    .parrafos h1 {
+        margin-top: 70px;
+        font-family: 'Oswald', sans-serif;
+        color: #ff7300;
+        font-weight: 400;
+        font-size: 50px;
+    }
+    .parrafos p {
+        margin-top: 30px;
+        font-size: 13px;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+@media screen and (max-width:440px) {
+    .main1 .parrafos{
+        margin-top: -190px;
+    }
+    .parrafos h1 {
+        margin-top: 70px;
+        font-family: 'Oswald', sans-serif;
+        color: #ff7300;
+        font-weight: 400;
+        font-size: 35px;
+    }
+    .parrafos p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .parrafos button {
+        font-family: 'Montserrat', sans-serif;
+        height: 30px;
+        width: 150px;
+        background-color: #ff7300;
+        border: none;
+        border-radius: 5px;
+        transition: .5s;
+        cursor: pointer;
+    }
+    .parrafos button:hover {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #be5600;
+        width: 150px;
+        border: none;
+        border-radius: 5px;
+        transition: .5s;
+        cursor: pointer;
+    }
+    /* .main1 .datos {
+        padding-bottom: 40px;
+    } */
+
+}
+
+
+
+/* Main 2 : Nuestros servicios*/
+
+
+.main2 {
+    padding: 100px 20px;
+    height: auto;
+    background-color: #222222;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #eeeeee;
+    position: relative;
+}
+
+
+.espacio {
+    height: 60px;
+
+}
+
+.serv .contenedor {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.serv .contenedor #servicio {
+    height: 210px;
+    width: 210px;
+    border-radius: 0 20px 0 20px;
+    background-color: azure;
+    box-sizing: border-box;
+}
+
+.serv .contenedor #servicio p {
+    color: white;
+    font-size: 20px;
+}
+
+
+/* Caja que se abre al seleccionar algun servicio */
+
+
+.serv .musculacion {
+    background: url('https://www.hammer.ar/image/act-musculacion.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    box-sizing: border-box;
+    transition: .5s !important;
+}
+
+.serv .musculacion:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.hammer.ar/image/act-musculacion.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    transform: scale(1.02);
+}
+
+.serv .cardio {
+    background: url('https://www.hammer.ar/image/salacardio.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    box-sizing: border-box;
+    transition: .5s !important;
+}
+
+.serv .cardio:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.hammer.ar/image/salacardio.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.02);
+}
+
+.serv .yoga {
+    background: url('https://www.hammer.ar/image/clasesgrupales.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    box-sizing: border-box;
+    transition: .5s !important;
+}
+
+.serv .yoga:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.hammer.ar/image/clasesgrupales.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    transform: scale(1.02);
+}
+
+.serv .crossfit {
+    background: url('https://www.hammer.ar/image/bajoimpacto.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    box-sizing: border-box;
+    transition: .5s !important;
+}
+
+.serv .crossfit:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.hammer.ar/image/bajoimpacto.jpg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    transform: scale(1.02);
+}
+.serv .kids {
+    background: url('https://www.hammer.ar/image/actividadeskids.jpg');
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 30px;
+    box-sizing: border-box;
+    transition: .5s !important;
+}
+
+.serv .kids:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.hammer.ar/image/actividadeskids.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transform: scale(1.02);
+}
+
+.serv button {
+    height: 30px;
+    width: 90px;
+    margin-top: 70px;
+    border: none;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    transition: .3s;
+    cursor: pointer;
+    background-color: #ff9100;
+}
+
+.serv button:hover {
+    width: 110px;
+    background-color: #db5000;
+}
+
+.serv ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.vermas {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verMasMusc {
+    position: relative;
+    margin-left: 30px;
+    height: 550px;
+    width: 80%;
+    background: white;
+}
+
+.img-close {
+    cursor: pointer;
+    height: 10px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.img-close:hover {
+    filter: invert(40%);
+}
+
+.verMasMusc h1 {
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.vermasbox {
+    height: 100%;
+    display: flex;
+}
+
+.vermasbox .images {
+    width: 75%;
+    height: 100%;
+    background-color: #FA8403;
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+}
+.vermasbox .images ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 5px;
+    left: 30%;
+    transform: translateX(-50%);
+}
+.vermasbox .images ul li{
+    width: 15px; 
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ffffff; 
+  margin: 10px 10px; 
+  transition: .3s;
+  cursor: pointer;
+}
+.images ul li:hover {
+    background-color: #be5600;
+}
+.vermasbox .vermas-cont {
+    width: 40%;
+    height: 100%;
+    background-color: white;
+    padding: 30px 30px 40px;
+    box-sizing: border-box;
+}
+
+.vermas-cont h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+}
+.vermas-cont p {
+    padding-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: #353535;
+    text-align: center;
+    line-height: 1.9;
+}
+
+/* Tarjetas responsive*/
+
+@media screen and (max-width:960px) {
+    .vermasbox {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vermasbox .images {
+        width: 100%;
+        height: 70%;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    }
+
+    .vermasbox .vermas-cont {
+        width: 100%;
+        padding-top: 10px;
+        height: 30%;
+    }
+
+    .verMasMusc h1 {
+        display: inline;
+        font-size: 22px;
+        text-align: start;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .vermas-cont p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        color: #353535;
+        text-align: start;
+        line-height: 1.3;
+    }
+
+    .vermasbox .images ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 34%;
+        left: 47%;
+    }
+
+}
+
+@media screen and (max-width:690px) {
+    .vermasbox .images {
+        width: 100%;
+        height: 70%;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+    }
+
+    .verMasMusc h1 {
+        display: inline;
+        font-size: 18px;
+        text-align: start;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .vermas-cont p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        color: #353535;
+        text-align: start;
+        line-height: 1.2;
+    }
+}
+
+
+
+
+/* Main 3 : Por que elegirnos*/
+
+
+.main3 {
+    height: auto;
+    background: linear-gradient(25deg, #FA8403, #e69c3b);
+    /* background: url('../images/minafondo.jpg'); */
+    background: linear-gradient(rgba(214, 74, 31, 0.685), rgba(201, 86, 33, 0.5)), url('../images/minafondo.jpg') top/cover;
+    background-size: cover;
+
+}
+
+.cont3 {
+    padding: 100px;
+}
+
+.main3 .cont3 h1 {
+    font-weight: 900;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.caja {
+    display: flex;
+    justify-content: center;
+}
+
+.main3-parrafos {
+    display: flex;
+    gap: 100px;
+}
+
+.main3-parrafos b {
+    color: #ff6600;
+}
+
+.parrafos3 {
+    width: 40%;
+}
+
+.main3-parrafos p {
+    margin-top: -10px;
+    color: #eee6e6;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-align: start;
+    padding-top: 10px;
+    line-height: 1.5;
+}
+
+.main3-cards {
+    margin-top: 30px;
+    text-align: center;
+    width: 60%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+}
+
+.main3-cards div {
+    height: auto;
+    width: auto;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    border-radius: 10px 0 10px 0;
+    background-color: #252525;
+}
+
+.main3-cards p {
+    font-family: 'Tilt Neon', sans-serif;
+    padding-top: 20px;
+    text-align: center;
+    color: #fa7203;
+}
+
+.img-card3 {
+    height: 60px;
+    filter: invert(100%);
+}
+
+.main3-img {
+    height: 500px
+}
+
+.main3-img img {
+    height: 100%;
+}
+
+
+@media screen and (max-width:870px) {
+    .cont3 {
+        padding: 60px 80px;
+    }
+
+    .main3-parrafos {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .main3-cards {
+        text-align: center;
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .parrafos3 {
+        text-align: center;
+        width: 100%;
+    }
+
+    .parrafos3 p {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:410px) {
+    .cont3 {
+        padding: 60px 80px;
+    }
+
+    .main3-parrafos {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .main3-cards {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .parrafos3 {
+        text-align: center;
+        width: 100%;
+    }
+
+    .parrafos3 p {
+        text-align: center;
+    }
+}
+
+
+
+/* Main 4 : Planes y precios*/
+
+
+.main4 {
+    height: auto;
+    padding: 50px 70px 100px;
+    background-color: #1c1c22;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main4-cont {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.text-main4 {
+    font-family: 'Tilt Neon', sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.text-main4 h1 {
+    font-size: 35px;
+    font-weight: 100;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.text-main4 b {
+    color: #ff7300;
+}
+
+.text-main4 p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Main 5 : Entrenadores*/
+
+
+.main5 {
+    height: auto;
+    background-color: #1c1c22;
+    box-sizing: border-box;
+}
+
+.main5-box {
+    margin: 0;
+    padding: 0;
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
+    background-color: #da7b00;
+    background: linear-gradient(25deg, #fc9713, #ff7b00);
+    height: 100%;
+}
+
+.main5-box .main5-cont {
+    padding: 50px 70px 80px;
+    text-align: center;
+}
+
+.main5-box .main5-title {
+    padding-top: 10px;
+    font-size: 35px;
+    font-weight: 100;
+    color: #1c1c22;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.main5-title span {
+    color: white;
+}
+
+.container-coach {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10%;
+}
+
+.main5-cont p {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.parrafo-coachs {
+    margin-top: 50px;
+}
+
+@media screen and (max-width:1100px) {
+    .main5-box {
+        margin: 0;
+        padding: 0;
+        clip-path: polygon(0 4%, 100% 0%, 100% 100%, 0% 100%);
+        background-color: #da7b00;
+        background: linear-gradient(25deg, #fc9713, #ff7b00);
+        height: 100%;
+    }
+}
+
+
+/* Main 6 : Footer*/
+
+
+.main6 {
+    height: auto;
+    padding: 60px;
+    background: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url('../images/a.jpg') center/cover no-repeat;
+    background-size: cover;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.img-footer {
+    display: flex;
+    justify-content: center;
+
+}
+
+.logo-footer {
+    filter: invert(100%);
+    margin: 0 auto;
+}
+
+.main6 p {
+    margin-top: -10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.main6 footer .footer-links {
+    margin-top: 50px;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 4%;
+    font-family: 'Tilt Neon', sans-serif;
+}
+
+.main6 footer .footer-links .foot-link a {
+    text-decoration: none;
+    color: #fff;
+    transition: .3s;
+}
+
+.main6 footer .footer-links .foot-link a:hover {
+    cursor: pointer;
+    color: #FA8403;
+}
+
+.main6 footer .re {
+    margin: 30px;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 4%;
+    background-color: #a19494ce;
+}
+
+.main6 footer .re .redes {
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.email {
+    font-family: 'Roboto', sans-serif;
+}
+.email label{
+    margin-right: 20px;
+}
+.email input{
+    height: 25px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(148, 135, 135, 0.959);
+    padding-left: 10px;
+    color: #c0c0c0;
+}
+.email button{
+    height: 27px;
+    cursor: pointer;
+    width: 25px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgba(255, 102, 0, 0.685);
+}
+.email button:hover{
+    background-color: rgba(255, 102, 0);
+}
+.email input:focus{
+    border: none;
+    outline: none;
+
+}
+.msj-final p {
+    margin-top: 50px;
+    font-size: 13px;
+}
