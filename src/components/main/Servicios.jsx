@@ -14,7 +14,7 @@ import {
   cross2,
   cross3,
 } from "../../images/index";
-import "../../styles/main/actividades.css"
+import "../../styles/main/servicios.css"
 
 const Servicios = () => {
   const [servicio, setServicio] = useState("");

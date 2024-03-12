@@ -21,7 +21,7 @@ const Navbar = () => {
         <Marcas />
 
         <div className="hidden items-center font-tilt-neon text-black gap-10 lg:flex space-x-4 dark:text-white">
-          <a href="#!" className="link">
+          <a href="/" className="link">
             Home
           </a>
           <a href="#about" className="link">

@@ -32,7 +32,7 @@ const Hero = () => {
               </li>
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
-                <a href="#">CONOCE TODA NUESTRA INFO</a>
+                <a href="#">CONOCÉ TODA NUESTRA INFO</a>
               </li>
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
