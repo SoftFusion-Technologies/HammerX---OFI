@@ -1,6 +1,5 @@
-import React from "react";
 import { guionesnar } from "../../images/index";
-// import Puntitos from "./puntitos";
+import "../../styles/main/about.css";
 import { Link } from "react-router-dom";
 
 const About = () => {
@@ -24,39 +23,19 @@ const About = () => {
           <div className="flex flex-wrap items-center justify-between lg:px-24">
             <div className="w-full px-4 lg:w-6/12">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center">
-                <div className="w-full px-3 max-md:px-10 xl:w-1/2 max-lg:grid max-lg:grid-cols-2 max-sm:grid-cols-1 lg:flex justify-center items-center lg:flex-col gap-10">
-                  <div className="h-80 w-60 mx-auto">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-duration="1500"
-                      src="https://www.hammer.ar/image/doschicas.jpeg"
-                      alt="img"
-                      className="h-full w-full rounded-2xl "
-                    />
-                  </div>
-                  <div className="h-80 w-60 max-lg:mx-auto max-lg:row-span-2">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-duration="2100"
-                      src="https://www.hammer.ar/image/senoras.jpeg"
-                      alt="img"
-                      className="w-full h-full rounded-2xl"
-                    />
-                  </div>
-                <div className="h-80 w-60 max-lg:mx-auto lg:hidden">
-                    <img
-                      data-aos="fade-right"
-                      data-aos-duration="1800"
-                      src="https://www.hammer.ar/image/slider4.jpg"
-                      alt="img"
-                      className="h-full w-full rounded-2xl"
-                    />
-                    {/* <Puntitos /> */}
-                  </div>
-                </div>
-                {/* <div className="h-80 w-5/6">
+                <div className="grid grid-cols-2">
+                  <a href="">
+                    <button className="btn bg-orange-500 shadow-orange-500 shadow-lg font-messina text-white font-semibold">
+                      Soy Cliente
+                    </button>
+                  </a>
+                  <a href="">
+                    <button className="btn bg-orange-500 shadow-orange-500 shadow-lg font-messina text-white font-semibold">
+                      Quiero Conocerlos
+                    </button>
+                  </a>
 
-                </div> */}
+                </div>
               </div>
             </div>
 
@@ -65,11 +44,11 @@ const About = () => {
               className="my-20 w-full max-md:px-14 px-4 lg:w-1/2 xl:w-5/12"
             >
               <div className="mt-10 lg:mt-0">
-                <span className="block mb-4 text-lg font-semibold text-primary dark:text-orange-500">
-                  Why Choose Us
+                <span className="block mb-4 text-lg font-messina text-primary dark:text-orange-500">
+                  ¿Porqué elegirnos?
                 </span>
-                <h2 className="mb-5 text-3xl font-bold text-orange-500 sm:text-[40px]/[48px] dark:text-white">
-                  Make your customers happy by giving services.
+                <h2 className="mb-5 text-3xl font-bignoodle tracking-wide lg:text-[50px] font-bold text-orange-500 sm:text-[40px]/[48px] dark:text-white">
+                  CONOCE TODA NUESTRA INFO
                 </h2>
                 <p className="mb-5 text-base text-body-color dark:text-gray-200">
                   It is a long established fact that a reader will be distracted
@@ -101,7 +80,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };

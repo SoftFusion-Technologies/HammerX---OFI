@@ -25,7 +25,7 @@ const FixedNavbar = () => {
         <ul className="list-none">
           <li className="">
             <a href="">
-              <p className="text-center font-bignoodle text-[20px] tracking-wide">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
+              <p className="text-center font-bignoodle text-[20px] tracking-wider">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
             </a>
           </li>
         </ul>

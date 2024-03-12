@@ -24,15 +24,15 @@ const Hero = () => {
             font-roboto text-sm"
             >
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
-                <a href="#">VOS, EN EL CENTRO DE LA ESCENA</a>
-              </li>
-              <hr className="text-black w-5/6" />
-              <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
                 <a href="#">TUS ACTIVIDADES</a>
               </li>
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
                 <a href="#">NUESTRAS SEDES</a>
+              </li>
+              <hr className="text-black w-5/6" />
+              <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
+                <a href="#">CONOCE TODA NUESTRA INFO</a>
               </li>
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">

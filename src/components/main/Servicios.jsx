@@ -14,7 +14,7 @@ import {
   cross2,
   cross3,
 } from "../../images/index";
-import "../../styles/main/main.css"
+import "../../styles/main/actividades.css"
 
 const Servicios = () => {
   const [servicio, setServicio] = useState("");
@@ -96,7 +96,7 @@ const Servicios = () => {
       <div className="text-center px-[5%] text-black dark:text-white" id="servs1">
 
         <h1 data-aos="fade-up" className="text-white font-bignoodle text-[50px] font-bold tracking-wider pb-5">Tus Actividades</h1>
-        <p data-aos="fade-up" className="font-montserrat font-semibold text-orange-200">
+        <p data-aos="fade-up" className="font-messina text-lg font-semibold text-orange-200">
           Explora un abanico de servicios diseñados para transformar tu
           experiencia de fitness. Desde entrenamientos personalizados hasta
           clases vibrantes, cada servicio en nuestra oferta está diseñado para
