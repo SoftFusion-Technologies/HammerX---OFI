@@ -15,6 +15,7 @@ import cross1 from './salacrossfit1.jpg'
 import cross2 from './salacrossfit2.jpg'
 import cross3 from './salacrossfit3.jpeg'
 import guionesnar from './guionesnar.png'
+import mobileapp from './app.png'
 
 export {
   menu,
@@ -33,5 +34,6 @@ export {
   cross1,
   cross2,
   cross3,
-  guionesnar
+  guionesnar,
+  mobileapp
 }

@@ -1,6 +1,7 @@
 import Hero from "../components/hero/Hero";
 import Servicios from "../components/main/Servicios";
 import About from "../components/main/About";
+import MobileApp from "../components/main/MobileApp";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Hero />
       <Servicios />
       <About />
+      <MobileApp />
     </>
   );
 };
