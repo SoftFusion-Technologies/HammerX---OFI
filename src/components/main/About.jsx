@@ -10,38 +10,37 @@ const About = () => {
         className="overflow-hidden h-full bg-white dark:bg-gradient-to-r from-gray-500 to-gray-700 relative"
       >
         <img
-          className="w-8 h-80 absolute top-20 left-0"
+          className="w-8 h-80 absolute top-20 left-0 max-sm:hidden"
           src={guionesnar}
           alt="Guiones"
         />
         <img
-          className="w-8 h-80 absolute bottom-20 right-0"
+          className="w-8 h-80 absolute bottom-20 right-0 max-sm:hidden"
           src={guionesnar}
           alt="Guiones"
         />
-        <div className="container mx-auto">
-          <div className="flex flex-wrap items-center justify-between lg:px-24">
-            <div className="w-full px-4 lg:w-6/12">
-              <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0">
-                <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col">
+        <div className="container mx-auto ">
+          <div className="flex flex-wrap items-center justify-between lg:px-16 bgvsps">
+            <div className="w-full px-4 lg:w-6/12 ">
+              <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
+                <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
                   <a href="/clientes" className="max-sm:mx-auto max-sm:mb-5 ">
-                    <button className="btn shadow-lg font-messina text-[#F97316] font-semibold ">
+                    <button className="btn shadow-lg font-messina text-white font-semibold ">
                       Soy Cliente
                     </button>
                   </a>
                   <a href="/nosotros" className="max-sm:mx-auto">
-                    <button className="btn shadow-lg font-messina text-[#F97316] font-semibold">
+                    <button className="btn shadow-lg font-messina text-white font-semibold">
                       Quiero Conocerlos
                     </button>
                   </a>
-
                 </div>
               </div>
             </div>
 
             <div
               data-aos="fade-left"
-              className="my-20 w-full max-md:px-14 px-4 lg:w-1/2 xl:w-5/12"
+              className="my-20 w-full max-md:px-14 md:pl-10 lg:w-1/2 xl:w-5/12"
             >
               <div className="mt-10 lg:mt-0 md:px-10 lg:px-5">
                 <span className="block mb-4 text-lg font-messina text-primary dark:text-orange-500">

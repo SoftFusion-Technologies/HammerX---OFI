@@ -3,21 +3,21 @@ import "../../styles/main/mobileApp.css";
 
 const MobileApp = () => {
   return (
-    <div className="w-full bg-gradient-to-b from-[#fc4b08] to-orange-500">
-      <div className="w-11/12 mx-auto flex pt-10">
-        <div className="w-2/3">
+    <div className="w-full bg-gradient-to-b from-[#fc4b08] to-gray-200 dark:from-gray-500 dark:to-gray-900">
+      <div className="w-11/12 mx-auto flex pt-10 max-md:flex-col">
+        <div className="w-2/3 max-md:w-full">
           <div>
-            <h1 className="font-bignoodle text-white text-[80px]">Ya tenes disponible tu app</h1>
+            <h1 className="font-bignoodle text-white md:text-[60px] text-[80px] max-sm:text-[40px] max-md:text-[70px] max-sm:text-center">Ya tenes disponible tu app</h1>
 
-            <p className="font-messina text-white">
+            <p className="font-messina text-white max-sm:pt-6 max-sm:text-center">
               Por la misma vamos a mantenernos comunicados y vas a enterarte de
               todas nuestras novedades y actualizaciones.
             </p>
           </div>
 
-          <div className="my-10 space-x-10">
+          <div className="my-10 sm:space-x-10 max-md:flex max-sm:flex-col max-sm:w-[200px] max-md:justify-center max-md:mx-auto">
             {/* Botón Google Play*/}
-            <a class="playstore-button" href="https://play.google.com/store/apps/details?id=com.hammerx&hl=es_419&gl=US">
+            <a className="playstore-button " href="https://play.google.com/store/apps/details?id=com.hammerx&hl=es_419&gl=US">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -33,7 +33,7 @@ const MobileApp = () => {
             </a>
 
             {/* Botón Google Play*/}
-            <a href="https://apps.apple.com/ar/app/hammer-x/id6470037033" class="playstore-button">
+            <a href="https://apps.apple.com/ar/app/hammer-x/id6470037033" className="playstore-button max-sm:mt-5" >
               <span class="icon">
                 <svg
                   fill="currentcolor"
@@ -60,8 +60,8 @@ const MobileApp = () => {
           </div>
         </div>
 
-        <div className="w-1/3">
-          <img src={mobileapp} alt="" />
+        <div className="w-1/3 max-md:mx-auto max-md:w-full flex flex-end">
+          <img src={mobileapp} alt="" className="mx-auto max-sm:w-2/3"/>
         </div>
       </div>
     </div>

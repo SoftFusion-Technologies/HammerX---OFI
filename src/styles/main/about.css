@@ -1,16 +1,24 @@
 .btn {
-  padding: 0.7em 1.7em;
+  padding: 1em 2em;
   font-size: 18px;
   border-radius: 0.5em;
   cursor: pointer;
   transition: all 0.3s;
+  background-color: #F97316;
 }
 
 .btn:hover {
-  background-color: #F97316;
-  color: white;
+  background-color: #fc4b08;
+  color: #ffffff;
+  
 }
 
 .btn:active {
   box-shadow: 4px 4px 12px #fc4b08;
+}
+
+.bgvsps {
+  background-image: url('../../images/svg/VSPS_bg_bordes_naranjas.svg');
+  background-repeat: none;
+  background-size: cover;
 }

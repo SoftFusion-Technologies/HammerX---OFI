@@ -4,7 +4,10 @@ import Footer from "./components/footer/Footer";
 import HomePage from "./pages/HomePage";
 import Clients from "./pages/Clients";
 import AboutUs from "./pages/AboutUs";
+import OurTeam from "./pages/OurTeam";
+import OurValues from "./pages/OurValues";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/clientes" element={<Clients />} />
           <Route path="/nosotros" element={<AboutUs />} />
+          <Route path="/quienessomos" element={<OurTeam />} />
+          <Route path="/nuestrosvalores" element={<OurValues />} />
         </Routes>
         <Footer />
       </Router>

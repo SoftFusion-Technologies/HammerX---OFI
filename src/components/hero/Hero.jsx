@@ -9,10 +9,10 @@ const Hero = () => {
 
         <div className="w-5/6 h-80 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto">
           <div>
-            <p className="max-md:text-sm text-center px-6 pt-6 font-montserrat dark:text-white">
+            <p className="max-md:text-sm text-center px-6 pt-6 font-messina dark:text-white">
               Bienvenidos a nuestro sitio oficial.{" "}
             </p>
-            <p className="max-md:text-sm text-center px-6 font-montserrat dark:text-white">
+            <p className="max-md:text-sm text-center px-6 font-messina dark:text-white">
               Todo lo que necesitas saber para entrenar con nosotros en un solo
               lugar.
             </p>
