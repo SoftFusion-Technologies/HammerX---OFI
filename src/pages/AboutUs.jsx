@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import "../styles/aboutUs/volver.css";
 import "../styles/aboutUs/botones.css";
 import "../styles/aboutUs/background.css";
 
 const AboutUs = () => {
+
+  useEffect(() => {
+    document.title = 'Quiero Conocerlos';
+  }, []);
+
   return (
     <div className="w-full pt-16 bg-gradient-to-b from-orange-500 to-orange-600 ">
       <div className="h-contain bgl">
@@ -33,13 +39,13 @@ const AboutUs = () => {
 
         <div className="h-[18rem] ">
           <div className="pt-20 max-sm:pt-16 flex justify-evenly max-sm:flex-col">
-            <a href="/quienessomos" className="max-sm:mb-5 max-sm:mx-auto">
+            <a href="/nosotros/quienessomos" className="max-sm:mb-5 max-sm:mx-auto">
               <button className="btns font-messina font-semibold ">
                 ¿Quienes Somos?
               </button>
             </a>
 
-            <a href="/nuestrosvalores" className="max-sm:mb-5 max-sm:mx-auto">
+            <a href="/nosotros/nuestrosvalores" className="max-sm:mb-5 max-sm:mx-auto">
               <button className="btns font-messina font-semibold ">
                 Nuestros Valores
               </button>

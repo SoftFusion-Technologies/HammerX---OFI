@@ -1,30 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/ourValues/background.css";
 import "../styles/ourValues/cards.css";
 
 const OurValues = () => {
-  const [hoveredTitle, setHoveredTitle] = useState("");
-  const [hoveredDescription, setHoveredDescription] = useState("");
-
-  let timeoutId;
-
-  const handleHover = (title, description) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      setHoveredTitle(title);
-      setHoveredDescription(description);
-    }, 100); // Retardo de 100 milisegundos
-  };
-
-  const handleMouseLeave = () => {
-    clearTimeout(timeoutId);
-    setHoveredTitle("");
-    setHoveredDescription("");
-  };
+  useEffect(() => {
+    document.title = "Nuestros Valores";
+  }, []);
 
   return (
-    <div className="h-screen w-full bgnv flex flex-col">
-      <div className="pt-16 flex-grow">
+    <div className="h-contain w-full bgnv flex flex-col">
+      <div className="pt-16">
         <div className="pt-2 pl-5 max-sm:pl-2">
           <a href="/nosotros">
             <button className="button">
@@ -43,112 +28,83 @@ const OurValues = () => {
             </button>
           </a>
         </div>
+      </div>
 
-        <div className="w-full flex justify-center items-center">
-          <div className="letters w-1/3  h-contain flex flex-col items-center">
-            <div className="letter py-5 px-10  bg-black transition text-white hover:bg-white hover:transition hover:duration-200 hover:ease-in-out rounded-lg hover:text-[#fc4b08]">
-              <p>
+      <div className="w-11/12 mx-auto flex justify-evenly">
+        <div className="letters h-contain flex flex-col items-center max-sm:hidden justify-center">
+          <div className="letter py-5 px-10 bg-gradient-to-b from-orange-500 to-[#fc4b08] transition text-white hover:from-white hover:to-slate-50 hover:transition hover:duration-200 hover:ease-in-out rounded-lg hover:text-[#fc4b08]">
+            <p>
+              <span >H</span>
+            </p>
+            <p>
+              <span>A</span>
+            </p>
+            <p>
+              <span>M</span>
+            </p>
+            <p>
+              <span>M</span>
+            </p>
+            <p>
+              <span>E</span>
+            </p>
+            <p>
+              <span>R</span>
+            </p>
+          </div>
+        </div>
 
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "HONESTIDAD:",
-                      "Transparenca al 100%"
-                    ) 
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer "
-                >
-                 H
-                </span>
-              </p>
-              <p>
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "ACTITUD:",
-                      "Actitud alegre creando un ambiente que desborde de energías positivas."
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer"
-                >
-                  A
-                </span>
-              </p>
-              <p>
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "MOTIVACIÓN:",
-                      "Para un aprendizaje y mejora continua de nuestros servicios."
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer"
-                >
-                  M
-                </span>
-              </p>
-              <p>
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "MORAL:",
-                      "Actuar siempre con buenas intenciones."
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer"
-                >
-                  M
-                </span>
-              </p>
-              <p>
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "EMPATIA:",
-                      "Para conectar con nuestros socios y entender las diferentes situaciones particulares que vive cada uno."
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer"
-                >
-                  E
-                </span>
-              </p>
-              <p>
-                <span
-                  onMouseEnter={() =>
-                    handleHover(
-                      "RESPONSABILIDAD:",
-                      "Responsabilidad y respeto a todos por igual, sin distinciones, creando un ambiente inclusivo."
-                    )
-                  }
-                  onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer"
-                >
-                  R
-                </span>
+        <div className="vcards w-2/3 max-sm:text-center">
+          <div className="vcard">
+            <div className="vcard1 max-md:max-w-full">
+              <h3>HONESTIDAD</h3>
+              <p className="small">Transparencia al 100%</p>
+            </div>
+          </div>
+
+          <div className="vcard flex md:justify-end">
+            <div className="vcard1 right-bg max-md:max-w-full">
+              <h3>ACTITUD</h3>
+              <p className="small">
+                Actitud alegre creando un ambiente que desborde de energías
+                positivas.
               </p>
             </div>
           </div>
-          <div className="w-2/3">
-            <div
-              className="w-1/2 ml-10 max-h-full"
-              style={{
-                opacity: hoveredTitle ? 1 : 0,
-                transition: "opacity 0.5s",
-              }}
-            >
-              <div className="h-[200px] text-center bg-white border  border-orange-500 rounded-xl py-6 px-5" >
-              <h1 className="font-bignoodle text-[40px]">
-                  <span style={{ color: "#fc4b08" }}>{hoveredTitle[0]}</span>
-                  {hoveredTitle.slice(1)}
-                </h1>
-                {hoveredDescription && <p className="font-messina text-[20px] text-[#666]">{hoveredDescription}</p>}
-              </div>
+
+          <div className="vcard">
+            <div className="vcard1 max-md:max-w-full">
+              <h3>MOTIVACIÓN</h3>
+              <p className="small">
+                Para un aprendizaje y mejora continua de nuestros servicios.
+              </p>
+            </div>
+          </div>
+
+          <div className="vcard flex md:justify-end">
+            <div className="vcard1 right-bg max-md:max-w-full">
+              <h3>MORAL</h3>
+              <p className="small">Actuar siempre con buenas intenciones.</p>
+            </div>
+          </div>
+
+          <div className="vcard">
+            <div className="vcard1 max-md:max-w-full">
+              <h3>EMPATIA</h3>
+              <p className="small">
+                Para conectar con nuestros socios y entender las diferentes
+                situaciones particulares que vive cada uno.
+              </p>
+            </div>
+          </div>
+
+          <div className="vcard flex md:justify-end">
+            <div className="vcard1 right-bg max-md:max-w-full">
+              <h3>RESPETO</h3>
+              <p className="small">
+                Responsabilidad y respeto a todos por igual, sin distinciones,
+                creando un ambiente inclusivo.
+              </p>
             </div>
           </div>
         </div>

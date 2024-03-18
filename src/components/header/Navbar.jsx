@@ -31,8 +31,8 @@ const Navbar = () => {
             Contacto
           </a>
           <a href="#testi" className=''>
-            <button className="bg-orange-500 hover:bg-[#fc4b08] text-white py-2 px-8 rounded transition-colors duration-300 z-10">
-              Comenzar
+            <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
+              ¡Probar una clase!
             </button>
           </a>
 

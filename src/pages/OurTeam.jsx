@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import "../styles/ourTeam/cards.css";
 import "../styles/aboutUs/volver.css";
 import "../styles/ourTeam/background.css"
 import { guionesnar } from "../images/index"
 
 const Cards = () => {
+  useEffect(() => {
+    document.title = 'Quiénes Somos';
+  }, []);
+
+
   return (
     <div className="w-full h-contain bgfqs">
       <div className="mx-auto pt-16">
