@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../styles/ourValues/background.css";
-import "../styles/ourValues/cards.css";
+import "../../styles/ourValues/background.css";
+import "../../styles/ourValues/cards.css";
 
 const OurValues = () => {
   useEffect(() => {

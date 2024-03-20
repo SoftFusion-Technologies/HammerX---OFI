@@ -27,10 +27,10 @@ const Navbar = () => {
           <a href="#about" className="link">
             ¿Quiénes somos?
           </a>
-          <a href="#testi" className="link">
+          <a href="#contact" className="link">
             Contacto
           </a>
-          <a href="#testi" className=''>
+          <a href="#" className=''>
             <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
               ¡Probar una clase!
             </button>

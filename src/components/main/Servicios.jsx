@@ -81,7 +81,7 @@ const Servicios = () => {
   };
 
   return (
-    <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative">
+    <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative" id="activities">
 
       <img
         className="w-8 h-80 absolute top-10 left-0 max-sm:hidden"

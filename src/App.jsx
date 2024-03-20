@@ -2,10 +2,10 @@ import "./App.css";
 import Navbar from "./components/header/Navbar";
 import Footer from "./components/footer/Footer";
 import HomePage from "./pages/HomePage";
-import Clients from "./pages/Clients";
-import AboutUs from "./pages/AboutUs";
-import OurTeam from "./pages/OurTeam";
-import OurValues from "./pages/OurValues";
+import Clients from "./pages/soycliente/Clients";
+import AboutUs from "./pages/quieroconocerlos/AboutUs";
+import OurTeam from "./pages/quieroconocerlos/OurTeam";
+import OurValues from "./pages/quieroconocerlos/OurValues";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 

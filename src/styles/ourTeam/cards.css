@@ -67,7 +67,8 @@
 }
 
 .card1:hover:before {
-  transform: scale(50);
+  transform: scale(100);
+  transition: all .5s ease-in-out;
 }
 
 .card1:hover p {
