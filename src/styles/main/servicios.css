@@ -216,12 +216,15 @@
 .vermasbox {
   height: 100%;
   display: flex;
+  background-image: url('../../images/svg/logo.svg');
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 50%;
 }
 
 .vermasbox .images {
   width: 75%;
   height: 100%;
-  background-color: #fa8403;
   background-size: cover;
   background-position: center;
   clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
@@ -313,6 +316,10 @@
     position: absolute;
     bottom: 34%;
     left: 47%;
+  }
+  .vermasbox{ /*posicion del logo de fondo en pantallas mas chicas*/
+    background-position: center 30%;
+    background-size: 100%;
   }
 }
 
