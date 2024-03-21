@@ -40,7 +40,7 @@
 /* Caja que se abre al seleccionar algun servicio */
 
 .serv .musculacion {
-  background: url("https://www.hammer.ar/image/act-musculacion.jpg");
+  background: url("../../images/Actividades/act-Musculacion.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -56,7 +56,7 @@
 
 .serv .musculacion:hover {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://www.hammer.ar/image/act-musculacion.jpg");
+    url("../../images/Actividades/act-Musculacion.jpg");
   background-repeat: no-repeat;
   background-position: left;
   background-size: cover;
@@ -64,7 +64,7 @@
 }
 
 .serv .cardio {
-  background: url("https://www.hammer.ar/image/salacardio.jpg");
+  background: url("../../images/Actividades/act-Cardio.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -80,15 +80,15 @@
 
 .serv .cardio:hover {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://www.hammer.ar/image/salacardio.jpg");
+    url("../../images/Actividades/act-Cardio.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   transform: scale(1.02);
 }
 
-.serv .yoga {
-  background: url("https://www.hammer.ar/image/clasesgrupales.jpg");
+.serv .clasesgrupales {
+  background: url("../../images/Actividades/act-Grupales.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -102,17 +102,17 @@
   transition: 0.5s !important;
 }
 
-.serv .yoga:hover {
+.serv .clasesgrupales:hover {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://www.hammer.ar/image/clasesgrupales.jpg");
+    url("../../images/Actividades/act-Grupales.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: left;
   transform: scale(1.02);
 }
 
-.serv .crossfit {
-  background: url("https://www.hammer.ar/image/bajoimpacto.jpg");
+.serv .bajoimpacto {
+  background: url("../../images/Actividades/act-BajoImpacto.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left;
@@ -126,16 +126,16 @@
   transition: 0.5s !important;
 }
 
-.serv .crossfit:hover {
+.serv .bajoimpacto:hover {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://www.hammer.ar/image/bajoimpacto.jpg");
+    url("../../images/Actividades/act-BajoImpacto.jpg");
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
   transform: scale(1.02);
 }
-.serv .kids {
-  background: url("https://www.hammer.ar/image/actividadeskids.jpg");
+.serv .actividadeskids {
+  background: url("../../images/Actividades/act-Kids.jpg");
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -149,9 +149,9 @@
   transition: 0.5s !important;
 }
 
-.serv .kids:hover {
+.serv .actividadeskids:hover {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://www.hammer.ar/image/actividadeskids.jpg");
+    url("../../images/Actividades/act-Kids.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
