@@ -13,7 +13,7 @@ git clone https://github.com/SoftFusion-Technologies/HammerX---OFI.git
 2)Actualizar Regularmente: Asegúrate de estar al día con los cambios realizados en el repositorio remoto antes de realizar cualquier modificación.
 
 git pull origin main
-Contribuir: Si eres un colaborador, sigue las directrices de contribución establecidas en el archivo CONTRIBUTING.md.
+
 
 Despliegue en Producción: Cuando sea necesario realizar un despliegue en producción, se utilizará el código de este repositorio. Asegúrate de que cualquier cambio esté completamente probado y listo para producción antes de fusionarlo con la rama principal (main).
 
