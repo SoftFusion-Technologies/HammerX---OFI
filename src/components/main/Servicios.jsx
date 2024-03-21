@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   close,
   musc1,
@@ -7,96 +7,131 @@ import {
   cardio1,
   cardio2,
   cardio3,
-  yoga1,
-  yoga2,
-  yoga3,
-  cross1,
-  cross2,
-  cross3,
-} from "../../images/index";
-import "../../styles/main/servicios.css"
+  grupales1,
+  grupales2,
+  grupales3,
+  bajoImpacto1,
+  bajoImpacto2,
+  bajoImpacto3,
+  kids1,
+  kids2,
+  kids3
+} from '../../images/index';
+import '../../styles/main/servicios.css';
 
 const Servicios = () => {
-  const [servicio, setServicio] = useState("");
+  const [servicio, setServicio] = useState('');
 
   const verMusculacion = () => {
-    setServicio("musculacion");
+    setServicio('musculacion');
   };
   const verCardio = () => {
-    setServicio("cardio");
+    setServicio('cardio');
   };
-  const verYoga = () => {
-    setServicio("yoga");
+  const verClasesGrupales = () => {
+    setServicio('clasesgrupales');
   };
-  const verCrossfit = () => {
-    setServicio("crossfit");
+  const verBajoImpacto = () => {
+    setServicio('bajoimpacto');
+  };
+  const verKids = () => {
+    setServicio('actividadeskids');
   };
   const cerrarVentana = () => {
-    setServicio("");
+    setServicio('');
   };
 
-  const [fondomusculacion, setFondomusculacion] = useState(musc1); // Estado para la imagen de fondo
-  const [fondocardio, setFondocardio] = useState(cardio1); // Estado para la imagen de fondo
-  const [fondoyoga, setFondoyoga] = useState(yoga1); // Estado para la imagen de fondo
-  const [fondocrossfit, setFondocrossfit] = useState(cross1); // Estado para la imagen de fondo
+  const [fondoMusculacion, setFondoMusculacion] = useState(musc1); // Estado para la imagen de fondo
+  const [fondoCardio, setFondoCardio] = useState(cardio1); // Estado para la imagen de fondo
+  const [fondoGrupales, setFondoGrupales] = useState(grupales1); // Estado para la imagen de fondo
+  const [fondoBajoImpacto, setFondoBajoImpacto] = useState(bajoImpacto1); // Estado para la imagen de fondo
+  const [fondoKids, setFondoKids] = useState(kids1); // Estado para la imagen de fondo
 
-  const cambiarFonduMusc = () => {
-    setFondomusculacion(musc1);
+  // Fondos para el cuadro de musculacion
+  const cambiarFondoMusc = () => {
+    setFondoMusculacion(musc1);
   };
-  const cambiarFonduMusc2 = () => {
-    setFondomusculacion(musc2);
+  const cambiarFondoMusc2 = () => {
+    setFondoMusculacion(musc2);
   };
-  const cambiarFonduMusc3 = () => {
-    setFondomusculacion(musc3);
-  };
-
-  const cambiarFonduCardio = () => {
-    setFondocardio(cardio1);
-  };
-  const cambiarFonduCardio2 = () => {
-    setFondocardio(cardio2);
-  };
-  const cambiarFonduCardio3 = () => {
-    setFondocardio(cardio3);
+  const cambiarFondoMusc3 = () => {
+    setFondoMusculacion(musc3);
   };
 
-  const cambiarFondoYoga = () => {
-    setFondoyoga(yoga1);
+  // Fondos para el cuadro de Cardio
+
+  const cambiarFondoCardio = () => {
+    setFondoCardio(cardio1);
   };
-  const cambiarFondoYoga2 = () => {
-    setFondoyoga(yoga2);
+  const cambiarFondoCardio2 = () => {
+    setFondoCardio(cardio2);
   };
-  const cambiarFondoYoga3 = () => {
-    setFondoyoga(yoga3);
+  const cambiarFondoCardio3 = () => {
+    setFondoCardio(cardio3);
   };
 
-  const cambiarFonduCross = () => {
-    setFondocrossfit(cross1);
+  // Fondos para el cuadro de Grupales
+
+  const cambiarFondoGrupales = () => {
+    setFondoGrupales(grupales1);
   };
-  const cambiarFonduCross2 = () => {
-    setFondocrossfit(cross2);
+  const cambiarFondoGrupales2 = () => {
+    setFondoGrupales(grupales2);
   };
-  const cambiarFonduCross3 = () => {
-    setFondocrossfit(cross3);
+  const cambiarFondoGrupales3 = () => {
+    setFondoGrupales(grupales3);
+  };
+
+  // Fondos para el cuadro de Bajo Impacto
+
+  const cambiarFondoBajoImpacto = () => {
+    setFondoBajoImpacto(bajoImpacto1);
+  };
+  const cambiarFondoBajoImpacto2 = () => {
+    setFondoBajoImpacto(bajoImpacto2);
+  };
+  const cambiarFondoBajoImpacto3 = () => {
+    setFondoBajoImpacto(bajoImpacto3);
+  };
+
+  // Fondos para el cuadro de Kids
+
+  const cambiarFondoKids = () => {
+    setFondoKids(kids1);
+  };
+  const cambiarFondoKids2 = () => {
+    setFondoKids(kids2);
+  };
+  const cambiarFondoKids3 = () => {
+    setFondoKids(kids3);
   };
 
   return (
-    <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative" id="activities">
-
+    <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative">
       <img
         className="w-8 h-80 absolute top-10 left-0 max-sm:hidden"
-        src={"https://www.hammer.ar/image/guiones1.png"}
+        src={'https://www.hammer.ar/image/guiones1.png'}
         alt="Guiones"
       />
       <img
         className="w-8 h-80 absolute bottom-10 right-0 max-sm:hidden"
-        src={"https://www.hammer.ar/image/guiones1.png"}
+        src={'https://www.hammer.ar/image/guiones1.png'}
         alt="Guiones"
       />
-      <div className="text-center px-[5%] text-black dark:text-white" id="servs1">
-
-        <h1 data-aos="fade-up" className="text-white font-bignoodle text-[50px] font-bold tracking-wider pb-5">Tus Actividades</h1>
-        <p data-aos="fade-up" className="font-messina text-md  text-orange-200 dark:text-white">
+      <div
+        className="text-center px-[5%] text-black dark:text-white"
+        id="servs1"
+      >
+        <h1
+          data-aos="fade-up"
+          className="text-white font-bignoodle text-[50px] font-bold tracking-wider pb-5"
+        >
+          Tus Actividades
+        </h1>
+        <p
+          data-aos="fade-up"
+          className="font-messina text-md  text-orange-200 dark:text-white"
+        >
           Explora un abanico de servicios diseñados para transformar tu
           experiencia de fitness. Desde entrenamientos personalizados hasta
           clases vibrantes, cada servicio en nuestra oferta está diseñado para
@@ -117,30 +152,30 @@ const Servicios = () => {
                 <button onClick={verCardio}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="yoga">
+            <div data-aos="fade-left" id="servicio" className="clasesgrupales">
               <p>Clases grupales</p>
               <a href="#vermas">
-                <button onClick={verYoga}>Ver más</button>
+                <button onClick={verClasesGrupales}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="crossfit">
+            <div data-aos="fade-left" id="servicio" className="bajoimpacto">
               <p>Bajo impacto</p>
               <a href="#vermas">
-                <button onClick={verCrossfit}>Ver más</button>
+                <button onClick={verBajoImpacto}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="kids">
+            <div data-aos="fade-left" id="servicio" className="actividadeskids">
               <p>Kids</p>
               <a href="#vermas">
-                <button onClick={verCrossfit}>Ver más</button>
+                <button onClick={verKids}>Ver más</button>
               </a>
             </div>
           </div>
         </div>
       </div>
-      {servicio === "musculacion" && (
+      {servicio === 'musculacion' && (
         <>
-          <div id="vermas" className="espacio"></div>{" "}
+          <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div className="verMasMusc">
@@ -155,12 +190,12 @@ const Servicios = () => {
               <div className="vermasbox">
                 <div
                   className="images"
-                  style={{ backgroundImage: `url(${fondomusculacion})` }}
+                  style={{ backgroundImage: `url(${fondoMusculacion})` }}
                 >
                   <ul>
-                    <li onClick={cambiarFonduMusc}></li>
-                    <li onClick={cambiarFonduMusc2}></li>
-                    <li onClick={cambiarFonduMusc3}></li>
+                    <li onClick={cambiarFondoMusc}></li>
+                    <li onClick={cambiarFondoMusc2}></li>
+                    <li onClick={cambiarFondoMusc3}></li>
                   </ul>
                   <a href="#servs1">
                     <img
@@ -174,12 +209,14 @@ const Servicios = () => {
                 <div className="vermas-cont">
                   <h1>Musculación</h1>
                   <p>
-                    Nuestros servicios de musculación van más allá de levantar
-                    pesas; son una invitación a la transformación física y al
-                    empoderamiento personal. Desde rutinas personalizadas hasta
-                    un amplio abanico de máquinas de última generación, te
-                    proporcionamos todo lo que necesitas para alcanzar tus
-                    objetivos de fuerza y definición muscular.
+                    ¿Primera vez entrenando o ya contas con experiencia? No te
+                    preocupes, porque en nuestros salones de musculación vas a
+                    contar con una gran variedad y calidad de máquinas y pesos
+                    libres para entrenar la fuerza, aumentar la musculatura y
+                    tonificar el cuerpo. Siempre guiad@ por nuestros
+                    instructores y además dispondrás de diferentes rutinas
+                    pensadas para que arranques de 0 y para desafiarte todos los
+                    días.
                   </p>
                 </div>
               </div>
@@ -187,9 +224,9 @@ const Servicios = () => {
           </div>
         </>
       )}
-      {servicio === "cardio" && (
+      {servicio === 'cardio' && (
         <>
-          <div id="vermas" className="espacio"></div>{" "}
+          <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div className="verMasMusc">
@@ -204,12 +241,12 @@ const Servicios = () => {
               <div className="vermasbox">
                 <div
                   className="images"
-                  style={{ backgroundImage: `url(${fondocardio})` }}
+                  style={{ backgroundImage: `url(${fondoCardio})` }}
                 >
                   <ul>
-                    <li onClick={cambiarFonduCardio}></li>
-                    <li onClick={cambiarFonduCardio2}></li>
-                    <li onClick={cambiarFonduCardio3}></li>
+                    <li onClick={cambiarFondoCardio}></li>
+                    <li onClick={cambiarFondoCardio2}></li>
+                    <li onClick={cambiarFondoCardio3}></li>
                   </ul>
                   <a href="#servs1">
                     <img
@@ -223,12 +260,13 @@ const Servicios = () => {
                 <div className="vermas-cont">
                   <h1>Cardio</h1>
                   <p>
-                    Únete a nuestra comunidad de amantes del cardio, donde cada
-                    latido cuenta y cada sesión te acerca a un estado físico y
-                    mental óptimo. Experimenta cómo el cardio no solo mejora tu
-                    salud cardiovascular, sino que también libera la tensión
-                    diaria, fortalece tu resistencia y te impulsa hacia un
-                    estilo de vida activo y saludable.
+                    ¿Pensas que hacer cardio es aburrido? Con nuestro plan de
+                    musculacion tambien tendrás a disposición todos nuestros
+                    equipos de cardio, cintas, bicis, elípticos, remos,
+                    airbikes, entre otros, para que elijas el más divertido y
+                    apto para vos, con los que podras quemar todas las calorías
+                    que te propongas, o bien para calentar un ratito antes de
+                    comenzar tu rutina 💪🏻
                   </p>
                 </div>
               </div>
@@ -236,9 +274,9 @@ const Servicios = () => {
           </div>
         </>
       )}
-      {servicio === "yoga" && (
+      {servicio === 'clasesgrupales' && (
         <>
-          <div id="vermas" className="espacio"></div>{" "}
+          <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div className="verMasMusc">
@@ -253,12 +291,12 @@ const Servicios = () => {
               <div className="vermasbox">
                 <div
                   className="images"
-                  style={{ backgroundImage: `url(${fondoyoga})` }}
+                  style={{ backgroundImage: `url(${fondoGrupales})` }}
                 >
                   <ul>
-                    <li onClick={cambiarFondoYoga}></li>
-                    <li onClick={cambiarFondoYoga2}></li>
-                    <li onClick={cambiarFondoYoga3}></li>
+                    <li onClick={cambiarFondoGrupales}></li>
+                    <li onClick={cambiarFondoGrupales2}></li>
+                    <li onClick={cambiarFondoGrupales3}></li>
                   </ul>
                   <a href="#servs1">
                     <img
@@ -270,14 +308,17 @@ const Servicios = () => {
                   </a>
                 </div>
                 <div className="vermas-cont">
-                  <h1>Yoga</h1>
+                  <h1>Clases Grupales</h1>
                   <p>
-                    En este espacio sagrado, nuestros instructores certificados
-                    te guiarán a través de respiraciones conscientes,
-                    movimientos fluidos y la búsqueda de la paz interior. La
-                    filosofía del yoga se entrelaza con cada sesión, promoviendo
-                    la flexibilidad, el equilibrio y la conexión con tu yo más
-                    profundo.
+                    ¿Y si probas entrenando en compañía con nuestras clases
+                    grupales? Crossfit, Funcional, Zumba, Aerobics y muchas
+                    otras actividades para que puedas elegir según tu gusto y
+                    tus objetivos, siempre vas a tener a tu disposición coachs
+                    que te van a orientar para que arranques desde el nivel más
+                    básico o para perfeccionarte si ya contas con experiencia
+                    previa. ¡Consulta las clases disponibles en tu sede! Si
+                    sentís que las actividades individuales no son para vos aquí
+                    encontraras tu lugar 😀
                   </p>
                 </div>
               </div>
@@ -285,9 +326,9 @@ const Servicios = () => {
           </div>
         </>
       )}
-      {servicio === "crossfit" && (
+      {servicio === 'bajoimpacto' && (
         <>
-          <div id="vermas" className="espacio"></div>{" "}
+          <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div className="verMasMusc">
@@ -302,12 +343,12 @@ const Servicios = () => {
               <div className="vermasbox">
                 <div
                   className="images"
-                  style={{ backgroundImage: `url(${fondocrossfit})` }}
+                  style={{ backgroundImage: `url(${fondoBajoImpacto})` }}
                 >
                   <ul>
-                    <li onClick={cambiarFonduCross}></li>
-                    <li onClick={cambiarFonduCross2}></li>
-                    <li onClick={cambiarFonduCross3}></li>
+                    <li onClick={cambiarFondoBajoImpacto}></li>
+                    <li onClick={cambiarFondoBajoImpacto2}></li>
+                    <li onClick={cambiarFondoBajoImpacto3}></li>
                   </ul>
                   <a href="#servs1">
                     <img
@@ -319,14 +360,64 @@ const Servicios = () => {
                   </a>
                 </div>
                 <div className="vermas-cont">
-                  <h1>CrossFit</h1>
+                  <h1>Bajo Impacto</h1>
                   <p>
-                    En la sección de CrossFit, sumérgete en una experiencia
-                    única que redefine los límites de tu rendimiento físico y
-                    mental. Nuestros programas de CrossFit no solo son
-                    entrenamientos, son desafíos que te inspirarán a superar tus
-                    propios límites día tras día. Cada sesión está diseñada para
-                    construir fuerza, resistencia y agilidad.
+                    ¿Sabías que también contamos con clases de bajo impacto?
+                    Pilates, Yoga y talleres para 3era edad (consulta las
+                    disponibles en tu sede). Vas a trabajar sin impacto para
+                    fortalecer todo tu cuerpo, mejorar postura y recuperar la
+                    movilidad perdida. Son ideales para aumentar la fuerza y
+                    flexibilidad, rehabilitarte de lesiones, complementar y
+                    especializarte en otras actividades y para conectar la mente
+                    con tu cuerpo 🧘
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {servicio === 'actividadeskids' && (
+        <>
+          <div id="vermas" className="espacio"></div>{' '}
+          {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
+          <div className="vermas">
+            <div className="verMasMusc">
+              <a href="#servs1">
+                <img
+                  src={close}
+                  className="img-close"
+                  onClick={cerrarVentana}
+                  alt="Cerrar Ventana"
+                />
+              </a>
+              <div className="vermasbox">
+                <div
+                  className="images"
+                  style={{ backgroundImage: `url(${fondoKids})` }}
+                >
+                  <ul>
+                    <li onClick={cambiarFondoKids}></li>
+                    <li onClick={cambiarFondoKids2}></li>
+                    <li onClick={cambiarFondoKids3}></li>
+                  </ul>
+                  <a href="#servs1">
+                    <img
+                      src={close}
+                      className="img-close"
+                      onClick={cerrarVentana}
+                      alt="Cerrar Ventana"
+                    />
+                  </a>
+                </div>
+                <div className="vermas-cont">
+                  <h1>Actividades Kids</h1>
+                  <p>
+                    ¿Sabías lo importante que es la actividad física en los
+                    niños? Por eso contamos con diferentes actividades grupales
+                    para ellos. Todas están guiadas por profes y pensadas para
+                    divertirse, y para acompañar su desarrollo tanto físico como
+                    social, desde las etapas más tempranas.
                   </p>
                 </div>
               </div>
