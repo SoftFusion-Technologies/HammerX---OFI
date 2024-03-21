@@ -1,13 +1,27 @@
 import { flecha1, flecha2, logo, hero2 } from "../../images/svg/index";
 import FixedNavbar from "./FixedNavbar";
+import Aos from "aos";
+import { useEffect, useState } from 'react';
 
 const Hero = () => {
+
+  useEffect(() => {
+    Aos.init({ duration: 1500, delay: '200' })
+  }, [])
+
+  const [mostrarBotonesSedes, setMostrarBotonesSedes] = useState(false);
+
+  const toggleSedes = () => { //mostrar botones de sedes
+    setMostrarBotonesSedes(!mostrarBotonesSedes);
+  };
+
+  
   return (
-    <div className="relative w-full h-screen flex">
-      <div className="lg:w-1/2 md:w-2/3 max-md:w-full px-10 max-sm:px-6 dark:bg-gradient-to-r from-gray-600 to-gray-700" id="div1">
+    <div className="relative w-full h-screen flex overflow-hidden">
+      <div data-aos="fade-right" className="lg:w-1/2 md:w-2/3 max-md:w-full px-10 max-sm:px-6 dark:bg-gradient-to-r from-gray-600 to-gray-700" id="div1">
         <img src={logo} alt="logo" className="mt-24" />
 
-        <div className="w-5/6 h-80 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto">
+        <div className="w-5/6 h-auto pb-5 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto">
           <div>
             <p className="max-md:text-sm text-center px-6 pt-6 font-messina dark:text-white">
               Bienvenidos a nuestro sitio oficial.{" "}
@@ -28,8 +42,18 @@ const Hero = () => {
               </li>
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
-                <a href="#">NUESTRAS SEDES</a>
+                <p className='cursor-pointer' onClick={toggleSedes}>NUESTRAS SEDES</p>
               </li>
+              { mostrarBotonesSedes && (
+                <div className='flex mx-auto mb-2'>
+                    <button className="bg-gray-300 transition hover:bg-gray-400 text-black  py-2 px-4 rounded mr-4">
+                      Concepción
+                    </button>
+                    <button className="bg-gray-300 transition hover:bg-gray-400 text-black  py-2 px-4 rounded">
+                      Monteros
+                    </button>
+                </div>
+              )}
               <hr className="text-black w-5/6" />
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
                 <a href="#about">CONOCÉ TODA NUESTRA INFO</a>
@@ -43,7 +67,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="lg:w-1/2 md:w-1/3 max-md:hidden relative dark:bg-gradient-to-r from-gray-700 to-gray-900" id="div2">
+      <div data-aos="fade-left" className="lg:w-1/2 md:w-1/3 max-md:hidden relative dark:bg-gradient-to-r from-gray-700 to-gray-900" id="div2">
         <img
           src={hero2}
           alt="Señoras"

@@ -4,7 +4,7 @@ import "../../styles/main/mobileApp.css";
 const MobileApp = () => {
   return (
     <div className="w-full bg-gradient-to-b from-[#fc4b08] to-gray-200 dark:from-gray-500 dark:to-gray-900">
-      <div className="w-11/12 mx-auto flex pt-10 max-md:flex-col">
+      <div data-aos="fade-up" className="w-11/12 mx-auto flex pt-10 max-md:flex-col">
         <div className="w-2/3 max-md:w-full">
           <div>
             <h1 className="font-bignoodle text-white md:text-[60px] text-[80px] max-sm:text-[40px] max-md:text-[70px] max-sm:text-center">Ya tenes disponible tu app</h1>
@@ -17,7 +17,7 @@ const MobileApp = () => {
 
           <div className="my-10 sm:space-x-10 max-md:flex max-sm:flex-col max-sm:w-[200px] max-md:justify-center max-md:mx-auto">
             {/* Botón Google Play*/}
-            <a className="playstore-button " href="https://play.google.com/store/apps/details?id=com.hammerx&hl=es_419&gl=US">
+            <a data-aos="fade-right" data-aos-duration="1500" className="playstore-button " href="https://play.google.com/store/apps/details?id=com.hammerx&hl=es_419&gl=US">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -33,7 +33,7 @@ const MobileApp = () => {
             </a>
 
             {/* Botón Google Play*/}
-            <a href="https://apps.apple.com/ar/app/hammer-x/id6470037033" className="playstore-button max-sm:mt-5" >
+            <a data-aos="fade-right" data-aos-duration="2300" href="https://apps.apple.com/ar/app/hammer-x/id6470037033" className="playstore-button max-sm:mt-5" >
               <span className="icon">
                 <svg
                   fill="currentcolor"
@@ -60,7 +60,7 @@ const MobileApp = () => {
           </div>
         </div>
 
-        <div className="w-1/3 max-md:mx-auto max-md:w-full flex flex-end">
+        <div data-aos="fade-left" className="w-1/3 max-md:mx-auto max-md:w-full flex flex-end">
           <img src={mobileapp} alt="" className="mx-auto max-sm:w-2/3"/>
         </div>
       </div>

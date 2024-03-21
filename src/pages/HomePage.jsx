@@ -6,10 +6,12 @@ import MobileApp from "../components/main/MobileApp";
 const HomePage = () => {
   return (
     <>
+    <div className='overflow-hidden'>
       <Hero />
       <Servicios />
       <About />
       <MobileApp />
+    </div>
     </>
   );
 };

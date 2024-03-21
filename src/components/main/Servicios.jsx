@@ -152,7 +152,7 @@ const Servicios = () => {
                 <button onClick={verCardio}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="clasesgrupales">
+            <div data-aos="fade-up" id="servicio" className="clasesgrupales">
               <p>Clases grupales</p>
               <a href="#vermas">
                 <button onClick={verClasesGrupales}>Ver más</button>

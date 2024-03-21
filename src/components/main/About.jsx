@@ -24,12 +24,12 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12 ">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
-                  <a href="/clientes" className="max-sm:mx-auto max-sm:mb-5 ">
+                  <a data-aos="fade-right"  href="/clientes" className="max-sm:mx-auto max-sm:mb-5 ">
                     <button className="btn shadow-lg font-messina text-white font-semibold ">
                       Soy Cliente
                     </button>
                   </a>
-                  <a href="/nosotros" className="max-sm:mx-auto">
+                  <a data-aos="fade-right" data-aos-duration="2000" href="/nosotros" className="max-sm:mx-auto">
                     <button className="btn shadow-lg font-messina text-white font-semibold">
                       Quiero Conocerlos
                     </button>
