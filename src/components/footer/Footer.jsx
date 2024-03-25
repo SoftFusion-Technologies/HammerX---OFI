@@ -11,21 +11,21 @@ const Footer = () => {
                         </a>
                         <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                             <li>
-                                <a href="https://spartansgym.netlify.app" className="hover:underline me-4 md:me-6">About</a>
+                                <a href="#" className="hover:underline me-4 md:me-6">Beneficios</a>
                             </li>
                             <li>
-                                <a href="https://spartansgym.netlify.app" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+                                <a href="#" className="hover:underline me-4 md:me-6">Pautas de Convivencia Hammer</a>
                             </li>
                             <li>
-                                <a href="https://spartansgym.netlify.app" className="hover:underline me-4 md:me-6">Licensing</a>
+                                <a href="#" className="hover:underline me-4 md:me-6">Legales</a>
                             </li>
                             <li>
-                                <a href="https://spartansgym.netlify.app" className="hover:underline">Contact</a>
+                                <a href="#" className="hover:underline">Contacto</a>
                             </li>
                         </ul>
                     </div>
                     <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                    <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://spartansgym.netlify.app" className="hover:underline">Hammer™</a>. All Rights Reserved.</span>
+                    <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#" className="hover:underline">Hammer™</a>. All Rights Reserved.</span>
                 </div>
             </footer>
         </>
