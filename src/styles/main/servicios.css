@@ -336,12 +336,12 @@
     text-align: start;
     font-family: "Montserrat", sans-serif;
   }
-
   .vermas-cont p {
     font-family: "Montserrat", sans-serif;
     font-size: 10px;
     color: #353535;
     text-align: start;
     line-height: 1.2;
+    padding-top: 3px;
   }
 }
