@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { flecha1, flecha2, logo, hero2 } from "../../images/svg/index";
 import FixedNavbar from "./FixedNavbar";
 import Aos from "aos";
@@ -46,12 +47,17 @@ const Hero = () => {
               </li>
               { mostrarBotonesSedes && (
                 <div className='flex mx-auto mb-2'>
-                    <button className="bg-gray-300 transition hover:bg-gray-400 text-black  py-2 px-4 rounded mr-4">
+                  <Link to={'/Concepcion'}>
+                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded mr-4">
                       Concepción
                     </button>
-                    <button className="bg-gray-300 transition hover:bg-gray-400 text-black  py-2 px-4 rounded">
+                  </Link>
+                  <Link to={'/Monteros'}>
+                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded">
                       Monteros
                     </button>
+                  </Link>
+                    
                 </div>
               )}
               <hr className="text-black w-5/6" />
