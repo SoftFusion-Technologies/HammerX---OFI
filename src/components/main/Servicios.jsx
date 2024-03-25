@@ -184,7 +184,7 @@ const Servicios = () => {
           <div className="vermas">
             {/* el onclick hace que cambie el estado que maneja el servicio que se abre, y así ir iterando entre los servicios */}
             <div onClick={() => setServicio(arrayServicios[4])} className='pt-0'>
-              <img className='h-10 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -230,7 +230,7 @@ const Servicios = () => {
               </div>
             </div>
             <div onClick={() => setServicio(arrayServicios[1])} className='pt-0'>
-              <img className='h-10 ml-5 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 ml-5  transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
           </div>
         </>
@@ -241,7 +241,7 @@ const Servicios = () => {
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div onClick={() => setServicio(arrayServicios[0])} className='pt-0'>
-              <img className='h-10 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -287,7 +287,7 @@ const Servicios = () => {
               
             </div>
             <div onClick={() => setServicio(arrayServicios[2])} className='pt-0'>
-              <img className='h-10 ml-5 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
           </div>
         </>
@@ -298,7 +298,7 @@ const Servicios = () => {
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div onClick={() => setServicio(arrayServicios[1])} className='pt-0'>
-              <img className='h-10 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -345,7 +345,7 @@ const Servicios = () => {
               </div>
             </div>
             <div onClick={() => setServicio(arrayServicios[3])} className='pt-0'>
-              <img className='h-10 ml-5 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
           </div>
         </>
@@ -356,7 +356,7 @@ const Servicios = () => {
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div onClick={() => setServicio(arrayServicios[2])} className='pt-0'>
-              <img className='h-10 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -402,7 +402,7 @@ const Servicios = () => {
               </div>
             </div>
             <div onClick={() => setServicio(arrayServicios[4])} className='pt-0'>
-              <img className='h-10 ml-5 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
           </div>
         </>
@@ -413,7 +413,7 @@ const Servicios = () => {
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             <div onClick={() => setServicio(arrayServicios[3])} className='pt-0'>
-              <img className='h-10 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -456,7 +456,7 @@ const Servicios = () => {
               </div>
             </div>
             <div onClick={() => setServicio(arrayServicios[0])} className='pt-0'>
-              <img className='h-10 ml-5 cursor-pointer transition hover:invert' src={flecha} alt="" />
+              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
             </div>
           </div>
         </>

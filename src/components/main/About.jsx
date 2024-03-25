@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { guionesnar } from "../../images/index";
 import "../../styles/main/about.css";
 
@@ -24,16 +25,17 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12 ">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
-                  <a data-aos="fade-right"  href="/clientes" className="max-sm:mx-auto max-sm:mb-5 ">
-                    <button className="btn shadow-lg font-messina text-white font-semibold ">
+                  <Link to={'/clientes'}>
+                    <button  data-aos="fade-right" data-aos-duration="1500" className="btn shadow-lg font-messina text-white font-semibold ">
                       Soy Cliente
                     </button>
-                  </a>
-                  <a data-aos="fade-right" data-aos-duration="2000" href="/nosotros" className="max-sm:mx-auto">
-                    <button className="btn shadow-lg font-messina text-white font-semibold">
+                  </Link>
+                  <Link to={'/nosotros'}>
+                    <button data-aos="fade-right" data-aos-duration="2000" className="btn shadow-lg font-messina text-white font-semibold">
                       Quiero Conocerlos
                     </button>
-                  </a>
+                  </Link>
+
                 </div>
               </div>
             </div>
