@@ -127,13 +127,13 @@ const Servicios = () => {
         id="servs1"
       >
         <h1
-          data-aos="fade-up"
+          data-aos="zoom-in-up"
           className="text-white font-bignoodle text-[50px] font-bold tracking-wider pb-5"
         >
           Tus Actividades
         </h1>
         <p
-          data-aos="fade-up"
+          data-aos="zoom-in-up"
           className="font-messina text-md  text-orange-200 dark:text-white"
         >
           Explora un abanico de servicios diseñados para transformar tu
@@ -144,31 +144,31 @@ const Servicios = () => {
         </p>
         <div className="serv">
           <div className="contenedor">
-            <div data-aos="fade-right" id="servicio" className="musculacion">
+            <div data-aos="zoom-in-right" id="servicio" className="musculacion">
               <p>Musculación</p>
               <a href="#vermas">
                 <button onClick={verMusculacion}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-right" id="servicio" className="cardio">
+            <div data-aos="zoom-in-right" id="servicio" className="cardio">
               <p>Cardio</p>
               <a href="#vermas">
                 <button onClick={verCardio}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-up" id="servicio" className="clasesgrupales">
+            <div data-aos="zoom-in-up" id="servicio" className="clasesgrupales">
               <p>Clases grupales</p>
               <a href="#vermas">
                 <button onClick={verClasesGrupales}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="bajoimpacto">
+            <div data-aos="zoom-in-left" id="servicio" className="bajoimpacto">
               <p>Bajo impacto</p>
               <a href="#vermas">
                 <button onClick={verBajoImpacto}>Ver más</button>
               </a>
             </div>
-            <div data-aos="fade-left" id="servicio" className="actividadeskids">
+            <div data-aos="zoom-in-left" id="servicio" className="actividadeskids">
               <p>Kids</p>
               <a href="#vermas">
                 <button onClick={verKids}>Ver más</button>
