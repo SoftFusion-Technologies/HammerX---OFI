@@ -22,3 +22,8 @@
   background-repeat: none;
   background-size: cover;
 }
+@media (max-width: 768px) {
+  .btn {
+    margin-bottom: 30px; /* Benjamin orellana, se separan los botones en cel */
+  }
+}

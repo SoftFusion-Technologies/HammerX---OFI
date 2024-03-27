@@ -58,16 +58,30 @@ const About = () => {
                 <h2 className="mb-5 text-3xl font-bignoodle tracking-wide lg:text-[50px] font-bold text-orange-500 sm:text-[40px]/[48px] dark:text-white">
                   CONOCÉ TODA NUESTRA INFO
                 </h2>
-                <p className="mb-5 text-base text-body-color dark:text-gray-200">
-                  Sabemos que cambiar tus hábitos puede ser difícil, pero en
-                  Hammer te acompañamos en tu transformación. Deja el
-                  sedentarismo atrás y convierte la actividad física en la mejor
-                  parte de tu día.
+                <p className="mb-8 text-base text-body-color dark:text-gray-200">
+                  En Hammer, entendemos que dar el primer paso hacia un estilo
+                  de vida más saludable puede ser desafiante. Nuestro compromiso
+                  va más allá de proporcionarte un lugar para hacer ejercicio
+                  estamos aquí para apoyarte en cada etapa de tu viaje de
+                  transformación. Desde el momento en que cruzas nuestras
+                  puertas, te convertimos en parte de una comunidad dedicada a
+                  alcanzar metas y superar límites.
+                </p>
+
+                <p className="mb-8 text-base text-body-color dark:text-gray-200">
+                  Además de nuestras amplias instalaciones y equipos de última
+                  generación, en Hammer también ofrecemos una variedad de clases
+                  grupales diseñadas para mantener tu entrenamiento fresco y
+                  emocionante. Desde clases de cardio y entrenamiento de fuerza
+                  hasta yoga y pilates, hay algo para todos los gustos y niveles
+                  de condición física.
                 </p>
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
-                  Un nombre de dominio es uno de los primeros pasos para
-                  establecer tu marca. Asegura una imagen de marca consistente
-                  con un nombre de dominio que coincida con tu negocio.
+                  <strong>
+                    {' '}
+                    Únete a nosotros en Hammer y descubre cómo convertir la
+                    actividad física en la mejor parte de tu día.
+                  </strong>
                 </p>
               </div>
             </div>
