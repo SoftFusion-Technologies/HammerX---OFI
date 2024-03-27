@@ -7,7 +7,7 @@ const FixedNavbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > 0) {
+      if (currentScrollY > 50) { //Cambio agregado por benjamin orellana para una demo al cliente
         setIsVisible(true);
       } else {
         setIsVisible(false);
