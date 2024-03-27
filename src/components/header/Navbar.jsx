@@ -16,7 +16,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav data-aos="fade-down" className="justify-between w-full dark:bg-gradient-to-r from-gray-600 to-gray-900  fixed z-50">
+    <nav
+      data-aos="zoom-in-up" //Se reemplazo fade-down por el realentizamiento que aplicaba a la web, cambio aplicado por Benjamin Orellana - 27/03/24
+      className="justify-between w-full dark:bg-gradient-to-r from-gray-600 to-gray-900  fixed z-50"
+    >
       <div className="h-12 flex w-full bg-white justify-between items-center py-8 px-10 z-10 dark:bg-transparent ">
         <Marcas />
 
@@ -30,18 +33,26 @@ const Navbar = () => {
           <a href="#contact" className="link">
             Contacto
           </a>
-          <a href="#" className=''>
+          <a href="#" className="">
             <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
               ¡Probar una clase!
             </button>
           </a>
 
-          <img onClick={toggleDarkMode} className="h-7 mt-2 cursor-pointer dark:invert" src={theme} alt="Theme" />
-
+          <img
+            onClick={toggleDarkMode}
+            className="h-7 mt-2 cursor-pointer dark:invert"
+            src={theme}
+            alt="Theme"
+          />
         </div>
 
         <div className="lg:hidden">
-          <button id="menu-toggle" className=" relative" onClick={toggleMobileMenu}>
+          <button
+            id="menu-toggle"
+            className=" relative"
+            onClick={toggleMobileMenu}
+          >
             <Menu /> {/* menú*/}
           </button>
         </div>
@@ -61,8 +72,13 @@ const Navbar = () => {
           <a href="#testi" className="block py-2 px-4 ">
             Comenzar
           </a>
-          <div className='ml-4'>
-            <img onClick={toggleDarkMode} className="h-7 mt-2 cursor-pointer dark:invert" src={theme} alt="Theme" />
+          <div className="ml-4">
+            <img
+              onClick={toggleDarkMode}
+              className="h-7 mt-2 cursor-pointer dark:invert"
+              src={theme}
+              alt="Theme"
+            />
           </div>
         </div>
       )}
