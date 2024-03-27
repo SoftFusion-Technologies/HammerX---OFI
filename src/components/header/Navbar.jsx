@@ -27,10 +27,13 @@ const Navbar = () => {
           <a href="/" className="link">
             Home
           </a>
-          <a href="#about" className="link">
+          <a href="/nosotros/quienessomos" className="link" target="_blank">
             ¿Quiénes somos?
           </a>
-          <a href="#contact" className="link">
+          <a
+            href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+necesito+info+de+la+sede+de+monteros&type=phone_number&app_absent=0"
+            className="link"
+          >
             Contacto
           </a>
           <a href="#" className="">
@@ -53,7 +56,7 @@ const Navbar = () => {
             className=" relative"
             onClick={toggleMobileMenu}
           >
-            <Menu /> {/* menú*/}
+            <Menu /> {/* menú para mostrarse en dispositivos mobiles*/}
           </button>
         </div>
       </div>
@@ -63,14 +66,17 @@ const Navbar = () => {
           <a href="#home" className="block py-2 px-4 ">
             Home
           </a>
-          <a href="#about" className="block py-2 px-4 ">
+          <a href="/nosotros/quienessomos" className="block py-2 px-4 ">
             ¿Quiénes somos?
           </a>
-          <a href="#testi" className="block py-2 px-4 ">
+          <a
+            href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+necesito+info+de+la+sede+de+monteros&type=phone_number&app_absent=0"
+            className="block py-2 px-4 "
+          >
             Contacto
           </a>
           <a href="#testi" className="block py-2 px-4 ">
-            Comenzar
+            Prueba una clase gratis
           </a>
           <div className="ml-4">
             <img
