@@ -134,7 +134,11 @@ const Servicios = () => {
         </h1>
         <p
           data-aos="zoom-in-up"
+<<<<<<< HEAD
           className="font-messina text-md  text-orange-100 text-[20px] font-bold dark:text-white"
+=======
+          className="font-messina text-md  text-orange-200 dark:text-white"
+>>>>>>> 8af3c6ce4bcbcafc99b09cc71ecad020b8babe8f
         >
           En HAMMERX Contamos con clases individuales y grupales, de bajo y de
           alto impacto, todas supervisadas y dictadas por profesores capacitados
@@ -167,11 +171,15 @@ const Servicios = () => {
                 <button onClick={verBajoImpacto}>Ver más</button>
               </a>
             </div>
+<<<<<<< HEAD
             <div
               data-aos="zoom-in-left"
               id="servicio"
               className="actividadeskids"
             >
+=======
+            <div data-aos="zoom-in-left" id="servicio" className="actividadeskids">
+>>>>>>> 8af3c6ce4bcbcafc99b09cc71ecad020b8babe8f
               <p>Kids</p>
               <a href="#vermas">
                 <button onClick={verKids}>Ver más</button>
