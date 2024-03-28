@@ -134,13 +134,12 @@ const Servicios = () => {
         </h1>
         <p
           data-aos="zoom-in-up"
-          className="font-messina text-md  text-orange-200 dark:text-white"
+          className="font-messina text-md  text-orange-100 text-[20px] font-bold dark:text-white"
         >
-          Explora un abanico de servicios diseñados para transformar tu
-          experiencia de fitness. Desde entrenamientos personalizados hasta
-          clases vibrantes, cada servicio en nuestra oferta está diseñado para
-          llevar tu bienestar a nuevas alturas. Únete a nosotros y descubre cómo
-          podemos personalizar tu viaje hacia una vida activa y saludable.
+          En HAMMERX Contamos con clases individuales y grupales, de bajo y de
+          alto impacto, todas supervisadas y dictadas por profesores capacitados
+          para cuidarte y diseñadas para adaptarse a tu nivel y objetivos.
+          ¡Elijamos juntos la mas indicada para vos!
         </p>
         <div className="serv">
           <div className="contenedor">
@@ -168,7 +167,11 @@ const Servicios = () => {
                 <button onClick={verBajoImpacto}>Ver más</button>
               </a>
             </div>
-            <div data-aos="zoom-in-left" id="servicio" className="actividadeskids">
+            <div
+              data-aos="zoom-in-left"
+              id="servicio"
+              className="actividadeskids"
+            >
               <p>Kids</p>
               <a href="#vermas">
                 <button onClick={verKids}>Ver más</button>
@@ -183,8 +186,15 @@ const Servicios = () => {
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
             {/* el onclick hace que cambie el estado que maneja el servicio que se abre, y así ir iterando entre los servicios */}
-            <div onClick={() => setServicio(arrayServicios[4])} className='pt-0'>
-              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[4])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -229,8 +239,15 @@ const Servicios = () => {
                 </div>
               </div>
             </div>
-            <div onClick={() => setServicio(arrayServicios[1])} className='pt-0'>
-              <img className='h-10 ml-5  transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[1])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 ml-5  transform rotate-180 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
           </div>
         </>
@@ -240,8 +257,15 @@ const Servicios = () => {
           <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
-            <div onClick={() => setServicio(arrayServicios[0])} className='pt-0'>
-              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[0])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -284,10 +308,16 @@ const Servicios = () => {
                   </p>
                 </div>
               </div>
-              
             </div>
-            <div onClick={() => setServicio(arrayServicios[2])} className='pt-0'>
-              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[2])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
           </div>
         </>
@@ -297,8 +327,15 @@ const Servicios = () => {
           <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
-            <div onClick={() => setServicio(arrayServicios[1])} className='pt-0'>
-              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[1])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -344,8 +381,15 @@ const Servicios = () => {
                 </div>
               </div>
             </div>
-            <div onClick={() => setServicio(arrayServicios[3])} className='pt-0'>
-              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[3])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
           </div>
         </>
@@ -355,8 +399,15 @@ const Servicios = () => {
           <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
-            <div onClick={() => setServicio(arrayServicios[2])} className='pt-0'>
-              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[2])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -401,8 +452,15 @@ const Servicios = () => {
                 </div>
               </div>
             </div>
-            <div onClick={() => setServicio(arrayServicios[4])} className='pt-0'>
-              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[4])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
           </div>
         </>
@@ -412,8 +470,15 @@ const Servicios = () => {
           <div id="vermas" className="espacio"></div>{' '}
           {/*Div da espacio entre la caja y el nav, para que no se vea encimado*/}
           <div className="vermas">
-            <div onClick={() => setServicio(arrayServicios[3])} className='pt-0'>
-              <img className='h-10 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[3])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
             <div className="verMasMusc">
               <a href="#servs1">
@@ -455,8 +520,15 @@ const Servicios = () => {
                 </div>
               </div>
             </div>
-            <div onClick={() => setServicio(arrayServicios[0])} className='pt-0'>
-              <img className='h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert' src={flecha} alt="" />
+            <div
+              onClick={() => setServicio(arrayServicios[0])}
+              className="pt-0"
+            >
+              <img
+                className="h-10 ml-5 transform rotate-180 cursor-pointer transition hover:invert"
+                src={flecha}
+                alt=""
+              />
             </div>
           </div>
         </>

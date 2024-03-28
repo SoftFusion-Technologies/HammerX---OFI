@@ -29,9 +29,9 @@ const About = () => {
                     <button
                       data-aos="fade-right"
                       data-aos-duration="1500"
-                      className="btn shadow-lg font-messina text-white font-semibold "
+                      className="btn shadow-lg font-messina text-white font-semibold mr-8 "
                     >
-                      Soy Cliente
+                      ¡Quiero Conocerlos!
                     </button>
                   </Link>
                   <Link to={'/nosotros'}>
@@ -40,7 +40,7 @@ const About = () => {
                       data-aos-duration="2000"
                       className="btn shadow-lg font-messina text-white font-semibold"
                     >
-                      Quiero Conocerlos
+                      Soy Cliente
                     </button>
                   </Link>
                 </div>
@@ -59,29 +59,18 @@ const About = () => {
                   CONOCÉ TODA NUESTRA INFO
                 </h2>
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
-                  En Hammer, entendemos que dar el primer paso hacia un estilo
-                  de vida más saludable puede ser desafiante. Nuestro compromiso
-                  va más allá de proporcionarte un lugar para hacer ejercicio
-                  estamos aquí para apoyarte en cada etapa de tu viaje de
-                  transformación. Desde el momento en que cruzas nuestras
-                  puertas, te convertimos en parte de una comunidad dedicada a
-                  alcanzar metas y superar límites.
+                  Somos un lugar donde vas a ejercitarte, pero también vas a
+                  encontrar un momento para pasarla bien, divertirte, conocerás
+                  personas y te sentirás acompañado, así te demostraremos una
+                  manera diferente de hacerlo y te ayudaremos a incorporar la
+                  actividad física como parte de tu vida y por qué no, a
+                  convertirse en el momento que esperas de tu día.
                 </p>
-{/* 
+
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
-                  Además de nuestras amplias instalaciones y equipos de última
-                  generación, en Hammer también ofrecemos una variedad de clases
-                  grupales diseñadas para mantener tu entrenamiento fresco y
-                  emocionante. Desde clases de cardio y entrenamiento de fuerza
-                  hasta yoga y pilates, hay algo para todos los gustos y niveles
-                  de condición física.
-                </p> */}
-                <p className="mb-8 text-base text-body-color dark:text-gray-200">
-                  <strong>
-                    {' '}
-                    Únete a nosotros en Hammer y descubre cómo convertir la
-                    actividad física en la mejor parte de tu día.
-                  </strong>
+                  Transformemos juntos el concepto tradicional de un gimnasio y
+                  lo convirtamos en un lugar donde no solo se entrena, sino
+                  también donde serás feliz.
                 </p>
               </div>
             </div>
