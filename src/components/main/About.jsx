@@ -26,16 +26,23 @@ const About = () => {
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
                   <Link to={'/clientes'}>
-                    <button  data-aos="fade-right" data-aos-duration="1500" className="btn shadow-lg font-messina text-white font-semibold ">
-                      Soy Cliente
+                    <button
+                      data-aos="fade-right"
+                      data-aos-duration="1500"
+                      className="btn shadow-lg font-messina text-white font-semibold mr-8 "
+                    >
+                      ¡Quiero Conocerlos!
                     </button>
                   </Link>
                   <Link to={'/nosotros'}>
-                    <button data-aos="fade-right" data-aos-duration="2000" className="btn shadow-lg font-messina text-white font-semibold">
-                      Quiero Conocerlos
+                    <button
+                      data-aos="fade-right"
+                      data-aos-duration="2000"
+                      className="btn shadow-lg font-messina text-white font-semibold"
+                    >
+                      Soy Cliente
                     </button>
                   </Link>
-
                 </div>
               </div>
             </div>
@@ -51,22 +58,25 @@ const About = () => {
                 <h2 className="mb-5 text-3xl font-bignoodle tracking-wide lg:text-[50px] font-bold text-orange-500 sm:text-[40px]/[48px] dark:text-white">
                   CONOCÉ TODA NUESTRA INFO
                 </h2>
-                <p className="mb-5 text-base text-body-color dark:text-gray-200">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less.
-                </p>
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
-                  A domain name is one of the first steps to establishing your
-                  brand. Secure a consistent brand image with a domain name that
-                  matches your business.
+                  Somos un lugar donde vas a ejercitarte, pero también vas a
+                  encontrar un momento para pasarla bien, divertirte, conocerás
+                  personas y te sentirás acompañado, así te demostraremos una
+                  manera diferente de hacerlo y te ayudaremos a incorporar la
+                  actividad física como parte de tu vida y por qué no, a
+                  convertirse en el momento que esperas de tu día.
                 </p>
-                
+
+                <p className="mb-8 text-base text-body-color dark:text-gray-200">
+                  Transformemos juntos el concepto tradicional de un gimnasio y
+                  lo convirtamos en un lugar donde no solo se entrena, sino
+                  también donde serás feliz.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section >
+      </section>
     </>
   );
 };
