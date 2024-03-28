@@ -18,7 +18,7 @@ import {
   kids3
 } from '../../images/index';
 import '../../styles/main/servicios.css';
-import flecha from '../../images/flecha.png'
+import flecha from '../../images/flecha.png';
 
 const Servicios = () => {
   const [servicio, setServicio] = useState('');
@@ -108,7 +108,13 @@ const Servicios = () => {
   };
 
   //array con los servicios para poder pasarlos entre si
-  const arrayServicios = ['musculacion','cardio','clasesgrupales','bajoimpacto','actividadeskids'];
+  const arrayServicios = [
+    'musculacion',
+    'cardio',
+    'clasesgrupales',
+    'bajoimpacto',
+    'actividadeskids'
+  ];
 
   return (
     <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative">
@@ -134,15 +140,7 @@ const Servicios = () => {
         </h1>
         <p
           data-aos="zoom-in-up"
-<<<<<<< HEAD
-<<<<<<< HEAD
           className="font-messina text-md  text-orange-100 text-[20px] font-bold dark:text-white"
-=======
-          className="font-messina text-md  text-orange-200 dark:text-white"
->>>>>>> 8af3c6ce4bcbcafc99b09cc71ecad020b8babe8f
-=======
-          className="font-messina text-md  text-orange-100 text-[20px] font-bold dark:text-white"
->>>>>>> benja-rama
         >
           En HAMMERX Contamos con clases individuales y grupales, de bajo y de
           alto impacto, todas supervisadas y dictadas por profesores capacitados
@@ -175,21 +173,11 @@ const Servicios = () => {
                 <button onClick={verBajoImpacto}>Ver más</button>
               </a>
             </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> benja-rama
             <div
               data-aos="zoom-in-left"
               id="servicio"
               className="actividadeskids"
             >
-<<<<<<< HEAD
-=======
-            <div data-aos="zoom-in-left" id="servicio" className="actividadeskids">
->>>>>>> 8af3c6ce4bcbcafc99b09cc71ecad020b8babe8f
-=======
->>>>>>> benja-rama
               <p>Kids</p>
               <a href="#vermas">
                 <button onClick={verKids}>Ver más</button>
