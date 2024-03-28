@@ -34,8 +34,8 @@ git checkout -b rama-v270324-hammer-benja
 Utilizar la Nueva Rama
 Una vez que has creado una nueva rama, puedes comenzar a trabajar en ella. Realiza las modificaciones necesarias en tu código para implementar nuevas características o solucionar problemas. Sigue estos pasos para trabajar en la nueva rama:
 
-Abre tu editor de código preferido.
-Realiza los cambios necesarios en tus archivos de proyecto.
+1)Abre tu editor de código preferido.
+2)Realiza los cambios necesarios en tus archivos de proyecto.
 Programar
 Este es el momento de programar. Asegúrate de seguir las mejores prácticas de codificación y documentación mientras trabajas en tu proyecto.
 
@@ -43,6 +43,18 @@ Agregar y Hacer Commit de tus Cambios
 Una vez que hayas completado tus cambios en la nueva rama, es necesario agregarlos y hacer commit para guardar tus modificaciones. Sigue estos pasos:
 
 En la terminal, ejecuta los siguientes comandos para agregar y hacer commit de tus cambios:
+
+git add .
+git commit -m "Mensaje descriptivo de tus cambios"
+
+
+Subir la Rama a tu Repositorio en GitHub
+Para compartir tus cambios con otros colaboradores o integrarlos con el código base, es necesario subir la nueva rama a tu repositorio en GitHub. Sigue estos pasos:
+
+En la terminal, ejecuta el siguiente comando para subir la nueva rama a GitHub:
+
+git push origin nombre-de-tu-rama
+
 
 -------------------------------------------------------
 Despliegue en Producción: Cuando sea necesario realizar un despliegue en producción, se utilizará el código de este repositorio. Asegúrate de que cualquier cambio esté completamente probado y listo para producción antes de fusionarlo con la rama principal (main).
