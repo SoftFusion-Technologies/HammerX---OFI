@@ -14,6 +14,8 @@ git clone https://github.com/SoftFusion-Technologies/HammerX---OFI.git
 
 git pull origin main
 
+Instrucciones para Trabajar con Ramas en Git 27/03/2024
+-------------------------------------------------------
 
 Despliegue en Producción: Cuando sea necesario realizar un despliegue en producción, se utilizará el código de este repositorio. Asegúrate de que cualquier cambio esté completamente probado y listo para producción antes de fusionarlo con la rama principal (main).
 
