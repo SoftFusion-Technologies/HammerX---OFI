@@ -54,7 +54,7 @@ const Marcas = () => {
   return (
     <div className="h-12 mt-2 w-5/6 md:w-2/3 lg:w-1/3 flex flex-col justif-between dark:bg-transparent overflow-hidden">
       <Slider className=" " {...settings}>
-        <div title="Soft-Fusion Empresa de Software" className="mx-auto">
+        {/* <div title="Soft-Fusion Empresa de Software" className="mx-auto">
           <a
             className="cursor-pointer"
             href="https://softfusion.netlify.app/"
@@ -63,7 +63,7 @@ const Marcas = () => {
           >
             <img className="h-10" src={comercio9} alt="SoftFusion" />
           </a>
-        </div>
+        </div> */}
         <div title="sin página" className="mx-auto">
           <img className="h-6 mt-2" src={comercio1} alt="Arquitectura" />
         </div>

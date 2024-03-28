@@ -67,7 +67,7 @@ const About = () => {
                   puertas, te convertimos en parte de una comunidad dedicada a
                   alcanzar metas y superar límites.
                 </p>
-
+{/* 
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
                   Además de nuestras amplias instalaciones y equipos de última
                   generación, en Hammer también ofrecemos una variedad de clases
@@ -75,7 +75,7 @@ const About = () => {
                   emocionante. Desde clases de cardio y entrenamiento de fuerza
                   hasta yoga y pilates, hay algo para todos los gustos y niveles
                   de condición física.
-                </p>
+                </p> */}
                 <p className="mb-8 text-base text-body-color dark:text-gray-200">
                   <strong>
                     {' '}
