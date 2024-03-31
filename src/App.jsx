@@ -1,33 +1,37 @@
-import "./App.css";
-import Navbar from "./components/header/Navbar";
-import Footer from "./components/footer/Footer";
-import HomePage from "./pages/HomePage";
-import Clients from "./pages/soycliente/Clients";
-import AboutUs from "./pages/quieroconocerlos/AboutUs";
-import OurTeam from "./pages/quieroconocerlos/OurTeam";
-import OurValues from "./pages/quieroconocerlos/OurValues";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Sedeconcepcion from "./pages/sedes/Concepcion";
-import Sedemonteros from "./pages/sedes/Monteros";
+import React, { lazy, Suspense } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes as Rutas,
+  Route as Ruta
+} from 'react-router-dom';
+import Navbar from './components/header/Navbar';
+import Footer from './components/footer/Footer';
 
+const HomePage = lazy(() => import('./pages/HomePage'));
+const Clients = lazy(() => import('./pages/soycliente/Clients'));
+const AboutUs = lazy(() => import('./pages/quieroconocerlos/AboutUs'));
+const OurTeam = lazy(() => import('./pages/quieroconocerlos/OurTeam'));
+const OurValues = lazy(() => import('./pages/quieroconocerlos/OurValues'));
+const Sedeconcepcion = lazy(() => import('./pages/sedes/Concepcion'));
+const Sedemonteros = lazy(() => import('./pages/sedes/Monteros'));
 
 function App() {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/clientes" element={<Clients />} />
-          <Route path="/nosotros" element={<AboutUs />} />
-          <Route path="/nosotros/quienessomos" element={<OurTeam />} />
-          <Route path="/nosotros/nuestrosvalores" element={<OurValues />} />
-          <Route path="/Concepcion" element={<Sedeconcepcion />} />
-          <Route path="/Monteros" element={<Sedemonteros />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </>
+    <Router>
+      <Navbar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Rutas>
+          <Ruta path="/" element={<HomePage />} />
+          <Ruta path="/clientes" element={<Clients />} />
+          <Ruta path="/nosotros" element={<AboutUs />} />
+          <Ruta path="/nosotros/quienessomos" element={<OurTeam />} />
+          <Ruta path="/nosotros/nuestrosvalores" element={<OurValues />} />
+          <Ruta path="/Concepcion" element={<Sedeconcepcion />} />
+          <Ruta path="/Monteros" element={<Sedemonteros />} />
+        </Rutas>
+      </Suspense>
+      <Footer />
+    </Router>
   );
 }
 
