@@ -1,12 +1,11 @@
 import React from 'react';
 import '../styles/Loading.css';
-import { logo } from "../images/svg/index";
+import Logo2  from "../images/imagenLogoSpinner.jpg";
 
 const Loading = () => {
 
     return (
-        <>
-          
+        <div>
             <div className="sk-chase">
                 <div className="sk-chase-dot"></div>
                 <div className="sk-chase-dot"></div>
@@ -15,17 +14,10 @@ const Loading = () => {
                 <div className="sk-chase-dot"></div>
                 <div className="sk-chase-dot"></div>
             </div>
-            
-            {/* <h1
-                Acomodar este texto y aplicarle TIPOGRAFIA: BIG NOODLE TITLING
-                className="text-simple"
-            >
-                VIVÍ SENSACIONES POSITIVAS SIEMPRE
-            </h1>
-             */}
-              <img src={logo} alt="logo" className="mt-20" /> 
-          
-        </>
+            <div className="container-logo">
+                <img src={Logo2} alt="logo" className="logo-centered" />
+            </div>
+        </div>
     );
 };
 

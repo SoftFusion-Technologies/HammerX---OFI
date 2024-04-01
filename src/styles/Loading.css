@@ -55,9 +55,29 @@
   } 
 }
 
-.text-simple {
-    text-align: center;
-    color: #fc4b08;
-    font-size: 2rem;
-  font-family: 'Big Noodle Titling', sans-serif;
+.container-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }
+
+.logo-centered {
+  max-width: 50%;
+  max-height: auto; /* La altura se ajustará automáticamente para mantener la proporción de la imagen */
+}
+
+/* Media query para dispositivos con un ancho máximo de 768px (por ejemplo, tablets y dispositivos móviles en posición vertical) */
+@media screen and (max-width: 768px) {
+  .logo-centered {
+    max-width: 90%; /* Aumenta el ancho máximo para adaptarse a tamaños de pantalla más pequeños */
+  }
+}
+
+/* Media query para dispositivos con un ancho máximo de 480px (por ejemplo, dispositivos móviles en posición horizontal) */
+@media screen and (max-width: 480px) {
+  .logo-centered {
+    max-width: 80%; /* Aumenta aún más el ancho máximo para adaptarse a tamaños de pantalla muy pequeños */
+  }
+}
+  
