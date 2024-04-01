@@ -14,12 +14,13 @@ const OurTeam = lazy(() => import('./pages/quieroconocerlos/OurTeam'));
 const OurValues = lazy(() => import('./pages/quieroconocerlos/OurValues'));
 const Sedeconcepcion = lazy(() => import('./pages/sedes/Concepcion'));
 const Sedemonteros = lazy(() => import('./pages/sedes/Monteros'));
+const Loading = lazy(() => import('./components/Loading'));
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
+        <Navbar />
         <Rutas>
           <Ruta path="/" element={<HomePage />} />
           <Ruta path="/clientes" element={<Clients />} />
@@ -29,8 +30,8 @@ function App() {
           <Ruta path="/Concepcion" element={<Sedeconcepcion />} />
           <Ruta path="/Monteros" element={<Sedemonteros />} />
         </Rutas>
+        <Footer />
       </Suspense>
-      <Footer />
     </Router>
   );
 }
