@@ -68,7 +68,7 @@ const Cards = () => {
 
             <div className="card flex justify-end">
               <div className="card1 right-bg max-md:max-w-full">
-                <p>V1ISIÓN</p>
+                <p>VISIÓN</p>
                 <p className="small">
                   Buscamos transformar el concepto tradicional de un gimnasio y
                   convertirlo en un lugar donde no solo se entrena y mejorar la
