@@ -10,14 +10,14 @@ Instrucciones de Uso
 
 git clone https://github.com/SoftFusion-Technologies/HammerX---OFI.git
 
-2)Actualizar Regularmente: Asegúrate de estar al día con los cambios realizados en el repositorio remoto antes de realizar cualquier modificación.
+2)Actualizar Regularmente: Asegúrate de estar al día con los cambios realizados en el repositorio remoto antes de realizar cualquier modificación. Tambien haberte logeado con GitHub en Visual Studio Code y acceder al repositorio.
 
 git pull origin main
 
 Instrucciones para Trabajar con Ramas en Git 27/03/2024
 -------------------------------------------------------
 Crear una Nueva Rama en Git
-Para comenzar a trabajar en una nueva función o solucionar un problema específico, es una buena práctica crear una nueva rama en Git. Esto permite mantener los cambios separados del código base hasta que estén listos para ser integrados. Sigue estos pasos para crear una nueva rama:
+Para comenzar a trabajar en una nueva función o solucionar un problema específico, es una buena práctica crear una nueva rama en Git. Esto permite mantener los cambios separados del código base hasta que estén listos para ser integrados.
 
 1)Ejecutar el siguiente comando para crear una nueva rama:
 
@@ -28,12 +28,13 @@ Esta rama se debe mantener actualizada a la ultima versión siempre, pull y cont
 git checkout -b rama-v270324-hammer-benja
 
 Utilizar la Nueva Rama
-Una vez que has creado una nueva rama, puedes comenzar a trabajar en ella. Realiza las modificaciones necesarias en tu código para implementar nuevas características o solucionar problemas. Sigue estos pasos para trabajar en la nueva rama:
 
-1)Abrir tu editor de código preferido.
-2)Realizar los cambios necesarios en tus archivos de proyecto.
+Una vez que has creado una nueva rama, hay que comenzar a trabajar en ella. Realizar las modificaciones necesarias en el código para implementar nuevas características o solucionar problemas. Sigue estos pasos para trabajar en la nueva rama:
+
+1)Abri tu editor de código preferido.
+2)Realiza los cambios necesarios en tus archivos de proyecto.
 Programar
-Este es el momento de programar. Asegúrate de seguir las mejores prácticas de codificación y documentación mientras trabajas en tu proyecto.
+
 
 Agregar y Hacer Commit de tus Cambios
 Una vez que hayas completado tus cambios en la nueva rama, es necesario agregarlos y hacer commit para guardar tus modificaciones. Sigue estos pasos:
