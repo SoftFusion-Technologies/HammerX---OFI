@@ -25,7 +25,7 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12 ">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
-                  <Link to={'/clientes'}>
+                  <Link to={'/nosotros'}>
                     <button
                       data-aos="fade-right"
                       data-aos-duration="1500"
@@ -34,7 +34,7 @@ const About = () => {
                       ¡Quiero Conocerlos!
                     </button>
                   </Link>
-                  <Link to={'/nosotros'}>
+                  <Link to={'/clientes'}>
                     <button
                       data-aos="fade-right"
                       data-aos-duration="2000"
