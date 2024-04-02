@@ -12,8 +12,6 @@ const Cards = () => {
 
 
   return (
-    <>
-      <Navbar />
       <div className="w-full h-contain bgfqs">
         <div className="mx-auto pt-16">
           <div className="pl-4 pt-5 max-sm:pl-2">
@@ -108,7 +106,7 @@ const Cards = () => {
           </div>
         </div>
       </div>
-    </>
+    
   );
 };
 

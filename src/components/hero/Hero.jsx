@@ -55,12 +55,12 @@ const Hero = () => {
                 <div className="flex mx-auto mb-2">
                   <Link to={'/Concepcion'}>
                     <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded mr-4">
-                      Concepción
+                      CONCEPCIÓN
                     </button>
                   </Link>
                   <Link to={'/Monteros'}>
                     <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded">
-                      Monteros
+                      MONTEROS
                     </button>
                   </Link>
                 </div>
