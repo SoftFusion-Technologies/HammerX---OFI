@@ -1,3 +1,15 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Página principal que contiene los componentes principales.
+ *  
+ *
+ *  Tema: Página Principal
+ *  Capa: Frontend
+ */
+
 import Hero from "../components/hero/Hero";
 import Servicios from "../components/main/Servicios";
 import About from "../components/main/About";

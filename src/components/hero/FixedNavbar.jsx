@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from "react";
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: NavBar fixed que contiene el texto "Quiero probar una clase gratis".
+ *  
+ *
+ *  Tema: Fixed Navbar
+ *  Capa: Frontend
+ */
+
+import { useEffect, useState } from "react";
 import "../../styles/hero/fixedNavbar.css"
 
 const FixedNavbar = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = () => { 
       const currentScrollY = window.scrollY;
-      if (currentScrollY > 50) { //Cambio agregado por benjamin orellana para una demo al cliente
+      if (currentScrollY > 0) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -20,8 +33,8 @@ const FixedNavbar = () => {
   }, []);
   
   return (
-    <nav className={`w-full absolute bottom-0 z-50 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0 '}`}>
-      <div className="border-2 bg-white py-4 fixed w-full bottom-0 box">
+    <nav className={`w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{position: 'fixed'}}>
+      <div className="border-2 bg-white py-4 w-full box">
         <ul className="list-none">
           <li className="">
             <a href="">

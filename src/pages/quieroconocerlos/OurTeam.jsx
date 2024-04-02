@@ -1,9 +1,23 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Subpágina que contiene información sobre la mision, vision y objetivos de Hammer.
+ *  
+ *
+ *  Tema: Nuestro Equipo
+ *  Capa: Frontend
+ */
+
+
 import { useEffect } from 'react';
-import Navbar from '../../components/header/Navbar';
 import "../../styles/ourTeam/cards.css";
 import "../../styles/aboutUs/volver.css";
 import "../../styles/ourTeam/background.css"
 import { guionesnar } from "../../images/index"
+import Navbar from '../../components/header/Navbar';
+import { Link } from 'react-router-dom';
 
 const Cards = () => {
   useEffect(() => {
@@ -12,10 +26,10 @@ const Cards = () => {
 
 
   return (
-      <div className="w-full h-contain bgfqs">
-        <div className="mx-auto pt-16">
+      <div className="w-contain h-contain bgfqs pt-16">
+        <div className="mx-auto">
           <div className="pl-4 pt-5 max-sm:pl-2">
-            <a href="/nosotros">
+            <Link to="/nosotros">
               <button className="button">
                 <div className="button-box">
                   <span className="button-elem">
@@ -30,7 +44,7 @@ const Cards = () => {
                   </span>
                 </div>
               </button>
-            </a>
+            </Link>
           </div>
 
           {/* <img

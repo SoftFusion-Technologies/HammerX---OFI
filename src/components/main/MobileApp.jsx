@@ -1,3 +1,15 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Sección que contiene información sobre la aplicación móvil de hammer.
+ *  
+ *
+ *  Tema: App Hammer
+ *  Capa: Frontend
+ */
+
 import { mobileapp } from "../../images";
 import "../../styles/main/mobileApp.css";
 

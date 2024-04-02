@@ -10,8 +10,8 @@ import comercio5 from '../../images/marcas/comercio5.png'
 import comercio6 from '../../images/marcas/comercio6.png'
 import comercio7 from '../../images/marcas/comercio7.png'
 import comercio8 from '../../images/marcas/comercio8.png';
-import comercio9 from '../../images/marcas/comercio9.png';
-// import soft from '../../images/marcas/soft.jpeg' se elimina esto - benjamin orellana
+import comercio9 from '../../images/marcas/comercio9.png'; //Imagen importada por Lucas ALbornoz - mar. 2 abr. 2024
+
 
 const Marcas = () => {
   const settings = {
@@ -54,19 +54,21 @@ const Marcas = () => {
   return (
     <div className="h-12 mt-2 w-5/6 md:w-2/3 lg:w-1/3 flex flex-col justif-between dark:bg-transparent overflow-hidden">
       <Slider className=" " {...settings}>
-        {/* <div title="Soft-Fusion Empresa de Software" className="mx-auto">
+        <div title="Soft-Fusion Empresa de Software" className='h-10'>
           <a
             className="cursor-pointer"
             href="https://softfusion.netlify.app/"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer"  
           >
-            <img className="h-10" src={comercio9} alt="SoftFusion" />
+            <img className="pt-3 px-2 mx-auto" src={comercio9} alt="SoftFusion" />
           </a>
-        </div> */}
-        <div title="sin página" className="mx-auto">
-          <img className="h-6 mt-2" src={comercio1} alt="Arquitectura" />
         </div>
+
+        <div title="sin página" className="mx-auto">
+          <img className="h-6 mt-2 mx-auto" src={comercio1} alt="Arquitectura" />
+        </div>
+
         <div>
           <a
             className="cursor-pointer"
@@ -74,7 +76,7 @@ const Marcas = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <img className="h-8 mt-1" src={comercio2} alt="Gerf" />
+            <img className="h-8 mt-1 mx-auto" src={comercio2} alt="Gerf" />
           </a>
         </div>
         <div>
@@ -84,23 +86,23 @@ const Marcas = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <img className="h-6 mt-2" src={comercio3} alt="Laestrella" />
+            <img className="h-6 mt-2  mx-auto" src={comercio3} alt="Laestrella" />
           </a>
         </div>
         <div title="sin página">
-          <img className="h-10" src={comercio4} alt="Nutripaz" />
+          <img className="h-10 mx-auto" src={comercio4} alt="Nutripaz" />
         </div>
         <div title="sin página">
-          <img className="h-8" src={comercio5} alt="Zelaya" />
+          <img className="h-8 mx-auto" src={comercio5} alt="Zelaya" />
         </div>
         <div title="sin página">
-          <img className="h-10" src={comercio6} alt="Rubio" />
+          <img className="h-10 mx-auto" src={comercio6} alt="Rubio" />
         </div>
         <div title="sin página">
-          <img className="h-10" src={comercio7} alt="Look fit" />
+          <img className="h-10 mx-auto" src={comercio7} alt="Look fit" />
         </div>
         <div title="sin página">
-          <img className="h-10" src={comercio8} alt="bear fit" /> 
+          <img className="h-10 mx-auto" src={comercio8} alt="bear fit" /> 
           {/* se agrega el comercio faltante - cambio aplicado por Benjamin Orellana - 27/03/24*/}
         </div>
       </Slider>

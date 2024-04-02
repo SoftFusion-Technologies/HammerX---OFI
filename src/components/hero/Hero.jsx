@@ -1,22 +1,34 @@
-import { Link } from "react-router-dom";
-import { flecha1, flecha2, logo, hero2 } from "../../images/svg/index";
-import FixedNavbar from "./FixedNavbar";
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Parte principal de la página web. Es lo primero que se ve cuando el usuario ingresa a la página.
+ *  
+ *
+ *  Tema: Hero Section
+ *  Capa: Frontend
+ */
+
+
 import Aos from "aos";
-import { useEffect, useState } from 'react';
-
+import FixedNavbar from "./FixedNavbar";
+import { Link } from "react-router-dom";
+import { guionesnar } from "../../images";
+import { useEffect, useState } from "react";
+import { flecha1, flecha2, logo, hero2 } from "../../images/svg/index";
 const Hero = () => {
-
   useEffect(() => {
-    Aos.init({ duration: 1500, delay: '200' })
-  }, [])
+    Aos.init({ duration: 1500, delay: "200" });
+  }, []);
 
   const [mostrarBotonesSedes, setMostrarBotonesSedes] = useState(false);
 
-  const toggleSedes = () => { //mostrar botones de sedes
+  const toggleSedes = () => {
+    //mostrar botones de sedes
     setMostrarBotonesSedes(!mostrarBotonesSedes);
   };
 
-  
   return (
     <div className="relative w-full h-screen flex overflow-hidden">
       <div
@@ -24,12 +36,23 @@ const Hero = () => {
         className="lg:w-1/2 md:w-2/3 max-md:w-full px-10 max-sm:px-6 dark:bg-gradient-to-r from-gray-600 to-gray-700"
         id="div1"
       >
-        <img src={logo} alt="logo" className="mt-24" />
+        <img src={logo} alt="logo" className="mt-24 max-sm:mt-32" />
+        
+        <img
+          className="w-8 h-80 absolute bottom-10 left-0 sm:hidden max-sm:-ml-4"
+          src={guionesnar}
+          alt="Guiones"
+        />
+        <img
+          className="w-8 h-80 absolute bottom-10 right-0 sm:hidden max-sm:-mr-4"
+          src={guionesnar}
+          alt="Guiones"
+        />
 
-        <div className="w-5/6 h-auto pb-5 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto">
+        <div className="w-5/6 h-auto pb-5 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto max-sm:mt-16">
           <div>
             <p className="max-md:text-sm text-center px-6 pt-6 font-messina dark:text-white">
-              ¡Bienvenidos a nuestro sitio oficial!{' '}
+              ¡Bienvenidos a nuestro sitio oficial!{" "}
             </p>
             <p className="max-md:text-sm text-center px-6 font-messina dark:text-white">
               Todo lo que necesitas saber para entrenar con nosotros en un solo
@@ -37,7 +60,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <nav className="w-full lg:mt-10 md:mt-8 sm:mt-4 max-sm:mt-4">
+          <nav className="w-full lg:mt-10 md:mt-8 sm:mt-4 max-sm:mt-8">
             <ul
               className="flex flex-col list-none font-semibold justify-between items-center text-[#fc4b08]
             font-roboto text-sm"
@@ -53,12 +76,12 @@ const Hero = () => {
               </li>
               {mostrarBotonesSedes && (
                 <div className="flex mx-auto mb-2">
-                  <Link to={'/Concepcion'}>
+                  <Link to={"/Concepcion"}>
                     <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded mr-4">
                       CONCEPCIÓN
                     </button>
                   </Link>
-                  <Link to={'/Monteros'}>
+                  <Link to={"/Monteros"}>
                     <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded">
                       MONTEROS
                     </button>

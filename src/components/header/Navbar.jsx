@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <nav
       data-aos="zoom-in-up" //Se reemplazo fade-down por el realentizamiento que aplicaba a la web, cambio aplicado por Benjamin Orellana - 27/03/24
-      className="justify-between w-full dark:bg-gradient-to-r from-gray-600 to-gray-900  fixed z-50"
+      className="justify-between w-full dark:bg-gradient-to-r from-gray-600 to-gray-900 fixed z-50"
     >
       <div className="h-12 flex w-full bg-white justify-between items-center py-8 px-10 z-10 dark:bg-transparent ">
         <Marcas />

@@ -25,22 +25,22 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12 ">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
-                  <Link to={'/nosotros'}>
+                  <Link to={'/clientes'} className="mx-auto">
                     <button
-                      data-aos="fade-right"
-                      data-aos-duration="1500"
-                      className="btn shadow-lg font-messina text-white font-semibold mr-8 "
-                    >
-                      ¡Quiero Conocerlos!
-                    </button>
-                  </Link>
-                  <Link to={'/clientes'}>
-                    <button
-                      data-aos="fade-right"
+                      data-aos="fade-in"
                       data-aos-duration="2000"
-                      className="btn shadow-lg font-messina text-white font-semibold"
+                      className="btn shadow-lg font-messina text-white font-semibold mx-auto"
                     >
                       Soy Cliente
+                    </button>
+                  </Link>
+                  <Link to={'/nosotros'} className="mx-auto">
+                    <button
+                      data-aos="fade-in"
+                      data-aos-duration="2000"
+                      className="btn shadow-lg font-messina text-white font-semibold md:mr-8"
+                    >
+                      ¡Quiero Conocerlos!
                     </button>
                   </Link>
                 </div>
@@ -49,7 +49,7 @@ const About = () => {
 
             <div
               data-aos="fade-left"
-              className="my-20 w-full max-md:px-14 md:pl-10 lg:w-1/2 xl:w-5/12"
+              className="my-20 w-contain max-md:px-14 md:pl-10 lg:w-1/2 xl:w-5/12"
             >
               <div className="mt-10 lg:mt-0 md:px-10 lg:px-5">
                 <span className="block mb-4 text-lg font-messina text-primary dark:text-orange-500">

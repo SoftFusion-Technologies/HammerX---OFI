@@ -15,7 +15,8 @@ import {
   bajoImpacto3,
   kids1,
   kids2,
-  kids3
+  kids3,
+  guionesbla
 } from '../../images/index';
 import '../../styles/main/servicios.css';
 import flecha from '../../images/flecha.png';
@@ -120,12 +121,12 @@ const Servicios = () => {
     <div className="main2 dark:bg-gradient-to-r dark:from-gray-600 dark:to-gray-800 bg-gradient-to-b from-orange-600 to-[#fc4b08] relative">
       <img
         className="w-8 h-80 absolute top-10 left-0 max-sm:hidden"
-        src={'https://www.hammer.ar/image/guiones1.png'}
+        src={guionesbla}
         alt="Guiones"
       />
       <img
         className="w-8 h-80 absolute bottom-10 right-0 max-sm:hidden"
-        src={'https://www.hammer.ar/image/guiones1.png'}
+        src={guionesbla}
         alt="Guiones"
       />
       <div

@@ -22,7 +22,7 @@
 .vcard1 {
   display: block;
   position: relative;
-  max-width: 50%;
+  max-width: 100%;
   background-color: #f2f8f9;
   border-radius: 4px;
   padding: 32px 24px;

@@ -16,7 +16,7 @@
 
 import React from 'react';
 import '../styles/Loading.css';
-import Logo2 from "../images/imagenLogoSpinner.jpg";
+import { logohammer, logoloading } from '../images';
 
 /**
  * Componente de carga utilizado para indicar al usuario que la aplicación está
@@ -39,7 +39,7 @@ const Loading = () => {
 
             {/* Imagen del logo */}
             <div className="container-logo">
-                <img src={Logo2} alt="logo" className="logo-centered" />
+                <img src={logoloading} alt="logo" className="logo-centered" />
             </div>
         </div>
     );

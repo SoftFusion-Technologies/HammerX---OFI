@@ -1,8 +1,22 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Subpágina que se abre luego de hacer click en el botón principal "Quiero Conocerlos".
+ * Contiene dos botones que llevan a otras subpáginas correspondientemente.
+ *  
+ *
+ *  Tema: Sobre Nosotros
+ *  Capa: Frontend
+ */
+
+
 import { useEffect } from 'react';
-import Navbar from '../../components/header/Navbar';
 import "../../styles/aboutUs/volver.css";
 import "../../styles/aboutUs/botones.css";
 import "../../styles/aboutUs/background.css";
+import { Link } from 'react-router-dom';
 
 const AboutUs = () => {
 
@@ -12,12 +26,11 @@ const AboutUs = () => {
 
   return (
     <>
-      <Navbar />
       <div className="w-full pt-16 bg-gradient-to-b from-orange-500 to-[#fc4b08]">
         <div className="h-contain bgl">
           <header className="w-full">
             <div className="pl-10 pt-5 max-sm:pl-2">
-              <a href="/">
+              <Link to="/">
                 <button className="button">
                   <div className="button-box">
                     <span className="button-elem">
@@ -35,7 +48,7 @@ const AboutUs = () => {
                     </span>
                   </div>
                 </button>
-              </a>
+              </Link>
             </div>
 
             <h1 className="text-white max-md:text-[40px] text-[50px] text-center font-bignoodle ">
@@ -45,23 +58,23 @@ const AboutUs = () => {
 
           <div className="h-[18rem] ">
             <div className="pt-20 max-sm:pt-16 flex justify-evenly max-sm:flex-col">
-              <a
-                href="/nosotros/quienessomos"
+              <Link
+                to="/nosotros/quienessomos"
                 className="max-sm:mb-5 max-sm:mx-auto"
               >
-                <button className="btns font-messina font-semibold ">
+                <button className="btns font-messina font-semibold">
                   ¿Quienes Somos?
                 </button>
-              </a>
+              </Link>
 
-              <a
-                href="/nosotros/nuestrosvalores"
+              <Link
+                to="/nosotros/nuestrosvalores"
                 className="max-sm:mb-5 max-sm:mx-auto"
               >
-                <button className="btns font-messina font-semibold ">
+                <button className="btns font-messina font-semibold">
                   Nuestros Valores
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

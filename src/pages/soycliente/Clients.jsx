@@ -1,7 +1,22 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Subpágina que se abre luego de hacer click en el botón principal "Soy Cliente". 
+ * Contiene diferente información sobre los servicios del gimnasio.
+ *  
+ *
+ *  Tema: Soy Cliente
+ *  Capa: Frontend
+ */
+
+
 import { useEffect } from "react";
 import "../../styles/clients/volver.css";
 import "../../styles/clients/botones.css";
 import "../../styles/clients/background.css";
+import { Link } from "react-router-dom";
 
 const Clients = () => {
   useEffect(() => {
@@ -13,7 +28,7 @@ const Clients = () => {
       <div className="bglcli pb-20">
         <header className="w-full">
           <div className="pl-10 pt-5 max-sm:pl-2">
-            <a href="/">
+            <Link to="/">
               <button className="button">
                 <div className="button-box">
                   <span className="button-elem">
@@ -28,7 +43,7 @@ const Clients = () => {
                   </span>
                 </div>
               </button>
-            </a>
+            </Link>
           </div>
 
           <h1 className="text-white max-md:text-[40px] text-[50px] text-center font-bignoodle ">

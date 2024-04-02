@@ -18,7 +18,10 @@ import kids1 from './Actividades/act-Kids.jpg';
 import kids2 from './Actividades/act-Kids2.jpg';
 import kids3 from './Actividades/act-Kids3.jpg';
 import guionesnar from './guionesnar.png';
+import guionesbla from './guionesbla.png';
 import mobileapp from './app.png';
+import logohammer from './logohammerorange.png'
+import logoloading from './logoloading.png'
 
 export {
   menu,
@@ -41,5 +44,8 @@ export {
   kids2,
   kids3,
   guionesnar,
-  mobileapp
+  guionesbla,
+  mobileapp,
+  logohammer,
+  logoloading,
 };

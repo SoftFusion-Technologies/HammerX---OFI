@@ -1,6 +1,20 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 01 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Subpágina que contiene los valores de Hammer.
+ *  
+ *
+ *  Tema: Nuestros Valores
+ *  Capa: Frontend
+ */
+
+
 import React, { useState, useEffect } from "react";
 import "../../styles/ourValues/background.css";
 import "../../styles/ourValues/cards.css";
+import { Link } from "react-router-dom";
 
 const OurValues = () => {
   useEffect(() => {
@@ -8,10 +22,10 @@ const OurValues = () => {
   }, []);
 
   return (
-    <div className="h-contain w-full bgnv flex flex-col">
+    <div className="w-full bgnv flex flex-col">
       <div className="pt-16">
         <div className="pt-2 pl-5 max-sm:pl-2">
-          <a href="/nosotros">
+          <Link to="/nosotros">
             <button className="button">
               <div className="button-box">
                 <span className="button-elem">
@@ -26,7 +40,7 @@ const OurValues = () => {
                 </span>
               </div>
             </button>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -56,14 +70,14 @@ const OurValues = () => {
 
         <div className="vcards w-2/3 max-sm:text-center">
           <div className="vcard">
-            <div className="vcard1 max-md:max-w-full">
+            <div className="vcard1 md:w-1/2">
               <h3>HONESTIDAD</h3>
               <p className="small">Transparencia al 100%</p>
             </div>
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg max-md:max-w-full">
+            <div className="vcard1 right-bg md:w-1/2">
               <h3>ACTITUD</h3>
               <p className="small">
                 Actitud alegre creando un ambiente que desborde de energías
@@ -73,7 +87,7 @@ const OurValues = () => {
           </div>
 
           <div className="vcard">
-            <div className="vcard1 max-md:max-w-full">
+            <div className="vcard1 md:w-1/2">
               <h3>MOTIVACIÓN</h3>
               <p className="small">
                 Para un aprendizaje y mejora continua de nuestros servicios.
@@ -82,14 +96,14 @@ const OurValues = () => {
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg max-md:max-w-full">
+            <div className="vcard1 right-bg md:w-1/2">
               <h3>MORAL</h3>
               <p className="small">Actuar siempre con buenas intenciones.</p>
             </div>
           </div>
 
           <div className="vcard">
-            <div className="vcard1 max-md:max-w-full">
+            <div className="vcard1 md:w-1/2">
               <h3>EMPATIA</h3>
               <p className="small">
                 Para conectar con nuestros socios y entender las diferentes
@@ -99,7 +113,7 @@ const OurValues = () => {
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg max-md:max-w-full">
+            <div className="vcard1 right-bg md:w-1/2">
               <h3>RESPETO</h3>
               <p className="small">
                 Responsabilidad y respeto a todos por igual, sin distinciones,

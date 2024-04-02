@@ -62,8 +62,8 @@ const App = memo(() => {
         {showLoading ? <Loading /> : (
           <>
             {/* Barra de navegación */}
-            <Navbar />
 
+            <Navbar />
             {/* Enrutamiento de las diferentes páginas */}
             <Rutas>
               <Ruta path="/" element={<HomePage />} /> {/* Página principal */}
