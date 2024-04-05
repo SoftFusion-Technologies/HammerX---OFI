@@ -71,8 +71,8 @@ const App = memo(() => {
               <Ruta path="/nosotros" element={<AboutUs />} /> {/* Página "Nosotros" */}
               <Ruta path="/nosotros/quienessomos" element={<OurTeam />} /> {/* Página "Quiénes somos" */}
               <Ruta path="/nosotros/nuestrosvalores" element={<OurValues />} /> {/* Página "Nuestros valores" */}
-              <Ruta path="/Concepcion" element={<Sedeconcepcion />} /> {/* Página de la sede de Concepción */}
-              <Ruta path="/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
+              <Ruta path="/Sedes/Concepcion" element={<Sedeconcepcion />} /> {/* Página de la sede de Concepción */}
+              <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
             </Rutas>
 
             {/* Pie de página */}

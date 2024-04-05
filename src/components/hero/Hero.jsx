@@ -75,14 +75,14 @@ const Hero = () => {
                 </p>
               </li>
               {mostrarBotonesSedes && (
-                <div className="flex mx-auto mb-2">
-                  <Link to={"/Concepcion"}>
-                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded mr-4">
+                <div className="flex mx-auto mb-2 max-sm:flex-col">
+                  <Link to={"/Sedes/Concepcion"} className="max-sm:mx-auto">
+                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded sm:mr-4">
                       CONCEPCIÓN
                     </button>
                   </Link>
-                  <Link to={"/Monteros"}>
-                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded">
+                  <Link to={"/Sedes/Monteros"} className="max-sm:mx-auto">
+                    <button className="bg-[#fc4b08] transition hover:bg-[#fc6e08] text-white  py-2 px-4 rounded max-sm:mt-2">
                       MONTEROS
                     </button>
                   </Link>
