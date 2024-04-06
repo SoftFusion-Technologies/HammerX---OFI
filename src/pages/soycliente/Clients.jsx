@@ -12,11 +12,17 @@
  */
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/clients/volver.css";
 import "../../styles/clients/botones.css";
 import "../../styles/clients/background.css";
 import { Link } from "react-router-dom";
+import ModalEntrenador from "./ModalEntrenador";
+import ModalPromociones from "./ModalPromociones";
+import ModalContratos from "./ModalContratos";
+import ModalConvenios from "./ModalConvenios";
+import ModalTransferencia from "./ModalTransferencia";
+
 
 const Clients = () => {
   useEffect(() => {
@@ -55,34 +61,14 @@ const Clients = () => {
           <div className="pt-20 max-sm:pt-16 flex justify-center gap-4 flex-wrap">
             {/* Primer grupo de 2 botones */}
             <div className="flex justify-center gap-4 max-sm:flex-col md:space-x-5">
-              <a href="/nosotros/quienessomos" className="max-sm:mb-5">
-                <button className="btnscli font-messina font-semibold">
-                  Contás con tu entrenador
-                </button>
-              </a>
-              <a href="/nosotros/nuestrosvalores" className="max-sm:mb-5">
-                <button className="btnscli font-messina font-semibold">
-                  Promociones
-                </button>
-              </a>
+              <ModalEntrenador />
+              <ModalPromociones />
             </div>
             {/* Segundo grupo de 3 botones */}
             <div className="flex justify-center gap-4 mt-4 max-sm:mt-0 sm:flex-wrap max-sm:flex-col md:space-x-5">
-              <a href="/nosotros/nuestrosvalores" className="max-sm:mb-5">
-                <button className="btnscli font-messina font-semibold">
-                  Congela tu contrato
-                </button>
-              </a>
-              <a href="/nosotros/nuestrosvalores" className="max-sm:mb-5">
-                <button className="btnscli font-messina font-semibold">
-                  Convenios
-                </button>
-              </a>
-              <a href="/nosotros/nuestrosvalores" className="max-sm:mb-5">
-                <button className="btnscli font-messina font-semibold">
-                  Transferencia de contratos
-                </button>
-              </a>
+              <ModalContratos />
+              <ModalConvenios />
+              <ModalTransferencia />
             </div>
           </div>
         </div>

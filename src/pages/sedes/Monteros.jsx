@@ -1,3 +1,16 @@
+/*
+ * Programador: Lucas Albornoz
+ * Fecha Cración: 06 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción: Subpágina que se abre luego de hacer click en el botón principal "Monteros (Nuestras Sedes)".
+ * Contiene información sobre la sede de Monteros.
+ *  
+ *
+ *  Tema: Sedes
+ *  Capa: Frontend
+ */
+
 import { Link } from "react-router-dom";
 import {
   sedemonteros,
@@ -11,8 +24,9 @@ import { guionesbla } from "../../images/index";
 
 const Sedemonteros = () => {
   const settings = {
+    dots:true,
     infinite: true,
-    arrows: false,
+    arrows: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -76,25 +90,39 @@ const Sedemonteros = () => {
           />
         </div>
 
+        <div className="w-2/3 max-lg:mt-10 max-md:w-5/6 hidden max-lg:block mx-auto">
+            <Slider className="" {...settings}>
+              <div>
+                <img className="" src={sedemonteros} alt="" />
+              </div>
+              <div>
+                <img className="" src={sedemonteros2} alt="" />
+              </div>
+              <div>
+                <img className="" src={sedemonteros3} alt="" />
+              </div>
+            </Slider>
+          </div>
+
         <div className="flex justify-center items-center mx-auto w-11/12 my-8 max-lg:flex-col max-lg:w-full ">
           {/* Guiones blancos*/}
           <div className="overflow-hidden">
             <img
-              className="w-8 h-80 absolute top-60 left-0 hidden max-lg:block"
+              className="w-8 max-sm:w-4 h-80 absolute md:-bottom-50 left-0 hidden max-lg:block"
               src={guionesbla}
               alt="Guiones"
             />
             <img
-              className="w-8 h-80 absolute -bottom-20 right-0 hidden max-lg:block"
+              className="w-8 max-sm:w-4 h-80 absolute md:-bottom-[500px] right-0 hidden max-lg:block"
               src={guionesbla}
               alt="Guiones"
             />
           </div>
 
-          <div className="w-1/3 lg:pr-12 max-lg:w-1/2">
+          <div className="w-1/3 lg:pr-12 max-lg:w-1/2 max-sm:w-11/12 max-lg:mt-10 max-lg:text-center">
             {/* Información de Horarios*/}
             <div className="text-white">
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-clock-hour-4"
@@ -112,7 +140,7 @@ const Sedemonteros = () => {
                   <path d="M12 12l3 2" />
                   <path d="M12 7v5" />
                 </svg>
-                <h1 className="font-bignoodle text-3xl ml-3">Horarios</h1>
+                <h1 className="font-bignoodle text-3xl pl-2">Horarios</h1>
               </div>
               <p className="font-messina">
                 <span className="font-bold">Lunes a Viernes</span> - 7:00hs a
@@ -125,7 +153,7 @@ const Sedemonteros = () => {
 
             {/* Información de Ubicación*/}
             <div className="text-white mt-5">
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-map-pin"
@@ -142,7 +170,7 @@ const Sedemonteros = () => {
                   <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                   <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                 </svg>
-                <h1 className="font-bignoodle text-3xl ml-3">Ubicación</h1>
+                <h1 className="font-bignoodle text-3xl pl-2">Ubicación</h1>
               </div>
               <p className="font-messina">
                 <a
@@ -157,7 +185,7 @@ const Sedemonteros = () => {
 
             {/* Información de Contacto*/}
             <div className="text-white mt-5">
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-phone-incoming"
@@ -175,9 +203,9 @@ const Sedemonteros = () => {
                   <path d="M15 9l5 -5" />
                   <path d="M15 5l0 4l4 0" />
                 </svg>
-                <h1 className="font-bignoodle text-3xl ml-3">Contacto</h1>
+                <h1 className="font-bignoodle text-3xl pl-2">Contacto</h1>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-brand-whatsapp"
@@ -194,7 +222,7 @@ const Sedemonteros = () => {
                   <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
                   <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
                 </svg>
-                <p className="font-messina ml-3">
+                <p className="font-messina pl-2">
                   <a
                     href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+vengo+desde+el+sitio+oficial%21%21&type=phone_number&app_absent=0"
                     title="Ir a WhatsApp"
@@ -204,7 +232,7 @@ const Sedemonteros = () => {
                   </a>
                 </p>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-brand-instagram"
@@ -222,7 +250,7 @@ const Sedemonteros = () => {
                   <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
                   <path d="M16.5 7.5l0 .01" />
                 </svg>
-                <p className="font-messina ml-3">
+                <p className="font-messina pl-2">
                   <a
                     href="https://www.instagram.com/hammer.ok/"
                     title="Ir a Instagram"
@@ -236,7 +264,7 @@ const Sedemonteros = () => {
 
             {/* Información de Equipamientos y Servicios*/}
             <div className="text-white mt-5">
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-barbell"
@@ -258,7 +286,7 @@ const Sedemonteros = () => {
                   <path d="M18 8h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2" />
                   <path d="M22 12h-1" />
                 </svg>
-                <h1 className="font-bignoodle text-3xl ml-3">
+                <h1 className="font-bignoodle text-3xl pl-2">
                   Equipamientos y servicios
                 </h1>
               </div>
@@ -276,7 +304,7 @@ const Sedemonteros = () => {
             </div>
 
             <div className="text-white mt-5">
-              <div className="flex items-center">
+              <div className="flex items-center max-lg:justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-sun"
@@ -301,7 +329,7 @@ const Sedemonteros = () => {
           </div>
 
           {/* Carrousel de imagenes*/}
-          <div className="w-2/3 max-lg:mt-10 max-md:w-11/12">
+          <div className="w-2/3 max-lg:mt-10 max-md:w-11/12 max-lg:hidden">
             <Slider className="" {...settings}>
               <div>
                 <img className="" src={sedemonteros} alt="" />
