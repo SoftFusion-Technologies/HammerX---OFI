@@ -12,6 +12,7 @@
  *
  * Tema: Configuración de la Aplicación Principal
  * Capa: Frontend
+ * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
 
 import React, { lazy, Suspense, useState, useEffect , memo} from 'react';

@@ -12,6 +12,8 @@
  *
  *  Tema: Componente de Carga
  *  Capa: Frontend
+ *  Contacto: benjamin.orellanaof@gmail.com || 3863531891
+ * 
  */
 
 import React from 'react';
