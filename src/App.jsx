@@ -32,12 +32,16 @@ const OurValues = lazy(() => import('./pages/quieroconocerlos/OurValues'));
 const Sedeconcepcion = lazy(() => import('./pages/sedes/Concepcion'));
 const Sedemonteros = lazy(() => import('./pages/sedes/Monteros'));
 const Loading = lazy(() => import('./components/Loading')); // Importa el componente de carga
+const Pautas = lazy(() => import('./pages/Pautas'));
+const Legales = lazy(() => import('./pages/Legales'));
+const Contacto = lazy(() => import('./pages/Contacto'));
 
 /**
  * Componente principal de la aplicación.
  * 
  * @returns {JSX.Element} Elemento JSX que representa la aplicación.
  */
+
 const App = memo(() => {
   // Estado para controlar si se debe mostrar el componente de carga
   const [showLoading, setShowLoading] = useState(true);
@@ -62,7 +66,6 @@ const App = memo(() => {
         {showLoading ? <Loading /> : (
           <>
             {/* Barra de navegación */}
-
             <Navbar />
             {/* Enrutamiento de las diferentes páginas */}
             <Rutas>
@@ -73,8 +76,11 @@ const App = memo(() => {
               <Ruta path="/nosotros/nuestrosvalores" element={<OurValues />} /> {/* Página "Nuestros valores" */}
               <Ruta path="/Sedes/Concepcion" element={<Sedeconcepcion />} /> {/* Página de la sede de Concepción */}
               <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
-            </Rutas>
+              <Ruta path="/pautas" element={<Pautas />} /> 
+              <Ruta path="/legales" element={<Legales />} /> 
+              <Ruta path="/contacto" element={<Contacto />} /> 
 
+            </Rutas>
             {/* Pie de página */}
             <Footer />
           </>

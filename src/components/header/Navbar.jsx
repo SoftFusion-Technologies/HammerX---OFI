@@ -31,7 +31,7 @@ const Navbar = () => {
             ¿Quiénes somos?
           </a>
           <a
-            href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+necesito+info+de+la+sede+de+monteros&type=phone_number&app_absent=0"
+            href="/contacto"
             className="link"
           >
             Contacto
