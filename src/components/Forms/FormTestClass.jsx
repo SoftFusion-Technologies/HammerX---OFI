@@ -19,7 +19,7 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-import Alerta from './Error';
+import Alerta from '../Error';
 
 const FormTestClass = () => {
     // yup sirve para validar formulario este ya trae sus propias sentencias
