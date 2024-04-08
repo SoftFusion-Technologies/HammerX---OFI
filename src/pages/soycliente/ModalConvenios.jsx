@@ -73,7 +73,13 @@ function ModalConvenios() {
                 {/* Modal body */}
                 <div className="p-4 md:p-5 space-y-4">
                   <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 font-messina">
-                   GYMPASS - SIPROSA - GREMIO UEJN (PODER JUDICIAL)
+                    •GYMPASS: Gestionalo desde tu App GymPass.<br />
+                    •SIPROSA: 10% OFF.<br />
+                    •GREMIO UEJN (PODER JUDICIAL): SOCIOS DIRECTOS 10% OFF - FAMILIARES 5% OFF.<br />
+                    •CENTRO DE FUNCIONARIOS JUDICIALES: 10% OFF.<br />
+                    •AFIP: 15% OFF - HASTA 2 FAMILIARES ADICIONALES.<br />
+                    •GRUPO ARCOR.<br />
+                    •CITROMAX.<br />
                   </p>
                 </div>
                 {/* Modal footer */}
