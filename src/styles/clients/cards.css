@@ -57,3 +57,10 @@
 .cardcontratos:hover .content {
   color: #ffffff;
 }
+
+/* Cambio el ancho de las cards para mobile para que no salgan del contenedor ya que se achicó el modal */
+@media (max-width:500px) {
+  .cardcontratos{
+    width: 250px;
+  }
+}

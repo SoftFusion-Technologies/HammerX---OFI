@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "../../styles/clients/botones.css";
 import "../../styles/clients/cards.css";
+import flecha from '../../images/flecha.png'
 
-function ModalTransferencia() {
-  const [isOpen, setIsOpen] = useState(false);
+function ModalTransferencia({ anterior, siguiente}) { //recibo las funciones que contienen la posición del modal siguiente y anterior
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -15,15 +16,7 @@ function ModalTransferencia() {
 
   return (
     <>
-      {/* Modal toggle */}
-      <button
-        onClick={toggleModal}
-        className="btnscli font-messina font-semibold max-sm:mb-5"
-        type="button"
-      >
-        Transferencia de planes
-      </button>
-
+      {/* Se movió el botón al archivo Clients.js */}
       {/* Main modal */}
       {isOpen && (
         <>
@@ -39,7 +32,9 @@ function ModalTransferencia() {
             aria-hidden="true"
             className="flex items-center justify-center fixed top-0 right-0 left-0 bottom-0 z-50"
           >
-            <div className="relative p-4 w-full max-w-5xl max-h-full mt-10">
+            {/* En la flecha anterior el evento click muestra el modal de la posición recibida por parametro */}
+            <img onClick={anterior} className="h-10 cursor-pointer transition hover:invert" src={flecha} alt="Flecha" />
+            <div className="relative p-4 w-[80%] sm:w-full max-w-5xl max-h-full mt-10"> {/* Se modificó en ancho del modal de full a 80% para que se visualicen las flechas en mobile, cambiado por Rafael Peralta */}
               {/* Modal content */}
               <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 {/* Modal header */}
@@ -72,7 +67,7 @@ function ModalTransferencia() {
                   </button>
                 </div>
                 {/* Modal body */}
-                <div className="p-4 md:p-5 space-y-4 overflow-y-auto max-h-96">
+                <div className="p-4 md:p-5 space-y-4 overflow-y-auto max-h-96 overflow-hidden">
                   <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 font-messina">
                     Este beneficio es aplicable en caso de imposibilitarse la
                     continuidad del plan por algún motivo o disconformidad con
@@ -130,6 +125,8 @@ function ModalTransferencia() {
                 </div>
               </div>
             </div>
+            {/* En la flecha anterior el evento click muestra el modal de la posición recibida por parametro */}
+            <img onClick={siguiente} className="h-10 transform rotate-180 cursor-pointer transition hover:invert" src={flecha} alt="Flecha" />
           </div>
         </>
       )}
