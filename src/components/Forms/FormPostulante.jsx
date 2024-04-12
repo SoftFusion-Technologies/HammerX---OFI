@@ -31,7 +31,7 @@ const FormPostulante = () => {
     const nuevoPostulanteSchema = Yup.object().shape({
         name: Yup.string()
             .min(3, 'El nombre es muy corto')
-            .max(255, 'El nombre es muy largo')
+            .max(100, 'El nombre es muy largo')
             .required('El Nombre es Obligatorio'),
         email: Yup.string()
             .email('Email no válido')
@@ -58,6 +58,7 @@ const FormPostulante = () => {
         created_at: Yup.date().nullable(true),
         updated_at: Yup.date().nullable(true)
     })
+
     const handleSubmitPostu = async (valores) => {
         try {
             // Verificar si los campos obligatorios están vacíos
@@ -132,6 +133,7 @@ const FormPostulante = () => {
                 {({ errors, touched }) => {
                     return (
                         <Form className='mt-10 formulario'>
+                            
                             <div className='mb-4'>
                                 <Field
                                     id='name'
@@ -147,6 +149,7 @@ const FormPostulante = () => {
                                     </Alerta>
                                     : null}
                             </div>
+
                             <div className='mb-4'>
                                 <Field
                                     id='email'
@@ -330,7 +333,7 @@ const FormPostulante = () => {
                             {/* {modal === true ? <ModalEnviado
                               modal={modal}
                               setModal={setModal}
-                          /> : ""} */}
+                          /> : ""} */}  
                         </Form>
                     )
                 }}

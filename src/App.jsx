@@ -36,6 +36,7 @@ const Loading = lazy(() => import('./components/Loading')); // Importa el compon
 const Pautas = lazy(() => import('./pages/Pautas'));
 const Legales = lazy(() => import('./pages/Legales'));
 const Contacto = lazy(() => import('./pages/Contacto'));
+const FormPostu = lazy(() => import('./components/Forms/FormPostulante'));
 
 /**
  * Componente principal de la aplicación.
@@ -79,7 +80,8 @@ const App = memo(() => {
               <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
               <Ruta path="/pautas" element={<Pautas />} /> 
               <Ruta path="/legales" element={<Legales />} /> 
-              <Ruta path="/contacto" element={<Contacto />} /> 
+              <Ruta path="/contacto" element={<Contacto />} />
+              <Ruta path="/form" element={<FormPostu />} /> 
 
             </Rutas>
             {/* Pie de página */}

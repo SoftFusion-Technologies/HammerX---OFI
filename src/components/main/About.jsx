@@ -31,7 +31,7 @@ const About = () => {
                       data-aos-duration="2000"
                       className="btn shadow-lg font-messina text-white font-semibold mx-auto"
                     >
-                      Soy Cliente
+                      Ya soy cliente
                     </button>
                   </Link>
                   <Link to={'/nosotros'} className="mx-auto">
