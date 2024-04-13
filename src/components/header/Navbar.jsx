@@ -2,10 +2,13 @@ import { useState } from 'react'
 import { theme } from '../../images'
 import Menu from "./Menu"
 import Marcas from './Marcas'
+import { Link } from 'react-router-dom'
+import DropdownMenu from './DropdownMenu'
 import '../../styles/header/animacionlinks.css'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [active, setActive] = useState('')
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -24,27 +27,37 @@ const Navbar = () => {
         <Marcas />
 
         <div className="hidden items-center font-tilt-neon text-black gap-10 lg:flex space-x-4 dark:text-white">
-          <a href="/" className="link">
+          {/* Se agregó el scrollTo para que al hacer click vuelva al inicio de la pag - Cambio realizado por Lucas Albornoz 12-04-24 */}
+          <Link to="/" className="link" onClick={() => {
+            setActive('');
+            window.scrollTo(0, 0);
+          }}> 
             Home
-          </a>
-          <a href="/nosotros/quienessomos" className="link" target="_blank">
+          </Link>
+
+          <Link to="/nosotros/quienessomos" className="link">
             ¿Quiénes somos?
-          </a>
-          <a
-            href="/contacto"
+          </Link>
+
+          {/* <Link
+            to="/contacto"
             className="link"
           >
             Contacto
-          </a>
-          <a href="#" className="">
+          </Link> */}
+
+          { /* Se agregó el dropdown de "Contacto" - Cambio realizado por Lucas Albornoz 12-04-24 */}
+          <DropdownMenu /> 
+
+          <Link to="#" className="">
             <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
               ¡Probar una clase!
             </button>
-          </a>
+          </Link>
 
           <img
             onClick={toggleDarkMode}
-            className="h-7 mt-2 cursor-pointer dark:invert"
+            className="h-7 mt-2 cursor-pointer dark:invert hidden xl:flex"
             src={theme}
             alt="Theme"
           />
@@ -63,21 +76,21 @@ const Navbar = () => {
 
       {isMobileMenuOpen && (
         <div className="h-auto absolute bg-[#fffc] text-black backdrop-filter backdrop-blur-lg pb-5 w-full z-15 lg:hidden px-8 z-50 dark:text-white dark:bg-[#90939ed7] dark:backdrop-filter dark:backdrop-blur-lg">
-          <a href="/" className="block py-2 px-4 ">
+          <Link to="/" className="block py-2 px-4 ">
             Home
-          </a>
-          <a href="/nosotros/quienessomos" className="block py-2 px-4 ">
+          </Link>
+          <Link to="/nosotros/quienessomos" className="block py-2 px-4 ">
             ¿Quiénes somos?
-          </a>
+          </Link>
           <a
             href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+necesito+info+de+la+sede+de+monteros&type=phone_number&app_absent=0"
             className="block py-2 px-4 "
           >
             Contacto
           </a>
-          <a href="#testi" className="block py-2 px-4 ">
+          <Link to="#testi" className="block py-2 px-4 ">
             Prueba una clase gratis
-          </a>
+          </Link>
           <div className="ml-4">
             <img
               onClick={toggleDarkMode}

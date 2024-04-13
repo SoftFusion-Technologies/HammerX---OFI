@@ -5,23 +5,21 @@
  *
  * Descripción: Subpágina que se abre luego de hacer click en el botón principal "Quiero Conocerlos".
  * Contiene dos botones que llevan a otras subpáginas correspondientemente.
- *  
+ *
  *
  *  Tema: Sobre Nosotros
  *  Capa: Frontend
  */
 
-
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import "../../styles/aboutUs/volver.css";
 import "../../styles/aboutUs/botones.css";
 import "../../styles/aboutUs/background.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
-
   useEffect(() => {
-    document.title = 'Quiero Conocerlos';
+    document.title = "Quiero Conocerlos";
   }, []);
 
   return (
@@ -56,11 +54,11 @@ const AboutUs = () => {
             </h1>
           </header>
 
-          <div className="h-[18rem] ">
-            <div className="pt-20 max-sm:pt-16 flex justify-evenly max-sm:flex-col">
+          <div className="">
+            <div className="pt-20 max-md:pt-16 flex justify-center md:gap-10 max-md:flex-col">
               <Link
                 to="/nosotros/quienessomos"
-                className="max-sm:mb-5 max-sm:mx-auto"
+                className="max-md:mb-5 max-md:mx-auto"
               >
                 <button className="btns font-messina font-semibold">
                   ¿Quienes Somos?
@@ -69,12 +67,34 @@ const AboutUs = () => {
 
               <Link
                 to="/nosotros/nuestrosvalores"
-                className="max-sm:mb-5 max-sm:mx-auto"
+                className="max-md:mb-5 max-md:mx-auto"
               >
                 <button className="btns font-messina font-semibold">
                   Nuestros Valores
                 </button>
               </Link>
+            </div>
+
+            { /* Dos botones nuevos agregados - Cambios realizado por Lucas Albornoz 12-04-24*/}
+            <div className="md:py-8 flex justify-center md:gap-10  max-md:flex-col">
+              <Link
+                to="/nosotros/nuestrosvalores"
+                className="max-md:mb-5 max-md:mx-auto"
+              >
+                <button className="btns font-messina font-semibold">
+                  Probar una clase GRATIS
+                </button>
+              </Link>
+
+              <a
+                href="https://api.whatsapp.com/send?phone=543863564651"
+                target="_blank"
+                className="max-md:mb-5 max-md:mx-auto"
+              >
+                <button className="btns font-messina font-semibold">
+                  Envianos un WhatsApp
+                </button>
+              </a>
             </div>
           </div>
         </div>

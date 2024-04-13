@@ -92,10 +92,12 @@ const Hero = () => {
               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
                 <a href="#about">CONOCÉ TODA NUESTRA INFO</a>
               </li>
+
+              {
+              /*
               <hr className="text-black w-5/6" />
               
-              {
-              /* <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
+               <li className="py-2 hover:text-orange-500 transition duration-200 ease-in-out">
                 <a href="#">QUIERO TRABAJAR CON USTEDES</a>
               </li>
                 Cambios, pre ultima version, 12-04-24, benjamin orellana
