@@ -15,7 +15,6 @@ import "../../styles/hero/fixedNavbar.css"
 
 const FixedNavbar = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
 
   useEffect(() => {
     const handleScroll = () => { 
@@ -31,9 +30,23 @@ const FixedNavbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   return (
-    <nav className={`w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{position: 'fixed'}}>
+    <>
+      <nav className={`max-md:hidden w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{position: 'fixed'}}>
+        <div className="border-2 bg-white py-4 w-full box">
+          <ul className="list-none">
+            <li className="">
+              <a href="">
+                <p className="text-center font-bignoodle text-[20px] tracking-wider">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      {/* Navbar flotantepara celu*/}
+      <nav className={`hidden max-md:flex w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 `} style={{position: 'fixed'}}>
       <div className="border-2 bg-white py-4 w-full box">
         <ul className="list-none">
           <li className="">
@@ -44,6 +57,7 @@ const FixedNavbar = () => {
         </ul>
       </div>
     </nav>
+    </>
   );
 };
 
