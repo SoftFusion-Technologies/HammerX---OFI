@@ -29,21 +29,19 @@ const FormPostulante = () => {
   const nuevoPostulanteSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre es muy corto")
-      .max(100, "El nombre es muy largo")
+      .max(120, "El nombre es muy largo")
       .required("El Nombre es obligatorio"),
     email: Yup.string()
       .email("Email no válido")
       .required("El Email es obligatorio"),
     celular: Yup.string()
-      .min(8, "El número es muy corto")
-      .max(255, "Número demasiado largo")
+      .min(6, "El número es muy corto")
+      .max(15, "Número demasiado largo")
       .required("El Celular es obligatorio"),
     edad: Yup.string().required("La Edad es obligatoria"),
     puesto: Yup.string()
-      .max(255, "Puesto demasiado largo")
       .required("El Puesto es obligatorio"),
     sede: Yup.string()
-      .max(255, "Sede demasiado larga")
       .required("La Sede es obligatoria"),
     redes: Yup.string().max(100, "Redes sociales demasiado largas"),
     state: Yup.boolean().required(),
@@ -59,9 +57,7 @@ const FormPostulante = () => {
         valores.celular === "" ||
         valores.edad === "" ||
         valores.puesto === "" ||
-        // valores.info === "" ||
         valores.redes === "" 
-        // valores.observacion === "" se quita de el form 
       ) {
         alert("Por favor, complete todos los campos obligatorios.");
       } else {

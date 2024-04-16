@@ -28,25 +28,23 @@ const FormTestClass = () => {
   const nuevoTestClassSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre es muy corto")
-      .max(255, "El nombre es muy largo")
+      .max(70, "El nombre es muy largo")
       .required("El Nombre es obligatorio"),
     last_name: Yup.string()
       .min(3, "El apellido es muy corto")
-      .max(255, "El apellido es muy largo")
+      .max(70, "El apellido es muy largo")
       .required("El Apellido es Obligatorio"),
     dni: Yup.string()
-      .min(3, "El DNI es muy corto")
-      .max(255, "El DNI es muy largo")
+      .min(6, "El DNI es muy corto")
+      .max(13, "El DNI es muy largo")
       .required("El DNI es Obligatorio"),
     celular: Yup.string()
       .min(8, "El número de celular es muy corto")
-      .max(255, "El número de celular es muy largo")
+      .max(15, "El número de celular es muy largo")
       .required("El Celular es obligatorio"),
     sede: Yup.string()
-      .max(255, "Sede demasiado larga")
       .required("La Sede es obligatoria"),
     objetivo: Yup.string()
-      .max(255, "Objetivo demasiado largo")
       .required("El Objetivo es obligatorio"),
     user: Yup.string().max(255, "Usuario demasiado largo"),
     observaciones: Yup.string().max(255, "Observaciones demasiado largas"),
@@ -61,9 +59,7 @@ const FormTestClass = () => {
       if (
         valores.last_name === "" ||
         valores.dni === "" ||
-        valores.celular === "" ||
-        valores.sede === "" ||
-        valores.objetivo === ""
+        valores.celular === "" 
       ) {
         alert("Por favor, complete todos los campos obligatorios.");
       } else {
@@ -141,9 +137,9 @@ const FormTestClass = () => {
                     id="name"
                     type="text"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Nombre"
+                    placeholder="NOMBRES"
                     name="name"
-                    maxLength="31"
+                    maxLength="70"
                   />
                   {errors.name && touched.name ? (
                     <Alerta>{errors.name}</Alerta>
@@ -155,9 +151,9 @@ const FormTestClass = () => {
                     id="last_name"
                     type="text"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Apellido"
+                    placeholder="APELLIDOS"
                     name="last_name"
-                    maxLength="31"
+                    maxLength="70"
                   />
                   {errors.last_name && touched.last_name ? (
                     <Alerta>{errors.last_name}</Alerta>
@@ -169,8 +165,9 @@ const FormTestClass = () => {
                     id="dni"
                     type="dni"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="DNI"
+                    placeholder="D.N.I"
                     name="dni"
+                    maxLength="14"
                   />
                   {errors.dni && touched.dni ? (
                     <Alerta>{errors.dni}</Alerta>
@@ -181,9 +178,9 @@ const FormTestClass = () => {
                     id="celular"
                     type="tel"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Número sin (+) ni espacios"
+                    placeholder="NÚMERO DE CELULAR"
                     name="celular"
-                    maxLength="14"
+                    maxLength="16"
                   />
                   {errors.celular && touched.celular ? (
                     <Alerta>{errors.celular}</Alerta>
@@ -192,13 +189,18 @@ const FormTestClass = () => {
 
                 <div className="mb-4 px-4">
                   <Field
+                    as="select"
                     id="sede"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Sede"
                     name="sede"
-                    maxLength="14"
-                  />
+                    className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      ¿EN QUÉ HAMMER QUERÉS ENTRENAR?
+                    </option>
+                    <option value="monteros">Monteros</option>
+                    <option value="concepcion">Concepción</option>
+                  </Field>
                   {errors.sede && touched.sede ? (
                     <Alerta>{errors.sede}</Alerta>
                   ) : null}
@@ -206,13 +208,27 @@ const FormTestClass = () => {
 
                 <div className="mb-4 px-4">
                   <Field
+                    as="select"
                     id="objetivo"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="objetivo"
                     name="objetivo"
-                    maxLength="14"
-                  />
+                    className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      SELECCIONÁ TU OBJETIVO
+                    </option>
+                    <option value="Quiero ganar masa muscular">Quiero ganar masa muscular</option>
+                    <option value="Quiero bajar la panza y marcar el abdomen">Quiero bajar la panza y marcar el abdomen</option>
+                    <option value="Quiero bajar de peso y tonificar">Quiero bajar de peso y tonificar</option>
+                    <option value="Quiero combinar con mi deporte">Quiero combinar con mi deporte</option>
+                    <option value="Quiero ganar fuerza">Quiero ganar fuerza</option>
+                    <option value="Quiero bajar el estrés">Quiero bajar el estrés</option>
+                    <option value="Me aburro fácil">Me aburro fácil</option>
+                    <option value="Quiero entrenar sin impacto">Quiero entrenar sin impacto</option>
+                    <option value="Quiero quemar calorías">Quiero quemar calorías</option>
+                    <option value="Quiero una clase para mi niño">Quiero una clase para mi niño</option>
+                    <option value="Otros">Otros</option>
+                  </Field>
                   {errors.objetivo && touched.objetivo ? (
                     <Alerta>{errors.objetivo}</Alerta>
                   ) : null}
@@ -221,7 +237,7 @@ const FormTestClass = () => {
                 <div className="mx-auto flex justify-center my-5">
                   <input
                     type="submit"
-                    value={"Enviar Consulta"}
+                    value="PROGRAMAR"
                     className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                     id="click2"
                   />
