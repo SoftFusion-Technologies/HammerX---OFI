@@ -138,7 +138,7 @@ const FormPostulante = () => {
                     id="name"
                     type="text"
                     className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Nombres y Apellidos"
+                    placeholder="NOMBRES y APELLIDOS"
                     name="name"
                     maxLength="31"
                   />
@@ -152,7 +152,7 @@ const FormPostulante = () => {
                     id="email"
                     type="email"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Email"
+                    placeholder="EMAIL"
                     name="email"
                   />
                   {errors.email && touched.email ? (
@@ -165,7 +165,7 @@ const FormPostulante = () => {
                     id="celular"
                     type="tel"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Número sin (+) ni espacios"
+                    placeholder="NÚMERO DE CELULAR"
                     name="celular"
                     maxLength="14"
                   />
@@ -193,7 +193,7 @@ const FormPostulante = () => {
                     id="redes"
                     type="text"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Instagram"
+                    placeholder="INSTAGRAM"
                     name="redes"
                     maxLength="50"
                   />
@@ -210,7 +210,7 @@ const FormPostulante = () => {
                     required
                   >
                     <option value="" disabled>
-                      Quiero trabajar de:
+                      QUIERO TRABAJAR DE:
                     </option>
                     <option value="recepcionista">Recepcionista</option>
                     <option value="vendedor">Vendedor</option>
@@ -235,7 +235,7 @@ const FormPostulante = () => {
                     required
                   >
                     <option value="" disabled>
-                      Sede
+                      SEDE
                     </option>
                     <option value="monteros">Monteros</option>
                     <option value="concepcion">Concepción</option>
@@ -251,7 +251,7 @@ const FormPostulante = () => {
                     id="info"
                     type="text"
                     className="resize-none mt-2 block w-full p-3 h-40 text-black text-md bg-slate-100  rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Contanos un poco sobre vos en menos de 100 palabras"
+                    placeholder="CONTANOS UN POCO SOBRE VOS EN MENOS DE 100 PALABRAS  "
                     name="info"
                     maxLength="301"
                   />
