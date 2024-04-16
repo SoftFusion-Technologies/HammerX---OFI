@@ -45,13 +45,7 @@ const FormPostulante = () => {
     sede: Yup.string()
       .max(255, "Sede demasiado larga")
       .required("La Sede es obligatoria"),
-    info: Yup.string().max(100, "Información adicional demasiado larga"),
     redes: Yup.string().max(100, "Redes sociales demasiado largas"),
-    observaciones: Yup.string().max(100, "Observaciones demasiado largas"),
-    valoracion: Yup.number()
-      .min(0, "La valoración mínima es 0")
-      .max(10, "La valoración máxima es 10")
-      .nullable(true),
     state: Yup.boolean().required(),
     created_at: Yup.date().nullable(true),
     updated_at: Yup.date().nullable(true),
@@ -65,9 +59,9 @@ const FormPostulante = () => {
         valores.celular === "" ||
         valores.edad === "" ||
         valores.puesto === "" ||
-        valores.info === "" ||
-        valores.redes === "" ||
-        valores.observacion === ""
+        // valores.info === "" ||
+        valores.redes === "" 
+        // valores.observacion === "" se quita de el form 
       ) {
         alert("Por favor, complete todos los campos obligatorios.");
       } else {
@@ -148,7 +142,7 @@ const FormPostulante = () => {
                     id="name"
                     type="text"
                     className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Nombre y Apellido"
+                    placeholder="Nombres y Apellidos"
                     name="name"
                     maxLength="31"
                   />
@@ -200,13 +194,37 @@ const FormPostulante = () => {
 
                 <div className="mb-4 px-4">
                   <Field
-                    id="puesto"
+                    id="redes"
                     type="text"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Puesto"
-                    name="puesto"
-                    maxLength="14"
+                    placeholder="Instagram"
+                    name="redes"
+                    maxLength="50"
                   />
+                  {errors.redes && touched.redes ? (
+                    <Alerta>{errors.redes}</Alerta>
+                  ) : null}
+                </div>
+                <div className="mb-4 px-4">
+                  <Field
+                    as="select"
+                    id="puesto"
+                    name="puesto"
+                    className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      Quiero trabajar de:
+                    </option>
+                    <option value="recepcionista">Recepcionista</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="instructormusculacion">Instructor de musculación</option>
+                    <option value="coachclasesgrupales">Coach de clases grupales</option>
+                    <option value="limpieza">Limpieza</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="otro">Otro</option>
+                  </Field>
                   {errors.puesto && touched.puesto ? (
                     <Alerta>{errors.puesto}</Alerta>
                   ) : null}
@@ -214,13 +232,18 @@ const FormPostulante = () => {
 
                 <div className="mb-4 px-4">
                   <Field
+                    as="select"
                     id="sede"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Sede"
                     name="sede"
-                    maxLength="14"
-                  />
+                    className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      Sede
+                    </option>
+                    <option value="monteros">Monteros</option>
+                    <option value="concepcion">Concepción</option>
+                  </Field>
                   {errors.sede && touched.sede ? (
                     <Alerta>{errors.sede}</Alerta>
                   ) : null}
@@ -228,77 +251,22 @@ const FormPostulante = () => {
 
                 <div className="mb-4 px-4">
                   <Field
+                    as="textarea"
                     id="info"
                     type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Info"
+                    className="resize-none mt-2 block w-full p-3 h-40 text-black text-md bg-slate-100  rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    placeholder="Contanos un poco sobre vos en menos de 100 palabras"
                     name="info"
-                    maxLength="14"
+                    maxLength="301"
                   />
                   {errors.info && touched.info ? (
                     <Alerta>{errors.info}</Alerta>
                   ) : null}
                 </div>
-
-                <div className="mb-4 px-4">
-                  <Field
-                    id="redes"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Redes"
-                    name="redes"
-                    maxLength="14"
-                  />
-                  {errors.redes && touched.redes ? (
-                    <Alerta>{errors.redes}</Alerta>
-                  ) : null}
-                </div>
-
-                <div className="mb-4 px-4">
-                  <Field
-                    id="observacion"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Observacion"
-                    name="observacion"
-                    maxLength="14"
-                  />
-                  {errors.observacion && touched.observacion ? (
-                    <Alerta>{errors.observacion}</Alerta>
-                  ) : null}
-                </div>
-
-                <div className="mb-4 px-4">
-                  <Field
-                    id="valoracion"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Valoracion"
-                    name="valoracion"
-                    maxLength="14"
-                  />
-                  {errors.valoracion && touched.valoracion ? (
-                    <Alerta>{errors.valoracion}</Alerta>
-                  ) : null}
-                </div>
-                <div className="mb-4 px-4">
-                  <Field
-                    as="textarea"
-                    id="notas"
-                    type="text"
-                    className="resize-none mt-2 block w-full p-3 h-40 text-black text-md bg-slate-100  rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Dejanos una nota para poder contactarte mas rapido"
-                    name="notas"
-                    maxLength="301"
-                  />
-                  {errors.notas && touched.notas ? (
-                    <Alerta>{errors.notas}</Alerta>
-                  ) : null}
-                </div>
                 <div className="mx-auto flex justify-center my-5">
                   <input
                     type="submit"
-                    value={"Enviar"}
+                    value="ENVIAR"
                     className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] "
                     id="click2"
                   />

@@ -102,7 +102,7 @@ function ModalContratos({ anterior, siguiente}) { //recibo las funciones que con
                         <p className="para">
                           Se podrá congelar dentro de toda la duración del mismo
                           y por única vez, con una extensión mínima de 14 días y
-                          máxima de 45 días y solicitados por los siguientes
+                          máxima de 60 días y solicitados por los siguientes
                           motivos. Enfermedades (solo con certificación medica),
                           Lesiones ocurridas dentro de nuestras instalaciones
                           (no serán incluidas lesiones ocurridas fuera del
