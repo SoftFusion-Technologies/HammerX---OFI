@@ -33,10 +33,10 @@ const Hero = () => {
     <div className="relative w-full h-screen flex overflow-hidden">
       <div
         data-aos="fade-right"
-        className="lg:w-1/2 md:w-2/3 max-md:w-full px-10 max-sm:px-6 dark:bg-gradient-to-r from-gray-600 to-gray-700"
+        className="lg:w-1/2  md:w-2/3 max-md:w-full px-10 max-sm:px-6 dark:bg-gradient-to-r from-gray-600 to-gray-700"
         id="div1"
       >
-        <img src={logo} alt="logo" className="mt-24 max-sm:mt-32" />
+        <img src={logo} alt="logo" className="mt-24 max-sm:mt-32 md:pl-3" />
         
         <img
           className="w-8 h-80 absolute bottom-10 left-0 sm:hidden max-sm:-ml-4"
@@ -49,7 +49,7 @@ const Hero = () => {
           alt="Guiones"
         />
 
-        <div className="w-5/6 h-auto pb-5 border-4 border-orange-600 rounded-xl mt-10 ml-5 max-md:mx-auto max-sm:mt-16">
+        <div className="w-5/6 h-auto pb-5 border-4 border-orange-600 rounded-xl mx-auto mt-5 max-sm:mt-16">
           <div>
             <p className="max-md:text-sm text-center px-6 pt-6 font-messina dark:text-white">
               ¡Bienvenidos a nuestro sitio oficial!{" "}

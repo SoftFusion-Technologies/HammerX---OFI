@@ -12,7 +12,6 @@
  */
 
 
-import { Link } from "react-router-dom";
 import {
   sedeconce,
   sedeconce2,
@@ -20,10 +19,16 @@ import {
   sedeconceptitulo,
 } from "../../images/sedes";
 import Slider from "react-slick";
-import "../../styles/aboutUs/volver.css";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { guionesbla } from "../../images/index";
+import "../../styles/aboutUs/volver.css";
 
 const Sedeconcepcion = () => {
+  useEffect(() => {
+    document.title = "Sede Concepción";
+  }, []);
+
   const settings = {
     dots:true,
     infinite: true,

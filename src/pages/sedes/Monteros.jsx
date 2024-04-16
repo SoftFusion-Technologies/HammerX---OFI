@@ -11,7 +11,6 @@
  *  Capa: Frontend
  */
 
-import { Link } from "react-router-dom";
 import {
   sedemonteros,
   sedemonteros2,
@@ -19,10 +18,16 @@ import {
   sedemonterostitulo,
 } from "../../images/sedes";
 import Slider from "react-slick";
-import "../../styles/aboutUs/volver.css";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { guionesbla } from "../../images/index";
+import "../../styles/aboutUs/volver.css";
 
 const Sedemonteros = () => {
+  useEffect(() => {
+    document.title = "Sede Monteros";
+  }, []);
+
   const settings = {
     dots:true,
     infinite: true,

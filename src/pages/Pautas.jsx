@@ -11,9 +11,13 @@
  */
 
 
-import React from 'react'
+import React, {useEffect} from 'react'
 
 const Pautas = () => {
+  useEffect(() => {
+    document.title = "Pautas";
+  }, []);
+
   return (
     <div className='bg-[#fc4b08] py-16'>
       <h1 className="text-white max-md:text-[40px] text-[50px] text-center font-bignoodle ">Hammer</h1>

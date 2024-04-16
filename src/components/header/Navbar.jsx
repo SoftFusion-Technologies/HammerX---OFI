@@ -1,21 +1,21 @@
-import { useState } from 'react'
-import { theme } from '../../images'
-import Menu from "./Menu"
-import Marcas from './Marcas'
-import { Link } from 'react-router-dom'
-import DropdownMenu from './DropdownMenu'
-import '../../styles/header/animacionlinks.css'
+import { useState } from "react";
+import { theme } from "../../images";
+import Menu from "./Menu";
+import Marcas from "./Marcas";
+import { Link } from "react-router-dom";
+import DropdownMenu from "./DropdownMenu";
+import "../../styles/header/animacionlinks.css";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState("");
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const toggleDarkMode = () => {
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
 
   return (
@@ -28,10 +28,14 @@ const Navbar = () => {
 
         <div className="hidden items-center font-tilt-neon text-black gap-10 lg:flex space-x-4 dark:text-white">
           {/* Se agregó el scrollTo para que al hacer click vuelva al inicio de la pag - Cambio realizado por Lucas Albornoz 12-04-24 */}
-          <Link to="/" className="link" onClick={() => {
-            setActive('');
-            window.scrollTo(0, 0);
-          }}> 
+          <Link
+            to="/"
+            className="link"
+            onClick={() => {
+              setActive("");
+              window.scrollTo(0, 0);
+            }}
+          >
             Home
           </Link>
 
@@ -46,8 +50,8 @@ const Navbar = () => {
             Contacto
           </Link> */}
 
-          { /* Se agregó el dropdown de "Contacto" - Cambio realizado por Lucas Albornoz 12-04-24 */}
-          <DropdownMenu /> 
+          {/* Se agregó el dropdown de "Contacto" - Cambio realizado por Lucas Albornoz 12-04-24 */}
+          <DropdownMenu />
 
           <Link to="#" className="">
             <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
@@ -82,19 +86,24 @@ const Navbar = () => {
           <Link to="/nosotros/quienessomos" className="block py-2 px-4 ">
             ¿Quiénes somos?
           </Link>
-          <a
-            href="https://api.whatsapp.com/send/?phone=543863564651&text=Hola%21+necesito+info+de+la+sede+de+monteros&type=phone_number&app_absent=0"
+          <Link
+            to="/contacto"
             className="block py-2 px-4 "
+            onClick={() => setMobileMenuOpen(false)}
           >
             Contacto
-          </a>
+          </Link>
+          <Link to="#testi" className="block py-2 px-4 ">
+            Quiero trabajar con ustedes
+          </Link>
           <Link to="#testi" className="block py-2 px-4 ">
             Prueba una clase gratis
           </Link>
-          <div className="ml-4">
+          <div className="ml-4 flex items-center gap-2 py-2">
+            <h1> Dark Mode</h1>
             <img
               onClick={toggleDarkMode}
-              className="h-7 mt-2 cursor-pointer dark:invert"
+              className="h-7 cursor-pointer dark:invert"
               src={theme}
               alt="Theme"
             />

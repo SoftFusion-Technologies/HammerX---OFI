@@ -10,7 +10,7 @@
  *  Capa: Frontend
  */
 
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import whats from "../../src/images/redes/whatsapp.png";
 import insta from "../../src/images/redes/instagram.png";
@@ -18,6 +18,10 @@ import facebook from "../../src/images/redes/facebook.png";
 import "../styles/aboutUs/volver.css";
 
 const Contacto = () => {
+  useEffect(() => {
+    document.title = "Contacto";
+  }, []);
+
   return (
     <div className="h-full bg-[#fc4b08] py-16">
       <header className="w-full">

@@ -2,8 +2,11 @@ import React from 'react'
 
 const Alerta = ({ children }) => {
     return (
-        <div className="text-center my-4 bg-red-600 text-white font-bold p-3 uppercase">
+        <div className="my-4">
+            <div className='flex text-orange-500 font-semibold font-messina text-[14px]'>
+            <p>* &nbsp;</p>
             {children}
+            </div>
             {/* en alerta recibimos como children el mensaje de error */}
         </div>
     )

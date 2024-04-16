@@ -23,6 +23,7 @@ import {
 } from 'react-router-dom';
 import Navbar from './components/header/Navbar'; // Importa el componente de la barra de navegación
 import Footer from './components/footer/Footer'; // Importa el componente del pie de página
+import FormTestClass from './components/Forms/FormTestClass';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -81,7 +82,9 @@ const App = memo(() => {
               <Ruta path="/pautas" element={<Pautas />} /> 
               <Ruta path="/legales" element={<Legales />} /> 
               <Ruta path="/contacto" element={<Contacto />} />
-              <Ruta path="/form" element={<FormPostu />} /> 
+              <Ruta path="/form" element={<FormPostu />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/probarclase" element={<FormTestClass/>} />  {/* Rutas de prueba para testear funcionamiento */}
+
 
             </Rutas>
             {/* Pie de página */}
