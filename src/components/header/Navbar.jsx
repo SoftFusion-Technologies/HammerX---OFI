@@ -5,10 +5,19 @@ import Marcas from "./Marcas";
 import { Link } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import "../../styles/header/animacionlinks.css";
+import FormTestClass from "../Forms/FormTestClass";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState("");
+  const [modalClaseFree, setModalClaseFree] = useState(false);
+
+  const abrirModal = () => {
+    setModalClaseFree(true)
+  };
+  const cerarModal = () => {
+    setModalClaseFree(false)
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -54,7 +63,7 @@ const Navbar = () => {
           <DropdownMenu />
 
           <Link to="#" className="">
-            <button className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
+            <button onClick={abrirModal} className="bg-[#fc4b08] hover:bg-orange-500 text-white py-2 px-4 rounded transition-colors duration-100 z-10">
               ¡Probar una clase!
             </button>
           </Link>
@@ -96,7 +105,7 @@ const Navbar = () => {
           <Link to="#testi" className="block py-2 px-4 ">
             Quiero trabajar con ustedes
           </Link>
-          <Link to="#testi" className="block py-2 px-4 ">
+          <Link onClick={abrirModal} to="#testi" className="block py-2 px-4 ">
             Prueba una clase gratis
           </Link>
           <div className="ml-4 flex items-center gap-2 py-2">
@@ -110,6 +119,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <FormTestClass isOpen={modalClaseFree} onClose={cerarModal} />
     </nav>
   );
 };

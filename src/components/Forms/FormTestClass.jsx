@@ -22,7 +22,8 @@ import * as Yup from "yup";
 import Alerta from "../Error";
 import "../../styles/Forms/FormPostulante.css";
 
-const FormTestClass = () => {
+  // isOpen y onCLose son los metodos que recibe para abrir y cerrar el modal
+const FormTestClass = ({ isOpen, onClose }) => {
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
   const nuevoTestClassSchema = Yup.object().shape({
@@ -87,7 +88,8 @@ const FormTestClass = () => {
   };
 
   return (
-    <div className="container-inputs">
+    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
+    <div className={`container-inputs`}>
       {/*
                 Formik es una biblioteca de formularios React de terceros.
                 Proporciona programación y validación de formularios básicos.
@@ -119,8 +121,9 @@ const FormTestClass = () => {
         {({ errors, touched }) => {
           return (
             
-            <div className="py-20"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
-              <Form className="formulario max-sm:w-[300px]">
+            <div className="py-0"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+              <Form className="formulario max-sm:w-[300px] bg-white">
+              <div className="flex justify-between">
                 <div className="tools">
                   <div className="circle">
                     <span className="red toolsbox"></span>
@@ -132,7 +135,11 @@ const FormTestClass = () => {
                     <span className="green toolsbox"></span>
                   </div>
                 </div>
-                <div className="mb-4 px-4">
+                <div className="pr-3 pt-2 cursor-pointer" onClick={onClose}>X</div>
+              </div>
+                
+                
+                <div className="mb-3 px-4">
                   <Field
                     id="name"
                     type="text"
@@ -146,7 +153,7 @@ const FormTestClass = () => {
                   ) : null}
                 </div>
 
-                <div className="mb-4 px-4">
+                <div className="mb-3 px-4">
                   <Field
                     id="last_name"
                     type="text"
@@ -160,7 +167,7 @@ const FormTestClass = () => {
                   ) : null}
                 </div>
 
-                <div className="mb-4 px-4">
+                <div className="mb-3 px-4">
                   <Field
                     id="dni"
                     type="dni"
@@ -173,11 +180,11 @@ const FormTestClass = () => {
                     <Alerta>{errors.dni}</Alerta>
                   ) : null}
                 </div>
-                <div className="mb-4 px-4">
+                <div className="mb-3 px-4">
                   <Field
                     id="celular"
                     type="tel"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                     placeholder="NÚMERO DE CELULAR"
                     name="celular"
                     maxLength="16"
@@ -187,7 +194,7 @@ const FormTestClass = () => {
                   ) : null}
                 </div>
 
-                <div className="mb-4 px-4">
+                <div className="mb-3 px-4">
                   <Field
                     as="select"
                     id="sede"
@@ -206,7 +213,7 @@ const FormTestClass = () => {
                   ) : null}
                 </div>
 
-                <div className="mb-4 px-4">
+                <div className="mb-3 px-4">
                   <Field
                     as="select"
                     id="objetivo"
@@ -241,6 +248,7 @@ const FormTestClass = () => {
                     className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                     id="click2"
                   />
+                  
                 </div>
               </Form>
             </div>
@@ -248,6 +256,8 @@ const FormTestClass = () => {
         }}
       </Formik>
     </div>
+    </div>
+
   );
 };
 
