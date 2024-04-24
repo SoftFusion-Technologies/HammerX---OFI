@@ -141,7 +141,7 @@ const Servicios = () => {
         </h1>
         <p
           data-aos="zoom-in-up"
-          className="font-messina text-md  text-orange-100 text-[20px] font-bold dark:text-white"
+          className="font-bignoodle text-md  text-orange-100 text-[20px] font-bold dark:text-white"
         >
           En HAMMERX Contamos con clases individuales y grupales, de bajo y de
           alto impacto, todas supervisadas y dictadas por profesores capacitados
