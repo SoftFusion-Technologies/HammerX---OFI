@@ -23,7 +23,6 @@ import {
 } from 'react-router-dom';
 import Navbar from './components/header/Navbar'; // Importa el componente de la barra de navegación
 import Footer from './components/footer/Footer'; // Importa el componente del pie de página
-import FormTestClass from './components/Forms/FormTestClass';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -38,6 +37,8 @@ const Pautas = lazy(() => import('./pages/Pautas'));
 const Legales = lazy(() => import('./pages/Legales'));
 const Contacto = lazy(() => import('./pages/Contacto'));
 const FormPostu = lazy(() => import('./components/Forms/FormPostulante'));
+const PostulanteGet = lazy(() => import('./components/MetodsGet/PostulanteGet'));
+const ClasesGet = lazy(() => import('./components/MetodsGet/FreeClassGet'));
 
 /**
  * Componente principal de la aplicación.
@@ -79,12 +80,12 @@ const App = memo(() => {
               <Ruta path="/nosotros/nuestrosvalores" element={<OurValues />} /> {/* Página "Nuestros valores" */}
               <Ruta path="/Sedes/Concepcion" element={<Sedeconcepcion />} /> {/* Página de la sede de Concepción */}
               <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
-              <Ruta path="/pautas" element={<Pautas />} /> 
-              <Ruta path="/legales" element={<Legales />} /> 
-              <Ruta path="/contacto" element={<Contacto />} />
+              <Ruta path="/pautas" element={<Pautas />} />  {/* Página de Pautas */}
+              <Ruta path="/legales" element={<Legales />} />  {/* Página de Legales */}
+              <Ruta path="/contacto" element={<Contacto />} /> {/* Página de Contacto */}
               <Ruta path="/form" element={<FormPostu />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/probarclase" element={<FormTestClass/>} />  {/* Rutas de prueba para testear funcionamiento */}
-
+              <Ruta path="/postu" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
 
             </Rutas>
             {/* Pie de página */}
