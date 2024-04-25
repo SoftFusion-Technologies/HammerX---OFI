@@ -170,6 +170,7 @@ const FreeClassGet = () => {
                                     <th>Cel</th>
                                     <th>Sede</th>
                                     <th>Objetivo</th>
+                                    <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

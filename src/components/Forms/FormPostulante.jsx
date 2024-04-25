@@ -47,6 +47,8 @@ const FormPostulante = ({ isOpen, onClose }) => {
     state: Yup.boolean().required(),
     created_at: Yup.date().nullable(true),
     updated_at: Yup.date().nullable(true),
+    sexo: Yup.string()
+      .required("El sexo es obligatorio"),
   });
 
   const handleSubmitPostu = async (valores) => {
@@ -109,6 +111,7 @@ const FormPostulante = ({ isOpen, onClose }) => {
             state: false,
             created_at: null,
             updated_at: null,
+            sexo:"",
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
@@ -152,6 +155,8 @@ const FormPostulante = ({ isOpen, onClose }) => {
                     ) : null}
                   </div>
 
+
+
                   <div className="mb-4 px-4">
                     <Field
                       id="email"
@@ -190,6 +195,26 @@ const FormPostulante = ({ isOpen, onClose }) => {
                     />
                     {errors.edad && touched.edad ? (
                       <Alerta>{errors.edad}</Alerta>
+                    ) : null}
+                  </div>
+
+                  <div className="mb-4 px-4">
+                    <Field
+                      as="select"
+                      id="sexo"
+                      name="sexo"
+                      className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      required
+                    >
+                      <option value="" disabled>
+                        Sexo:
+                      </option>
+                      <option value="masculino">Masculino</option>
+                      <option value="femenino">Femenino</option>
+                      <option value="prefieronodecirlo">Prefiero no decirlo</option>
+                    </Field>
+                    {errors.sexo && touched.sexo ? (
+                      <Alerta>{errors.sexo}</Alerta>
                     ) : null}
                   </div>
 

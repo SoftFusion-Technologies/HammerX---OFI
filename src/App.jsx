@@ -84,7 +84,7 @@ const App = memo(() => {
               <Ruta path="/legales" element={<Legales />} />  {/* Página de Legales */}
               <Ruta path="/contacto" element={<Contacto />} /> {/* Página de Contacto */}
               <Ruta path="/form" element={<FormPostu />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/postu" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/postulante" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
 
             </Rutas>

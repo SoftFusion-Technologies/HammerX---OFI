@@ -102,11 +102,12 @@ const PostulanteGet = () => {
   } else if (search) {
     results = postulantes.filter((dato) => {
       const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
+      const sexoMatch = dato.sexo.toLowerCase().includes(search.toLowerCase());
       const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase());
       const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase());
       const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
 
-      return nameMatch || emailMatch || puestoMatch || sedeMatch; // Agrega otras condiciones aquí
+      return nameMatch || sexoMatch || emailMatch || puestoMatch || sedeMatch; // Agrega otras condiciones aquí
     });
   }
 
@@ -170,6 +171,7 @@ const PostulanteGet = () => {
               <tr key={postulantes.id}>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Sexo</th>
                 <th>Puesto</th>
                 <th>sede</th>
                 <th>Valoración</th>
@@ -185,6 +187,9 @@ const PostulanteGet = () => {
                   </td>
                   <td onClick={() => obtenerPostulante(postulante.id)}>
                     {postulante.name}
+                  </td>
+                  <td onClick={() => obtenerPostulante(postulante.id)}>
+                    {postulante.sexo}
                   </td>
                   <td onClick={() => obtenerPostulante(postulante.id)}>
                     {postulante.puesto}
