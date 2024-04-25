@@ -11,16 +11,27 @@
  *  Capa: Frontend
  */
 
-import { useEffect } from "react";
+import FormTestClass from "../../components/Forms/FormTestClass";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../../styles/aboutUs/volver.css";
 import "../../styles/aboutUs/botones.css";
 import "../../styles/aboutUs/background.css";
-import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   useEffect(() => {
     document.title = "Quiero Conocerlos";
   }, []);
+
+  const [modalClaseFree, setModalClaseFree] = useState(false);
+
+  //metodos para abrir y cerrar modal de clase gratis
+  const abrirModal = () => {
+    setModalClaseFree(true)
+  };
+  const cerarModal = () => {
+    setModalClaseFree(false)
+  };
 
   return (
     <>
@@ -78,14 +89,18 @@ const AboutUs = () => {
             { /* Dos botones nuevos agregados - Cambios realizado por Lucas Albornoz 12-04-24*/}
             <div className="md:py-8 flex justify-center md:gap-10  max-md:flex-col">
               <Link
-                to="/nosotros/nuestrosvalores"
+                to="#"
                 className="max-md:mb-5 max-md:mx-auto"
+                onClick={abrirModal} 
               >
                 <button className="btns font-messina font-semibold">
                   Probar una clase GRATIS
                 </button>
               </Link>
 
+              {/* Modal para abrir formulario de clase gratis */}
+              <FormTestClass isOpen={modalClaseFree} onClose={cerarModal} />
+              {/* Modal para abrir formulario de quiero trabajar con ustedes */}
               <a
                 href="https://api.whatsapp.com/send?phone=543863564651"
                 target="_blank"

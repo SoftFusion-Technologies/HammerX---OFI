@@ -23,8 +23,7 @@
     transition: all 300ms;
 }
 
-.bars__menu.active span {
-    /* Estilos para líneas activas */
+/* .bars__menu.active span {
     transform: rotate(45deg) translate(-2px, 1px);
 }
 
@@ -35,4 +34,4 @@
 
 .bars__menu.active span:nth-child(3) {
     transform: rotate(-45deg) translate(-4px, 2px);
-}
+} */
