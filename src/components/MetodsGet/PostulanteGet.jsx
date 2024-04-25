@@ -19,12 +19,15 @@ import '../../styles/MetodsGet/Tabla.css'
 // Componente funcional que maneja la lógica relacionada con los postulantes
 const PostulanteGet = () => {
 
+  //URL estatica, luego cambiar por variable de entorno
+  const URL = 'http://localhost:8080/postulante/'
+
   // Estado para almacenar la lista de postulantes
   const [postulantes, setPostulantes] = useState([]);
 
-  //----------------------------------------------
-  // Estados para almacenar el término de búsqueda
-  //----------------------------------------------
+  //------------------------------------------------------
+  // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
+  //------------------------------------------------------
   const [search, setSearch] = useState("")
   const [sexoFilter, setSexoFilter] = useState(null);
   const [edadFilter, setEdadFilter] = useState(null);
@@ -51,11 +54,44 @@ const PostulanteGet = () => {
   const handleResetSexoFilter = () => {
     setSexoFilter(null);
   }
-  //----------------------------------------------
-  //----------------------------------------------
 
-  //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/postulante/'
+  const calcularRangoEdad = (edad) => {
+    if (edad >= 18 && edad <= 21) return "18-21"
+    if (edad >= 21 && edad <= 23) return "21-23"
+    if (edad >= 23 && edad <= 25) return "23-25"
+    if (edad > 25) return ">25"
+  }
+
+  //Funcion de busqueda, en el cuadro
+  const searcher = (e) => {
+    setSearch(e.target.value);
+  }
+
+  let results = []
+
+  if (!search && !sexoFilter && !edadFilter) {
+    results = postulantes
+  } else {
+    results = postulantes.filter((dato) => {
+      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase())
+      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase())
+      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase())
+      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase())
+      const sexoMatch = !sexoFilter || dato.sexo === sexoFilter
+      const edadMatch = !edadFilter || calcularRangoEdad(dato.edad) === edadFilter
+
+      return (
+        nameMatch ||
+        emailMatch ||
+        puestoMatch ||
+        sedeMatch
+      ) && sexoMatch && edadMatch
+    })
+  }
+
+  //------------------------------------------------------
+  // 1.3 Relacion al Filtrado - Final - Benjamin Orellana
+  //------------------------------------------------------
 
   useEffect(() => {
     // utilizamos get para obtenerPostulante los datos contenidos en la url
@@ -114,42 +150,8 @@ const PostulanteGet = () => {
   const contactarPostulante = (celular) => {
     const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
 
-    window.open(`${link}`, '_blank');
+    window.open(`${link}`, '_blank')
   }
-
-  const calcularRangoEdad = (edad) => {
-    if (edad >= 18 && edad <= 21) return "18-21"
-    if (edad >= 21 && edad <= 23) return "21-23"
-    if (edad >= 23 && edad <= 25) return "23-25"
-    if (edad > 25) return ">25"
-  }
-  const searcher = (e) => {
-    setSearch(e.target.value);
-  }
-
-  let results = []
-
-  if (!search && !sexoFilter && !edadFilter) {
-    results = postulantes
-  } else {
-    results = postulantes.filter((dato) => {
-      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase())
-      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase())
-      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase())
-      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase())
-      const sexoMatch = !sexoFilter || dato.sexo === sexoFilter
-      const edadMatch = !edadFilter || calcularRangoEdad(dato.edad) === edadFilter
-
-      return (
-        nameMatch ||
-        emailMatch ||
-        puestoMatch ||
-        sedeMatch
-      ) && sexoMatch && edadMatch
-    })
-  }
-
-
 
   // Función para ordenar los postulantes de forma decreciente basado en el id
   const ordenarPostulantesDecreciente = (postulantes) => {
@@ -161,9 +163,10 @@ const PostulanteGet = () => {
 
   return (
     <div id="main-container">
+      
       {/* notificacion */}
       <div className="notification">
-        <p>Bienvenido, Benja! 🤗</p>
+        <p>Bienvenido! 🤗</p>
         <span className="progress"></span>
       </div>
 
@@ -174,7 +177,6 @@ const PostulanteGet = () => {
         </span>
       </h1>
 
-      <a id="a" className="text-decoration-none" target="_blank"></a>
 
       {/* formulario de busqueda */}
       <form className="search">
@@ -182,21 +184,10 @@ const PostulanteGet = () => {
           value={search}
           onChange={searcher}
           type="text"
-          placeholder="Buscar Clientes mediante el NOMBRE"
+          placeholder="Buscar postulantes"
           className="input-form"
         />
-        <i className="button-form" onClick={searcher}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-search"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-          </svg>
-        </i>
+       
       </form>
       {/* formulario de busqueda */}
 
