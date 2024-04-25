@@ -100,9 +100,14 @@ const PostulanteGet = () => {
     results = postulantes
 
   } else if (search) {
-    results = postulantes.filter((dato) =>
-      dato.name.toLowerCase().includes(search.toLocaleLowerCase())
-    );
+    results = postulantes.filter((dato) => {
+      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
+      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase());
+      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase());
+      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
+
+      return nameMatch || emailMatch || puestoMatch || sedeMatch; // Agrega otras condiciones aquí
+    });
   }
 
   // Función para ordenar los postulantes de forma decreciente basado en el id

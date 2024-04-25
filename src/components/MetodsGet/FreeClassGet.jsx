@@ -92,9 +92,16 @@ const FreeClassGet = () => {
         results = personClass
 
     } else if (search) {
-        results = personClass.filter((dato) =>
-            dato.name.toLowerCase().includes(search.toLocaleLowerCase())
-        );
+        results = personClass.filter((dato) => {
+            const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
+            const lastNameMatch = dato.last_name.toLowerCase().includes(search.toLowerCase());
+            const dniMatch = dato.dni.includes(search);
+            const celularMatch = dato.celular.includes(search);
+            const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
+            const objetivoMatch = dato.objetivo.toLowerCase().includes(search.toLowerCase());
+
+            return nameMatch || lastNameMatch || dniMatch || celularMatch || sedeMatch || objetivoMatch;
+        });
     }
 
     // Función para ordenar los personClass de forma decreciente basado en el id
