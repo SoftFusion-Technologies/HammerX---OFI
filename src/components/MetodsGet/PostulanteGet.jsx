@@ -22,12 +22,40 @@ const PostulanteGet = () => {
   // Estado para almacenar la lista de postulantes
   const [postulantes, setPostulantes] = useState([]);
 
-  // Estado para almacenar el término de búsqueda
+  //----------------------------------------------
+  // Estados para almacenar el término de búsqueda
+  //----------------------------------------------
   const [search, setSearch] = useState("")
+  const [sexoFilter, setSexoFilter] = useState(null);
+  const [edadFilter, setEdadFilter] = useState(null);
+
+  const handleEdadChange = (e) => {
+    setEdadFilter(e.target.value);
+  }
+
+  const handleResetEdadFilter = () => {
+    setEdadFilter(null)
+  }
+
+  const handleSexoChange = (e) => {
+    const selectedSexo = e.target.value;
+
+    // Si el radio button seleccionado ya estaba seleccionado anteriormente,
+    // establece sexoFilter a null para desmarcarlo
+    if (sexoFilter === selectedSexo) {
+      setSexoFilter(null);
+    } else {
+      setSexoFilter(selectedSexo);
+    }
+  }
+  const handleResetSexoFilter = () => {
+    setSexoFilter(null);
+  }
+  //----------------------------------------------
+  //----------------------------------------------
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/postulante/'
-
 
   useEffect(() => {
     // utilizamos get para obtenerPostulante los datos contenidos en la url
@@ -47,7 +75,6 @@ const PostulanteGet = () => {
       console.log('Error al obtener los postulantes:', error);
     }
   };
-
 
   const handleEliminarPostulante = async id => {
     try {
@@ -88,28 +115,41 @@ const PostulanteGet = () => {
     const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
 
     window.open(`${link}`, '_blank');
-  };
+  }
 
+  const calcularRangoEdad = (edad) => {
+    if (edad >= 18 && edad <= 21) return "18-21"
+    if (edad >= 21 && edad <= 23) return "21-23"
+    if (edad >= 23 && edad <= 25) return "23-25"
+    if (edad > 25) return ">25"
+  }
   const searcher = (e) => {
-    setSearch(e.target.value)
+    setSearch(e.target.value);
   }
 
   let results = []
 
-  if (!search) {
+  if (!search && !sexoFilter && !edadFilter) {
     results = postulantes
-
-  } else if (search) {
+  } else {
     results = postulantes.filter((dato) => {
-      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
-      const sexoMatch = dato.sexo.toLowerCase().includes(search.toLowerCase());
-      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase());
-      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase());
-      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
+      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase())
+      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase())
+      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase())
+      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase())
+      const sexoMatch = !sexoFilter || dato.sexo === sexoFilter
+      const edadMatch = !edadFilter || calcularRangoEdad(dato.edad) === edadFilter
 
-      return nameMatch || sexoMatch || emailMatch || puestoMatch || sedeMatch; // Agrega otras condiciones aquí
-    });
+      return (
+        nameMatch ||
+        emailMatch ||
+        puestoMatch ||
+        sedeMatch
+      ) && sexoMatch && edadMatch
+    })
   }
+
+
 
   // Función para ordenar los postulantes de forma decreciente basado en el id
   const ordenarPostulantesDecreciente = (postulantes) => {
@@ -158,6 +198,106 @@ const PostulanteGet = () => {
           </svg>
         </i>
       </form>
+      {/* formulario de busqueda */}
+
+      {/* filtros por sexo */}
+      <div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="masculino"
+              checked={sexoFilter === "masculino"}
+              onChange={handleSexoChange}
+            />
+            Masculino
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="femenino"
+              checked={sexoFilter === "femenino"}
+              onChange={handleSexoChange}
+            />
+            Femenino
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value=""
+              checked={!sexoFilter}
+              onChange={handleResetSexoFilter}
+            />
+            Limpiar sexo  
+          </label>
+        </div>
+      </div>
+      {/* filtros por sexo */}
+
+      {/* Filtro de edad */}
+      <div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="18-21"
+              checked={edadFilter === "18-21"}
+              onChange={handleEdadChange}
+            />
+            18 a 21
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="21-23"
+              checked={edadFilter === "21-23"}
+              onChange={handleEdadChange}
+            />
+            21 a 23
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value="23-25"
+              checked={edadFilter === "23-25"}
+              onChange={handleEdadChange}
+            />
+            23 a 25
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value=">25"
+              checked={edadFilter === ">25"}
+              onChange={handleEdadChange}
+            />
+            Mayores a 25
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              value=""
+              checked={!edadFilter}
+              onChange={handleResetEdadFilter}
+            />
+            Limpiar edad
+          </label>
+        </div>
+      </div>
+      {/* Filtro de edad */}
 
       {Object.keys(results).length === 0 ? (
         <p className="text-center mt-12 font-mono parrafo">
@@ -171,6 +311,7 @@ const PostulanteGet = () => {
               <tr key={postulantes.id}>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Edad</th>
                 <th>Sexo</th>
                 <th>Puesto</th>
                 <th>sede</th>
@@ -187,6 +328,9 @@ const PostulanteGet = () => {
                   </td>
                   <td onClick={() => obtenerPostulante(postulante.id)}>
                     {postulante.name}
+                  </td>
+                  <td onClick={() => obtenerPostulante(postulante.id)}>
+                    {postulante.edad}
                   </td>
                   <td onClick={() => obtenerPostulante(postulante.id)}>
                     {postulante.sexo}
@@ -228,7 +372,7 @@ const PostulanteGet = () => {
           </table>
         </>
       )}
-    </div>  
+    </div>
   )
 }
 
