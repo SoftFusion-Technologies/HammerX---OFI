@@ -60,9 +60,9 @@ const Cards = () => {
 
           <div className="w-11/12 mx-auto pb-10" id="card-container">
             <div className="card">
-              <div className="card1 max-md:max-w-full">
+              <div className="card1 max-md:max-w-full select-none">
                 <p>MISIÓN</p>
-                <p className="small">
+                <p className="small select-none">
                   HAMMER es un centro social de entrenamiento y entretenimiento
                   que brinda calidad en su servicio. Somos un lugar donde las
                   personas hacen ejercicio, pero también encuentran un momento
@@ -79,9 +79,9 @@ const Cards = () => {
             </div>
 
             <div className="card flex justify-end">
-              <div className="card1 right-bg max-md:max-w-full">
+              <div className="card1 right-bg max-md:max-w-full select-none">
                 <p>VISIÓN</p>
-                <p className="small">
+                <p className="small select-none">
                   Buscamos transformar el concepto tradicional de un gimnasio y
                   convertirlo en un lugar donde no solo se entrena y mejorar la
                   salud física, sino también demostrar que puede ser un lugar
@@ -97,9 +97,9 @@ const Cards = () => {
             </div>
 
             <div className="card">
-              <div className="card1 max-md:max-w-full">
+              <div className="card1 max-md:max-w-full select-none">
                 <p>¿Cómo lo hacemos?</p>
-                <p className="small">
+                <p className="small select-none">
                   Contamos con muchas actividades diferentes para que elijas,
                   con nuestro asesoramiento, la más adecuada para vos, ya sean
                   de carácter grupal o entrenamiento individual, siempre guiados

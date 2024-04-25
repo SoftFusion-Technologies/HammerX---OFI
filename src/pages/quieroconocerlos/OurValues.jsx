@@ -46,7 +46,7 @@ const OurValues = () => {
 
       <div className="w-11/12 mx-auto flex justify-evenly">
         <div className="letters h-contain flex flex-col items-center max-sm:hidden justify-center">
-          <div className="letter py-5 px-10 bg-gradient-to-b from-orange-500 to-[#fc4b08] transition text-white hover:from-white hover:to-slate-50 hover:transition hover:duration-200 hover:ease-in-out rounded-lg hover:text-[#fc4b08]">
+          <div className="letter py-5 px-10 bg-gradient-to-b from-orange-500 to-[#fc4b08] transition text-white hover:from-white hover:to-slate-50 hover:transition hover:duration-200 hover:ease-in-out rounded-lg hover:text-[#fc4b08] ">
             <p>
               <span >H</span>
             </p>
@@ -70,16 +70,16 @@ const OurValues = () => {
 
         <div className="vcards w-2/3 max-sm:text-center">
           <div className="vcard">
-            <div className="vcard1 md:w-1/2">
+            <div className="vcard1 md:w-1/2 select-none">
               <h3>HONESTIDAD</h3>
-              <p className="small">Transparencia al 100%</p>
+              <p className="small select-none">Transparencia al 100%</p>
             </div>
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg md:w-1/2">
+            <div className="vcard1 right-bg md:w-1/2 select-none">
               <h3>ACTITUD</h3>
-              <p className="small">
+              <p className="small select-none">
                 Actitud alegre creando un ambiente que desborde de energías
                 positivas.
               </p>
@@ -87,25 +87,25 @@ const OurValues = () => {
           </div>
 
           <div className="vcard">
-            <div className="vcard1 md:w-1/2">
+            <div className="vcard1 md:w-1/2 select-none">
               <h3>MOTIVACIÓN</h3>
-              <p className="small">
+              <p className="small select-none">
                 Para un aprendizaje y mejora continua de nuestros servicios.
               </p>
             </div>
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg md:w-1/2">
+            <div className="vcard1 right-bg md:w-1/2 select-none">
               <h3>MORAL</h3>
-              <p className="small">Actuar siempre con buenas intenciones.</p>
+              <p className="small select-none">Actuar siempre con buenas intenciones.</p>
             </div>
           </div>
 
           <div className="vcard">
-            <div className="vcard1 md:w-1/2">
+            <div className="vcard1 md:w-1/2 select-none">
               <h3>EMPATIA</h3>
-              <p className="small">
+              <p className="small select-none">
                 Para conectar con nuestros socios y entender las diferentes
                 situaciones particulares que vive cada uno.
               </p>
@@ -113,9 +113,9 @@ const OurValues = () => {
           </div>
 
           <div className="vcard flex md:justify-end">
-            <div className="vcard1 right-bg md:w-1/2">
+            <div className="vcard1 right-bg md:w-1/2 select-none">
               <h3>RESPETO</h3>
-              <p className="small">
+              <p className="small select-none">
                 Responsabilidad y respeto a todos por igual, sin distinciones,
                 creando un ambiente inclusivo.
               </p>

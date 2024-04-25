@@ -13,12 +13,13 @@
 import { useEffect, useState } from "react";
 import "../../styles/hero/fixedNavbar.css"
 import FormTestClass from "../Forms/FormTestClass";
+import FormPostulante from "../Forms/FormPostulante";
 
 const FixedNavbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [modal, setModal] = useState(false); //estado para manejar el modal
 
-  //funciones para abrir modals
+  //funcion para abrir modal de clase gratis
   const verModal = () => {
     setModal(true);
   }
@@ -26,8 +27,8 @@ const FixedNavbar = () => {
     setModal(false);
   }
 
-    useEffect(() => {
-    const handleScroll = () => { 
+  useEffect(() => {
+    const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY > 0) {
         setIsVisible(true);
@@ -43,11 +44,11 @@ const FixedNavbar = () => {
 
   return (
     <>
-      <nav className={`cursor-pointer max-md:hidden w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{position: 'fixed'}}>
+      <nav className={`cursor-pointer max-md:hidden w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ position: 'fixed' }}>
         <div onClick={verModal} className="border-2 bg-white py-4 w-full box">
           <ul className="list-none">
             <li className="">
-                <p className="text-center font-bignoodle text-[20px] tracking-wider">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
+              <p className="text-center font-bignoodle text-[20px] tracking-wider">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
             </li>
           </ul>
         </div>
@@ -57,17 +58,18 @@ const FixedNavbar = () => {
       <FormTestClass isOpen={modal} onClose={cerrarModal} />
 
       {/* Navbar flotantepara celu*/}
-      <nav className={`hidden max-md:flex w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 `} style={{position: 'fixed'}}>
-      <div className="border-2 bg-white py-4 w-full box">
-        <ul className="list-none">
-          <li className="">
-            <a href="">
+      <nav className={`hidden max-md:flex w-full absolute bottom-0 z-40 bg-gray-200 transition-opacity duration-200 `} style={{ position: 'fixed' }}>
+        <div onClick={verModal} className="border-2 bg-white py-4 w-full box">
+          <ul className="list-none">
+            <li className="">
               <p className="text-center font-bignoodle text-[20px] tracking-wider">¡QUIERO PROBAR UNA CLASE GRATIS!</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      {/* Modal de clase gratis */}
+      <FormTestClass isOpen={modal} onClose={cerrarModal} />
     </>
   );
 };

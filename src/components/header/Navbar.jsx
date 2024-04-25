@@ -6,18 +6,30 @@ import { Link } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import "../../styles/header/animacionlinks.css";
 import FormTestClass from "../Forms/FormTestClass";
+import FormPostulante from "../Forms/FormPostulante";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState("");
   const [modalClaseFree, setModalClaseFree] = useState(false);
+  const [modalTrabajarConUstedes, setModalTrabajarConUstedes] = useState(false);
 
+  //metodos para abrir y cerrar modal de clase gratis
   const abrirModal = () => {
     setModalClaseFree(true)
   };
   const cerarModal = () => {
     setModalClaseFree(false)
   };
+
+  //metodos para abrir y cerrar modal de trabajar con ustedes
+  const activarModalTrabajar = () => {
+    setModalTrabajarConUstedes(true);
+  };
+  const desactivarModalTrabajar = () => {
+    setModalTrabajarConUstedes(false);
+  };
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -89,23 +101,35 @@ const Navbar = () => {
 
       {isMobileMenuOpen && (
         <div className="h-auto absolute bg-[#fffc] text-black backdrop-filter backdrop-blur-lg pb-5 w-full z-15 lg:hidden px-8 z-50 dark:text-white dark:bg-[#90939ed7] dark:backdrop-filter dark:backdrop-blur-lg">
-          <Link to="/" className="block py-2 px-4 ">
+          <Link
+            to="/"
+            className="block py-2 px-4"
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          >
             Home
           </Link>
-          <Link to="/nosotros/quienessomos" className="block py-2 px-4 ">
+          <Link
+            to="/nosotros/quienessomos"
+            className="block py-2 px-4"
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          >
             ¿Quiénes somos?
           </Link>
           <Link
             to="/contacto"
             className="block py-2 px-4 "
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
           >
             Contacto
           </Link>
-          <Link to="#testi" className="block py-2 px-4 ">
+          <Link
+            to="#form"
+            className="block py-2 px-4"
+            onClick={activarModalTrabajar}
+          >
             Quiero trabajar con ustedes
           </Link>
-          <Link onClick={abrirModal} to="#testi" className="block py-2 px-4 ">
+          <Link onClick={abrirModal} to="#form" className="block py-2 px-4 ">
             Prueba una clase gratis
           </Link>
           <div className="ml-4 flex items-center gap-2 py-2">
@@ -119,7 +143,11 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      {/* Modal para abrir formulario de clase gratis */}
       <FormTestClass isOpen={modalClaseFree} onClose={cerarModal} />
+      {/* Modal para abrir formulario de quiero trabajar con ustedes */}
+      <FormPostulante isOpen={modalTrabajarConUstedes} onClose={desactivarModalTrabajar} />
     </nav>
   );
 };

@@ -14,10 +14,12 @@ import { Link } from "react-router-dom";
 
 import React, { useState } from "react";
 import FormTestClass from "../Forms/FormTestClass";
+import FormPostulante from "../Forms/FormPostulante";
 
 const DropdownMenu = () => {
   const [toggle, setToggle] = useState(false);
   const [isOpenClass, setIsOpenClass] = useState(false);
+  const [modalTrabajarConUstedes, setModalTrabajarConUstedes] = useState(false);
 
   //metodos para abrir y cerrar modal de clase gratis
   const activarModalClase = () => {
@@ -25,6 +27,14 @@ const DropdownMenu = () => {
   };
   const desactivarModalClase = () => {
     setIsOpenClass(false);
+  };
+
+  //metodos para abrir y cerrar modal de trabajar con ustedes
+  const activarModalTrabajar = () => {
+    setModalTrabajarConUstedes(true);
+  };
+  const desactivarModalTrabajar = () => {
+    setModalTrabajarConUstedes(false);
   };
 
   return (
@@ -53,9 +63,9 @@ const DropdownMenu = () => {
               Envianos un mensaje
             </Link>
           </li>
-          <li>
+          <li onClick={activarModalTrabajar}>
             <Link
-              to="/form"
+              to="#"
               className="block px-4 py-2 hover:text-[#fc4b08] font-messina text-[16px]"
               onClick={() => setToggle(!toggle)}
             >
@@ -73,8 +83,13 @@ const DropdownMenu = () => {
           </li>
         </ul>
       </div>
+
       {/* Modal para abrir formulario de clase gratis */}
       <FormTestClass isOpen={isOpenClass} onClose={desactivarModalClase} />
+      
+      {/* Modal para abrir formulario de quiero trabajar con ustedes */}
+      <FormPostulante isOpen={modalTrabajarConUstedes} onClose={desactivarModalTrabajar} />
+      
     </div>
   );
 };
