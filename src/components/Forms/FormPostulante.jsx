@@ -18,12 +18,16 @@ import React, { useState } from "react";
 
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-
+import ModalSuccess from "./ModalSuccess";
+import ModalError from "./ModalError";
 import Alerta from "../Error";
 
 import "../../styles/Forms/FormPostulante.css";
 
 const FormPostulante = ({ isOpen, onClose }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
   const nuevoPostulanteSchema = Yup.object().shape({
@@ -80,9 +84,25 @@ const FormPostulante = ({ isOpen, onClose }) => {
         // Convertir la respuesta a JSON
         const data = await respuesta.json();
         console.log("Registro insertado correctamente:", data);
+
+        // Mostrar la ventana modal de éxito
+        setShowModal(true);
+
+        // Ocultar la ventana modal de éxito después de 3 segundos
+        setTimeout(() => {
+          setShowModal(false);
+        }, 3000);
       }
     } catch (error) {
       console.error("Error al insertar el registro:", error.message);
+
+      // Mostrar la ventana modal de error
+      setErrorModal(true);
+
+      // Ocultar la ventana modal de éxito después de 3 segundos
+      setTimeout(() => {
+        setErrorModal(false);
+      }, 3000);
     }
   };
 
@@ -111,7 +131,7 @@ const FormPostulante = ({ isOpen, onClose }) => {
             state: false,
             created_at: null,
             updated_at: null,
-            sexo:"",
+            sexo: "",
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
@@ -323,6 +343,8 @@ const FormPostulante = ({ isOpen, onClose }) => {
           }}
         </Formik>
       </div>
+      <ModalSuccess isVisible={showModal} onClose={() => setShowModal(false)} />
+      <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );
 };
