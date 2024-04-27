@@ -11,7 +11,7 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { formatearFecha } from '../../Helpers'
 import axios from 'axios';
 import '../../styles/MetodsGet/Tabla.css'
@@ -23,17 +23,17 @@ const PostulanteGet = () => {
   const URL = 'http://localhost:8080/postulante/'
 
   // Estado para almacenar la lista de postulantes
-  const [postulantes, setPostulantes] = useState([]);
+  const [postulantes, setPostulantes] = useState([])
 
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
   const [search, setSearch] = useState("")
-  const [sexoFilter, setSexoFilter] = useState(null);
-  const [edadFilter, setEdadFilter] = useState(null);
+  const [sexoFilter, setSexoFilter] = useState(null)
+  const [edadFilter, setEdadFilter] = useState(null)
 
   const handleEdadChange = (e) => {
-    setEdadFilter(e.target.value);
+    setEdadFilter(e.target.value)
   }
 
   const handleResetEdadFilter = () => {
@@ -100,7 +100,7 @@ const PostulanteGet = () => {
         setPostulantes(res.data);
         obtenerPostulantes();
       })
-  }, []);
+  }, [])
 
   // Función para obtener todos los postulantes desde la API
   const obtenerPostulantes = async () => {
@@ -110,7 +110,7 @@ const PostulanteGet = () => {
     } catch (error) {
       console.log('Error al obtener los postulantes:', error);
     }
-  };
+  }
 
   const handleEliminarPostulante = async id => {
     try {

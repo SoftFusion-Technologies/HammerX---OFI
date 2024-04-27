@@ -24,6 +24,7 @@ import Alerta from "../Error";
 
 import "../../styles/Forms/FormPostulante.css";
 
+// isOpen y onCLose son los metodos que recibe para abrir y cerrar el modal
 const FormPostulante = ({ isOpen, onClose }) => {
   const [showModal, setShowModal] = useState(false)
   const [errorModal, setErrorModal] = useState(false)

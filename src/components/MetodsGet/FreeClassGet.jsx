@@ -11,7 +11,7 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { formatearFecha } from '../../Helpers'
 import axios from 'axios';
 import '../../styles/MetodsGet/Tabla.css'
@@ -29,7 +29,7 @@ const FreeClassGet = () => {
     const URL = 'http://localhost:8080/testclass/'
 
     useEffect(() => {
-        // utilizamos get para obtenerPeronas los datos contenidos en la url
+        // utilizamos get para obtenerPersonas los datos contenidos en la url
         axios.get(URL)
             .then((res) => {
                 setPersonClass(res.data);

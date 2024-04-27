@@ -25,6 +25,7 @@ import Navbar from './components/header/Navbar'; // Importa el componente de la 
 import Footer from './components/footer/Footer'; // Importa el componente del pie de página
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
+// COMPONENTES PRINCIPALES DE LA PAGINA
 const HomePage = lazy(() => import('./pages/HomePage'));
 const Clients = lazy(() => import('./pages/soycliente/Clients'));
 const AboutUs = lazy(() => import('./pages/quieroconocerlos/AboutUs'));
@@ -36,10 +37,16 @@ const Loading = lazy(() => import('./components/Loading')); // Importa el compon
 const Pautas = lazy(() => import('./pages/Pautas'));
 const Legales = lazy(() => import('./pages/Legales'));
 const Contacto = lazy(() => import('./pages/Contacto'));
-const FormPostu = lazy(() => import('./components/Forms/FormPostulante'));
+// COMPONENTES PRINCIPALES DE LA PAGINA
+
+// const FormPostu = lazy(() => import('./components/Forms/FormPostulante')); se elimina
+
+// Renderizado de pagina del STAFF, para los metodos Get, y listado
 const PostulanteGet = lazy(() => import('./components/MetodsGet/PostulanteGet'));
 const ClasesGet = lazy(() => import('./components/MetodsGet/FreeClassGet'));
-
+const UsersGet = lazy(() => import('./components/MetodsGet/UserGet'));
+const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
+// Renderizado de pagina del STAFF, para los metodos Get, y listado
 /**
  * Componente principal de la aplicación.
  * 
@@ -83,9 +90,12 @@ const App = memo(() => {
               <Ruta path="/pautas" element={<Pautas />} />  {/* Página de Pautas */}
               <Ruta path="/legales" element={<Legales />} />  {/* Página de Legales */}
               <Ruta path="/contacto" element={<Contacto />} /> {/* Página de Contacto */}
-              <Ruta path="/form" element={<FormPostu />} /> {/* Rutas de prueba para testear funcionamiento */}
+              {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
+             
               <Ruta path="/postulante" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              {/* <Ruta path="/formusers" element={<AltaUserForm />} /> Rutas de prueba para testear funcionamiento */}
 
             </Rutas>
             {/* Pie de página */}
