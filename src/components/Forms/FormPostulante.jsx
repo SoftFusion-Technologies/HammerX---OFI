@@ -25,9 +25,10 @@ import Alerta from "../Error";
 import "../../styles/Forms/FormPostulante.css";
 
 const FormPostulante = ({ isOpen, onClose }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  const [errorModal, setErrorModal] = useState(false)
 
+  const textoModal = "Gracias por querer ser parte del equipo de Hammer, pronto nos pondremos en contacto con usted."
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
   const nuevoPostulanteSchema = Yup.object().shape({
@@ -174,8 +175,6 @@ const FormPostulante = ({ isOpen, onClose }) => {
                       <Alerta>{errors.name}</Alerta>
                     ) : null}
                   </div>
-
-
 
                   <div className="mb-4 px-4">
                     <Field
@@ -343,7 +342,7 @@ const FormPostulante = ({ isOpen, onClose }) => {
           }}
         </Formik>
       </div>
-      <ModalSuccess isVisible={showModal} onClose={() => setShowModal(false)} />
+      <ModalSuccess textoModal={ textoModal}  isVisible={showModal} onClose={() => setShowModal(false)} />
       <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );

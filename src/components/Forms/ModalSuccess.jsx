@@ -1,7 +1,7 @@
 import React from 'react'
 import { logohammer } from '../../images';
 
-const ModalSuccess = ({ isVisible, onClose }) => {
+const ModalSuccess = ({ isVisible, onClose, textoModal }) => {
   if (!isVisible) return null;
 
   return (
@@ -13,7 +13,9 @@ const ModalSuccess = ({ isVisible, onClose }) => {
             <img src={logohammer} alt="logo" width={150} className='pt-4 mx-auto' />
           </div>
           <hr className='mt-2 w-5/6 mx-auto' />
-          <p className='px-2 py-6 text-center font-messina text-slate-600'>Gracias por querer ser parte del equipo de Hammer, pronto nos pondremos en contacto con usted.</p>
+          <p className='px-2 py-6 text-center font-messina text-slate-600'>
+              {textoModal}  
+          </p>
         </div>
       </div>
     </div>

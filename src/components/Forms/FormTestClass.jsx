@@ -18,12 +18,18 @@ import React, { useState } from "react";
 
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-
+import ModalSuccess from "./ModalSuccess";
+import ModalError from "./ModalError";
 import Alerta from "../Error";
 import "../../styles/Forms/FormPostulante.css";
 
 // isOpen y onCLose son los metodos que recibe para abrir y cerrar el modal
 const FormTestClass = ({ isOpen, onClose }) => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+
+  const textoModal = "Hola, recibimos tu informacion, ya puedes pasar por nuestras Sedes, a probar tu clase!"
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
   const nuevoTestClassSchema = Yup.object().shape({
@@ -52,7 +58,7 @@ const FormTestClass = ({ isOpen, onClose }) => {
     state: Yup.boolean().required(),
     created_at: Yup.date().nullable(true),
     updated_at: Yup.date().nullable(true),
-  });
+  })
 
   const handleSubmitTestClass = async (valores) => {
     try {
@@ -75,15 +81,31 @@ const FormTestClass = ({ isOpen, onClose }) => {
 
         // Verificamos si la solicitud fue exitosa
         if (!respuesta.ok) {
-          throw new Error("Error en la solicitud POST: " + respuesta.status);
+          throw new Error("Error en la solicitud POST: " + respuesta.status)
         }
 
         // Convertimos la respuesta a JSON
         const data = await respuesta.json();
-        console.log("Registro insertado correctamente:", data);
+        console.log("Registro insertado correctamente:", data)
+
+        // Mostrar la ventana modal de éxito
+        setShowModal(true);
+
+        // Ocultar la ventana modal de éxito después de 3 segundos
+        setTimeout(() => {
+          setShowModal(false);
+        }, 3000);
       }
     } catch (error) {
       console.error("Error al insertar el registro:", error.message);
+
+      // Mostrar la ventana modal de error
+      setErrorModal(true);
+
+      // Ocultar la ventana modal de éxito después de 3 segundos
+      setTimeout(() => {
+        setErrorModal(false);
+      }, 3000);
     }
   };
 
@@ -256,6 +278,8 @@ const FormTestClass = ({ isOpen, onClose }) => {
           }}
         </Formik>
       </div>
+      <ModalSuccess textoModal={textoModal} isVisible={showModal} onClose={() => setShowModal(false)} />
+      <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
 
   );
