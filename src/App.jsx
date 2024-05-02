@@ -37,6 +37,7 @@ const Loading = lazy(() => import('./components/Loading')); // Importa el compon
 const Pautas = lazy(() => import('./pages/Pautas'));
 const Legales = lazy(() => import('./pages/Legales'));
 const Contacto = lazy(() => import('./pages/Contacto'));
+const AdminPage = lazy(() => import('./pages/staff/AdminPage'));
 // COMPONENTES PRINCIPALES DE LA PAGINA
 
 // const FormPostu = lazy(() => import('./components/Forms/FormPostulante')); se elimina
@@ -76,8 +77,7 @@ const App = memo(() => {
         {/* Condición para mostrar el componente de carga o el contenido de la aplicación */}
         {showLoading ? <Loading /> : (
           <>
-            {/* Barra de navegación */}
-            <Navbar />
+
             {/* Enrutamiento de las diferentes páginas */}
             <Rutas>
               <Ruta path="/" element={<HomePage />} /> {/* Página principal */}
@@ -97,6 +97,8 @@ const App = memo(() => {
               <Ruta path="/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               {/* <Ruta path="/formusers" element={<AltaUserForm />} /> Rutas de prueba para testear funcionamiento */}
 
+              {/* Ruta para la página del staff */}
+              <Ruta path ="/staff" element={<AdminPage />}/>
             </Rutas>
             {/* Pie de página */}
             <Footer />

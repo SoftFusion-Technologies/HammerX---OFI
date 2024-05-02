@@ -12,6 +12,7 @@
  */
 
 import FormTestClass from "../../components/Forms/FormTestClass";
+import Navbar from "../../components/header/Navbar";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../../styles/aboutUs/volver.css";
@@ -35,6 +36,7 @@ const AboutUs = () => {
 
   return (
     <>
+      <Navbar/>
       <div className="w-full pt-16 bg-gradient-to-b from-orange-500 to-[#fc4b08]">
         <div className="h-contain bgl">
           <header className="w-full">
