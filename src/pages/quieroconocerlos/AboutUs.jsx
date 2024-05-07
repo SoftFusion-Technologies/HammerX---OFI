@@ -89,7 +89,7 @@ const AboutUs = () => {
             </div>
 
             { /* Dos botones nuevos agregados - Cambios realizado por Lucas Albornoz 12-04-24*/}
-            <div className="md:py-8 flex justify-center md:gap-10  max-md:flex-col">
+            <div className="pb-10 md:py-8 flex justify-center md:gap-10  max-md:flex-col">
               <Link
                 to="#"
                 className="max-md:mb-5 max-md:mx-auto"

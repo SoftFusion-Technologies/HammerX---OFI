@@ -12,9 +12,11 @@
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
 import React, { useEffect, useState } from 'react'
+import NavbarStaff from './NavbarStaff';
 import axios from 'axios';
 import '../../styles/MetodsGet/Tabla.css'
-
+import "../../styles/staff/background.css";
+import { Link } from 'react-router-dom';
 
 // Componente funcional que maneja la lógica relacionada con los Users
 const UserGet = () => {
@@ -114,91 +116,105 @@ const UserGet = () => {
 
   // Llamada a la función para obtener los usuarios ordenados de forma creciente
   const sortedUsers = ordenarUsersCreciente(results)
-  return (
-    <div id="main-container">
 
-      {/* notificacion */}
+  return (
+    <>
+      <NavbarStaff />
+      <div className='dashboardbg h-contain pt-10 pb-10'>
+        <div className='bg-white rounded-lg w-11/12 mx-auto'>
+            <div className='pl-5 pt-5'>
+              <Link to="/staff">
+                <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+                  Volver
+                </button>
+              </Link>
+            </div>
+            <div className='flex justify-center'>
+              <h1 className="pb-5">
+                Listado de Usuarios : &nbsp;
+                <span className="text-center">
+                  Cantidad de registros : {results.length}
+                </span>
+              </h1>
+            </div>
+
+
+          {/* formulario de busqueda */}
+          <form className="flex justify-center pb-5">
+            <input
+              value={search}
+              onChange={searcher}
+              type="text"
+              placeholder="Buscar usuarios"
+              className="border rounded-sm"
+            />
+          </form>
+          {/* formulario de busqueda */}
+
+
+          {Object.keys(results).length === 0 ? (
+            <p className="text-center pb-10">
+              El Usuario NO Existe ||{' '}
+              <span className="text-span"> Usuario: {results.length}</span>
+            </p>
+          ) : (
+            <>
+              <table className='w-11/12 mx-auto p'>
+                <thead className="text-white bg-[#fc4b08] ">
+                  <tr key={users.id}>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Sede</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td onClick={() => obtenerUser(user.id)}>
+                        {user.id}
+                      </td>
+                      <td onClick={() => obtenerUser(user.id)}>
+                        {user.name}
+                      </td>
+                      <td onClick={() => obtenerUser(user.id)}>
+                        {user.email}
+                      </td>
+                      <td onClick={() => obtenerUser(user.id)}>
+                        {user.level}
+                      </td>
+                      <td onClick={() => obtenerUser(user.id)}>
+                        {user.sede}
+                      </td>
+                      {/* ACCIONES */}
+                      <td>
+                        <button
+                          onClick={() => handleEliminarUser(user.id)}
+                          type="button"
+                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <hr className='mt-10' />
+              </table>
+            </>
+          )}
+
+        </div>
+        {/* notificacion
       <div className="notification">
         <p>Bienvenido! 🤗</p>
         <span className="progress"></span>
+      </div> */}
+
       </div>
-
-      <h1 className="titulo">
-        Listado de Usuarios :{' '}
-        <span className="text-center textoP">
-          Cantidad de registros : {results.length}
-        </span>
-      </h1>
-
-
-      {/* formulario de busqueda */}
-      <form className="search">
-        <input
-          value={search}
-          onChange={searcher}
-          type="text"
-          placeholder="Buscar usuarios"
-          className="input-form"
-        />
-
-      </form>
-      {/* formulario de busqueda */}
-
-
-      {Object.keys(results).length === 0 ? (
-        <p className="text-center mt-12 font-mono parrafo">
-          El Usuario NO Existe ||{' '}
-          <span className="text-span"> Usuario: {results.length}</span>
-        </p>
-      ) : (
-        <>
-          <table>
-            <thead className="table-primary text-white">
-              <tr key={users.id}>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Sede</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-                {sortedUsers.map((user) => (
-                <tr key={user.id}>
-                  <td onClick={() => obtenerUser(user.id)}>
-                    {user.id}
-                  </td>
-                  <td onClick={() => obtenerUser(user.id)}>
-                    {user.name}
-                  </td>
-                  <td onClick={() => obtenerUser(user.id)}>
-                    {user.email}
-                  </td>
-                  <td onClick={() => obtenerUser(user.id)}>
-                    {user.level}
-                  </td>
-                  <td onClick={() => obtenerUser(user.id)}>
-                    {user.sede}
-                  </td>
-                  {/* ACCIONES */}
-                  <td>
-                    <button
-                      onClick={() => handleEliminarUser(user.id)}
-                      type="button"
-                      className="btn btn-danger p-3 bg-red-600 text-white boton"
-                    >
-                      Eliminar
-                    </button>
-                  
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
-    </div>
+    </>
   )
 }
 

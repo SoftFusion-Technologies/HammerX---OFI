@@ -45,7 +45,7 @@ const AdminPage = lazy(() => import('./pages/staff/AdminPage'));
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 const PostulanteGet = lazy(() => import('./components/MetodsGet/PostulanteGet'));
 const ClasesGet = lazy(() => import('./components/MetodsGet/FreeClassGet'));
-const UsersGet = lazy(() => import('./components/MetodsGet/UserGet'));
+const UsersGet = lazy(() => import('./pages/staff/UserGet'));
 const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 /**

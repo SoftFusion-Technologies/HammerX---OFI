@@ -59,8 +59,8 @@ const Cards = () => {
         /> */}
 
           <div className="w-11/12 mx-auto pb-10" id="card-container">
-            <div className="card">
-              <div className="card1 max-md:max-w-full select-none">
+            <div className="card max-sm:flex max-sm:justify-center">
+              <div className="card1 max-md:max-w-full select-none ">
                 <p>MISIÓN</p>
                 <p className="small select-none">
                   HAMMER es un centro social de entrenamiento y entretenimiento
@@ -78,7 +78,7 @@ const Cards = () => {
               </div>
             </div>
 
-            <div className="card flex justify-end">
+            <div className="card flex justify-end max-sm:flex max-sm:justify-center">
               <div className="card1 right-bg max-md:max-w-full select-none">
                 <p>VISIÓN</p>
                 <p className="small select-none">
@@ -96,7 +96,7 @@ const Cards = () => {
               </div>
             </div>
 
-            <div className="card">
+            <div className="card max-sm:flex max-sm:justify-center">
               <div className="card1 max-md:max-w-full select-none">
                 <p>¿Cómo lo hacemos?</p>
                 <p className="small select-none">

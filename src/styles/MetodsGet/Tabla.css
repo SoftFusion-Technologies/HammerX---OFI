@@ -3,84 +3,46 @@
   --color: #eee;
   --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
 }
-.botonContactar{
+
+.botonContactar {
   background-color: blue;
-  padding: 10px;
+  padding: 4px 2px;
   text-transform: uppercase;
   color: #fff;
 }
-h1 {
-  color: #fff;
-  text-transform: uppercase;
-  text-align: center;
-}
-.titulo {
-  margin-bottom: 5rem;
-}
-#main-container {
-  margin: 150px auto;
-  width: 1500px;
-}
-body {
-  background-color: #0d2235;
-}
+
 table {
   background-color: white;
   text-align: left;
   border-collapse: collapse;
-  width: 1600px;
-  margin-bottom: 2rem;
   text-align: center;
 }
-th,
-td {
-  padding: 30px;
+
+th {
+  padding: 4px 2px;
+  font-size: medium;
 }
 
-thead {
-  background-color: #246355;
-  border-bottom: solid 5px #0f362d;
-  color: white;
+td {
+  padding: 2px 2px;
+  font-size: small;
 }
 
 tr:nth-child(even) {
-  background-color: #ddd;
+  background-color: #ecebeb;
 }
 
-body {
-  font-family: Arial;
-}
 
 tr:hover {
-  background-color: #369681;
+  --tw-text-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-text-opacity));
   color: white;
   cursor: pointer;
 }
-p {
-  color: #fff;
-  text-align: right;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-}
-.parrafo {
-  margin-top: 10rem;
-  text-transform: uppercase;
-  font-size: 4.5rem;
-}
 
-.text-span {
-  font-size: 3.5rem;
-  color: gray;
-}
 
-.textoP {
-  color: #ccc;
-  text-align: right;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-}
 
-.notification {
+/* .notification {
   position: relative;
   display: inline-block;
   max-width: 300px;
@@ -93,9 +55,9 @@ p {
   opacity: 0;
   visibility: hidden;
   animation: fade 4s linear forwards;
-}
+} */
 
-.progress {
+/* .progress {
   position: absolute;
   left: 5px;
   bottom: 5px;
@@ -130,17 +92,18 @@ p {
   to {
     width: calc(100% - 10px);
   }
-}
-.relog {
+} */
+
+/* .relog {
   color: #fff;
   font-size: 144px;
   font-weight: 300;
-}
+} */
 
 
 /* buton para volver */
 
-.wrapper {
+/* .wrapper {
   padding: 1.5rem 0;
   filter: url('#goo');
 }
@@ -188,4 +151,4 @@ p {
 .buttonVolver:hover:before,
 .buttonVolver:hover:after {
   transform: none;
-}
+} */

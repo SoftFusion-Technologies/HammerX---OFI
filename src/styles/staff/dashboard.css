@@ -1,6 +1,5 @@
-button {
-  font-size: 30px;
-  color: white;
+.btnstaff {
+  color: #fc4b08;
   font-family: inherit;
   font-weight: 800;
   cursor: pointer;
@@ -14,19 +13,19 @@ button {
   letter-spacing: 0.05em;;
 }
 
-button:focus,
-button:hover {
+.btnstaff:focus,
+.btnstaff:hover {
   transform: scale(1.1);
   transition: all .3s;
 }
 
-button:focus:after,
-button:hover:after {
+.btnstaff:focus:after,
+.btnstaff:hover:after {
   width: 100%;
   left: 0%;
 }
 
-button:after {
+.btnstaff:after {
   content: "";
   pointer-events: none;
   bottom: -2px;
@@ -34,7 +33,7 @@ button:after {
   position: absolute;
   width: 0%;
   height: 2px;
-  background-color: #fff;
+  background-color: #fc4b08;
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 400ms;
   transition-property: width, left;

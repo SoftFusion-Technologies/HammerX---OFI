@@ -25,9 +25,9 @@ import logoloading from './logoloading.png'
 
 export {
   menu,
+  close,
   theme,
   señoras,
-  close,
   musc1,
   musc2,
   musc3,
