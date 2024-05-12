@@ -21,8 +21,8 @@ import {
   Routes as Rutas,
   Route as Ruta
 } from 'react-router-dom';
-import Navbar from './components/header/Navbar'; // Importa el componente de la barra de navegación
 import Footer from './components/footer/Footer'; // Importa el componente del pie de página
+import LoginForm from './components/login/LoginForm';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -90,12 +90,13 @@ const App = memo(() => {
               <Ruta path="/pautas" element={<Pautas />} />  {/* Página de Pautas */}
               <Ruta path="/legales" element={<Legales />} />  {/* Página de Legales */}
               <Ruta path="/contacto" element={<Contacto />} /> {/* Página de Contacto */}
+              <Ruta path="/login" element={<LoginForm />} /> {/* Página de Logeo */}
               {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
              
               <Ruta path="/postulante" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              {/* <Ruta path="/formusers" element={<AltaUserForm />} /> Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formusers" element={<AltaUserForm />} /> {/* Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
               <Ruta path ="/staff" element={<AdminPage />}/>
