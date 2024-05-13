@@ -33,7 +33,7 @@ const LoginForm = ({ onLogin }) => {
         // Aquí puedes incluir lógica adicional, como almacenar tokens de autenticación, etc.
 
         // Redirigir al usuario a la página del staff después de una respuesta exitosa
-        window.location.href = "http://localhost:5173/staff";
+        window.location.href = "http://localhost:5173/dashboard/";
       } else {
         // En caso de que la respuesta no sea exitosa, manejar el error
         throw new Error("Inicio de sesión fallido. Por favor, verifique sus credenciales.");
