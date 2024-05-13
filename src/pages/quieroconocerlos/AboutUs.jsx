@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import "../../styles/aboutUs/volver.css";
 import "../../styles/aboutUs/botones.css";
 import "../../styles/aboutUs/background.css";
+import Footer from "../../components/footer/Footer";
 
 const AboutUs = () => {
   useEffect(() => {
@@ -68,7 +69,7 @@ const AboutUs = () => {
           </header>
 
           <div className="">
-            <div className="pt-20 max-md:pt-16 flex justify-center md:gap-10 max-md:flex-col">
+            <div className="pt-10 max-md:pt-16 flex justify-center md:gap-10 max-md:flex-col">
               <Link
                 to="/nosotros/quienessomos"
                 className="max-md:mb-5 max-md:mx-auto"
@@ -89,7 +90,7 @@ const AboutUs = () => {
             </div>
 
             { /* Dos botones nuevos agregados - Cambios realizado por Lucas Albornoz 12-04-24*/}
-            <div className="pb-10 md:py-8 flex justify-center md:gap-10  max-md:flex-col">
+            <div className="pb-20 md:pt-8 flex justify-center md:gap-10  max-md:flex-col">
               <Link
                 to="#"
                 className="max-md:mb-5 max-md:mx-auto"
@@ -116,6 +117,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

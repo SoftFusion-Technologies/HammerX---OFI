@@ -11,12 +11,13 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import React, { useEffect, useState } from 'react'
-import NavbarStaff from './NavbarStaff';
 import axios from 'axios';
-import '../../styles/MetodsGet/Tabla.css'
-import "../../styles/staff/background.css";
+import React, { useEffect, useState } from 'react'
+import NavbarStaff from '../NavbarStaff';
 import { Link } from 'react-router-dom';
+import '../../../styles/MetodsGet/Tabla.css'
+import "../../../styles/staff/background.css";
+import Footer from '../../../components/footer/Footer';
 
 // Componente funcional que maneja la lógica relacionada con los Users
 const UserGet = () => {
@@ -123,7 +124,7 @@ const UserGet = () => {
       <div className='dashboardbg h-contain pt-10 pb-10'>
         <div className='bg-white rounded-lg w-11/12 mx-auto'>
             <div className='pl-5 pt-5'>
-              <Link to="/staff">
+              <Link to="/dashboard">
                 <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
                   Volver
                 </button>
@@ -131,9 +132,9 @@ const UserGet = () => {
             </div>
             <div className='flex justify-center'>
               <h1 className="pb-5">
-                Listado de Usuarios : &nbsp;
+                Listado de Usuarios: &nbsp;
                 <span className="text-center">
-                  Cantidad de registros : {results.length}
+                  Cantidad de registros: {results.length}
                 </span>
               </h1>
             </div>
@@ -159,7 +160,7 @@ const UserGet = () => {
             </p>
           ) : (
             <>
-              <table className='w-11/12 mx-auto p'>
+              <table className='w-11/12 mx-auto'>
                 <thead className="text-white bg-[#fc4b08] ">
                   <tr key={users.id}>
                     <th>ID</th>
@@ -214,6 +215,7 @@ const UserGet = () => {
       </div> */}
 
       </div>
+      <Footer />
     </>
   )
 }

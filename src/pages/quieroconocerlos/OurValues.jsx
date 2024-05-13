@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/header/Navbar";
 import "../../styles/ourValues/background.css";
 import "../../styles/ourValues/cards.css";
+import Footer from "../../components/footer/Footer";
 
 const OurValues = () => {
   useEffect(() => {
@@ -128,6 +129,7 @@ const OurValues = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

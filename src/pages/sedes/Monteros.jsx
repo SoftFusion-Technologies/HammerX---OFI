@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { guionesbla } from "../../images/index";
 import "../../styles/aboutUs/volver.css";
+import Footer from "../../components/footer/Footer";
 
 const Sedemonteros = () => {
   useEffect(() => {
@@ -351,6 +352,7 @@ const Sedemonteros = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

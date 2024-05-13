@@ -12,6 +12,7 @@
 
 import React, { useEffect } from "react";
 import Navbar from "../components/header/Navbar";
+import Footer from "../components/footer/Footer";
 
 const Pautas = () => {
   useEffect(() => {
@@ -124,6 +125,7 @@ const Pautas = () => {
           </p>
         </div>
       </div>
+      <Footer  />
     </>
   );
 };

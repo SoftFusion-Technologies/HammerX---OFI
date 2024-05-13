@@ -17,6 +17,7 @@ import whats from "../../src/images/redes/whatsapp.png";
 import insta from "../../src/images/redes/instagram.png";
 import facebook from "../../src/images/redes/facebook.png";
 import "../styles/aboutUs/volver.css";
+import Footer from "../components/footer/Footer";
 
 const Contacto = () => {
   useEffect(() => {
@@ -149,6 +150,7 @@ const Contacto = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

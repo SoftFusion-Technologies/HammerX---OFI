@@ -12,6 +12,7 @@
 
 import React, { useEffect } from "react";
 import Navbar from "../components/header/Navbar";
+import Footer from "../components/footer/Footer";
 
 const Legales = () => {
   useEffect(() => {
@@ -172,6 +173,7 @@ const Legales = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

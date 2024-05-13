@@ -15,6 +15,7 @@ import Navbar from "../components/header/Navbar";
 import Servicios from "../components/main/Servicios";
 import About from "../components/main/About";
 import MobileApp from "../components/main/MobileApp";
+import Footer from "../components/footer/Footer";
 
 const HomePage = () => {
   return (
@@ -25,6 +26,7 @@ const HomePage = () => {
       <Servicios />
       <About />
       <MobileApp />
+      <Footer />
     </div>
     </>
   );

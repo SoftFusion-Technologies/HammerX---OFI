@@ -17,6 +17,7 @@ import "../../styles/ourTeam/background.css";
 import { guionesnar } from "../../images/index";
 import Navbar from "../../components/header/Navbar";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 const Cards = () => {
   useEffect(() => {
@@ -120,6 +121,7 @@ const Cards = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

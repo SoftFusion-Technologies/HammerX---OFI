@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { guionesbla } from "../../images/index";
 import "../../styles/aboutUs/volver.css";
+import Footer from "../../components/footer/Footer";
 
 const Sedeconcepcion = () => {
   useEffect(() => {
@@ -329,6 +330,7 @@ const Sedeconcepcion = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

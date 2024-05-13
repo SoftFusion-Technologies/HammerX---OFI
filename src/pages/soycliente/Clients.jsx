@@ -24,6 +24,7 @@ import ModalTransferencia from "./ModalTransferencia";
 import "../../styles/clients/volver.css";
 import "../../styles/clients/botones.css";
 import "../../styles/clients/background.css";
+import Footer from "../../components/footer/Footer";
 
 const Clients = () => {
   useEffect(() => {
@@ -218,6 +219,7 @@ const Clients = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

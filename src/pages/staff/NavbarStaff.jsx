@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { logohammer, menu, close } from "../../images";
+import { Link } from "react-router-dom";
 
 const NavbarStaff = () => {
   const [active, setActive] = useState('')
@@ -11,19 +12,19 @@ const NavbarStaff = () => {
       title: "Dashboard"
     },
     {
-      id: "usuarios",
+      id: "dashboard/users",
       title: "Usuarios"
     },
     {
-      id: "preguntas_frecuentes",
+      id: "dashboard",
       title: "Preguntas Frecuentes"
     },
     {
-      id: "programar",
+      id: "dashboard",
       title: "Programar Tarea"
     },
     {
-      id: "administrar",
+      id: "dashboard",
       title: "Administrar Textos"
     },
   ];
@@ -47,7 +48,7 @@ const NavbarStaff = () => {
                     } hover:text-orange-500 text-[16px] cursor-pointer `}
                   onClick={() => setActive(link.title)}
                 >
-                  <a href={`#${link.id}`}>{link.title}</a>
+                  <Link to={`/${link.id}`}>{link.title}</Link>
                 </li>
               ))}
             </ul>

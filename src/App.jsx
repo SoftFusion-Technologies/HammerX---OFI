@@ -43,9 +43,9 @@ const AdminPage = lazy(() => import('./pages/staff/AdminPage'));
 // const FormPostu = lazy(() => import('./components/Forms/FormPostulante')); se elimina
 
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
-const PostulanteGet = lazy(() => import('./components/MetodsGet/PostulanteGet'));
-const ClasesGet = lazy(() => import('./components/MetodsGet/FreeClassGet'));
-const UsersGet = lazy(() => import('./pages/staff/UserGet'));
+const PostulanteGet = lazy(() => import('./pages/staff/MetodsGet/PostulanteGet'));
+const ClasesGet = lazy(() => import('./pages/staff/MetodsGet/FreeClassGet'));
+const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 /**
@@ -93,16 +93,14 @@ const App = memo(() => {
               <Ruta path="/login" element={<LoginForm />} /> {/* Página de Logeo */}
               {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
              
-              <Ruta path="/postulante" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/dashboard/postulantes" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/dashboard/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/dashboard/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/formusers" element={<AltaUserForm />} /> {/* Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
-              <Ruta path ="/staff" element={<AdminPage />}/>
+              <Ruta path ="/dashboard" element={<AdminPage />}/>
             </Rutas>
-            {/* Pie de página */}
-            <Footer />
           </>
         )}
       </Suspense>
