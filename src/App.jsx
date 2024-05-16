@@ -44,9 +44,13 @@ const AdminPage = lazy(() => import('./pages/staff/AdminPage'));
 
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 const PostulanteGet = lazy(() => import('./pages/staff/MetodsGet/PostulanteGet'));
+const NovedadGet = lazy(() => import('./pages/staff/MetodsGet/NovedadGet'));
+const TaskGet = lazy(() => import('./pages/staff/MetodsGet/TaskGet'));
 const ClasesGet = lazy(() => import('./pages/staff/MetodsGet/FreeClassGet'));
 const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
+const AltaNovedadForm = lazy(() => import('./components/Forms/FormAltaNovedad'));
+const AltaTaskForm = lazy(() => import('./components/Forms/FormAltaTask'));
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 /**
  * Componente principal de la aplicación.
@@ -96,7 +100,11 @@ const App = memo(() => {
               <Ruta path="/dashboard/postulantes" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/dashboard/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/dashboard/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/dashboard/novedades" element={<NovedadGet />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/dashboard/task" element={<TaskGet />} /> {/* Rutas de prueba para testear funcionamiento */}
               <Ruta path="/formusers" element={<AltaUserForm />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formnovedad" element={<AltaNovedadForm />} /> {/* Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
               <Ruta path ="/dashboard" element={<AdminPage />}/>
