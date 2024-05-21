@@ -23,6 +23,8 @@ import {
 } from 'react-router-dom';
 import Footer from './components/footer/Footer'; // Importa el componente del pie de página
 import LoginForm from './components/login/LoginForm';
+import { AuthProvider } from './AuthContext';
+import ProtectedRoute from './ProtectedRoute';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -75,9 +77,10 @@ const App = memo(() => {
 
   // Renderizado del componente
   return (
+    <AuthProvider>
     <Router>
       {/* Componente de Suspense para manejar la carga de componentes lazy */}
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         {/* Condición para mostrar el componente de carga o el contenido de la aplicación */}
         {showLoading ? <Loading /> : (
           <>
@@ -107,12 +110,13 @@ const App = memo(() => {
               <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
-              <Ruta path ="/dashboard" element={<AdminPage />}/>
+              <Ruta path="/dashboard" element={ <ProtectedRoute> <AdminPage /> </ProtectedRoute> }/>
             </Rutas>
           </>
         )}
       </Suspense>
     </Router>
+    </AuthProvider>
   );
 });
 

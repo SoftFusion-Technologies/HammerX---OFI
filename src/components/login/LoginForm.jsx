@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Validation from "./LoginValidation";
 import axios from "axios";
 import "../../styles/login.css";
+import { useAuth } from "../../AuthContext";
 
 Modal.setAppElement("#root");
 
@@ -17,6 +18,7 @@ const LoginForm = () => {
 
   // Hook de navegación
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // Estado para mostrar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
@@ -57,12 +59,12 @@ const LoginForm = () => {
       setLoading(true); // Habilitar indicador de carga
 
       axios
-        .post("http://localhost:8080/login", values)
-        .then((res) => {
-          setLoading(false); // Deshabilitar indicador de carga
-          if (res.data === "Success") {
-            navigate("/dashboard");
-          } else {
+      .post("http://localhost:8080/login", values)
+      .then((res) => {
+        if (res.data.message === "Success") {
+          login(res.data.token);
+          navigate("/dashboard");
+        } else {
             setModalMessage("Usuario o Contraseña incorrectos");
             setIsModalOpen(true);
           }

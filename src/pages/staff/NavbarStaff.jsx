@@ -16,15 +16,15 @@ const NavbarStaff = () => {
       title: "Usuarios"
     },
     {
-      id: "dashboard",
+      id: "dashboard/faqs",
       title: "Preguntas Frecuentes"
     },
     {
-      id: "dashboard",
+      id: "dashboard/tasks",
       title: "Programar Tarea"
     },
     {
-      id: "dashboard",
+      id: "dashboard/texts",
       title: "Administrar Textos"
     },
   ];
