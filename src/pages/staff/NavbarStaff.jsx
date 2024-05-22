@@ -18,15 +18,18 @@ const NavbarStaff = () => {
       title: "Usuarios"
     },
     {
-      id: "dashboard",
+      id: 3,
+      href: "preguntas-frecuentes",
       title: "Preguntas Frecuentes"
     },
     {
-      id: "dashboard",
+      id: 4,
+      href: "programar",
       title: "Programar Tarea"
     },
     {
-      id: "dashboard",
+      id: 5,
+      href: "administrar-textos",
       title: "Administrar Textos"
     },
   ];
