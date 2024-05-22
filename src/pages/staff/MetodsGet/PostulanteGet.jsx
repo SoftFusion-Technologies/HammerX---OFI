@@ -22,6 +22,8 @@ import Footer from '../../../components/footer/Footer';
 
 // Componente funcional que maneja la lógica relacionada con los postulantes
 const PostulanteGet = () => {
+  
+
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/postulante/'
@@ -165,11 +167,34 @@ const PostulanteGet = () => {
   // Llamada a la función para obtener los postulantes ordenados de forma decreciente
   const sortedPostulantes = ordenarPostulantesDecreciente(results);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const records = sortedPostulantes.slice(firstIndex, lastIndex)
+  const nPage = Math.ceil(sortedPostulantes.length / itemsPerPage)
+  const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+  function prevPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id)
+  }
+
+  function nextPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto'>
+        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
           <div className='pl-5 pt-5'>
             <Link to="/dashboard">
               <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
@@ -244,7 +269,7 @@ const PostulanteGet = () => {
 
             {/* Filtro de edad */}
             <div className='py-4 px-5'>
-            <h1 className='mb-2 font-medium'>Filtrar por edad</h1>
+              <h1 className='mb-2 font-medium'>Filtrar por edad</h1>
               <div>
                 <label>
                   <input
@@ -253,7 +278,7 @@ const PostulanteGet = () => {
                     checked={edadFilter === "18-21"}
                     onChange={handleEdadChange}
                   />
-                   &nbsp; 18 a 21
+                  &nbsp; 18 a 21
                 </label>
               </div>
               <div>
@@ -264,7 +289,7 @@ const PostulanteGet = () => {
                     checked={edadFilter === "21-23"}
                     onChange={handleEdadChange}
                   />
-                   &nbsp; 21 a 23
+                  &nbsp; 21 a 23
                 </label>
               </div>
               <div>
@@ -275,7 +300,7 @@ const PostulanteGet = () => {
                     checked={edadFilter === "23-25"}
                     onChange={handleEdadChange}
                   />
-                   &nbsp; 23 a 25
+                  &nbsp; 23 a 25
                 </label>
               </div>
               <div>
@@ -286,7 +311,7 @@ const PostulanteGet = () => {
                     checked={edadFilter === ">25"}
                     onChange={handleEdadChange}
                   />
-                   &nbsp; Mayores a 25
+                  &nbsp; Mayores a 25
                 </label>
               </div>
               <div>
@@ -297,7 +322,7 @@ const PostulanteGet = () => {
                     checked={!edadFilter}
                     onChange={handleResetEdadFilter}
                   />
-                   &nbsp; Limpiar edad
+                  &nbsp; Limpiar edad
                 </label>
               </div>
             </div>
@@ -314,7 +339,7 @@ const PostulanteGet = () => {
               <table className='w-11/12 mx-auto'>
                 <thead className=" bg-[#fc4b08]  text-white">
                   <tr key={postulantes.id}>
-                    <th className='thid'>ID</th>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Edad</th>
                     <th>Sexo</th>
@@ -326,7 +351,7 @@ const PostulanteGet = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedPostulantes.map((postulante) => (
+                  {records.map((postulante) => (
                     <tr key={postulante.id}>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
                         {postulante.id}
@@ -374,8 +399,30 @@ const PostulanteGet = () => {
                     </tr>
                   ))}
                 </tbody>
-                <hr className='mt-10' />
               </table>
+                <nav className='flex justify-center items-center my-10'>
+                  <ul className='pagination'>
+                    <li className='page-item'>
+                      <a href="#"
+                        className='page-link'
+                        onClick={prevPage}>Prev</a>
+                    </li>
+                    {
+                      numbers.map((number, index) => (
+                        <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
+                          <a
+                            href="#"
+                            className='page-link'
+                            onClick={() => changeCPage(number)}>{number}</a>
+                        </li>
+                      ))}
+                    <li className='page-item'>
+                      <a href="#"
+                        className='page-link'
+                        onClick={nextPage}>Next</a>
+                    </li>
+                  </ul>
+                </nav>
             </>
           )}
         </div>

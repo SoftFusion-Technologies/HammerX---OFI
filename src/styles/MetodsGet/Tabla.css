@@ -23,9 +23,6 @@ th {
   font-size: medium;
 }
 
-.thid {
- padding-left: 10px;
-}
 
 td {
   padding: 2px 4px;
@@ -44,6 +41,23 @@ tr:hover {
   cursor: pointer;
 }
 
+.pagination {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+}
+
+.page-link {
+  padding: 2px 15px;
+  color: #666;
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+}
+
+.page-link:hover {
+  color: white;
+  background-color: #ff7441;
+}
 
 
 /* .notification {

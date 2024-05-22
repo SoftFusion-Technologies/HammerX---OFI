@@ -22,6 +22,7 @@ import Footer from '../../../components/footer/Footer';
 
 const FreeClassGet = () => {
 
+
   // Estado para almacenar la lista de personas
   const [personClass, setPersonClass] = useState([]);
 
@@ -116,11 +117,34 @@ const FreeClassGet = () => {
   // Llamada a la función para obtener los personClasss ordenados de forma decreciente
   const sortedpersonClass = ordenarPersonasDecreciente(results);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const records = sortedpersonClass.slice(firstIndex, lastIndex)
+  const nPage = Math.ceil(sortedpersonClass.length / itemsPerPage)
+  const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+  function prevPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id)
+  }
+
+  function nextPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto'>
+        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
           <div className='pl-5 pt-5'>
             <Link to="/dashboard">
               <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
@@ -137,7 +161,7 @@ const FreeClassGet = () => {
             </h1>
           </div>
 
-          
+
 
           {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
@@ -172,7 +196,7 @@ const FreeClassGet = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedpersonClass.map((personClass) => (
+                  {records.map((personClass) => (
                     <tr key={personClass.id}>
                       <td onClick={() => obtenerPersonClass(personClass.id)}>
                         {personClass.id}
@@ -220,8 +244,30 @@ const FreeClassGet = () => {
                     </tr>
                   ))}
                 </tbody>
-                <hr className='mt-10' />
               </table>
+              <nav className='flex justify-center items-center my-10'>
+                <ul className='pagination'>
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={prevPage}>Prev</a>
+                  </li>
+                  {
+                    numbers.map((number, index) => (
+                      <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
+                        <a
+                          href="#"
+                          className='page-link'
+                          onClick={() => changeCPage(number)}>{number}</a>
+                      </li>
+                    ))}
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={nextPage}>Next</a>
+                  </li>
+                </ul>
+              </nav>
             </>
           )}
         </div>

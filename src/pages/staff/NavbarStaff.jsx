@@ -8,23 +8,28 @@ const NavbarStaff = () => {
 
   const Links = [
     {
-      id: "dashboard",
+      id: 1,
+      href: "",
       title: "Dashboard"
     },
     {
-      id: "dashboard/users",
+      id: 2,
+      href: "users",
       title: "Usuarios"
     },
     {
-      id: "dashboard",
+      id: 3,
+      href: "preguntas-frecuentes",
       title: "Preguntas Frecuentes"
     },
     {
-      id: "dashboard",
+      id: 4,
+      href: "programar",
       title: "Programar Tarea"
     },
     {
-      id: "dashboard",
+      id: 5,
+      href: "administrar-textos",
       title: "Administrar Textos"
     },
   ];
@@ -48,7 +53,7 @@ const NavbarStaff = () => {
                     } hover:text-orange-500 text-[16px] cursor-pointer `}
                   onClick={() => setActive(link.title)}
                 >
-                  <Link to={`/${link.id}`}>{link.title}</Link>
+                  <Link to={`/dashboard/${link.href}`}>{link.title}</Link>
                 </li>
               ))}
             </ul>
@@ -84,7 +89,7 @@ const NavbarStaff = () => {
                       setActive(link.title);
                     }}
                   >
-                    <a href={`#${link.id}`}>{link.title}</a>
+                    <a href={`#${link.href}`}>{link.title}</a>
                   </li>
                 ))}
               </ul>
