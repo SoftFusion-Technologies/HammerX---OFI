@@ -53,6 +53,7 @@ const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
 const AltaNovedadForm = lazy(() => import('./components/Forms/FormAltaNovedad'));
 const AltaTaskForm = lazy(() => import('./components/Forms/FormAltaTask'));
+const AltaFreAskForm = lazy(() => import('./components/Forms/FormAltaFrecAsk'));
 // Renderizado de pagina del STAFF, para los metodos Get, y listado
 /**
  * Componente principal de la aplicación.
@@ -100,18 +101,20 @@ const App = memo(() => {
               <Ruta path="/login" element={<LoginForm />} /> {/* Página de Logeo */}
               {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
              
-              <Ruta path="/dashboard/postulantes" element={<PostulanteGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/dashboard/testclass" element={<ClasesGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/dashboard/users" element={<UsersGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/dashboard/novedades" element={<NovedadGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/dashboard/task" element={<TaskGet />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formusers" element={<AltaUserForm />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formnovedad" element={<AltaNovedadForm />} /> {/* Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* Rutas de prueba para testear funcionamiento */}
+                
+              <Ruta path="/formusers" element={<AltaUserForm />} /> {/*  TABLA USERS Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formnovedad" element={<AltaNovedadForm />} /> {/* TABLA NOVEDAD Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* TABLA SCHEDULERTASK Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/formask" element={<AltaFreAskForm />} /> {/* TABLA FRECASK Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
               <Ruta path="/dashboard" element={ <ProtectedRoute> <AdminPage /> </ProtectedRoute> }/>
-            </Rutas>
+                <Ruta path="/dashboard/postulantes" element={<ProtectedRoute> <PostulanteGet /></ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/testclass" element={<ProtectedRoute>  <ClasesGet /></ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/users" element={<ProtectedRoute>  <UsersGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/novedades" element={<ProtectedRoute>  <NovedadGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
+              </Rutas>
           </>
         )}
       </Suspense>
