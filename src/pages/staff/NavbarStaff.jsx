@@ -19,7 +19,7 @@ const NavbarStaff = () => {
     },
     {
       id: 3,
-      href: "preguntas-frecuentes",
+      href: "frequent-asks",
       title: "Preguntas Frecuentes"
     },
     {
@@ -27,11 +27,11 @@ const NavbarStaff = () => {
       href: "task",
       title: "Programar Tarea"
     },
-    {
-      id: 5,
-      href: "administrar-textos",
-      title: "Administrar Textos"
-    },
+    // {
+    //   id: 5,
+    //   href: "administrar-textos",
+    //   title: "Administrar Textos"
+    // },
   ];
 
   return (
@@ -40,7 +40,9 @@ const NavbarStaff = () => {
       <nav className="w-full flex items-center py-5 z-20 bg-white xl:px-0 sm:px-16 px-6">
         <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <img src={logohammer} alt="" width={200} />
+            <Link to="/">
+              <img src={logohammer} alt="hammer loco" width={200} />
+            </Link>
           </div>
           <div>
             <ul className="list-none hidden lg:flex flex-row gap-10">

@@ -25,6 +25,7 @@ import Footer from './components/footer/Footer'; // Importa el componente del pi
 import LoginForm from './components/login/LoginForm';
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
+import PreguntasFrecuentesGet from './pages/staff/MetodsGet/FrequentAsksGet';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -113,6 +114,7 @@ const App = memo(() => {
                 <Ruta path="/dashboard/testclass" element={<ProtectedRoute>  <ClasesGet /></ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/users" element={<ProtectedRoute>  <UsersGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/novedades" element={<ProtectedRoute>  <NovedadGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/frequent-asks" element={<ProtectedRoute>  <PreguntasFrecuentesGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
               </Rutas>
           </>

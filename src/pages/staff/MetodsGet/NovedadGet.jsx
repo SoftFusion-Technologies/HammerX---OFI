@@ -19,9 +19,18 @@ import NavbarStaff from '../NavbarStaff';
 import '../../../styles/MetodsGet/Tabla.css'
 import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
+import FormAltaNovedad from '../../../components/Forms/FormAltaNovedad';
 
 // Componente funcional que maneja la lógica relacionada con los Novedad
 const NovedadGet = () => {
+  const [modalNewNovedad, setModalNewNovedad] = useState(false);
+
+  const abrirModal = () => {
+    setModalNewNovedad(true)
+  };
+  const cerarModal = () => {
+    setModalNewNovedad(false)
+  };
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/novedades/'
@@ -124,8 +133,8 @@ const NovedadGet = () => {
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const records = sortednovedad.slice(firstIndex, lastIndex)
-  const nPage = Math.ceil(sortednovedad.length / itemsPerPage)
-  const numbers = [...Array(nPage + 1).keys()].slice(1);
+  // const nPage = Math.ceil(sortednovedad.length / itemsPerPage)
+  // const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
     if (currentPage !== firstIndex) {
@@ -146,7 +155,7 @@ const NovedadGet = () => {
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto'>
+        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
           <div className='pl-5 pt-5'>
             <Link to="/dashboard">
               <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
@@ -173,9 +182,17 @@ const NovedadGet = () => {
               placeholder="Buscar novedads"
               className="border rounded-sm"
             />
-
           </form>
           {/* formulario de busqueda */}
+
+          <div className='flex justify-center pb-10'>
+            <Link to="#">
+              <button onClick={abrirModal} className='bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10'>
+                Nueva Novedad
+              </button>
+            </Link>
+          </div>
+
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
@@ -200,22 +217,24 @@ const NovedadGet = () => {
                   {records.map((novedad) => (
                     <tr key={novedad.id}>
                       {/* <td onClick={() => obtenerNovedad(novedad.id)}>
-                                                {novedad.id}
-                                            </td> */}
+                        {novedad.id}
+                      </td> */}
                       <td onClick={() => obtenerNovedad(novedad.id)}>
                         {novedad.sede}
                       </td>
                       <td onClick={() => obtenerNovedad(novedad.id)}>
                         {novedad.user}
                       </td>
-
                       <td onClick={() => obtenerNovedad(novedad.id)}>
                         {formatearFecha(novedad.vencimiento)}
                       </td>
+                      <td className="max-w-[100px] p-2 overflow-y-auto max-h-[100px]" onClick={() => obtenerNovedad(novedad.id)}>
+                        {novedad.mensaje}
+                      </td>
                       {/* ACCIONES */}
-                      <td className='flex gap-2'>
+                      <td className=''>
                         <button
-                          onClick={() => handleEliminarnovedad(novedad.id)}
+                          onClick={() => handleEliminarNovedad(novedad.id)}
                           type="button"
                           className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                         >
@@ -226,23 +245,25 @@ const NovedadGet = () => {
                   ))}
                 </tbody>
               </table>
-                <nav className='flex justify-center items-center my-10'>
-                  <ul className='pagination'>
-                    <li className='page-item'>
-                      <a href="#"
-                        className='page-link'
-                        onClick={prevPage}>Prev</a>
-                    </li>
+              <nav className='flex justify-center items-center my-10'>
+                <ul className='pagination space-x-2'>
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={prevPage}>Prev</a>
+                  </li>
 
-                    <li className='page-item'>
-                      <a href="#"
-                        className='page-link'
-                        onClick={nextPage}>Next</a>
-                    </li>
-                  </ul>
-                </nav>
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={nextPage}>Next</a>
+                  </li>
+                </ul>
+              </nav>
             </>
           )}
+          {/* Modal para abrir formulario de clase gratis */}
+          <FormAltaNovedad isOpen={modalNewNovedad} onClose={cerarModal} />
         </div>
       </div>
       <Footer />

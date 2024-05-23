@@ -140,6 +140,7 @@ const FreeClassGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
+  
   return (
     <>
       <NavbarStaff />

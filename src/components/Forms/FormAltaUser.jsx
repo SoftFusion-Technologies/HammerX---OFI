@@ -24,7 +24,7 @@ import Alerta from "../Error";
 
 // isOpen y onCLose son los metodos que recibe para abrir y cerrar el modal
 const FormAltaUser = ({ isOpen, onClose }) => {
-  
+
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
 
@@ -58,7 +58,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
       if (
         valores.name === "" ||
         valores.email === "" ||
-        valores.password === "" 
+        valores.password === ""
       ) {
         alert("Por favor, complete todos los campos obligatorios.");
       } else {
@@ -102,7 +102,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center bg-gray-800 bg-opacity-75 z-50`}>
+    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
       <div className={`container-inputs`}>
         {/*
                 Formik es una biblioteca de formularios React de terceros.
@@ -117,7 +117,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
             email: "",
             level: "",
             sede: "",
-            password:"",
+            password: "",
             state: false,
             created_at: null,
             updated_at: null,
@@ -134,7 +134,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
           {({ errors, touched }) => {
             return (
 
-              <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+              <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                 <Form className="formulario max-sm:w-[300px] bg-white ">
                   <div className="flex justify-between">
                     <div className="tools">
@@ -199,7 +199,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       <Alerta>{errors.level}</Alerta>
                     ) : null}
                   </div>
-                  
+
                   <div className="mb-4 px-4">
                     <Field
                       as="select"
@@ -246,7 +246,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                     ) : null}
                   </div>
 
-                    <div className="mx-auto flex justify-center my-5">
+                  <div className="mx-auto flex justify-center my-5">
                     <input
                       type="submit"
                       value="Crear usuario"

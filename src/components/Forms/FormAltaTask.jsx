@@ -110,7 +110,7 @@ const FormAltaTask = ({ isOpen, onClose }) => {
         }
     };
     return (
-        <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center bg-gray-800 bg-opacity-75 z-50`}>
+        <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
             <div className={`container-inputs`}>
                 {/*
                 Formik es una biblioteca de formularios React de terceros.
@@ -142,7 +142,7 @@ const FormAltaTask = ({ isOpen, onClose }) => {
                     {({ errors, touched }) => {
                         return (
 
-                            <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+                            <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                                 <Form className="formulario max-sm:w-[300px] bg-white ">
                                     <div className="flex justify-between">
                                         <div className="tools">

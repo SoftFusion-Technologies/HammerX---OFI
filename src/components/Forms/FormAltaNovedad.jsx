@@ -112,7 +112,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
     };
 
   return (
-        <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center bg-gray-800 bg-opacity-75 z-50`}>
+        <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
             <div className={`container-inputs`}>
                 {/*
                 Formik es una biblioteca de formularios React de terceros.
@@ -145,7 +145,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                   {({ isSubmitting, setFieldValue, errors, touched }) => {
                         return (
 
-                            <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+                            <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                                 <Form className="formulario max-sm:w-[300px] bg-white ">
                                     <div className="flex justify-between">
                                         <div className="tools">
@@ -211,13 +211,13 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
 
                                     <div className="mb-3 px-4">
                                         <label htmlFor="vencimiento" className="block font-medium left-0">
-                                            <span className="text-black text-base">Fecha de publicacion de la tarea</span>
+                                            <span className="text-black text-base pl-1">Fecha de publicacion de la tarea</span>
                                         </label>
 
                                         <Field
                                             name="vencimiento"
                                             type="date"
-                                            className="form-input rounded-md shadow-sm mt-1 block w-full"
+                                            className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                                         />
                                         {/* <ErrorMessage name="vencimiento" component="div" className="text-red-500" /> */}
                                     </div>

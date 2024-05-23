@@ -18,9 +18,19 @@ import { Link } from 'react-router-dom';
 import '../../../styles/MetodsGet/Tabla.css'
 import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
+import FormAltaUser from '../../../components/Forms/FormAltaUser';
 
 // Componente funcional que maneja la lógica relacionada con los Users
 const UserGet = () => {
+  // useState que controla el modal de nuevo usuario
+  const [modalNewUser, setModalNewUser] = useState(false);
+
+  const abrirModal = () => {
+    setModalNewUser(true)
+  };
+  const cerarModal = () => {
+    setModalNewUser(false)
+  };
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/users/'
@@ -118,26 +128,49 @@ const UserGet = () => {
   // Llamada a la función para obtener los usuarios ordenados de forma creciente
   const sortedUsers = ordenarUsersCreciente(results)
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const records = sortedUsers.slice(firstIndex, lastIndex)
+  const nPage = Math.ceil(sortedUsers.length / itemsPerPage)
+  const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+  function prevPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id)
+  }
+
+  function nextPage() {
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
   return (
     <>
       <NavbarStaff />
       <div className='dashboardbg h-contain pt-10 pb-10'>
-        <div className='bg-white rounded-lg w-11/12 mx-auto'>
-            <div className='pl-5 pt-5'>
-              <Link to="/dashboard">
-                <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
-                  Volver
-                </button>
-              </Link>
-            </div>
-            <div className='flex justify-center'>
-              <h1 className="pb-5">
-                Listado de Usuarios: &nbsp;
-                <span className="text-center">
-                  Cantidad de registros: {results.length}
-                </span>
-              </h1>
-            </div>
+        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
+          <div className='pl-5 pt-5'>
+            <Link to="/dashboard">
+              <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+                Volver
+              </button>
+            </Link>
+          </div>
+          <div className='flex justify-center'>
+            <h1 className="pb-5">
+              Listado de Usuarios: &nbsp;
+              <span className="text-center">
+                Cantidad de registros: {results.length}
+              </span>
+            </h1>
+          </div>
 
 
           {/* formulario de busqueda */}
@@ -152,6 +185,13 @@ const UserGet = () => {
           </form>
           {/* formulario de busqueda */}
 
+          <div className='flex justify-center pb-10'>
+            <Link to="#">
+              <button onClick={abrirModal} className='bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10'>
+                Nuevo Usuario
+              </button>
+            </Link>
+          </div>
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
@@ -172,7 +212,7 @@ const UserGet = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedUsers.map((user) => (
+                  {records.map((user) => (
                     <tr key={user.id}>
                       <td onClick={() => obtenerUser(user.id)}>
                         {user.id}
@@ -202,11 +242,34 @@ const UserGet = () => {
                     </tr>
                   ))}
                 </tbody>
-                <hr className='mt-10' />
               </table>
+              <nav className='flex justify-center items-center my-10'>
+                <ul className='pagination'>
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={prevPage}>Prev</a>
+                  </li>
+                  {
+                    numbers.map((number, index) => (
+                      <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
+                        <a
+                          href="#"
+                          className='page-link'
+                          onClick={() => changeCPage(number)}>{number}</a>
+                      </li>
+                    ))}
+                  <li className='page-item'>
+                    <a href="#"
+                      className='page-link'
+                      onClick={nextPage}>Next</a>
+                  </li>
+                </ul>
+              </nav>
             </>
           )}
-
+          {/* Modal para abrir formulario de clase gratis */}
+          <FormAltaUser isOpen={modalNewUser} onClose={cerarModal} />
         </div>
         {/* notificacion
       <div className="notification">
