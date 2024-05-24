@@ -42,7 +42,6 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
       .max(70, "La descripcion es muy larga")
       .required("La descripcion es Obligatoria"),
     orden: Yup.string()
-      .min(6, "El Orden es muy corto")
       .max(13, "El Orden es muy largo")
       .required("El Orden es Obligatorio"),
   })
@@ -96,7 +95,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
     }
   };
   return (
-    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center bg-gray-800 bg-opacity-75 z-50`}>
+    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
       <div className={`container-inputs`}>
         {/*
                 Formik es una biblioteca de formularios React de terceros.

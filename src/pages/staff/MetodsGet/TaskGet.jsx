@@ -29,6 +29,8 @@ const TaskGet = () => {
   };
   const cerarModal = () => {
     setModalNewTask(false)
+    obtenerAsk(); // Llama a la función para obtener los datos actualizados
+
   };
 
 
@@ -72,7 +74,7 @@ const TaskGet = () => {
     axios.get(URL)
       .then((res) => {
         setTask(res.data);
-        obtenerTask();
+        obtenerTasks();
       })
   }, [])
 
@@ -80,7 +82,7 @@ const TaskGet = () => {
   const obtenerTasks = async () => {
     try {
       const response = await axios.get(URL);
-      settask(response.data);
+      setTask(response.data);
     } catch (error) {
       console.log('Error al obtener las tareas:', error);
     }
