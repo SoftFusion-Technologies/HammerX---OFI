@@ -1,31 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { logohammer, menu, close } from "../../images";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarStaff = () => {
-  const [active, setActive] = useState('')
-  const [toggle, setToggle] = useState(false)
+  const [active, setActive] = useState("");
+  const [toggle, setToggle] = useState(false);
+  const { logout, userName } = useAuth(); // utilizamos la funcion logout de authcontext
+  const navigate = useNavigate(); // redirigimos a /login
+
+  const [displayUserName, setDisplayUserName] = useState("");
+
+  useEffect(() => {
+    if (userName && userName.includes("@")) {
+      const atIndex = userName.indexOf('@');
+      const usernameWithoutDomain = userName.substring(0, atIndex);
+      setDisplayUserName(usernameWithoutDomain);
+    } else {
+      setDisplayUserName(userName);
+    }
+  }, [userName]);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   const Links = [
     {
       id: 1,
       href: "",
-      title: "Dashboard"
+      title: "Dashboard",
     },
     {
       id: 2,
       href: "users",
-      title: "Usuarios"
+      title: "Usuarios",
     },
     {
       id: 3,
       href: "frequent-asks",
-      title: "Preguntas Frecuentes"
+      title: "Preguntas Frecuentes",
     },
     {
       id: 4,
       href: "task",
-      title: "Programar Tarea"
+      title: "Programar Tarea",
     },
     // {
     //   id: 5,
@@ -49,10 +70,9 @@ const NavbarStaff = () => {
               {Links.map((link) => (
                 <li
                   key={link.id}
-                  className={`${active === link.title
-                    ? "text-[#fc4b08]"
-                    : "text-black"
-                    } hover:text-orange-500 text-[16px] cursor-pointer `}
+                  className={`${
+                    active === link.title ? "text-[#fc4b08]" : "text-black"
+                  } hover:text-orange-500 text-[16px] cursor-pointer `}
                   onClick={() => setActive(link.title)}
                 >
                   <Link to={`/dashboard/${link.href}`}>{link.title}</Link>
@@ -61,13 +81,17 @@ const NavbarStaff = () => {
             </ul>
           </div>
 
-          <div className="">
-            <h1 className="hidden xl:flex">
-              Bienvenidido User !
-            </h1>
+          <div className="hidden lg:flex flex-col xl:flex-row xl:items-center justify-between">
+            <h1 className="hidden xl:flex">Bienvenidido {displayUserName}!</h1>
+            <button
+              onClick={handleLogout}
+              className="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 ml-4 xl:mt-0"
+            >
+              Cerrar Sesión
+            </button>
           </div>
 
-          { /* Mobile Navbar */}
+          {/* Mobile Navbar */}
           <div className="lg:hidden flex justify-end items-center">
             <img
               src={toggle ? close : menu}
@@ -75,17 +99,20 @@ const NavbarStaff = () => {
               className="w-[28px] h-[28px] object-contain cursor-pointer "
               onClick={() => setToggle(!toggle)}
             />
-            <div className={`${!toggle ? 'hidden' : 'flex'}  p-6 bg-white absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-lg flex flex-col`} >
-              <h1 className="select-none"> ¡Bienvenido User! </h1>
+            <div
+              className={`${
+                !toggle ? "hidden" : "flex"
+              }  p-6 bg-white absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-lg flex flex-col`}
+            >
+              <h1 className="select-none"> ¡Bienvenido {displayUserName}! </h1>
               <hr className="my-4" />
               <ul className="list-none flex justify-end items-start flex-col gap-4">
                 {Links.map((link) => (
                   <li
                     key={link.id}
-                    className={`${active === link.title
-                      ? "text-[#fc4b08]"
-                      : "text-black"
-                      } hover:text-orange-500 text-[16px] cursor-pointer `}
+                    className={`${
+                      active === link.title ? "text-[#fc4b08]" : "text-black"
+                    } hover:text-orange-500 text-[16px] cursor-pointer `}
                     onClick={() => {
                       setToggle(!toggle);
                       setActive(link.title);
@@ -95,12 +122,19 @@ const NavbarStaff = () => {
                   </li>
                 ))}
               </ul>
+              <hr className="my-4" />
+              <button
+                onClick={handleLogout}
+                className="bg-orange-500 text-white px-4 py-2 rounded-lg"
+              >
+                Cerrar Sesión
+              </button>
             </div>
           </div>
         </div>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default NavbarStaff
+export default NavbarStaff;
