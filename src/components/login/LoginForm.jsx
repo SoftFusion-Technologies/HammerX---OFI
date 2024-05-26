@@ -10,37 +10,24 @@ import { useAuth } from "../../AuthContext";
 Modal.setAppElement("#root");
 
 const LoginForm = () => {
-  // Estado para los valores del formulario
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
 
-  // Hook de navegación
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // Estado para mostrar/ocultar contraseña
   const [showPassword, setShowPassword] = useState(false);
-
-  // Estado para los errores de validación
   const [errors, setErrors] = useState({});
-
-  // Estado para indicador de carga
   const [loading, setLoading] = useState(false);
-
-  // Estado para controlar apertura/cierre del modal de error
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Mensaje a mostrar en el modal de error
   const [modalMessage, setModalMessage] = useState("");
 
-  // Función para alternar entre mostrar/ocultar contraseña
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  // Manejar cambios en los inputs del formulario
   const handleInput = (event) => {
     setValues((prev) => ({
       ...prev,
@@ -48,29 +35,27 @@ const LoginForm = () => {
     }));
   };
 
-  // Manejar envío del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validationErrors = Validation(values); // Validar campos
-    setErrors(validationErrors); // Actualizar errores
+    const validationErrors = Validation(values);
+    setErrors(validationErrors);
 
-    // Verificar si hay errores de validación
     if (Object.keys(validationErrors).length === 0) {
-      setLoading(true); // Habilitar indicador de carga
+      setLoading(true);
 
       axios
-      .post("http://localhost:8080/login", values)
-      .then((res) => {
-        if (res.data.message === "Success") {
-          login(res.data.token);
-          navigate("/dashboard");
-        } else {
+        .post("http://localhost:8080/login", values)
+        .then((res) => {
+          if (res.data.message === "Success") {
+            login(res.data.token, values.email);
+            navigate("/dashboard");
+          } else {
             setModalMessage("Usuario o Contraseña incorrectos");
             setIsModalOpen(true);
           }
         })
         .catch((err) => {
-          setLoading(false); // Deshabilitar indicador de carga
+          setLoading(false);
           console.log(err);
         });
     }
