@@ -56,7 +56,7 @@ const AdminPage = () => {
             </div>
             <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
               <Link to="/dashboard/testclass">
-                <button className="btnstaff">Leads y Contacto</button>
+                <button className="btnstaff">Leads y Prospectos</button>
               </Link>
             </div>
             <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">

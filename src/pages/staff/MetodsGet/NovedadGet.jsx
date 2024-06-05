@@ -86,18 +86,21 @@ const NovedadGet = () => {
   }
 
   const handleEliminarNovedad = async id => {
-    try {
-      const url = `${URL}${id}`
-      const respuesta = await fetch(url, {
-        method: 'DELETE'
-      })
-      await respuesta.json()
-      const arraynovedad = novedad.filter(novedad => novedad.id !== id)
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        });
+        await respuesta.json();
 
-      setNovedad(arraynovedad)
-    }
-    catch (error) {
-      console.log(error)
+        // Filtrar las novedades
+        const arraynovedad = novedad.filter((novedad) => novedad.id !== id);
+        setNovedad(arraynovedad);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -155,15 +158,15 @@ const NovedadGet = () => {
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
-          <div className='pl-5 pt-5'>
+        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
+          <div className="pl-5 pt-5">
             <Link to="/dashboard">
-              <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
             </Link>
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <h1 className="pb-5">
               Listado de Novedades: &nbsp;
               <span className="text-center">
@@ -171,7 +174,6 @@ const NovedadGet = () => {
               </span>
             </h1>
           </div>
-
 
           {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
@@ -185,14 +187,16 @@ const NovedadGet = () => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className='flex justify-center pb-10'>
+          <div className="flex justify-center pb-10">
             <Link to="#">
-              <button onClick={abrirModal} className='bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10'>
+              <button
+                onClick={abrirModal}
+                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+              >
                 Nueva Novedad
               </button>
             </Link>
           </div>
-
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
@@ -201,62 +205,47 @@ const NovedadGet = () => {
             </p>
           ) : (
             <>
-              <table className='w-11/12 mx-auto'>
-                <thead className=" bg-[#fc4b08]  text-white">
-                  <tr key={novedad.id}>
-                    {/* <th className='thid'>ID</th> */}
-                    <th>Sede</th>
-                    <th>Usuario</th>
-                    <th>Fecha</th>
-                    <th>Mensaje</th>
-                    <th>Acciones</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  {records.map((novedad) => (
-                    <tr key={novedad.id}>
-                      {/* <td onClick={() => obtenerNovedad(novedad.id)}>
-                        {novedad.id}
-                      </td> */}
-                      <td onClick={() => obtenerNovedad(novedad.id)}>
-                        {novedad.sede}
-                      </td>
-                      <td onClick={() => obtenerNovedad(novedad.id)}>
-                        {novedad.user}
-                      </td>
-                      <td onClick={() => obtenerNovedad(novedad.id)}>
-                        {formatearFecha(novedad.vencimiento)}
-                      </td>
-                      <td className="max-w-[100px] p-2 overflow-y-auto max-h-[100px]" onClick={() => obtenerNovedad(novedad.id)}>
-                        {novedad.mensaje}
-                      </td>
-                      {/* ACCIONES */}
-                      <td className=''>
-                        <button
-                          onClick={() => handleEliminarNovedad(novedad.id)}
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <nav className='flex justify-center items-center my-10'>
-                <ul className='pagination space-x-2'>
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={prevPage}>Prev</a>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {records.map((novedad) => (
+                  <div
+                    key={novedad.id}
+                    className="border border-gray-300 p-4 rounded-lg"
+                  >
+                    <h2 className="text-xl font-semibold">{novedad.sede}</h2>
+                    <p className="text-gray-600 mb-2">{novedad.user}</p>
+                    <p className="text-gray-600 mb-2">
+                      {formatearFecha(novedad.vencimiento)}
+                    </p>
+                    <p className="text-gray-600 mb-4">{novedad.mensaje}</p>
+                    <div className="flex justify-end">
+                      <button
+                        onClick={() => handleEliminarNovedad(novedad.id)}
+                        className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        // onClicsek={() => handleEditarNovedad(novedad.id)}
+                        className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                      >
+                        Editar
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <nav className="flex justify-center items-center my-10">
+                <ul className="pagination space-x-2">
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={prevPage}>
+                      Prev
+                    </a>
                   </li>
 
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={nextPage}>Next</a>
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={nextPage}>
+                      Next
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -268,7 +257,7 @@ const NovedadGet = () => {
       </div>
       <Footer />
     </>
-  )
+  );
 }
 
 export default NovedadGet
