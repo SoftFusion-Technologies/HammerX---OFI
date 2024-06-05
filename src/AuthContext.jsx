@@ -1,3 +1,16 @@
+/*
+ * Programador: Emir Segovia
+ * Fecha Cración: 05 / 06 / 2024
+ * Versión: 1.0
+ *
+ * Descripción:
+ * Este archivo (AuthContext.jsx) es el componente el cual valida el login del usuario con un token.
+ *
+ * Tema: Renderizacion
+ * Capa: Frontend
+ * Contacto: emirvalles90f@gmail.com || 3865761910
+ */
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();

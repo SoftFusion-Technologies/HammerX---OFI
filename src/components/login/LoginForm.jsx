@@ -1,3 +1,16 @@
+/*
+ * Programador: Emir Segovia
+ * Fecha Cración: 05 / 06 / 2024
+ * Versión: 1.0
+ *
+ * Descripción:
+ * Este archivo (LoginForm.jsx) es el componente el cual realiza el logeo de los usuarios mendiante una validacion de la base de datos y un token de sesion.
+ *
+ * Tema: Renderizacion
+ * Capa: Frontend
+ * Contacto: emirvalles90f@gmail.com || 3865761910
+ */
+
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Alerta from "../Error";
