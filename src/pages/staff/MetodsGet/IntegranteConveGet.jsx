@@ -19,7 +19,7 @@ import NavbarStaff from '../NavbarStaff';
 import '../../../styles/MetodsGet/Tabla.css';
 import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
-import FormAltaConve from '../../../components/Forms/FormAltaConve';
+import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
 
 const IntegranteConveGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
@@ -37,7 +37,7 @@ const IntegranteConveGet = ({ integrantes }) => {
   const [search, setSearch] = useState('');
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/integrantesconve/';
+  const URL = 'http://localhost:8080/integrantes/';
 
   useEffect(() => {
     // utilizamos get para obtenerPersonas los datos contenidos en la url
@@ -257,8 +257,7 @@ const IntegranteConveGet = ({ integrantes }) => {
               </nav>
             </>
           )}
-          {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaConve isOpen={modalNewConve} onClose={cerarModal} />
+          <FormAltaIntegranteConve isOpen={modalNewConve} onClose={cerarModal} />
         </div>
       </div>
       <Footer />

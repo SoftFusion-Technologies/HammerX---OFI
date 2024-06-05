@@ -109,7 +109,7 @@ const App = memo(() => {
               <Ruta path="/formusers" element={<AltaUserForm />} /> {/*  TABLA USERS Rutas de prueba para testear funcionamiento */}
               <Ruta path="/formnovedad" element={<AltaNovedadForm />} /> {/* TABLA NOVEDAD Rutas de prueba para testear funcionamiento */}
               <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* TABLA SCHEDULERTASK Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/formask" element={<AltaFreAskForm />} /> {/* TABLA FRECASK Rutas de prueba para testear funcionamiento */}
+              <Ruta path="/formask" element={<AltaFreAskForm />} /> {/* TABLA FRECASK Rutas de prueba para testear funcionamiento */}
 
               {/* Ruta para la página del staff */}
               <Ruta path="/dashboard" element={ <ProtectedRoute> <AdminPage /> </ProtectedRoute> }/>
