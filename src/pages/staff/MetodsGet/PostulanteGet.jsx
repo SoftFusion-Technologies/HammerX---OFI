@@ -11,40 +11,41 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { formatearFecha } from '../../../Helpers'
-import { Link } from 'react-router-dom';
-import NavbarStaff from '../NavbarStaff';
-import '../../../styles/MetodsGet/Tabla.css'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { formatearFecha } from "../../../Helpers";
+import { Link } from "react-router-dom";
+import NavbarStaff from "../NavbarStaff";
+import "../../../styles/MetodsGet/Tabla.css";
 import "../../../styles/staff/background.css";
-import Footer from '../../../components/footer/Footer';
+import Footer from "../../../components/footer/Footer";
+import PostulanteDetails from "./PostulanteGetId";
 
 // Componente funcional que maneja la lógica relacionada con los postulantes
 const PostulanteGet = () => {
-  
-
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
+  const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/postulante/'
+  const URL = "http://localhost:8080/postulantes/";
 
   // Estado para almacenar la lista de postulantes
-  const [postulantes, setPostulantes] = useState([])
+  const [postulantes, setPostulantes] = useState([]);
 
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
-  const [search, setSearch] = useState("")
-  const [sexoFilter, setSexoFilter] = useState(null)
-  const [edadFilter, setEdadFilter] = useState(null)
+  const [search, setSearch] = useState("");
+  const [sexoFilter, setSexoFilter] = useState(null);
+  const [edadFilter, setEdadFilter] = useState(null);
 
   const handleEdadChange = (e) => {
-    setEdadFilter(e.target.value)
-  }
+    setEdadFilter(e.target.value);
+  };
 
   const handleResetEdadFilter = () => {
-    setEdadFilter(null)
-  }
+    setEdadFilter(null);
+  };
 
   const handleSexoChange = (e) => {
     const selectedSexo = e.target.value;
@@ -56,43 +57,47 @@ const PostulanteGet = () => {
     } else {
       setSexoFilter(selectedSexo);
     }
-  }
+  };
   const handleResetSexoFilter = () => {
     setSexoFilter(null);
-  }
+  };
 
   const calcularRangoEdad = (edad) => {
-    if (edad >= 18 && edad <= 21) return "18-21"
-    if (edad >= 21 && edad <= 23) return "21-23"
-    if (edad >= 23 && edad <= 25) return "23-25"
-    if (edad > 25) return ">25"
-  }
+    if (edad >= 18 && edad <= 21) return "18-21";
+    if (edad >= 21 && edad <= 23) return "21-23";
+    if (edad >= 23 && edad <= 25) return "23-25";
+    if (edad > 25) return ">25";
+  };
 
   //Funcion de busqueda, en el cuadro
   const searcher = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
-  let results = []
+  let results = [];
 
   if (!search && !sexoFilter && !edadFilter) {
-    results = postulantes
+    results = postulantes;
   } else {
     results = postulantes.filter((dato) => {
-      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase())
-      const emailMatch = dato.email.toLowerCase().includes(search.toLowerCase())
-      const puestoMatch = dato.puesto.toLowerCase().includes(search.toLowerCase())
-      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase())
-      const sexoMatch = !sexoFilter || dato.sexo === sexoFilter
-      const edadMatch = !edadFilter || calcularRangoEdad(dato.edad) === edadFilter
+      const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
+      const emailMatch = dato.email
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const puestoMatch = dato.puesto
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
+      const sexoMatch = !sexoFilter || dato.sexo === sexoFilter;
+      const edadMatch =
+        !edadFilter || calcularRangoEdad(dato.edad) === edadFilter;
 
       return (
-        nameMatch ||
-        emailMatch ||
-        puestoMatch ||
-        sedeMatch
-      ) && sexoMatch && edadMatch
-    })
+        (nameMatch || emailMatch || puestoMatch || sedeMatch) &&
+        sexoMatch &&
+        edadMatch
+      );
+    });
   }
 
   //------------------------------------------------------
@@ -101,12 +106,11 @@ const PostulanteGet = () => {
 
   useEffect(() => {
     // utilizamos get para obtenerPostulante los datos contenidos en la url
-    axios.get(URL)
-      .then((res) => {
-        setPostulantes(res.data);
-        obtenerPostulantes();
-      })
-  }, [])
+    axios.get(URL).then((res) => {
+      setPostulantes(res.data);
+      obtenerPostulantes();
+    });
+  }, []);
 
   // Función para obtener todos los postulantes desde la API
   const obtenerPostulantes = async () => {
@@ -114,50 +118,44 @@ const PostulanteGet = () => {
       const response = await axios.get(URL);
       setPostulantes(response.data);
     } catch (error) {
-      console.log('Error al obtener los postulantes:', error);
+      console.log("Error al obtener los postulantes:", error);
     }
-  }
+  };
 
-  const handleEliminarPostulante = async id => {
+  const handleEliminarPostulante = async (id) => {
     try {
-      const url = `${URL}${id}`
+      const url = `${URL}${id}`;
       const respuesta = await fetch(url, {
-        method: 'DELETE'
-      })
-      await respuesta.json()
-      const arrayPostulantes = postulantes.filter(postulante => postulante.id !== id)
+        method: "DELETE",
+      });
+      await respuesta.json();
+      const arrayPostulantes = postulantes.filter(
+        (postulante) => postulante.id !== id
+      );
 
-      setPostulantes(arrayPostulantes)
+      setPostulantes(arrayPostulantes);
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
+  };
 
   const obtenerPostulante = async (id) => {
     try {
-
-      const url = `${URL}${id}`
-
-      console.log(url)
-
-      const respuesta = await fetch(url)
-
-      const resultado = await respuesta.json()
-
-      setPostulantes(resultado)
-
-
+      const url = `${URL}${id}`;
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
+      setSelectedUser(resultado);
+      setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log(error)
+      console.log("Error al obtener el usuario:", error);
     }
-  }
+  };
 
   const contactarPostulante = (celular) => {
     const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
 
-    window.open(`${link}`, '_blank')
-  }
+    window.open(`${link}`, "_blank");
+  };
 
   // Función para ordenar los postulantes de forma decreciente basado en el id
   const ordenarPostulantesDecreciente = (postulantes) => {
@@ -171,8 +169,8 @@ const PostulanteGet = () => {
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const records = sortedPostulantes.slice(firstIndex, lastIndex)
-  const nPage = Math.ceil(sortedPostulantes.length / itemsPerPage)
+  const records = sortedPostulantes.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(sortedPostulantes.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
@@ -182,7 +180,7 @@ const PostulanteGet = () => {
   }
 
   function changeCPage(id) {
-    setCurrentPage(id)
+    setCurrentPage(id);
   }
 
   function nextPage() {
@@ -194,15 +192,15 @@ const PostulanteGet = () => {
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
-          <div className='pl-5 pt-5'>
+        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
+          <div className="pl-5 pt-5">
             <Link to="/dashboard">
-              <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
             </Link>
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <h1 className="pb-5">
               Listado de Postulantes: &nbsp;
               <span className="text-center">
@@ -210,7 +208,6 @@ const PostulanteGet = () => {
               </span>
             </h1>
           </div>
-
 
           {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
@@ -221,15 +218,14 @@ const PostulanteGet = () => {
               placeholder="Buscar postulantes"
               className="border rounded-sm"
             />
-
           </form>
           {/* formulario de busqueda */}
 
           {/* filtros*/}
-          <div className='flex justify-evenly mt-4 mb-8 w-[500px] mx-auto border rounded-lg'>
+          <div className="flex justify-evenly mt-4 mb-8 w-[500px] mx-auto border rounded-lg">
             {/* filtros por sexo */}
-            <div className='py-4 px-5'>
-              <h1 className='mb-2 font-medium'>Filtrar por sexo</h1>
+            <div className="py-4 px-5">
+              <h1 className="mb-2 font-medium">Filtrar por sexo</h1>
               <div>
                 <label>
                   <input
@@ -268,8 +264,8 @@ const PostulanteGet = () => {
             {/* filtros por sexo */}
 
             {/* Filtro de edad */}
-            <div className='py-4 px-5'>
-              <h1 className='mb-2 font-medium'>Filtrar por edad</h1>
+            <div className="py-4 px-5">
+              <h1 className="mb-2 font-medium">Filtrar por edad</h1>
               <div>
                 <label>
                   <input
@@ -331,12 +327,12 @@ const PostulanteGet = () => {
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Postulante NO Existe ||{' '}
+              El Postulante NO Existe ||{" "}
               <span className="text-span"> Postulante: {results.length}</span>
             </p>
           ) : (
             <>
-              <table className='w-11/12 mx-auto'>
+              <table className="w-11/12 mx-auto">
                 <thead className=" bg-[#fc4b08]  text-white">
                   <tr key={postulantes.id}>
                     <th>ID</th>
@@ -372,24 +368,29 @@ const PostulanteGet = () => {
                         {postulante.sede}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
-                        {postulante.valoracion === "" || postulante.valoracion === null
-                          ? 'El postulante no tiene ninguna valoración'
+                        {postulante.valoracion === "" ||
+                        postulante.valoracion === null
+                          ? "El postulante no tiene ninguna valoración"
                           : postulante.valoracion}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
                         {formatearFecha(postulante.created_at)}
                       </td>
                       {/* ACCIONES */}
-                      <td className='flex gap-2'>
+                      <td className="flex gap-2">
                         <button
-                          onClick={() => handleEliminarPostulante(postulante.id)}
+                          onClick={() =>
+                            handleEliminarPostulante(postulante.id)
+                          }
                           type="button"
                           className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                         >
                           Eliminar
                         </button>
                         <button
-                          onClick={() => contactarPostulante(postulante.celular)}
+                          onClick={() =>
+                            contactarPostulante(postulante.celular)
+                          }
                           type="button"
                           className="py-2 px-4 my-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                         >
@@ -400,36 +401,50 @@ const PostulanteGet = () => {
                   ))}
                 </tbody>
               </table>
-                <nav className='flex justify-center items-center my-10'>
-                  <ul className='pagination'>
-                    <li className='page-item'>
-                      <a href="#"
-                        className='page-link'
-                        onClick={prevPage}>Prev</a>
+              <nav className="flex justify-center items-center my-10">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={prevPage}>
+                      Prev
+                    </a>
+                  </li>
+                  {numbers.map((number, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === number ? "active" : ""
+                      }`}
+                      key={index}
+                    >
+                      <a
+                        href="#"
+                        className="page-link"
+                        onClick={() => changeCPage(number)}
+                      >
+                        {number}
+                      </a>
                     </li>
-                    {
-                      numbers.map((number, index) => (
-                        <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
-                          <a
-                            href="#"
-                            className='page-link'
-                            onClick={() => changeCPage(number)}>{number}</a>
-                        </li>
-                      ))}
-                    <li className='page-item'>
-                      <a href="#"
-                        className='page-link'
-                        onClick={nextPage}>Next</a>
-                    </li>
-                  </ul>
-                </nav>
+                  ))}
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={nextPage}>
+                      Next
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </>
           )}
         </div>
       </div>
+      {selectedUser && (
+        <PostulanteDetails
+          user={selectedUser}
+          isOpen={modalUserDetails}
+          onClose={() => setModalUserDetails(false)}
+        />
+      )}
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default PostulanteGet
+export default PostulanteGet;

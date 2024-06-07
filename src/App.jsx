@@ -26,6 +26,8 @@ import LoginForm from './components/login/LoginForm';
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 import PreguntasFrecuentesGet from './pages/staff/MetodsGet/FrequentAsksGet';
+import UserDetails from './pages/staff/MetodsGet/UserGetId';
+import PostulanteDetails from './pages/staff/MetodsGet/PostulanteGetId';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -121,6 +123,10 @@ const App = memo(() => {
                 <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/admconvenios" element={<ProtectedRoute>  <AdmConveGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento
+
+                {/* Rutas para obtener por los registros por id*/}
+                <Ruta path="/users/:id" element={<UserDetails/>} />
+                <Ruta path="/postulantes/:id" element={<PostulanteDetails/>} />
               </Rutas>
           </>
         )}

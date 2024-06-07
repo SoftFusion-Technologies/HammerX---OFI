@@ -205,7 +205,7 @@ const NovedadGet = () => {
             </p>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-11/12 mx-auto">
                 {records.map((novedad) => (
                   <div
                     key={novedad.id}
@@ -216,8 +216,8 @@ const NovedadGet = () => {
                     <p className="text-gray-600 mb-2">
                       {formatearFecha(novedad.vencimiento)}
                     </p>
-                    <p className="text-gray-600 mb-4">{novedad.mensaje}</p>
-                    <div className="flex justify-end">
+                    <p className="text-gray-600 mb-4 overflow-y-auto max-h-[100] h-[100px]">{novedad.mensaje}</p>
+                    <div className="flex justify-end space-x-4">
                       <button
                         onClick={() => handleEliminarNovedad(novedad.id)}
                         className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"

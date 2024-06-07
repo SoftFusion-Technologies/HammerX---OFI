@@ -70,7 +70,7 @@ const FormPostulante = ({ isOpen, onClose }) => {
         alert("Por favor, complete todos los campos obligatorios.");
       } else {
         // Realizar la solicitud POST al servidor
-        const respuesta = await fetch("http://localhost:8080/postulante/", {
+        const respuesta = await fetch("http://localhost:8080/postulantes/", {
           method: "POST",
           body: JSON.stringify(valores),
           headers: {
