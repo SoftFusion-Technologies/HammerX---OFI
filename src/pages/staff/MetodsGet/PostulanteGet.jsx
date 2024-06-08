@@ -123,19 +123,22 @@ const PostulanteGet = () => {
   };
 
   const handleEliminarPostulante = async (id) => {
-    try {
-      const url = `${URL}${id}`;
-      const respuesta = await fetch(url, {
-        method: "DELETE",
-      });
-      await respuesta.json();
-      const arrayPostulantes = postulantes.filter(
-        (postulante) => postulante.id !== id
-      );
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        });
+        await respuesta.json();
+        const arrayPostulantes = postulantes.filter(
+          (postulante) => postulante.id !== id
+        );
 
-      setPostulantes(arrayPostulantes);
-    } catch (error) {
-      console.log(error);
+        setPostulantes(arrayPostulantes);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

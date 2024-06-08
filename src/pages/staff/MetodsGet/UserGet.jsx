@@ -89,18 +89,21 @@ const UserGet = () => {
   };
 
   const handleEliminarUser = async (id) => {
-    try {
-      const url = `${URL}${id}`;
-      const respuesta = await fetch(url, {
-        method: "DELETE",
-      });
-      await respuesta.json();
-      const arrayUsers = users.filter((user) => user.id !== id);
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+      if (confirmacion) {
+        try {
+          const url = `${URL}${id}`;
+          const respuesta = await fetch(url, {
+            method: 'DELETE'
+          });
+          await respuesta.json();
+          const arrayUsers = users.filter((user) => user.id !== id);
 
-      setUsers(arrayUsers);
-    } catch (error) {
-      console.log(error);
-    }
+          setUsers(arrayUsers);
+        } catch (error) {
+          console.log(error);
+        }
+      }
   };
 
   const obtenerUser = async (id) => {

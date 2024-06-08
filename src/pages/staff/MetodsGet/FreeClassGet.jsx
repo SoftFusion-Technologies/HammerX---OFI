@@ -53,18 +53,21 @@ const FreeClassGet = () => {
   };
 
   const handleEliminarPersonClass = async id => {
-    try {
-      const url = `${URL}${id}`
-      const respuesta = await fetch(url, {
-        method: 'DELETE'
-      })
-      await respuesta.json()
-      const arrayPersonClass = personClass.filter(personClass => personClass.id !== id)
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        })
+        await respuesta.json()
+        const arrayPersonClass = personClass.filter(personClass => personClass.id !== id)
 
-      setPersonClass(arrayPersonClass)
-    }
-    catch (error) {
-      console.log(error)
+        setPersonClass(arrayPersonClass)
+      }
+      catch (error) {
+        console.log(error)
+      }
     }
   }
 

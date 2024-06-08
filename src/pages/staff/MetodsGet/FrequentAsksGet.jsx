@@ -92,17 +92,20 @@ const PreguntasFrecuentesGet = () => {
   };
 
   const handleEliminarAsk = async (id) => {
-    try {
-      const url = `${URL}${id}`;
-      const respuesta = await fetch(url, {
-        method: "DELETE",
-      });
-      await respuesta.json();
-      const arrayAsk = frecAsk.filter((frecAsk) => frecAsk.id !== id);
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: "DELETE",
+        });
+        await respuesta.json();
+        const arrayAsk = frecAsk.filter((frecAsk) => frecAsk.id !== id);
 
-      setFreAsk(arrayAsk);
-    } catch (error) {
-      console.log(error);
+        setFreAsk(arrayAsk);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

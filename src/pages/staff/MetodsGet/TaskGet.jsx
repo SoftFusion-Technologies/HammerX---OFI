@@ -89,18 +89,21 @@ const TaskGet = () => {
   }
 
   const handleEliminarTask = async id => {
-    try {
-      const url = `${URL}${id}`
-      const respuesta = await fetch(url, {
-        method: 'DELETE'
-      })
-      await respuesta.json()
-      const arraytask = task.filter(task => task.id !== id)
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        })
+        await respuesta.json()
+        const arraytask = task.filter(task => task.id !== id)
 
-      setTask(arraytask)
-    }
-    catch (error) {
-      console.log(error)
+        setTask(arraytask)
+      }
+      catch (error) {
+        console.log(error)
+      }
     }
   }
 

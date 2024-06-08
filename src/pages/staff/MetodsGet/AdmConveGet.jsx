@@ -67,17 +67,20 @@ const AdmConveGet = () => {
   };
 
   const handleEliminarConve = async (id) => {
-    try {
-      const url = `${URL}${id}`;
-      const respuesta = await fetch(url, {
-        method: 'DELETE'
-      });
-      await respuesta.json();
-      const arrayConve = conve.filter((conve) => conve.id !== id);
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        });
+        await respuesta.json();
+        const arrayConve = conve.filter((conve) => conve.id !== id);
 
-      setConve(arrayConve);
-    } catch (error) {
-      console.log(error);
+        setConve(arrayConve);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

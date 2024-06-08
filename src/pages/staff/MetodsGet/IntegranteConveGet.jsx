@@ -79,19 +79,22 @@ const IntegranteConveGet = ({ integrantes }) => {
   }, [id_conv, id_adm]);
 
   const handleEliminarIntegrante = async (id) => {
-    try {
-      const url = `${URL}${id}`;
-      const respuesta = await fetch(url, {
-        method: 'DELETE'
-      });
-      await respuesta.json();
-      const arrayIntegrante = integrante.filter(
-        (integrante) => integrante.id !== id
-      );
+    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        });
+        await respuesta.json();
+        const arrayIntegrante = integrante.filter(
+          (integrante) => integrante.id !== id
+        );
 
-      setIntegrantes(arrayIntegrante);
-    } catch (error) {
-      console.log(error);
+        setIntegrantes(arrayIntegrante);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
