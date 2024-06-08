@@ -27,7 +27,7 @@ const PostulanteGet = () => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = "http://localhost:8080/postulante/";
+  const URL = "http://localhost:8080/postulantes/";
 
   // Estado para almacenar la lista de postulantes
   const [postulantes, setPostulantes] = useState([]);
@@ -231,7 +231,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="masculino"
-                    checked={sexoFilter === "masculino"}
+                    checked={sexoFilter === 'masculino'}
                     onChange={handleSexoChange}
                   />
                   &nbsp; Masculino
@@ -243,7 +243,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="femenino"
-                    checked={sexoFilter === "femenino"}
+                    checked={sexoFilter === 'femenino'}
                     onChange={handleSexoChange}
                   />
                   &nbsp; Femenino
@@ -271,7 +271,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="18-21"
-                    checked={edadFilter === "18-21"}
+                    checked={edadFilter === '18-21'}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 18 a 21
@@ -282,7 +282,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="21-23"
-                    checked={edadFilter === "21-23"}
+                    checked={edadFilter === '21-23'}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 21 a 23
@@ -293,7 +293,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="23-25"
-                    checked={edadFilter === "23-25"}
+                    checked={edadFilter === '23-25'}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 23 a 25
@@ -304,7 +304,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value=">25"
-                    checked={edadFilter === ">25"}
+                    checked={edadFilter === '>25'}
                     onChange={handleEdadChange}
                   />
                   &nbsp; Mayores a 25
@@ -327,7 +327,7 @@ const PostulanteGet = () => {
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Postulante NO Existe ||{" "}
+              El Postulante NO Existe ||{' '}
               <span className="text-span"> Postulante: {results.length}</span>
             </p>
           ) : (
@@ -368,9 +368,9 @@ const PostulanteGet = () => {
                         {postulante.sede}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
-                        {postulante.valoracion === "" ||
+                        {postulante.valoracion === '' ||
                         postulante.valoracion === null
-                          ? "El postulante no tiene ninguna valoración"
+                          ? 'El postulante no tiene ninguna valoración'
                           : postulante.valoracion}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
@@ -411,7 +411,7 @@ const PostulanteGet = () => {
                   {numbers.map((number, index) => (
                     <li
                       className={`page-item ${
-                        currentPage === number ? "active" : ""
+                        currentPage === number ? 'active' : ''
                       }`}
                       key={index}
                     >
@@ -440,6 +440,7 @@ const PostulanteGet = () => {
           user={selectedUser}
           isOpen={modalUserDetails}
           onClose={() => setModalUserDetails(false)}
+          obtenerPostulantes={obtenerPostulantes}
         />
       )}
       <Footer />
