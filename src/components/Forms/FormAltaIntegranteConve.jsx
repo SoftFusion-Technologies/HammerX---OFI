@@ -103,9 +103,9 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
           initialValues={{
             id_conv: id_conv || '', // Usa el id_conv obtenido de la URL
             nombre: '',
+            dni: '',
             telefono: '',
-            direccion: '',
-            trabajo: '',
+            email: '',
             sede: ''
           }}
           enableReinitialize={!isOpen}
@@ -159,6 +159,34 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
 
                   <div className="mb-3 px-4">
                     <Field
+                      id="dni"
+                      type="tel"
+                      className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      placeholder="DNI"
+                      name="dni"
+                      maxLength="70"
+                    />
+                    {errors.dni && touched.dni ? (
+                      <Alerta>{errors.dni}</Alerta>
+                    ) : null}
+                  </div>
+
+                  <div className="mb-3 px-4">
+                    <Field
+                      id="email"
+                      type="text"
+                      className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      placeholder="Email"
+                      name="email"
+                      maxLength="70"
+                    />
+                    {errors.email && touched.email ? (
+                      <Alerta>{errors.email}</Alerta>
+                    ) : null}
+                  </div>
+
+                  <div className="mb-3 px-4">
+                    <Field
                       id="telefono"
                       type="tel"
                       className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
@@ -168,34 +196,6 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
                     />
                     {errors.telefono && touched.telefono ? (
                       <Alerta>{errors.telefono}</Alerta>
-                    ) : null}
-                  </div>
-
-                  <div className="mb-3 px-4">
-                    <Field
-                      id="direccion"
-                      type="text"
-                      className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                      placeholder="direccion"
-                      name="direccion"
-                      maxLength="70"
-                    />
-                    {errors.direccion && touched.direccion ? (
-                      <Alerta>{errors.direccion}</Alerta>
-                    ) : null}
-                  </div>
-
-                  <div className="mb-3 px-4">
-                    <Field
-                      id="trabajo"
-                      type="text"
-                      className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                      placeholder="trabajo"
-                      name="trabajo"
-                      maxLength="70"
-                    />
-                    {errors.trabajo && touched.trabajo ? (
-                      <Alerta>{errors.trabajo}</Alerta>
                     ) : null}
                   </div>
 

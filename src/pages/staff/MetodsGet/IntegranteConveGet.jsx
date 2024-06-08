@@ -216,10 +216,11 @@ const IntegranteConveGet = ({ integrantes }) => {
                 <thead className=" bg-[#fc4b08]  text-white">
                   <tr key={integrante.id}>
                     {/* <th className='thid'>ID</th> */}
+                    <th>Notas</th>
                     <th>Nombre y Apellido</th>
+                    <th>DNI</th>
                     <th>Telefono</th>
-                    <th>direccion</th>
-                    <th>Trabajo</th>
+                    <th>Email</th>
                     <th>Sede</th>
                     <th>Acciones</th>
                   </tr>
@@ -230,18 +231,27 @@ const IntegranteConveGet = ({ integrantes }) => {
                       {/* <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {i.id}
                       </td> */}
+                      <td>
+                        <button
+                          className="bg-blue-500 text-white p-1 rounded"
+                          // onClick={() => handleAgregarNota(integrante.id)}
+                        >
+                          Agregar Nota
+                        </button>
+                      </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.nombre}
+                      </td>
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.dni}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.telefono}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {integrante.direccion}
+                        {integrante.email}
                       </td>
-                      <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {integrante.trabajo}
-                      </td>
+
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.sede}
                       </td>
