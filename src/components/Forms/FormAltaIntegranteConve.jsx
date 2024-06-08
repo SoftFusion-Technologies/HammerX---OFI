@@ -15,6 +15,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -25,6 +26,7 @@ import Alerta from '../Error';
 const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
+  const { id_conv } = useParams(); // Obtener el id_conv de la URL
 
   const textoModal = 'Integrante creado correctamente.';
 
@@ -98,13 +100,13 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
             */}
         <Formik
           // valores con los cuales el formulario inicia y este objeto tambien lo utilizo para cargar los datos en la API
-            initialValues={{
-                id_conv : 1,
-                nombre: '',
-                telefono: '',
-                direccion: '',
-                trabajo: '',
-                sede: ''
+          initialValues={{
+            id_conv: id_conv || '', // Usa el id_conv obtenido de la URL
+            nombre: '',
+            telefono: '',
+            direccion: '',
+            trabajo: '',
+            sede: ''
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
@@ -160,7 +162,7 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
                       id="telefono"
                       type="tel"
                       className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                      placeholder="T"
+                      placeholder="Telefono"
                       name="telefono"
                       maxLength="70"
                     />
@@ -205,7 +207,7 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
                       className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                       required
                     >
-                    <option value="" disabled>
+                      <option value="" disabled>
                         Sede:
                       </option>
                       <option value="monteros">Monteros</option>

@@ -43,7 +43,6 @@ const AdmConveGet = () => {
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/admconvenios/';
-  const INTEGRANTES_URL = 'http://localhost:8080/integrantesconve/';
 
   const handleVerIntegrantes = (id) => {
     setSelectedConve(id);
@@ -204,12 +203,12 @@ const AdmConveGet = () => {
                   <div key={conve.id} style={styles.conveBox}>
                     <h2>{conve.nameConve}</h2>
                     <p>{conve.descConve}</p>
-                    <button
-                      onClick={() => handleVerIntegrantes(conve.id)}
-                      style={styles.button}
+                    <Link
+                      to={`/dashboard/admconvenios/${conve.id}/integrantes/`}
                     >
                       Ver Integrantes
-                    </button>
+                    </Link>
+                
                     <button
                       onClick={() => handleEliminarConve(conve.id)}
                       style={{ ...styles.button, backgroundColor: 'red' }}

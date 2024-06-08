@@ -13,6 +13,8 @@
  */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { formatearFecha } from '../../../Helpers';
 import { Link } from 'react-router-dom';
 import NavbarStaff from '../NavbarStaff';
@@ -23,7 +25,8 @@ import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegrant
 
 const IntegranteConveGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
-  const [conve, setConve] = useState([]);
+  const { id_conv, id_adm } = useParams();
+  const [integrante, setIntegrantes] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
 
   const abrirModal = () => {
@@ -31,48 +34,68 @@ const IntegranteConveGet = ({ integrantes }) => {
   };
   const cerarModal = () => {
     setmodalNewConve(false);
-    obtenerConves();
+    obtenerIntegrantes2();
   };
   // Estado para almacenar el término de búsqueda
   const [search, setSearch] = useState('');
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/integrantes/';
+  const URL2 =`http://localhost:8080/admconvenios/${id_conv}/integrantes/`
+
 
   useEffect(() => {
     // utilizamos get para obtenerPersonas los datos contenidos en la url
-    axios.get(URL).then((res) => {
-      setConve(res.data);
-      obtenerConves();
+    axios.get(URL2).then((res) => {
+      setIntegrantes(res.data);
+      obtenerIntegrantes2();
     });
   }, []);
 
   // Función para obtener todos los personClass desde la API
-  const obtenerConves = async () => {
+  const obtenerIntegrantes2 = async () => {
     try {
-      const response = await axios.get(URL);
-      setConve(response.data);
+      const response = await axios.get(URL2);
+      setIntegrantes(response.data);
     } catch (error) {
       console.log('Error al obtener las personas :', error);
     }
   };
 
-  const handleEliminarConve = async (id) => {
+  // Función para obtener todos los personClass desde la API
+  useEffect(() => {
+    const obtenerIntegrantes = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/admconvenios/${id_conv}/integrantes/`
+        );
+        setIntegrantes(response.data);
+      } catch (error) {
+        console.error('Error al obtener los integrantes:', error);
+      }
+    };
+
+    obtenerIntegrantes();
+  }, [id_conv, id_adm]);
+
+  const handleEliminarIntegrante = async (id) => {
     try {
       const url = `${URL}${id}`;
       const respuesta = await fetch(url, {
         method: 'DELETE'
       });
       await respuesta.json();
-      const arrayConve = conve.filter((conve) => conve.id !== id);
+      const arrayIntegrante = integrante.filter(
+        (integrante) => integrante.id !== id
+      );
 
-      setConve(arrayConve);
+      setIntegrantes(arrayIntegrante);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const obtenerconve = async (id) => {
+  const obtenerIntegrante = async (id) => {
     try {
       const url = `${URL}${id}`;
 
@@ -82,7 +105,7 @@ const IntegranteConveGet = ({ integrantes }) => {
 
       const resultado = await respuesta.json();
 
-      setConve(resultado);
+      setIntegrantes(resultado);
     } catch (error) {
       console.log(error);
     }
@@ -95,9 +118,9 @@ const IntegranteConveGet = ({ integrantes }) => {
   let results = [];
 
   if (!search) {
-    results = conve;
+    results = integrante;
   } else if (search) {
-    results = conve.filter((dato) => {
+    results = integrante.filter((dato) => {
       const nameMatch = dato.nameConve
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -106,20 +129,20 @@ const IntegranteConveGet = ({ integrantes }) => {
     });
   }
 
-  // Función para ordenar los conve de forma decreciente basado en el id
-  const ordenarConveDecreciente = (conve) => {
-    return [...conve].sort((a, b) => b.id - a.id);
+  // Función para ordenar los integrante de forma decreciente basado en el id
+  const ordenarintegranteDecreciente = (integrante) => {
+    return [...integrante].sort((a, b) => b.id - a.id);
   };
 
-  // Llamada a la función para obtener los conves ordenados de forma decreciente
-  const sortedConve = ordenarConveDecreciente(results);
+  // Llamada a la función para obtener los integrantes ordenados de forma decreciente
+  const sortedintegrante = ordenarintegranteDecreciente(results);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const records = sortedConve.slice(firstIndex, lastIndex);
-  const nPage = Math.ceil(sortedConve.length / itemsPerPage);
+  const records = sortedintegrante.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(sortedintegrante.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
@@ -144,7 +167,7 @@ const IntegranteConveGet = ({ integrantes }) => {
       <div className="dashboardbg h-contain pt-10 pb-10">
         <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
           <div className="pl-5 pt-5">
-            <Link to="/dashboard">
+            <Link to="/dashboard/admconvenios">
               <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
@@ -191,7 +214,7 @@ const IntegranteConveGet = ({ integrantes }) => {
             <>
               <table className="w-11/12 mx-auto">
                 <thead className=" bg-[#fc4b08]  text-white">
-                  <tr key={conve.id}>
+                  <tr key={integrante.id}>
                     {/* <th className='thid'>ID</th> */}
                     <th>Nombre y Apellido</th>
                     <th>Telefono</th>
@@ -202,34 +225,36 @@ const IntegranteConveGet = ({ integrantes }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {records.map((conve) => (
-                    <tr key={conve.id}>
-                      {/* <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.id}
+                  {records.map((integrante) => (
+                    <tr key={integrante.id}>
+                      {/* <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {i.id}
                       </td> */}
-                      <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.nombre}
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.nombre}
                       </td>
-                      <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.telefono}
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.telefono}
                       </td>
-                      <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.direccion}
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.direccion}
                       </td>
-                      <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.trabajo}
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.trabajo}
                       </td>
-                      <td onClick={() => obtenerconve(conve.id)}>
-                        {conve.sede}
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.sede}
                       </td>
-                      {/* <td onClick={() => obtenerconve(conve.id)}>
-                        {formatearFecha(conve.vencimiento)}
+                      {/* <td onClick={() => obtenerIntegrante(i.id)}>
+                        {formatearFecha(i.vencimiento)}
                       </td> */}
 
                       {/* ACCIONES */}
                       <td className="">
                         <button
-                          onClick={() => handleEliminarConve(conve.id)}
+                          onClick={() =>
+                            handleEliminarIntegrante(integrante.id)
+                          }
                           type="button"
                           className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                         >
@@ -257,7 +282,10 @@ const IntegranteConveGet = ({ integrantes }) => {
               </nav>
             </>
           )}
-          <FormAltaIntegranteConve isOpen={modalNewConve} onClose={cerarModal} />
+          <FormAltaIntegranteConve
+            isOpen={modalNewConve}
+            onClose={cerarModal}
+          />
         </div>
       </div>
       <Footer />

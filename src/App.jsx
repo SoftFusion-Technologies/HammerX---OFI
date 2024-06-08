@@ -122,7 +122,8 @@ const App = memo(() => {
                 <Ruta path="/dashboard/frequent-asks" element={<ProtectedRoute>  <PreguntasFrecuentesGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/admconvenios" element={<ProtectedRoute>  <AdmConveGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento
+                {/* <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/" element={<IntegranteConveGet />} />
 
                 {/* Rutas para obtener por los registros por id*/}
                 <Ruta path="/users/:id" element={<UserDetails/>} />

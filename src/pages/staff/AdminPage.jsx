@@ -9,12 +9,11 @@ import TituloPreguntasModal from "./MetodsGet/TituloPreguntasModal";
 import PreguntaDetalleModal from "./MetodsGet/PreguntaDetalleModal";
 
 const AdminPage = () => {
-
   const [modalPreguntasOpen, setModalPreguntasOpen] = useState(false);
   const [modalDetalleOpen, setModalDetalleOpen] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(null);
-  const URL = "http://localhost:8080/ask/";
+  const URL = 'http://localhost:8080/ask/';
 
   const abrirModalPreguntas = async () => {
     try {
@@ -22,7 +21,7 @@ const AdminPage = () => {
       setPreguntas(response.data);
       setModalPreguntasOpen(true);
     } catch (error) {
-      console.log("Error al obtener las preguntas:", error);
+      console.log('Error al obtener las preguntas:', error);
     }
   };
 
@@ -39,6 +38,7 @@ const AdminPage = () => {
     setModalDetalleOpen(false);
   };
 
+  const userRole = 'administrador'; // Ejemplo de rol; reemplazar según tu lógica de obtención de rol
 
   return (
     <>
@@ -54,31 +54,40 @@ const AdminPage = () => {
                 <button className="btnstaff">Foro de Novedades</button>
               </Link>
             </div>
-            <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+
+            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
               <Link to="/dashboard/testclass">
                 <button className="btnstaff">Leads y Prospectos</button>
               </Link>
             </div>
-            <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
-              <Link to="/dashboard/admconvenios">
-                <button className="btnstaff">Convenios</button>
-              </Link>
-            </div>
-            <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
-              <Link to="/dashboard/postulantes">
-                <button className="btnstaff ">CV's Recibidos</button>
-              </Link>
-            </div>
-            {/* New button to open the modal */}
-            <div className="bg-white  font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
-              <button className="btnstaff" onClick={abrirModalPreguntas}>Ver Preguntas Frecuentes</button>
+
+            {(userRole === 'administrador' || userRole === 'vendedor') && (
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
+                <Link to="/dashboard/admconvenios">
+                  <button className="btnstaff">Convenios</button>
+                </Link>
+              </div>
+            )}
+
+            {userRole === 'administrador' && (
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+                <Link to="/dashboard/postulantes">
+                  <button className="btnstaff">CV's Recibidos</button>
+                </Link>
+              </div>
+            )}
+
+            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+              <button className="btnstaff" onClick={abrirModalPreguntas}>
+                Ver Preguntas Frecuentes
+              </button>
             </div>
           </div>
         </div>
       </section>
       <Footer />
-       {/* Modals */}
-       <TituloPreguntasModal
+      {/* Modals */}
+      <TituloPreguntasModal
         isOpen={modalPreguntasOpen}
         onClose={cerrarModalPreguntas}
         preguntas={preguntas}

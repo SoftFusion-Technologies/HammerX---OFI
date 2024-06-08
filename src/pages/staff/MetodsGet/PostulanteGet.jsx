@@ -27,7 +27,7 @@ const PostulanteGet = () => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = "http://localhost:8080/postulantes/";
+  const URL = "http://localhost:8080/postulante/";
 
   // Estado para almacenar la lista de postulantes
   const [postulantes, setPostulantes] = useState([]);

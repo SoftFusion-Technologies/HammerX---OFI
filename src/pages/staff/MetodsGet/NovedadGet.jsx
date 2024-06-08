@@ -181,7 +181,7 @@ const NovedadGet = () => {
               value={search}
               onChange={searcher}
               type="text"
-              placeholder="Buscar novedads"
+              placeholder="Buscar novedades"
               className="border rounded-sm"
             />
           </form>
