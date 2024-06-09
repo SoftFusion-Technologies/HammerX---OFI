@@ -106,7 +106,11 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
             dni: '',
             telefono: '',
             email: '',
-            sede: ''
+            sede: '',
+            notas:'',
+            precio: '',
+            descuento:'0%',
+            preciofinal:''
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera

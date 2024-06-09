@@ -163,6 +163,11 @@ const IntegranteConveGet = ({ integrantes }) => {
     }
   }
 
+const formatearMoneda = (valor) => {
+  return `$${Number(valor).toLocaleString('es-ES', {
+    minimumFractionDigits: 0
+  })}`;
+};
   return (
     <>
       <NavbarStaff />
@@ -218,12 +223,14 @@ const IntegranteConveGet = ({ integrantes }) => {
                 <thead className=" bg-[#fc4b08]  text-white">
                   <tr key={integrante.id}>
                     {/* <th className='thid'>ID</th> */}
-                    <th>Notas</th>
                     <th>Nombre y Apellido</th>
                     <th>DNI</th>
                     <th>Telefono</th>
                     <th>Email</th>
                     <th>Sede</th>
+                    <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>Precio Final</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -233,14 +240,6 @@ const IntegranteConveGet = ({ integrantes }) => {
                       {/* <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {i.id}
                       </td> */}
-                      <td>
-                        <button
-                          className="bg-blue-500 text-white p-1 rounded"
-                          // onClick={() => handleAgregarNota(integrante.id)}
-                        >
-                          Agregar Nota
-                        </button>
-                      </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.nombre}
                       </td>
@@ -256,6 +255,16 @@ const IntegranteConveGet = ({ integrantes }) => {
 
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.sede}
+                      </td>
+
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {formatearMoneda(integrante.precio)}
+                      </td>
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {integrante.descuento}
+                      </td>
+                      <td onClick={() => obtenerIntegrante(integrante.id)}>
+                        {formatearMoneda(integrante.preciofinal)}
                       </td>
                       {/* <td onClick={() => obtenerIntegrante(i.id)}>
                         {formatearFecha(i.vencimiento)}
@@ -305,6 +314,7 @@ const IntegranteConveGet = ({ integrantes }) => {
           user={selectedUser}
           isOpen={modalUserDetails}
           onClose={() => setModalUserDetails(false)}
+          obtenerIntegrantes2={obtenerIntegrantes2}
         />
       )}
       <Footer />

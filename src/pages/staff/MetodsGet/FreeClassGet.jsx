@@ -202,29 +202,29 @@ const FreeClassGet = () => {
                 <tbody>
                   {records.map((personClass) => (
                     <tr key={personClass.id}>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.id}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {formatearFecha(personClass.created_at)}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.name}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.last_name}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.dni}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.celular}
                       </td>
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.sede}
                       </td>
 
-                      <td onClick={() => obtenerPersonClass(personClass.id)}>
+                      <td>
                         {personClass.objetivo}
                       </td>
 
