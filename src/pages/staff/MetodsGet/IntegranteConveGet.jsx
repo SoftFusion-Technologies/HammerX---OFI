@@ -29,6 +29,7 @@ const IntegranteConveGet = ({ integrantes }) => {
   const { id_conv, id_adm } = useParams();
   const [integrante, setIntegrantes] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
+  const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
 
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
@@ -163,6 +164,14 @@ const IntegranteConveGet = ({ integrantes }) => {
     }
   }
 
+  useEffect(() => {
+    // Calcular el total de preciofinal, convirtiendo cada valor a número
+    const total = records.reduce(
+      (acc, integrante) => acc + Number(integrante.preciofinal),
+      0
+    );
+    setTotalPrecioFinal(total);
+  }, [records]);
 const formatearMoneda = (valor) => {
   return `$${Number(valor).toLocaleString('es-ES', {
     minimumFractionDigits: 0
@@ -266,6 +275,7 @@ const formatearMoneda = (valor) => {
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {formatearMoneda(integrante.preciofinal)}
                       </td>
+
                       {/* <td onClick={() => obtenerIntegrante(i.id)}>
                         {formatearFecha(i.vencimiento)}
                       </td> */}
@@ -286,6 +296,12 @@ const formatearMoneda = (valor) => {
                   ))}
                 </tbody>
               </table>
+              <div className="style-prec">
+                <div colSpan="7" className="font-bold text-[#fc4b08]">
+                  TOTAL
+                </div>
+                <div className="">{formatearMoneda(totalPrecioFinal)}</div>
+              </div>
               <nav className="flex justify-center items-center my-10">
                 <ul className="pagination space-x-2">
                   <li className="page-item">

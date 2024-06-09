@@ -21,15 +21,32 @@ import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 
 const FormAltaNota = ( {isOpen, onClose, user }) => {
-    const [showModal, setShowModal] = useState(false);
-    const [errorModal, setErrorModal] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+ 
+  const [precio, setPrecio] = useState('');
   const textoModal = 'Nota agregada correctamente.';
   
-   const nuevoNotaSchema = Yup.object().shape({
-     notas: Yup.string().required('La nota es obligatoria')
-   });
+  const nuevoNotaSchema = Yup.object().shape({
+    notas: Yup.string().required('Notas es requerido')
+    
+  });
   
+   const handlePrecioChange = (values, setFieldValue) => {
+     const precio = parseFloat(values.precio) || 0;
+     const descuento = parseFloat(values.descuento) || 0;
+     const precioFinal = precio - (precio * descuento) / 100;
+     setFieldValue('preciofinal', precioFinal.toFixed(2));
+   };
+
+   const calcularPrecioFinal = (precio, descuento) => {
+     const precioNumerico = parseFloat(precio.replace(/[^0-9.-]+/g, '')) || 0;
+     const descuentoNumerico =
+       parseFloat(descuento.replace(/[^0-9.-]+/g, '')) || 0;
+     const precioFinalCalculado =
+       precioNumerico - (precioNumerico * descuentoNumerico) / 100;
+     setPrecioFinal(precioFinalCalculado.toFixed(2));
+   };
   
   return (
     <div
@@ -51,13 +68,17 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
                 `http://localhost:8080/integrantes/${user.id}`,
                 {
                   method: 'PUT',
-                  body: JSON.stringify(values),
+                  body: JSON.stringify({
+                    notas: values.notas,
+                    precio: parseFloat(values.precio),
+                    descuento: parseFloat(values.descuento),
+                    preciofinal: parseFloat(values.preciofinal)
+                  }),
                   headers: {
                     'Content-Type': 'application/json'
                   }
                 }
               );
-
               if (!response.ok) {
                 throw new Error(
                   'Error en la solicitud PUT: ' + response.status
@@ -80,7 +101,7 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
           }}
           validationSchema={nuevoNotaSchema}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
             <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
               <Form className="formulario max-sm:w-[300px] bg-white ">
                 <div className="flex justify-between items-center mt-3 mx-5 pb-2">
@@ -109,37 +130,53 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
                 <div className="mb-4 px-4">
                   <Field
                     id="precio"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Precio"
                     name="precio"
+                    type="text"
+                    className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    placeholder="Precio"
                     maxLength="14"
+                    onChange={(e) => {
+                      setFieldValue('precio', e.target.value);
+                      handlePrecioChange(
+                        { ...values, precio: e.target.value },
+                        setFieldValue
+                      );
+                    }}
                   />
                 </div>
                 <div className="mb-4 px-4">
                   <Field
                     id="descuento"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Descuento"
                     name="descuento"
+                    type="text"
+                    className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    placeholder="Descuento"
                     maxLength="14"
+                    onChange={(e) => {
+                      setFieldValue('descuento', e.target.value);
+                      handlePrecioChange(
+                        { ...values, descuento: e.target.value },
+                        setFieldValue
+                      );
+                    }}
                   />
                 </div>
                 <div className="mb-4 px-4">
                   <Field
                     id="preciofinal"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Precio Final"
                     name="preciofinal"
+                    type="text"
+                    className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    placeholder="Precio Final"
                     maxLength="14"
+                    readOnly
+                    value={values.preciofinal}
                   />
                 </div>
                 <div className="mx-auto flex justify-center my-5">
                   <button
                     type="submit"
-                    className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
+                    className="bg-orange-500 py-2 px-5 rounded-xl text-white font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                     id="click2"
                     disabled={isSubmitting}
                   >
