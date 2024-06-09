@@ -82,6 +82,11 @@ const AdminPage = () => {
                 Ver Preguntas Frecuentes
               </button>
             </div>
+            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+              <button className="btnstaff">
+                Vendedores
+              </button>
+            </div>
           </div>
         </div>
       </section>

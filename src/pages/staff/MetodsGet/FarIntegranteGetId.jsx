@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
-import "../../../styles/MetodsGet/GetUserId.css";
+import React, { useState } from 'react';
+import '../../../styles/MetodsGet/GetUserId.css';
 import FormAltaNota from '../../../components/Forms/FormAltaNota';
 import { Link } from 'react-router-dom';
-import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
-import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
+import FormAltaNotaFam from '../../../components/Forms/FormAltaNotaFam';
+// import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
+// import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
 
 const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
   if (!isOpen) {
@@ -12,7 +13,6 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
   const [modalNewConve, setmodalNewConve] = useState(false);
   const [modalNewConve2, setmodalNewConve2] = useState(false);
 
- 
   const abrirModal = () => {
     setmodalNewConve(true);
   };
@@ -33,7 +33,7 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
       <div className="modal-content">
         <div className="flex justify-between text-[20px] pb-4 items-center">
           <h2 className="font-bignoodle tracking-wide text-[#fc4b08]">
-            Detalles del Integrante
+            Detalles del Familiar
           </h2>
           <div className="pr-2 cursor-pointer font-semibold" onClick={onClose}>
             x
@@ -69,26 +69,11 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
             </button>
           </Link>
           {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaNota
+          <FormAltaNotaFam
             isOpen={modalNewConve}
             onClose={cerarModal}
             user={user}
           />
-
-          <Link to={`/dashboard/integrantes/${user.id}/integrantesfam/`}>
-            <button
-              onClick={abrirModal2}
-              className=" ml-5 bg-[#298dc0] hover:bg-[#1a4469] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-            >
-              Ver Familiar
-            </button>
-          </Link>
-{/*         
-          <FormAltaFamiliarI
-            isOpen={modalNewConve2}
-            onClose={cerarModal2}
-            user={user}
-          /> */}
         </div>
       </div>
     </div>

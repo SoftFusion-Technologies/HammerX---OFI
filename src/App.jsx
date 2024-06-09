@@ -56,7 +56,7 @@ const ClasesGet = lazy(() => import('./pages/staff/MetodsGet/FreeClassGet'));
 const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AdmConveGet = lazy(() => import('./pages/staff/MetodsGet/AdmConveGet'));
 const IntegranteConveGet= lazy(() => import('./pages/staff/MetodsGet/IntegranteConveGet'));
-
+const FamIntegranteGet = lazy(() =>  import('./pages/staff/MetodsGet/FamIntegranteGet'));
 const AltaUserForm = lazy(() => import('./components/Forms/FormAltaUser'));
 const AltaNovedadForm = lazy(() => import('./components/Forms/FormAltaNovedad'));
 const AltaTaskForm = lazy(() => import('./components/Forms/FormAltaTask'));
@@ -125,11 +125,12 @@ const App = memo(() => {
                 <Ruta path="/dashboard/admconvenios" element={<ProtectedRoute>  <AdmConveGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 {/* <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/" element={<IntegranteConveGet />} />
+                <Ruta path="/dashboard/integrantes/:id_integrante/integrantesfam/" element={<FamIntegranteGet />} />
 
                 {/* Rutas para obtener por los registros por id*/}
                 <Ruta path="/users/:id" element={<UserDetails/>} />
                 <Ruta path="/postulantes/:id" element={<PostulanteDetails/>} />
-                <Ruta path="/integranets/:id" element={<IntegranteDetails/>} />
+                <Ruta path="/integrantes/:id" element={<IntegranteDetails/>} />
               </Rutas>
           </>
         )}
