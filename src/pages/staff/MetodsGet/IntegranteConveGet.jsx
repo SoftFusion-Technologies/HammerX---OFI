@@ -22,12 +22,16 @@ import '../../../styles/MetodsGet/Tabla.css';
 import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
 import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
+import IntegranteDetails from './IntegranteConveGetId';
 
 const IntegranteConveGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
   const { id_conv, id_adm } = useParams();
   const [integrante, setIntegrantes] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
+
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
+  const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   const abrirModal = () => {
     setmodalNewConve(true);
@@ -101,19 +105,14 @@ const IntegranteConveGet = ({ integrantes }) => {
   const obtenerIntegrante = async (id) => {
     try {
       const url = `${URL}${id}`;
-
-      console.log(url);
-
       const respuesta = await fetch(url);
-
       const resultado = await respuesta.json();
-
-      setIntegrantes(resultado);
+      setSelectedUser(resultado);
+      setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log(error);
+      console.log("Error al obtener el integrante:", error);
     }
   };
-
   const searcher = (e) => {
     setSearch(e.target.value);
   };
@@ -301,6 +300,13 @@ const IntegranteConveGet = ({ integrantes }) => {
           />
         </div>
       </div>
+      {selectedUser && (
+        <IntegranteDetails
+          user={selectedUser}
+          isOpen={modalUserDetails}
+          onClose={() => setModalUserDetails(false)}
+        />
+      )}
       <Footer />
     </>
   );

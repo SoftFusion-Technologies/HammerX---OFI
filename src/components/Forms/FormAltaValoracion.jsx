@@ -14,53 +14,53 @@
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import ModalSuccess from './ModalSuccess';
-import ModalError from './ModalError';
-import Alerta from '../Error';
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import ModalSuccess from "./ModalSuccess";
+import ModalError from "./ModalError";
+import Alerta from "../Error";
 
 const FormAltaValoracion = ({ isOpen, onClose, user }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
 
-  const textoModal = 'Se valoró correctamente el postulante.';
+  const textoModal = "Se valoró correctamente el postulante.";
 
   const nuevoValSchema = Yup.object().shape({
-    valoracion: Yup.string().required('La valoración es obligatoria'),
-    observaciones: Yup.string().required('Las observaciones son obligatorias')
+    valoracion: Yup.string().required("La valoración es obligatoria"),
+    observaciones: Yup.string().required("Las observaciones son obligatorias"),
   });
 
   return (
     <div
-      className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
-        isOpen ? 'block' : 'hidden'
+      className={`h-screen w-screen fixed inset-0 flex pt-10 justify-center items-center ${
+        isOpen ? "block" : "hidden"
       } bg-gray-800 bg-opacity-75 z-50`}
     >
       <div className={`container-inputs`}>
         <Formik
           initialValues={{
-            valoracion: '',
-            observaciones: ''
+            valoracion: "",
+            observaciones: "",
           }}
           onSubmit={async (values, { resetForm }) => {
             try {
               const response = await fetch(
                 `http://localhost:8080/postulantes/${user.id}`,
                 {
-                  method: 'PUT',
+                  method: "PUT",
                   body: JSON.stringify(values),
                   headers: {
-                    'Content-Type': 'application/json'
-                  }
+                    "Content-Type": "application/json",
+                  },
                 }
               );
 
               if (!response.ok) {
                 throw new Error(
-                  'Error en la solicitud PUT: ' + response.status
+                  "Error en la solicitud PUT: " + response.status
                 );
               }
 
@@ -69,7 +69,7 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
                 setShowModal(false);
               }, 3000);
             } catch (error) {
-              console.error('Error al insertar el registro:', error.message);
+              console.error("Error al insertar el registro:", error.message);
               setErrorModal(true);
               setTimeout(() => {
                 setErrorModal(false);
@@ -83,38 +83,46 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
           {({ isSubmitting }) => (
             <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
               <Form className="formulario max-sm:w-[300px] bg-white ">
-                <div className="flex justify-between">
-                  <div className="tools">
-                    <div className="circle">
-                      <span className="red toolsbox"></span>
-                    </div>
-                    <div className="circle">
-                      <span className="yellow toolsbox"></span>
-                    </div>
-                    <div className="circle">
-                      <span className="green toolsbox"></span>
-                    </div>
-                  </div>
+                <div className="flex justify-between items-center mt-3 mx-5 pb-2">
+                  <h1 className="">
+                    <span className="text-orange-600">Postulante: </span>{" "}
+                    {user.name}
+                  </h1>
                   <div
-                    className="pr-6 pt-3 text-[20px] cursor-pointer"
+                    className="text-[20px] cursor-pointer font-semibold" 
                     onClick={onClose}
                   >
                     x
                   </div>
                 </div>
-                <h1 className="mb-3 px-4">
-                  <span className='text-orange-600'>Postulante: </span> {user.name}
-                </h1>
 
                 <div className="mb-3 px-4">
-                  <Field
+                  {/* <Field
                     id="valoracion"
                     type="text"
                     className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                     placeholder="Valorar"
                     name="valoracion"
                     maxLength="70"
-                  />
+                  /> */}
+                  <Field
+                    as="select"
+                    id="sede"
+                    name="sede"
+                    placeholder="Valoración"
+                    className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                    required
+                  >
+                    Valorar
+                    <option value="" disabled selected>
+                      Valoración
+                    </option>
+                    <option value="1">Muy Mala</option>
+                    <option value="2">Mala</option>
+                    <option value="3">Normal</option>
+                    <option value="4">Buena</option>
+                    <option value="5">Muy Buena</option>
+                  </Field>
                 </div>
                 <div className="mb-3 px-4">
                   <Field
@@ -153,7 +161,7 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
 };
 
 FormAltaValoracion.defaultProps = {
-  valoracion: {}
+  valoracion: {},
 };
 
 export default FormAltaValoracion;

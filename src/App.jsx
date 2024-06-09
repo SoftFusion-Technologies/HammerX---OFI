@@ -28,6 +28,7 @@ import ProtectedRoute from './ProtectedRoute';
 import PreguntasFrecuentesGet from './pages/staff/MetodsGet/FrequentAsksGet';
 import UserDetails from './pages/staff/MetodsGet/UserGetId';
 import PostulanteDetails from './pages/staff/MetodsGet/PostulanteGetId';
+import IntegranteDetails from './pages/staff/MetodsGet/IntegranteConveGetId';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -128,6 +129,7 @@ const App = memo(() => {
                 {/* Rutas para obtener por los registros por id*/}
                 <Ruta path="/users/:id" element={<UserDetails/>} />
                 <Ruta path="/postulantes/:id" element={<PostulanteDetails/>} />
+                <Ruta path="/integranets/:id" element={<IntegranteDetails/>} />
               </Rutas>
           </>
         )}

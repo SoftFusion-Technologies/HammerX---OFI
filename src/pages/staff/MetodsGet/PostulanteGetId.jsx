@@ -54,7 +54,8 @@ const PostulanteDetails = ({ user, isOpen, onClose, obtenerPostulantes }) => {
           {user.observaciones}
         </p>
 
-        <div className="flex justify-center pb-10">
+        <hr className='my-4'/>
+        <div className="flex justify-center ">
           <Link to="#">
             <button
               onClick={abrirModal}

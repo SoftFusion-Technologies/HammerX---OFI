@@ -11,17 +11,17 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { formatearFecha } from '../../../Helpers';
-import { Link } from 'react-router-dom';
-import NavbarStaff from '../NavbarStaff';
-import '../../../styles/MetodsGet/Tabla.css';
-import '../../../styles/staff/background.css';
-import Footer from '../../../components/footer/Footer';
-import FormAltaConve from '../../../components/Forms/FormAltaConve';
-import IntegranteConveGet from './IntegranteConveGet';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { formatearFecha } from "../../../Helpers";
+import { Link } from "react-router-dom";
+import NavbarStaff from "../NavbarStaff";
+import "../../../styles/MetodsGet/Tabla.css";
+import "../../../styles/staff/background.css";
+import Footer from "../../../components/footer/Footer";
+import FormAltaConve from "../../../components/Forms/FormAltaConve";
+import IntegranteConveGet from "./IntegranteConveGet";
+import { useNavigate } from "react-router-dom";
 
 const AdmConveGet = () => {
   // Estado para almacenar la lista de personas
@@ -39,10 +39,10 @@ const AdmConveGet = () => {
     obtenerConves();
   };
   // Estado para almacenar el término de búsqueda
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/admconvenios/';
+  const URL = "http://localhost:8080/admconvenios/";
 
   const handleVerIntegrantes = (id) => {
     setSelectedConve(id);
@@ -62,17 +62,17 @@ const AdmConveGet = () => {
       const response = await axios.get(URL);
       setConve(response.data);
     } catch (error) {
-      console.log('Error al obtener las personas :', error);
+      console.log("Error al obtener las personas :", error);
     }
   };
 
   const handleEliminarConve = async (id) => {
-    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    const confirmacion = window.confirm("¿Seguro que desea eliminar?");
     if (confirmacion) {
       try {
         const url = `${URL}${id}`;
         const respuesta = await fetch(url, {
-          method: 'DELETE'
+          method: "DELETE",
         });
         await respuesta.json();
         const arrayConve = conve.filter((conve) => conve.id !== id);
@@ -196,7 +196,7 @@ const AdmConveGet = () => {
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Convenio NO Existe ||{' '}
+              El Convenio NO Existe ||{" "}
               <span className="text-span"> Convenio: {results.length}</span>
             </p>
           ) : (
@@ -204,17 +204,21 @@ const AdmConveGet = () => {
               <div style={styles.container}>
                 {results.map((conve) => (
                   <div key={conve.id} style={styles.conveBox}>
-                    <h2>{conve.nameConve}</h2>
+                    <h2 className="font-semibold">{conve.nameConve}</h2>
                     <p>{conve.descConve}</p>
                     <Link
                       to={`/dashboard/admconvenios/${conve.id}/integrantes/`}
                     >
-                      Ver Integrantes
+                      <button 
+                        style={{ ...styles.button, backgroundColor: "#fc4b08" }}
+                      >
+                        Ver Integrantes
+                      </button>
                     </Link>
-                
+
                     <button
                       onClick={() => handleEliminarConve(conve.id)}
-                      style={{ ...styles.button, backgroundColor: 'red' }}
+                      style={{ ...styles.button, backgroundColor: "red" }}
                     >
                       Eliminar
                     </button>
@@ -237,41 +241,41 @@ const AdmConveGet = () => {
 
 const styles = {
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    gap: '10px'
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: "10px",
   },
   conveBox: {
-    border: '1px solid #ccc',
-    padding: '16px',
-    borderRadius: '8px',
-    boxSizing: 'border-box',
-    flex: '1 1 calc(33% - 20px)', // Ajusta el ancho para permitir más espacio entre cuadros
-    margin: '10px',
-    minWidth: '250px' // Ajusta el tamaño mínimo para que los cuadros no sean demasiado pequeños
+    border: "1px solid #ccc",
+    padding: "16px",
+    borderRadius: "8px",
+    boxSizing: "border-box",
+    flex: "1 1 calc(33% - 20px)", // Ajusta el ancho para permitir más espacio entre cuadros
+    margin: "10px",
+    minWidth: "250px", // Ajusta el tamaño mínimo para que los cuadros no sean demasiado pequeños
   },
   button: {
-    margin: '5px',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    fontSize: '14px'
+    margin: "10px 10px 0px 0px",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    cursor: "pointer",
+    backgroundColor: "#007BFF",
+    color: "white",
+    border: "none",
+    fontSize: "14px",
   },
   // Media queries
-  '@media (max-width: 1200px)': {
+  "@media (max-width: 1200px)": {
     conveBox: {
-      flex: '1 1 calc(50% - 20px)' // Dos columnas para pantallas medianas
-    }
+      flex: "1 1 calc(50% - 20px)", // Dos columnas para pantallas medianas
+    },
   },
-  '@media (max-width: 768px)': {
+  "@media (max-width: 768px)": {
     conveBox: {
-      flex: '1 1 calc(100% - 20px)' // Una columna para pantallas pequeñas
-    }
-  }
+      flex: "1 1 calc(100% - 20px)", // Una columna para pantallas pequeñas
+    },
+  },
 };
 
 export default AdmConveGet;
