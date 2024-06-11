@@ -11,6 +11,7 @@ import comercio6 from '../../images/marcas/comercio6.png'
 import comercio7 from '../../images/marcas/comercio7.png'
 import comercio8 from '../../images/marcas/comercio8.png';
 import comercio9 from '../../images/marcas/comercio9.png'; //Imagen importada por Lucas ALbornoz - mar. 2 abr. 2024
+import comercio10 from '../../images/marcas/comercio10.png';
 
 
 const Marcas = () => {
@@ -104,6 +105,9 @@ const Marcas = () => {
         <div title="sin página">
           <img className="h-10 mx-auto" src={comercio8} alt="bear fit" /> 
           {/* se agrega el comercio faltante - cambio aplicado por Benjamin Orellana - 27/03/24*/}
+        </div>
+        <div title="sin página">
+          <img className="h-10 mx-auto" src={comercio10} alt="Look fit" />
         </div>
       </Slider>
     </div>
