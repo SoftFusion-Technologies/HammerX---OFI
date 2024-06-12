@@ -7,6 +7,7 @@ import "../../styles/staff/background.css";
 import Footer from "../../components/footer/Footer";
 import TituloPreguntasModal from "./MetodsGet/TituloPreguntasModal";
 import PreguntaDetalleModal from "./MetodsGet/PreguntaDetalleModal";
+import { useAuth } from "../../AuthContext";
 
 const AdminPage = () => {
   const [modalPreguntasOpen, setModalPreguntasOpen] = useState(false);
@@ -14,6 +15,8 @@ const AdminPage = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(null);
   const URL = 'http://localhost:8080/ask/';
+
+   const { userLevel } = useAuth();
 
   const abrirModalPreguntas = async () => {
     try {
@@ -55,13 +58,15 @@ const AdminPage = () => {
               </Link>
             </div>
 
+            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
             <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
               <Link to="/dashboard/testclass">
                 <button className="btnstaff">Leads y Prospectos</button>
               </Link>
             </div>
+            )}
 
-            {(userRole === 'administrador' || userRole === 'vendedor') && (
+            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/admconvenios">
                   <button className="btnstaff">Convenios</button>
@@ -69,7 +74,7 @@ const AdminPage = () => {
               </div>
             )}
 
-            {userRole === 'administrador' && (
+            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
                 <Link to="/dashboard/postulantes">
                   <button className="btnstaff">CV's Recibidos</button>
@@ -82,11 +87,14 @@ const AdminPage = () => {
                 Ver Preguntas Frecuentes
               </button>
             </div>
+
+            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
             <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
               <button className="btnstaff">
                 Vendedores
               </button>
             </div>
+            )}
           </div>
         </div>
       </section>
