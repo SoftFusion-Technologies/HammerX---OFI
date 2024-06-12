@@ -60,7 +60,7 @@ const LoginForm = () => {
         .post("http://localhost:8080/login", values)
         .then((res) => {
           if (res.data.message === "Success") {
-            login(res.data.token, values.email);
+            login(res.data.token, values.email, res.data.level);
             navigate("/dashboard");
           } else {
             setModalMessage("Usuario o Contraseña incorrectos");
