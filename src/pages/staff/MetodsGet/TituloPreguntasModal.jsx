@@ -37,7 +37,7 @@ const TituloPreguntasModal = ({ isOpen, onClose, preguntas, onPreguntaSelect }) 
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-black bg-opacity-50">
-      <div className="modal-content bg-white p-6 rounded shadow-lg">
+      <div className="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl mx-auto overflow-y-auto max-h-full">
         <button
           className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-700 cursor-pointer"
           onClick={onClose}
@@ -66,6 +66,7 @@ const TituloPreguntasModal = ({ isOpen, onClose, preguntas, onPreguntaSelect }) 
             placeholder="Buscar pregunta..."
             value={search}
             onChange={handleSearchChange}
+            className="border p-2 rounded w-full max-w-lg"
           />
         </form>
         {/* formulario de busqueda */}
