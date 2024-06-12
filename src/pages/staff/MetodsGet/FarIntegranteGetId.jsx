@@ -3,6 +3,8 @@ import '../../../styles/MetodsGet/GetUserId.css';
 import FormAltaNota from '../../../components/Forms/FormAltaNota';
 import { Link } from 'react-router-dom';
 import FormAltaNotaFam from '../../../components/Forms/FormAltaNotaFam';
+import { useAuth } from '../../../AuthContext';
+
 // import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
 // import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
 
@@ -12,6 +14,7 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
   }
   const [modalNewConve, setmodalNewConve] = useState(false);
   const [modalNewConve2, setmodalNewConve2] = useState(false);
+  const { userLevel } = useAuth();
 
   const abrirModal = () => {
     setmodalNewConve(true);
@@ -60,14 +63,23 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
 
         <hr className="my-4" />
         <div className="flex justify-center ">
-          <Link to="#">
-            <button
-              onClick={abrirModal}
-              className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-            >
-              Agregar Nota
-            </button>
-          </Link>
+          {
+            /*
+                      userLevel === 'gerente' ||
+                      userLevel === 'vendedor' ||
+                      userLevel === 'convenio' ||
+                      */
+            (userLevel === 'admin' || userLevel === 'administrador') && (
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Agregar Nota
+                </button>
+              </Link>
+            )
+          }
           {/* Modal para abrir formulario de clase gratis */}
           <FormAltaNotaFam
             isOpen={modalNewConve}

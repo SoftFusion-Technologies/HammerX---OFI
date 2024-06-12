@@ -50,16 +50,18 @@ const AdminPage = () => {
       <section className="relative w-full h-contain mx-auto bg-white">
         <div className="dashboardbg">
           <div className="xl:px-0 sm:px-16 px-6 max-w-7xl mx-auto grid grid-cols-2 max-sm:grid-cols-1 max-md:gap-y-10 md:gap-10 py-28 sm:pt-44 lg:pt-28 md:w-5/6 ">
-            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
-              <Link to="/dashboard/novedades">
-                <button className="btnstaff">Foro de Novedades</button>
-              </Link>
-            </div>
+            {(userLevel === 'admin' || userLevel === 'administrador') && (
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
+                <Link to="/dashboard/novedades">
+                  <button className="btnstaff">Foro de Novedades</button>
+                </Link>
+              </div>
+            )}
 
-            {(userLevel === "gerente" ||
-              userLevel === "admin" ||
-              userLevel === "vendedor" ||
-              userLevel === "administrador") && (
+            {(userLevel === 'gerente' ||
+              userLevel === 'admin' ||
+              userLevel === 'vendedor' ||
+              userLevel === 'administrador') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
                 <Link to="/dashboard/testclass">
                   <button className="btnstaff">Leads y Prospectos</button>
@@ -67,10 +69,11 @@ const AdminPage = () => {
               </div>
             )}
 
-            {(userLevel === "gerente" ||
-              userLevel === "admin" ||
-              userLevel === "vendedor" ||
-              userLevel === "administrador") && (
+            {(userLevel === 'gerente' ||
+              userLevel === 'admin' ||
+              userLevel === 'vendedor' ||
+              userLevel === 'convenio' ||
+              userLevel === 'administrador') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/admconvenios">
                   <button className="btnstaff">Convenios</button>
@@ -78,10 +81,10 @@ const AdminPage = () => {
               </div>
             )}
 
-            {(userLevel === "gerente" ||
-              userLevel === "admin" ||
-              userLevel === "vendedor" ||
-              userLevel === "administrador") && (
+            {(userLevel === 'gerente' ||
+              userLevel === 'admin' ||
+              userLevel === 'vendedor' ||
+              userLevel === 'administrador') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
                 <Link to="/dashboard/postulantes">
                   <button className="btnstaff">CV's Recibidos</button>
@@ -89,10 +92,10 @@ const AdminPage = () => {
               </div>
             )}
 
-            {(userLevel === "gerente" ||
-              userLevel === "admin" ||
-              userLevel === "vendedor" ||
-              userLevel === "administrador") && (
+            {(userLevel === 'gerente' ||
+              userLevel === 'admin' ||
+              userLevel === 'vendedor' ||
+              userLevel === 'administrador') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
                 <button className="btnstaff">Vendedores</button>
               </div>
@@ -104,10 +107,17 @@ const AdminPage = () => {
               href="#"
               onClick={abrirModalPreguntas}
             >
-              <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#fc4b08]"></span>
-              <span className="fold-bold relative inline-block rounded border-2 border-[#343333] bg-white px-3 py-1 text-base font-bold text-[#fc4b08] transition duration-100 hover:bg-[#fc4b08] hover:text-white">
-                VER FAQs
-              </span>
+              {(userLevel === 'gerente' ||
+                userLevel === 'admin' ||
+                userLevel === 'vendedor' ||
+                userLevel === 'administrador') && (
+                <div>
+                  <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#fc4b08]"></span>
+                  <span className="fold-bold relative inline-block rounded border-2 border-[#343333] bg-white px-3 py-1 text-base font-bold text-[#fc4b08] transition duration-100 hover:bg-[#fc4b08] hover:text-white">
+                    VER FAQs
+                  </span>
+                </div>
+              )}
             </a>
           </div>
         </div>

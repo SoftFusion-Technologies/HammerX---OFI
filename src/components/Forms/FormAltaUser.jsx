@@ -133,8 +133,9 @@ const FormAltaUser = ({ isOpen, onClose }) => {
         >
           {({ errors, touched }) => {
             return (
-
-              <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+              <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
+                {' '}
+                {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                 <Form className="formulario max-sm:w-[300px] bg-white ">
                   <div className="flex justify-between">
                     <div className="tools">
@@ -148,9 +149,13 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                         <span className="green toolsbox"></span>
                       </div>
                     </div>
-                    <div className="pr-6 pt-3 text-[20px] cursor-pointer" onClick={onClose}>x</div>
+                    <div
+                      className="pr-6 pt-3 text-[20px] cursor-pointer"
+                      onClick={onClose}
+                    >
+                      x
+                    </div>
                   </div>
-
 
                   <div className="mb-3 px-4">
                     <Field
@@ -191,9 +196,18 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Tipo de Usuario:
                       </option>
+                    {/* Cambio realizado por Benjamin Orellana 12/06/2024 - INICIO
+                      Se reemplaza el valor del administrador por el de Admin para que pueda tomar el level
                       <option value="administrador">Administrador</option>
+                       */}
+                      <option value="admin">Administrador</option>
                       <option value="vendedor">Vendedor</option>
                       <option value="gerente">Gerente</option>
+                      {/* Se agrega nuevo rol para que los convenios puedan cargar sus Usuarios */}
+                      <option value="convenio">Convenio</option>
+
+                    {/* Cambio realizado por Benjamin Orellana 12/06/2024 - FINAL */}
+
                     </Field>
                     {errors.level && touched.level ? (
                       <Alerta>{errors.level}</Alerta>
@@ -253,7 +267,6 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                       id="click2"
                     />
-
                   </div>
                 </Form>
               </div>

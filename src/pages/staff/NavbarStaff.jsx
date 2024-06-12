@@ -10,6 +10,8 @@ const NavbarStaff = () => {
   const { logout, userName } = useAuth(); // utilizamos la funcion logout de authcontext
   const navigate = useNavigate(); // redirigimos a /login
 
+  const { userLevel } = useAuth();
+
   const [displayUserName, setDisplayUserName] = useState("");
 
   useEffect(() => {
@@ -27,33 +29,54 @@ const NavbarStaff = () => {
     navigate("/login");
   };
 
-  const Links = [
-    {
-      id: 1,
-      href: "",
-      title: "Dashboard",
-    },
-    {
-      id: 2,
-      href: "users",
-      title: "Usuarios",
-    },
-    {
-      id: 3,
-      href: "frequent-asks",
-      title: "Preguntas Frecuentes",
-    },
-    {
-      id: 4,
-      href: "task",
-      title: "Programar Tarea",
-    },
-    // {
-    //   id: 5,
-    //   href: "administrar-textos",
-    //   title: "Administrar Textos"
-    // },
-  ];
+     {
+       (userLevel === 'gerente' ||
+         userLevel === 'admin' ||
+         userLevel === 'vendedor' ||
+         userLevel === 'convenio' ||
+         userLevel === 'administrador') && (
+         <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
+           <Link to="/dashboard/admconvenios">
+             <button className="btnstaff">Convenios</button>
+           </Link>
+         </div>
+       );
+  }
+  
+const Links = [
+  {
+    id: 1,
+    href: '',
+    title: 'Dashboard',
+    roles: ['gerente', 'admin', 'vendedor', 'administrador'] // Benjamin Orellana INI / 12/06/2024 /nueva forma de gestionar los accesos 
+  },
+  {
+    id: 2,
+    href: 'users',
+    title: 'Usuarios',
+    roles: ['admin', 'administrador']
+  },
+  {
+    id: 3,
+    href: 'frequent-asks',
+    title: 'Preguntas Frecuentes',
+    roles: ['vendedor', 'administrador']
+  },
+  {
+    id: 4,
+    href: 'task',
+    title: 'Programar Tarea',
+    roles: ['admin', 'administrador']
+  }
+  // {
+  //   id: 5,
+  //   href: "administrar-textos",
+  //   title: "Administrar Textos",
+  //   roles: ['admin']
+  // },
+];
+
+  const filteredLinks = Links.filter((link) => link.roles.includes(userLevel));
 
   return (
     <>
@@ -67,11 +90,11 @@ const NavbarStaff = () => {
           </div>
           <div>
             <ul className="list-none hidden lg:flex flex-row gap-10">
-              {Links.map((link) => (
+              {filteredLinks.map((link) => (
                 <li
                   key={link.id}
                   className={`${
-                    active === link.title ? "text-[#fc4b08]" : "text-black"
+                    active === link.title ? 'text-[#fc4b08]' : 'text-black'
                   } hover:text-orange-500 text-[16px] cursor-pointer `}
                   onClick={() => setActive(link.title)}
                 >
@@ -101,17 +124,17 @@ const NavbarStaff = () => {
             />
             <div
               className={`${
-                !toggle ? "hidden" : "flex"
+                !toggle ? 'hidden' : 'flex'
               }  p-6 bg-white absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-lg flex flex-col`}
             >
               <h1 className="select-none"> ¡Bienvenido {displayUserName}! </h1>
               <hr className="my-4" />
               <ul className="list-none flex justify-end items-start flex-col gap-4">
-                {Links.map((link) => (
+                {filteredLinks.map((link) => (
                   <li
                     key={link.id}
                     className={`${
-                      active === link.title ? "text-[#fc4b08]" : "text-black"
+                      active === link.title ? 'text-[#fc4b08]' : 'text-black'
                     } hover:text-orange-500 text-[16px] cursor-pointer `}
                     onClick={() => {
                       setToggle(!toggle);

@@ -22,6 +22,7 @@ import Footer from "../../../components/footer/Footer";
 import FormAltaConve from "../../../components/Forms/FormAltaConve";
 import IntegranteConveGet from "./IntegranteConveGet";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../../AuthContext';
 
 const AdmConveGet = () => {
   // Estado para almacenar la lista de personas
@@ -30,6 +31,8 @@ const AdmConveGet = () => {
   const [integrantes, setIntegrantes] = useState([]);
   const [selectedConve, setSelectedConve] = useState(null);
   const navigate = useNavigate(); // Hook para navegación
+
+  const { userLevel } = useAuth();
 
   const abrirModal = () => {
     setmodalNewConve(true);
@@ -183,20 +186,28 @@ const AdmConveGet = () => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nuevo Convenio
-              </button>
-            </Link>
-          </div>
+          {
+            /* userLevel === 'gerente' || */
+            /* userLevel === 'vendedor' || */
+            /* userLevel === 'convenio' || Se elimina la visualizacion para que  la persona que entre con este rol no pueda crear un convenio*/
+            /* Unicos roles que pueden dar Alta un nuevo convenio */
+            (userLevel === 'admin' || userLevel === 'administrador') && (
+              <div className="flex justify-center pb-10">
+                <Link to="#">
+                  <button
+                    onClick={abrirModal}
+                    className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                  >
+                    Nuevo Convenio
+                  </button>
+                </Link>
+              </div>
+            )
+          }
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Convenio NO Existe ||{" "}
+              El Convenio NO Existe ||{' '}
               <span className="text-span"> Convenio: {results.length}</span>
             </p>
           ) : (
@@ -209,19 +220,27 @@ const AdmConveGet = () => {
                     <Link
                       to={`/dashboard/admconvenios/${conve.id}/integrantes/`}
                     >
-                      <button 
-                        style={{ ...styles.button, backgroundColor: "#fc4b08" }}
+                      <button
+                        style={{ ...styles.button, backgroundColor: '#fc4b08' }}
                       >
                         Ver Integrantes
                       </button>
                     </Link>
 
-                    <button
-                      onClick={() => handleEliminarConve(conve.id)}
-                      style={{ ...styles.button, backgroundColor: "red" }}
-                    >
-                      Eliminar
-                    </button>
+                    {(/*
+                      userLevel === 'gerente' ||
+                      userLevel === 'vendedor' ||
+                      userLevel === 'convenio' ||
+                      */
+                      userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <button
+                        onClick={() => handleEliminarConve(conve.id)}
+                        style={{ ...styles.button, backgroundColor: 'red' }}
+                      >
+                        Eliminar
+                      </button>
+                    )}
                   </div>
                 ))}
                 {selectedConve && (

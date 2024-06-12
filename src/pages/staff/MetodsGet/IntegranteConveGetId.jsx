@@ -4,6 +4,7 @@ import FormAltaNota from '../../../components/Forms/FormAltaNota';
 import { Link } from 'react-router-dom';
 import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
 import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
+import { useAuth } from '../../../AuthContext';
 
 const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
   if (!isOpen) {
@@ -11,6 +12,8 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
   }
   const [modalNewConve, setmodalNewConve] = useState(false);
   const [modalNewConve2, setmodalNewConve2] = useState(false);
+
+  const { userLevel } = useAuth();
 
  
   const abrirModal = () => {
@@ -60,14 +63,24 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
 
         <hr className="my-4" />
         <div className="flex justify-center ">
-          <Link to="#">
-            <button
-              onClick={abrirModal}
-              className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-            >
-              Agregar Nota
-            </button>
-          </Link>
+          {
+            /*
+                      userLevel === 'gerente' ||
+                      userLevel === 'vendedor' ||
+                      userLevel === 'convenio' ||
+                      */
+            (userLevel === 'admin' || userLevel === 'administrador') && (
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Agregar Nota
+                </button>
+              </Link>
+            )
+          }
+
           {/* Modal para abrir formulario de clase gratis */}
           <FormAltaNota
             isOpen={modalNewConve}
@@ -83,7 +96,7 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
               Ver Familiar
             </button>
           </Link>
-{/*         
+          {/*         
           <FormAltaFamiliarI
             isOpen={modalNewConve2}
             onClose={cerarModal2}

@@ -24,12 +24,15 @@ import Footer from '../../../components/footer/Footer';
 import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegranteConve';
 import IntegranteDetails from './IntegranteConveGetId';
 
+import { useAuth } from '../../../AuthContext';
+
 const IntegranteConveGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
   const { id_conv, id_adm } = useParams();
   const [integrante, setIntegrantes] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
   const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
+  const { userLevel } = useAuth();
 
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
@@ -281,17 +284,27 @@ const formatearMoneda = (valor) => {
                       </td> */}
 
                       {/* ACCIONES */}
-                      <td className="">
-                        <button
-                          onClick={() =>
-                            handleEliminarIntegrante(integrante.id)
-                          }
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
+                      {
+                        /*
+                      userLevel === 'gerente' ||
+                      userLevel === 'vendedor' ||
+                      userLevel === 'convenio' ||
+                      */
+                        (userLevel === 'admin' ||
+                          userLevel === 'administrador') && (
+                          <td className="">
+                            <button
+                              onClick={() =>
+                                handleEliminarIntegrante(integrante.id)
+                              }
+                              type="button"
+                              className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                              Eliminar
+                            </button>
+                          </td>
+                        )
+                      }
                     </tr>
                   ))}
                 </tbody>

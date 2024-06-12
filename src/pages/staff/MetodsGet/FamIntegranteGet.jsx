@@ -23,8 +23,11 @@ import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
 import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
 import FamIntegranteGetId from './FarIntegranteGetId'
+import { useAuth } from '../../../AuthContext';
+
 const FamIntegranteGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
+  const { userLevel } = useAuth();
   const { id_integrante, id_adm } = useParams();
   const [integrante, setIntegrantes] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
@@ -279,17 +282,28 @@ const FamIntegranteGet = ({ integrantes }) => {
                       </td> */}
 
                       {/* ACCIONES */}
-                      <td className="">
-                        <button
-                          onClick={() =>
-                            handleEliminarIntegrante(integrante.id)
-                          }
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
+                      {/* ACCIONES */}
+                      {
+                        /*
+                      userLevel === 'gerente' ||
+                      userLevel === 'vendedor' ||
+                      userLevel === 'convenio' ||
+                      */
+                        (userLevel === 'admin' ||
+                          userLevel === 'administrador') && (
+                          <td className="">
+                            <button
+                              onClick={() =>
+                                handleEliminarIntegrante(integrante.id)
+                              }
+                              type="button"
+                              className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                              Eliminar
+                            </button>
+                          </td>
+                        )
+                      }
                     </tr>
                   ))}
                 </tbody>
