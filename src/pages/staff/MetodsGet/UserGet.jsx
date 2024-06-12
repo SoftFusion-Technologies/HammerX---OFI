@@ -33,7 +33,8 @@ const UserGet = () => {
   };
   const cerarModal = () => {
     setModalNewUser(false);
-    obtenerAsk(); // Llama a la función para obtener los datos actualizados
+    // obtenerAsk(); // Llama a la función para obtener los datos actualizados
+    obtenerUsers();
   };
 
   //URL estatica, luego cambiar por variable de entorno

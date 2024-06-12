@@ -28,27 +28,13 @@ const NavbarStaff = () => {
     logout();
     navigate("/login");
   };
-
-     {
-       (userLevel === 'gerente' ||
-         userLevel === 'admin' ||
-         userLevel === 'vendedor' ||
-         userLevel === 'convenio' ||
-         userLevel === 'administrador') && (
-         <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
-           <Link to="/dashboard/admconvenios">
-             <button className="btnstaff">Convenios</button>
-           </Link>
-         </div>
-       );
-  }
   
 const Links = [
   {
     id: 1,
     href: '',
     title: 'Dashboard',
-    roles: ['gerente', 'admin', 'vendedor', 'administrador'] // Benjamin Orellana INI / 12/06/2024 /nueva forma de gestionar los accesos 
+    roles: ['gerente', 'admin', 'vendedor', 'administrador'] // Benjamin Orellana INI / 12/06/2024 /nueva forma de gestionar los accesos
   },
   {
     id: 2,
@@ -60,7 +46,7 @@ const Links = [
     id: 3,
     href: 'frequent-asks',
     title: 'Preguntas Frecuentes',
-    roles: ['vendedor', 'administrador']
+    roles: ['vendedor', 'admin', 'administrador']
   },
   {
     id: 4,
