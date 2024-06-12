@@ -8,7 +8,7 @@ const VendedoresGet = () => {
           type="submit"
           className="bg-orange-500 py-2 px-5 rounded-xl text-white font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
         >
-          - DESARROLLADO DE SOFT FUSION - PROXIMAMENTE -
+          - DESARROLLADO POR SOFT FUSION - PROXIMAMENTE -
         </h1>
       </div>
     </div>

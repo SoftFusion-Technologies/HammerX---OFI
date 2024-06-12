@@ -35,31 +35,31 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
   return (
     <div
       className={`h-screen w-screen fixed inset-0 flex pt-10 justify-center items-center ${
-        isOpen ? "block" : "hidden"
+        isOpen ? 'block' : 'hidden'
       } bg-gray-800 bg-opacity-75 z-50`}
     >
       <div className={`container-inputs`}>
         <Formik
           initialValues={{
-            valoracion: "",
-            observaciones: "",
+            valoracion: '',
+            observaciones: ''
           }}
           onSubmit={async (values, { resetForm }) => {
             try {
               const response = await fetch(
                 `http://localhost:8080/postulantes/${user.id}`,
                 {
-                  method: "PUT",
+                  method: 'PUT',
                   body: JSON.stringify(values),
                   headers: {
-                    "Content-Type": "application/json",
-                  },
+                    'Content-Type': 'application/json'
+                  }
                 }
               );
 
               if (!response.ok) {
                 throw new Error(
-                  "Error en la solicitud PUT: " + response.status
+                  'Error en la solicitud PUT: ' + response.status
                 );
               }
 
@@ -68,7 +68,7 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
                 setShowModal(false);
               }, 3000);
             } catch (error) {
-              console.error("Error al insertar el registro:", error.message);
+              console.error('Error al insertar el registro:', error.message);
               setErrorModal(true);
               setTimeout(() => {
                 setErrorModal(false);
@@ -79,16 +79,16 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
           }}
           validationSchema={nuevoValSchema}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values }) => (
             <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
               <Form className="formulario max-sm:w-[300px] bg-white ">
                 <div className="flex justify-between items-center mt-3 mx-5 pb-2">
                   <h1 className="">
-                    <span className="text-orange-600">Postulante: </span>{" "}
+                    <span className="text-orange-600">Postulante: </span>{' '}
                     {user.name}
                   </h1>
                   <div
-                    className="text-[20px] cursor-pointer font-semibold" 
+                    className="text-[20px] cursor-pointer font-semibold"
                     onClick={onClose}
                   >
                     x
@@ -96,24 +96,15 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
                 </div>
 
                 <div className="mb-3 px-4">
-                  {/* <Field
-                    id="valoracion"
-                    type="text"
-                    className="mt-2 block w-full p-3  text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Valorar"
-                    name="valoracion"
-                    maxLength="70"
-                  /> */}
                   <Field
                     as="select"
-                    id="sede"
-                    name="sede"
-                    placeholder="Valoración"
+                    id="valoracion"
+                    name="valoracion"
                     className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                     required
+                    value={values.valoracion} // Controla el valor usando Formik
                   >
-                    Valorar
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       Valoración
                     </option>
                     <option value="1">Muy Mala</option>
@@ -122,7 +113,9 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
                     <option value="4">Buena</option>
                     <option value="5">Muy Buena</option>
                   </Field>
+               
                 </div>
+
                 <div className="mb-3 px-4">
                   <Field
                     id="observaciones"
