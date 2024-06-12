@@ -41,8 +41,6 @@ const AdminPage = () => {
     setModalDetalleOpen(false);
   };
 
-  const userRole = 'administrador'; // Ejemplo de rol; reemplazar según tu lógica de obtención de rol
-
   return (
     <>
       {/* Navbar section */}
@@ -58,15 +56,21 @@ const AdminPage = () => {
               </Link>
             </div>
 
-            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
-            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
-              <Link to="/dashboard/testclass">
-                <button className="btnstaff">Leads y Prospectos</button>
-              </Link>
-            </div>
+            {(userLevel === "gerente" ||
+              userLevel === "admin" ||
+              userLevel === "vendedor" ||
+              userLevel === "administrador") && (
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+                <Link to="/dashboard/testclass">
+                  <button className="btnstaff">Leads y Prospectos</button>
+                </Link>
+              </div>
             )}
 
-            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
+            {(userLevel === "gerente" ||
+              userLevel === "admin" ||
+              userLevel === "vendedor" ||
+              userLevel === "administrador") && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/admconvenios">
                   <button className="btnstaff">Convenios</button>
@@ -74,7 +78,10 @@ const AdminPage = () => {
               </div>
             )}
 
-            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
+            {(userLevel === "gerente" ||
+              userLevel === "admin" ||
+              userLevel === "vendedor" ||
+              userLevel === "administrador") && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
                 <Link to="/dashboard/postulantes">
                   <button className="btnstaff">CV's Recibidos</button>
@@ -82,19 +89,26 @@ const AdminPage = () => {
               </div>
             )}
 
-            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
-              <button className="btnstaff" onClick={abrirModalPreguntas}>
-                Ver Preguntas Frecuentes
-              </button>
-            </div>
-
-            {(userLevel === 'gerente' || userLevel === 'admin' || userLevel === 'vendedor') && (
-            <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
-              <button className="btnstaff">
-                Vendedores
-              </button>
-            </div>
+            {(userLevel === "gerente" ||
+              userLevel === "admin" ||
+              userLevel === "vendedor" ||
+              userLevel === "administrador") && (
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+                <button className="btnstaff">Vendedores</button>
+              </div>
             )}
+          </div>
+          <div className="flex justify-end p-5">
+            <a
+              className="relative inline-block"
+              href="#"
+              onClick={abrirModalPreguntas}
+            >
+              <span className="absolute top-0 left-0 mt-1 ml-1 h-full w-full rounded bg-[#fc4b08]"></span>
+              <span className="fold-bold relative inline-block rounded border-2 border-[#343333] bg-white px-3 py-1 text-base font-bold text-[#fc4b08] transition duration-100 hover:bg-[#fc4b08] hover:text-white">
+                VER FAQs
+              </span>
+            </a>
           </div>
         </div>
       </section>
