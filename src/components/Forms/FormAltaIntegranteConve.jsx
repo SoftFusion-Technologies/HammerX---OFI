@@ -28,6 +28,33 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
   const [errorModal, setErrorModal] = useState(false);
   const { id_conv } = useParams(); // Obtener el id_conv de la URL
 
+  // para recuperar los valores de precio INI
+  const URL = 'http://localhost:8080/admprecio/';
+
+   const [precio, setPrecio] = useState('');
+   const [descuento, setDescuento] = useState('');
+   const [precioFinal, setPrecioFinal] = useState('');
+
+   useEffect(() => {
+     obtenerDatosAdmPrecio();
+   }, []);
+
+ const obtenerDatosAdmPrecio = async () => {
+   try {
+     const response = await axios.get(URL);
+     const data = response.data; // Suponiendo que response.data es un objeto con precio, descuento, preciofinal
+
+     // Verifica los datos obtenidos
+     console.log('Datos obtenidos de admprecio:', data);
+
+     setPrecio(data.precio);
+     setDescuento(data.descuento);
+     setPrecioFinal(data.preciofinal);
+   } catch (error) {
+     console.log('Error al obtener datos de admprecio:', error);
+   }
+ };
+  // para recuperar los valores de precio FIN 
   const textoModal = 'Integrante creado correctamente.';
 
   // yup sirve para validar formulario este ya trae sus propias sentencias
@@ -107,10 +134,10 @@ const FormAltaIntegranteConve = ({ isOpen, onClose }) => {
             telefono: '',
             email: '',
             sede: '',
-            notas:'',
-            precio: '',
-            descuento:'0%',
-            preciofinal:''
+            notas: '',
+            precio: precio !== null && precio !== undefined ? precio : '',
+            descuento: descuento || '0%', // Asegúrate de que descuento tenga un valor por defecto adecuado si puede ser null
+            preciofinal: precioFinal !== null && precioFinal !== undefined ? precioFinal : ''
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera

@@ -269,11 +269,6 @@ const UserGet = () => {
           {/* Modal para abrir formulario de clase gratis */}
           <FormAltaUser isOpen={modalNewUser} onClose={cerarModal} />
         </div>
-        {/* notificacion
-      <div className="notification">
-        <p>Bienvenido! 🤗</p>
-        <span className="progress"></span>
-      </div> */}
       </div>
       {selectedUser && (
         <UserDetails

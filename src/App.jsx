@@ -55,6 +55,7 @@ const TaskGet = lazy(() => import('./pages/staff/MetodsGet/TaskGet'));
 const ClasesGet = lazy(() => import('./pages/staff/MetodsGet/FreeClassGet'));
 const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AdmConveGet = lazy(() => import('./pages/staff/MetodsGet/AdmConveGet'));
+const AdmPrecioGet = lazy(() => import('./pages/staff/MetodsGet/AdmPrecioGet'));
 const IntegranteConveGet= lazy(() => import('./pages/staff/MetodsGet/IntegranteConveGet'));
 const FamIntegranteGet = lazy(() =>  import('./pages/staff/MetodsGet/FamIntegranteGet'));
 const VendedoresGet = lazy(() => import('./pages/staff/MetodsGet/VendedoresGet'))
@@ -125,7 +126,8 @@ const App = memo(() => {
                 <Ruta path="/dashboard/frequent-asks" element={<ProtectedRoute>  <PreguntasFrecuentesGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
                 <Ruta path="/dashboard/admconvenios" element={<ProtectedRoute>  <AdmConveGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/vendedores" element={<ProtectedRoute>  <VendedoresGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/admprecio" element={<ProtectedRoute>  <AdmPrecioGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/dashboard/vendedores" element={<ProtectedRoute>  <VendedoresGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
                 
                 
                 {/* <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}

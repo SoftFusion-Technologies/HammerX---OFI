@@ -53,13 +53,13 @@ const Links = [
     href: 'task',
     title: 'Programar Tarea',
     roles: ['admin', 'administrador']
-  }
-  // {
-  //   id: 5,
-  //   href: "administrar-textos",
-  //   title: "Administrar Textos",
-  //   roles: ['admin']
-  // },
+  },
+  {
+    id: 5,
+    href: "admprecio",
+    title: "Administrar Precios",
+    roles: ['admin']
+  },
 ];
 
   const filteredLinks = Links.filter((link) => link.roles.includes(userLevel));
