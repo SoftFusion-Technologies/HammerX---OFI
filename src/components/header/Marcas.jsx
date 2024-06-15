@@ -93,9 +93,9 @@ const Marcas = () => {
         <div title="sin página">
           <img className="h-10 mx-auto" src={comercio4} alt="Nutripaz" />
         </div>
-        <div title="sin página">
+        {/*SE ELIMINA ZELAYA DE COMERCIOS AMIGOS <div title="sin página">
           <img className="h-8 mx-auto" src={comercio5} alt="Zelaya" />
-        </div>
+        </div> */}
         <div title="sin página">
           <img className="h-10 mx-auto" src={comercio6} alt="Rubio" />
         </div>

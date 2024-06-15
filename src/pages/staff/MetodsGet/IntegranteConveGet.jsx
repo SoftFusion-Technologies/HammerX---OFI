@@ -135,13 +135,13 @@ const IntegranteConveGet = ({ integrantes }) => {
     });
   }
 
-  // Función para ordenar los integrante de forma decreciente basado en el id
-  const ordenarintegranteDecreciente = (integrante) => {
-    return [...integrante].sort((a, b) => b.id - a.id);
+  // Función para ordenar los integrantes de forma alfabética basado en el nombre
+  const ordenarIntegranteAlfabeticamente = (integrante) => {
+    return [...integrante].sort((a, b) => a.sede.localeCompare(b.sede));
   };
 
   // Llamada a la función para obtener los integrantes ordenados de forma decreciente
-  const sortedintegrante = ordenarintegranteDecreciente(results);
+  const sortedintegrante = ordenarIntegranteAlfabeticamente(results);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -175,11 +175,11 @@ const IntegranteConveGet = ({ integrantes }) => {
     );
     setTotalPrecioFinal(total);
   }, [records]);
-const formatearMoneda = (valor) => {
-  return `$${Number(valor).toLocaleString('es-ES', {
-    minimumFractionDigits: 0
-  })}`;
-};
+  const formatearMoneda = (valor) => {
+    return `$${Number(valor).toLocaleString('es-ES', {
+      minimumFractionDigits: 0
+    })}`;
+  };
   return (
     <>
       <NavbarStaff />
@@ -294,7 +294,6 @@ const formatearMoneda = (valor) => {
                       userLevel === 'vendedor' ||
                       userLevel === 'convenio' ||
                       */
-                     
                         (userLevel === 'admin' ||
                           userLevel === 'administrador') && (
                           <td className="">
