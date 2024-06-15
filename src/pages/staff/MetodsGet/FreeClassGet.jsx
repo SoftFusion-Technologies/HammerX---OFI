@@ -200,7 +200,7 @@ const FreeClassGet = () => {
           </div>
           <div className="flex justify-center">
             <h1 className="pb-5">
-              Listado de personClasss :{' '}
+              Listado de Personas :{' '}
               <span className="text-center">
                 Cantidad de registros : {results.length}
               </span>
@@ -213,15 +213,15 @@ const FreeClassGet = () => {
               value={search}
               onChange={searcher}
               type="text"
-              placeholder="Buscar Clientes mediante el NOMBRE"
+              placeholder="Buscar mediante el NOMBRE"
               className="border rounded-sm"
             />
           </form>
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El personClass NO Existe ||{' '}
-              <span className="text-span"> personClass: {results.length}</span>
+              La Persona NO Existe ||{' '}
+              <span className="text-span"> Persona: {results.length}</span>
             </p>
           ) : (
             <>
@@ -256,15 +256,17 @@ const FreeClassGet = () => {
 
                       {(userLevel === 'admin' ||
                         userLevel === 'administrador') && (
-                        <button
-                          onClick={() =>
-                            handleEliminarPersonClass(personClass.id)
-                          }
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleEliminarPersonClass(personClass.id)
+                            }
+                            type="button"
+                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
                       )}
                       <td className="flex gap-2">
                         <button

@@ -33,6 +33,7 @@ const NovedadGet = () => {
   };
   const cerarModal = () => {
     setModalNewNovedad(false)
+    obtenerNovedades();
   };
 
   //URL estatica, luego cambiar por variable de entorno
