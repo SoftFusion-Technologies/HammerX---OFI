@@ -20,6 +20,7 @@ import "../../../styles/MetodsGet/Tabla.css";
 import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import PostulanteDetails from "./PostulanteGetId";
+import { useAuth } from '../../../AuthContext';
 
 // Componente funcional que maneja la lógica relacionada con los postulantes
 const PostulanteGet = () => {
@@ -27,15 +28,18 @@ const PostulanteGet = () => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = "http://localhost:8080/postulantes/";
+  const URL = 'http://localhost:8080/postulantes/';
+
+  const { userLevel } = useAuth();
 
   // Estado para almacenar la lista de postulantes
   const [postulantes, setPostulantes] = useState([]);
+  const [contactados, setContactados] = useState({});
 
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [sexoFilter, setSexoFilter] = useState(null);
   const [edadFilter, setEdadFilter] = useState(null);
 
@@ -63,10 +67,10 @@ const PostulanteGet = () => {
   };
 
   const calcularRangoEdad = (edad) => {
-    if (edad >= 18 && edad <= 21) return "18-21";
-    if (edad >= 21 && edad <= 23) return "21-23";
-    if (edad >= 23 && edad <= 25) return "23-25";
-    if (edad > 25) return ">25";
+    if (edad >= 18 && edad <= 21) return '18-21';
+    if (edad >= 21 && edad <= 23) return '21-23';
+    if (edad >= 23 && edad <= 25) return '23-25';
+    if (edad > 25) return '>25';
   };
 
   //Funcion de busqueda, en el cuadro
@@ -116,9 +120,17 @@ const PostulanteGet = () => {
   const obtenerPostulantes = async () => {
     try {
       const response = await axios.get(URL);
-      setPostulantes(response.data);
+      const postulantesData = response.data;
+      setPostulantes(postulantesData);
+
+      // Obtener el estado de contacto de cada postulante y actualizar el estado
+      const contactadosData = {};
+      postulantesData.forEach((postulante) => {
+        contactadosData[postulante.id] = postulante.state;
+      });
+      setContactados(contactadosData);
     } catch (error) {
-      console.log("Error al obtener los postulantes:", error);
+      console.log('Error al obtener los postulantes:', error);
     }
   };
 
@@ -150,16 +162,36 @@ const PostulanteGet = () => {
       setSelectedUser(resultado);
       setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log("Error al obtener el usuario:", error);
+      console.log('Error al obtener el usuario:', error);
     }
   };
 
-  const contactarPostulante = (celular) => {
-    const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
-
-    window.open(`${link}`, "_blank");
+  // Función para actualizar el estado de contacto en la base de datos
+  const updateContactState = async (id, state) => {
+    try {
+      await axios.put(`${URL}${id}`, { state }); // Cambiado a PUT en la URL correcta
+    } catch (error) {
+      console.log('Error al actualizar el estado de contacto:', error);
+    }
   };
 
+  const contactarPostulante = (celular, id) => {
+    const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
+    const newWindow = window.open(link, '_blank');
+
+    if (newWindow) {
+      const interval = setInterval(async () => {
+        if (newWindow.closed) {
+          clearInterval(interval);
+          await updateContactState(id, true);
+          setContactados((prevState) => ({
+            ...prevState,
+            [id]: true
+          }));
+        }
+      }, 1000); // Check every second if the window is closed
+    }
+  };
   // Función para ordenar los postulantes de forma decreciente basado en el id
   const ordenarPostulantesDecreciente = (postulantes) => {
     return [...postulantes].sort((a, b) => b.id - a.id);
@@ -380,24 +412,39 @@ const PostulanteGet = () => {
                         {formatearFecha(postulante.created_at)}
                       </td>
                       {/* ACCIONES */}
+
+                      {(userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleEliminarPostulante(postulante.id)
+                            }
+                            type="button"
+                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      )}
                       <td className="flex gap-2">
                         <button
                           onClick={() =>
-                            handleEliminarPostulante(postulante.id)
+                            contactarPostulante(
+                              postulante.celular,
+                              postulante.id
+                            )
                           }
                           type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          className={`py-2 px-4 my-1 rounded-md text-white ${
+                            contactados[postulante.id]
+                              ? 'bg-green-500 hover:bg-green-600'
+                              : 'bg-blue-500 hover:bg-blue-600'
+                          }`}
                         >
-                          Eliminar
-                        </button>
-                        <button
-                          onClick={() =>
-                            contactarPostulante(postulante.celular)
-                          }
-                          type="button"
-                          className="py-2 px-4 my-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                        >
-                          Contactar
+                          {contactados[postulante.id]
+                            ? 'Contactado'
+                            : 'Contactar'}
                         </button>
                       </td>
                     </tr>

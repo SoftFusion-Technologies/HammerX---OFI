@@ -213,16 +213,20 @@ const formatearMoneda = (valor) => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nuevo Integrante
-              </button>
-            </Link>
-          </div>
+          {(userLevel === 'convenio' ||
+            userLevel === 'admin' ||
+            userLevel === 'administrador') && (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nuevo Integrante
+                </button>
+              </Link>
+            </div>
+          )}
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
@@ -290,6 +294,7 @@ const formatearMoneda = (valor) => {
                       userLevel === 'vendedor' ||
                       userLevel === 'convenio' ||
                       */
+                     
                         (userLevel === 'admin' ||
                           userLevel === 'administrador') && (
                           <td className="">

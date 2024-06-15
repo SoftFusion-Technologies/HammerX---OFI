@@ -48,13 +48,15 @@ const PostulanteDetails = ({ user, isOpen, onClose, obtenerPostulantes }) => {
         <p>
           <span className="font-semibold ">Valoracion:</span> {user.valoracion}
         </p>
-
+        <p>
+          <span className="font-semibold ">Información:</span> {user.info}
+        </p>
         <p>
           <span className="font-semibold ">Observaciones:</span>{' '}
           {user.observaciones}
         </p>
 
-        <hr className='my-4'/>
+        <hr className="my-4" />
         <div className="flex justify-center ">
           <Link to="#">
             <button

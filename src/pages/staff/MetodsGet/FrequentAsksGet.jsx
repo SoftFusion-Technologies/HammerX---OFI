@@ -27,9 +27,13 @@ import "../../../styles/MetodsGet/Tabla.css";
 import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import FormAltaFrecAsk from "../../../components/Forms/FormAltaFrecAsk";
+import { useAuth } from '../../../AuthContext';
 
 const PreguntasFrecuentesGet = () => {
   const [modalNewFrecAsk, setModalNewAsk] = useState(false);
+
+  const { userLevel } = useAuth();
+
 
   const abrirModal = () => {
     setModalNewAsk(true);
@@ -119,7 +123,7 @@ const PreguntasFrecuentesGet = () => {
 
       const resultado = await respuesta.json();
 
-      setFrecAsk(resultado);
+      setFreAsk(resultado);
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +136,7 @@ const PreguntasFrecuentesGet = () => {
   const sortedFrecAsk = ordernarFrecAsk(results);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 5;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const records = sortedFrecAsk.slice(firstIndex, lastIndex);
@@ -154,6 +158,8 @@ const PreguntasFrecuentesGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
+
+
   return (
     <>
       <NavbarStaff />
@@ -187,22 +193,24 @@ const PreguntasFrecuentesGet = () => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nueva Pregunta
-              </button>
-            </Link>
-          </div>
+          {(userLevel === 'admin' || userLevel === 'administrador') && (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nueva Pregunta
+                </button>
+              </Link>
+            </div>
+          )}
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              La Pregunta NO Existe ||{" "}
+              La Pregunta NO Existe ||{' '}
               <span className="text-span">
-                {" "}
+                {' '}
                 Pregunta Frecuentes: {results.length}
               </span>
             </p>
@@ -216,21 +224,16 @@ const PreguntasFrecuentesGet = () => {
                     <th>Pregunta</th>
                     <th>Respuesta</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && <th>Acciones</th>}
                   </tr>
                 </thead>
                 <tbody>
                   {records.map((frecAsk) => (
                     <tr key={frecAsk.id}>
-                      <td onClick={() => obtenerfrecAsk(frecAsk.id)}>
-                        {frecAsk.id}
-                      </td>
-                      <td onClick={() => obtenerFrecAsk(frecAsk.id)}>
-                        {frecAsk.orden}
-                      </td>
-                      <td onClick={() => obtenerFrecAsk(frecAsk.id)}>
-                        {frecAsk.titulo}
-                      </td>
+                      <td>{frecAsk.id}</td>
+                      <td>{frecAsk.orden}</td>
+                      <td>{frecAsk.titulo}</td>
 
                       <td
                         className="max-w-[100px] p-2 overflow-y-auto max-h-[100px]"
@@ -238,39 +241,61 @@ const PreguntasFrecuentesGet = () => {
                       >
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: frecAsk.descripcion,
+                            __html: frecAsk.descripcion
                           }}
                         />
                       </td>
 
                       <td
-                        className="max-w-[100px] p-2 overflow-y-auto max-h-[100px]"
-                        onClick={() => obtenerAsk(frecAsk.id)}
+                        className={`max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
+                          frecAsk.estado === 1
+                            ? 'text-green-500'
+                            : 'text-red-500'
+                        }`}
                       >
-                        {frecAsk.estado}
+                        {frecAsk.estado === 1 ? 'Activa' : 'Inactiva'}
                       </td>
                       {/* ACCIONES */}
-                      <td className="">
-                        <button
-                          onClick={() => handleEliminarAsk(frecAsk.id)}
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
+
+                      {(userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
+                        <td className="">
+                          <button
+                            onClick={() => handleEliminarAsk(frecAsk.id)}
+                            type="button"
+                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
               </table>
               <nav className="flex justify-center items-center my-10">
-                <ul className="pagination space-x-2">
+                <ul className="pagination">
                   <li className="page-item">
                     <a href="#" className="page-link" onClick={prevPage}>
                       Prev
                     </a>
                   </li>
-
+                  {numbers.map((number, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === number ? 'active' : ''
+                      }`}
+                      key={index}
+                    >
+                      <a
+                        href="#"
+                        className="page-link"
+                        onClick={() => changeCPage(number)}
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  ))}
                   <li className="page-item">
                     <a href="#" className="page-link" onClick={nextPage}>
                       Next

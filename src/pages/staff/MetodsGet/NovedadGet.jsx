@@ -20,10 +20,13 @@ import '../../../styles/MetodsGet/Tabla.css'
 import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
 import FormAltaNovedad from '../../../components/Forms/FormAltaNovedad';
+import { useAuth } from '../../../AuthContext';
 
 // Componente funcional que maneja la lógica relacionada con los Novedad
 const NovedadGet = () => {
   const [modalNewNovedad, setModalNewNovedad] = useState(false);
+
+  const { userLevel } = useAuth();
 
   const abrirModal = () => {
     setModalNewNovedad(true)
@@ -136,8 +139,8 @@ const NovedadGet = () => {
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const records = sortednovedad.slice(firstIndex, lastIndex)
-  // const nPage = Math.ceil(sortednovedad.length / itemsPerPage)
-  // const numbers = [...Array(nPage + 1).keys()].slice(1);
+  const nPage = Math.ceil(sortednovedad.length / itemsPerPage);
+  const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
     if (currentPage !== firstIndex) {
@@ -187,16 +190,18 @@ const NovedadGet = () => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nueva Novedad
-              </button>
-            </Link>
-          </div>
+          {(userLevel === 'admin' || userLevel === 'administrador') && (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nueva Novedad
+                </button>
+              </Link>
+            </div>
+          )}
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
@@ -216,32 +221,54 @@ const NovedadGet = () => {
                     <p className="text-gray-600 mb-2">
                       {formatearFecha(novedad.vencimiento)}
                     </p>
-                    <p className="text-gray-600 mb-4 overflow-y-auto max-h-[100] h-[100px]">{novedad.mensaje}</p>
+                    <p className="text-gray-600 mb-4 overflow-y-auto max-h-[100] h-[100px]">
+                      {novedad.mensaje}
+                    </p>
                     <div className="flex justify-end space-x-4">
-                      <button
-                        onClick={() => handleEliminarNovedad(novedad.id)}
-                        className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        // onClicsek={() => handleEditarNovedad(novedad.id)}
-                        className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
-                      >
-                        Editar
-                      </button>
+                      {(userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
+                        <div>
+                          <button
+                            onClick={() => handleEliminarNovedad(novedad.id)}
+                            className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          >
+                            Eliminar
+                          </button>
+                          <button
+                            // onClicsek={() => handleEditarNovedad(novedad.id)}
+                            className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                          >
+                            Editar
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
               <nav className="flex justify-center items-center my-10">
-                <ul className="pagination space-x-2">
+                <ul className="pagination">
                   <li className="page-item">
                     <a href="#" className="page-link" onClick={prevPage}>
                       Prev
                     </a>
                   </li>
-
+                  {numbers.map((number, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === number ? 'active' : ''
+                      }`}
+                      key={index}
+                    >
+                      <a
+                        href="#"
+                        className="page-link"
+                        onClick={() => changeCPage(number)}
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  ))}
                   <li className="page-item">
                     <a href="#" className="page-link" onClick={nextPage}>
                       Next

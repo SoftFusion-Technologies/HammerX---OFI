@@ -19,96 +19,112 @@ import NavbarStaff from '../NavbarStaff';
 import '../../../styles/MetodsGet/Tabla.css'
 import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
+import { useAuth } from '../../../AuthContext';
 
 const FreeClassGet = () => {
-
+  const { userLevel } = useAuth();
 
   // Estado para almacenar la lista de personas
   const [personClass, setPersonClass] = useState([]);
-
+  const [contactedTestClass, setContactedTestClass] = useState({});
 
   // Estado para almacenar el término de búsqueda
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('');
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/testclass/'
+  const URL = 'http://localhost:8080/testclass/';
 
   useEffect(() => {
     // utilizamos get para obtenerPersonas los datos contenidos en la url
-    axios.get(URL)
-      .then((res) => {
-        setPersonClass(res.data);
-        obtenerPersonsClass();
-      })
+    axios.get(URL).then((res) => {
+      setPersonClass(res.data);
+      obtenerPersonsClass();
+    });
   }, []);
 
   // Función para obtener todos los personClass desde la API
   const obtenerPersonsClass = async () => {
     try {
       const response = await axios.get(URL);
-      setPersonClass(response.data);
+      const testclassData = response.data;
+      setPersonClass(testclassData);
+
+      // Obtener el estado de contacto de cada testclass y actualizar el estado
+      const contactedData = {};
+      testclassData.forEach((test) => {
+        contactedData[test.id] = test.state === '1'; // Convertir a booleano
+      });
+      setContactedTestClass(contactedData);
     } catch (error) {
-      console.log('Error al obtener las personas :', error);
+      console.log('Error al obtener las testclass:', error);
     }
   };
 
-  const handleEliminarPersonClass = async id => {
+  const handleEliminarPersonClass = async (id) => {
     const confirmacion = window.confirm('¿Seguro que desea eliminar?');
     if (confirmacion) {
       try {
-        const url = `${URL}${id}`
+        const url = `${URL}${id}`;
         const respuesta = await fetch(url, {
           method: 'DELETE'
-        })
-        await respuesta.json()
-        const arrayPersonClass = personClass.filter(personClass => personClass.id !== id)
+        });
+        await respuesta.json();
+        const arrayPersonClass = personClass.filter(
+          (personClass) => personClass.id !== id
+        );
 
-        setPersonClass(arrayPersonClass)
-      }
-      catch (error) {
-        console.log(error)
+        setPersonClass(arrayPersonClass);
+      } catch (error) {
+        console.log(error);
       }
     }
-  }
+  };
 
   const obtenerPersonClass = async (id) => {
     try {
+      const url = `${URL}${id}`;
 
-      const url = `${URL}${id}`
+      console.log(url);
 
-      console.log(url)
+      const respuesta = await fetch(url);
 
-      const respuesta = await fetch(url)
+      const resultado = await respuesta.json();
 
-      const resultado = await respuesta.json()
-
-      setPersonClass(resultado)
-
-
+      setPersonClass(resultado);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const searcher = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
-  let results = []
+  let results = [];
 
   if (!search) {
-    results = personClass
-
+    results = personClass;
   } else if (search) {
     results = personClass.filter((dato) => {
       const nameMatch = dato.name.toLowerCase().includes(search.toLowerCase());
-      const lastNameMatch = dato.last_name.toLowerCase().includes(search.toLowerCase());
+      const lastNameMatch = dato.last_name
+        .toLowerCase()
+        .includes(search.toLowerCase());
       const dniMatch = dato.dni.includes(search);
       const celularMatch = dato.celular.includes(search);
       const sedeMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
-      const objetivoMatch = dato.objetivo.toLowerCase().includes(search.toLowerCase());
+      const objetivoMatch = dato.objetivo
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
-      return nameMatch || lastNameMatch || dniMatch || celularMatch || sedeMatch || objetivoMatch;
+      return (
+        nameMatch ||
+        lastNameMatch ||
+        dniMatch ||
+        celularMatch ||
+        sedeMatch ||
+        objetivoMatch
+      );
     });
   }
 
@@ -124,8 +140,8 @@ const FreeClassGet = () => {
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const records = sortedpersonClass.slice(firstIndex, lastIndex)
-  const nPage = Math.ceil(sortedpersonClass.length / itemsPerPage)
+  const records = sortedpersonClass.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(sortedpersonClass.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
@@ -135,7 +151,7 @@ const FreeClassGet = () => {
   }
 
   function changeCPage(id) {
-    setCurrentPage(id)
+    setCurrentPage(id);
   }
 
   function nextPage() {
@@ -143,20 +159,46 @@ const FreeClassGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
-  
+
+  // Función para actualizar el estado de contacto en la base de datos
+  const updateContactState = async (id, state) => {
+    try {
+      await axios.put(`${URL}${id}`, { state: state ? '1' : '0' }); // Cambiado a PUT con el estado correcto
+      setContactedTestClass((prevState) => ({
+        ...prevState,
+        [id]: state
+      }));
+    } catch (error) {
+      console.log('Error al actualizar el estado de contacto:', error);
+    }
+  };
+
+  const contactarTestClass = (celular, id) => {
+    const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
+    const newWindow = window.open(link, '_blank');
+
+    if (newWindow) {
+      const interval = setInterval(async () => {
+        if (newWindow.closed) {
+          clearInterval(interval);
+          await updateContactState(id, true);
+        }
+      }, 1000); // Verificar cada segundo si la ventana se cerró
+    }
+  };
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
-          <div className='pl-5 pt-5'>
+        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
+          <div className="pl-5 pt-5">
             <Link to="/dashboard">
-              <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
             </Link>
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <h1 className="pb-5">
               Listado de personClasss :{' '}
               <span className="text-center">
@@ -164,8 +206,6 @@ const FreeClassGet = () => {
               </span>
             </h1>
           </div>
-
-
 
           {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
@@ -185,10 +225,10 @@ const FreeClassGet = () => {
             </p>
           ) : (
             <>
-              <table className='w-11/12 mx-auto'>
+              <table className="w-11/12 mx-auto">
                 <thead className="bg-[#fc4b08]  text-white">
                   <tr key={personClass.id}>
-                    <th className='thid'>ID</th>
+                    <th className="thid">ID</th>
                     <th>Solicitud</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
@@ -202,73 +242,81 @@ const FreeClassGet = () => {
                 <tbody>
                   {records.map((personClass) => (
                     <tr key={personClass.id}>
-                      <td>
-                        {personClass.id}
-                      </td>
-                      <td>
-                        {formatearFecha(personClass.created_at)}
-                      </td>
-                      <td>
-                        {personClass.name}
-                      </td>
-                      <td>
-                        {personClass.last_name}
-                      </td>
-                      <td>
-                        {personClass.dni}
-                      </td>
-                      <td>
-                        {personClass.celular}
-                      </td>
-                      <td>
-                        {personClass.sede}
-                      </td>
+                      <td>{personClass.id}</td>
+                      <td>{formatearFecha(personClass.created_at)}</td>
+                      <td>{personClass.name}</td>
+                      <td>{personClass.last_name}</td>
+                      <td>{personClass.dni}</td>
+                      <td>{personClass.celular}</td>
+                      <td>{personClass.sede}</td>
 
-                      <td>
-                        {personClass.objetivo}
-                      </td>
+                      <td>{personClass.objetivo}</td>
 
                       {/* ACCIONES */}
-                      <td className='flex gap-2'>
+
+                      {(userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
                         <button
-                          onClick={() => handleEliminarPersonClass(personClass.id)}
+                          onClick={() =>
+                            handleEliminarPersonClass(personClass.id)
+                          }
                           type="button"
                           className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                         >
                           Eliminar
                         </button>
+                      )}
+                      <td className="flex gap-2">
                         <button
-                          onClick={() => contactarpersonClass(personClass.celular)}
+                          onClick={() =>
+                            contactarTestClass(
+                              personClass.celular,
+                              personClass.id
+                            )
+                          }
                           type="button"
-                          className="py-2 px-4 my-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                          className={`py-2 px-4 my-1 rounded-md text-white ${
+                            contactedTestClass[personClass.id]
+                              ? 'bg-green-500 hover:bg-green-600'
+                              : 'bg-blue-500 hover:bg-blue-600'
+                          }`}
                         >
-                          Contactar
+                          {contactedTestClass[personClass.id]
+                            ? 'Contactado'
+                            : 'Contactar'}
                         </button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <nav className='flex justify-center items-center my-10'>
-                <ul className='pagination'>
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={prevPage}>Prev</a>
+              <nav className="flex justify-center items-center my-10">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={prevPage}>
+                      Prev
+                    </a>
                   </li>
-                  {
-                    numbers.map((number, index) => (
-                      <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
-                        <a
-                          href="#"
-                          className='page-link'
-                          onClick={() => changeCPage(number)}>{number}</a>
-                      </li>
-                    ))}
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={nextPage}>Next</a>
+                  {numbers.map((number, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === number ? 'active' : ''
+                      }`}
+                      key={index}
+                    >
+                      <a
+                        href="#"
+                        className="page-link"
+                        onClick={() => changeCPage(number)}
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  ))}
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={nextPage}>
+                      Next
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -278,7 +326,7 @@ const FreeClassGet = () => {
       </div>
       <Footer />
     </>
-  )
+  );
 }
 
 export default FreeClassGet

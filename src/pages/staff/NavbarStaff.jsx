@@ -46,7 +46,7 @@ const Links = [
     id: 3,
     href: 'frequent-asks',
     title: 'Preguntas Frecuentes',
-    roles: ['vendedor', 'admin', 'administrador']
+    roles: ['vendedor', 'admin', 'administrador', 'gerente']
   },
   {
     id: 4,
