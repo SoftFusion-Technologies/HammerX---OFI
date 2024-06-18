@@ -1,5 +1,14 @@
 /*  Nuestros servicios*/
 
+.actividades {
+  background-image: url('../../images/svg/actividades.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
+
 .main2 {
   padding: 80px 20px;
   height: auto;
@@ -35,12 +44,16 @@
 .serv .contenedor #servicio p {
   color: white;
   font-size: 20px;
+  /* background-color: #ff9100;
+  margin: 0px 20px;
+  border-radius: 4px; */
 }
 
 /* Caja que se abre al seleccionar algun servicio */
 
 .serv .musculacion {
-  background: url("../../images/Actividades/act-Musculacion.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/Actividades/act-Musculacion.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -64,7 +77,8 @@
 }
 
 .serv .cardio {
-  background: url("../../images/Actividades/act-Cardio.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/Actividades/act-Cardio.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -88,7 +102,8 @@
 }
 
 .serv .clasesgrupales {
-  background: url("../../images/Actividades/act-Grupales.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/Actividades/act-Grupales.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -112,7 +127,8 @@
 }
 
 .serv .bajoimpacto {
-  background: url("../../images/Actividades/act-BajoImpacto.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/Actividades/act-BajoImpacto.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left;
@@ -135,7 +151,8 @@
   transform: scale(1.02);
 }
 .serv .actividadeskids {
-  background: url("../../images/Actividades/act-Kids.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/Actividades/act-Kids.jpg");
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;

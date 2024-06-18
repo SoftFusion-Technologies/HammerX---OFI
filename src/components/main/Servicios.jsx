@@ -130,7 +130,7 @@ const Servicios = () => {
         alt="Guiones"
       />
       <div
-        className="text-center px-[5%] text-black dark:text-white"
+        className="text-center px-[5%] text-black dark:text-white actividades"
         id="servs1"
       >
         <h1
@@ -141,12 +141,12 @@ const Servicios = () => {
         </h1>
         <p
           data-aos="zoom-in-up"
-          className="font-bignoodle text-md  text-orange-100 text-[20px] dark:text-white"
+          className="font-messina text-md text-orange-100 text-[16px] dark:text-white"
         >
-          En HAMMERX Contamos con clases individuales y grupales, de bajo y de
+          En HAMMERX contamos con clases individuales y grupales, de bajo y de
           alto impacto, todas supervisadas y dictadas por profesores capacitados
           para cuidarte y diseñadas para adaptarse a tu nivel y objetivos.
-          ¡Elijamos juntos la mas indicada para vos!
+          ¡Elijamos juntos la mas indicada para vos!
         </p>
         <div className="serv">
           <div className="contenedor">

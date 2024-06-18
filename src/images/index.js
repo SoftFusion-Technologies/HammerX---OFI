@@ -20,8 +20,9 @@ import kids3 from './Actividades/act-Kids3.jpg';
 import guionesnar from './guionesnar.png';
 import guionesbla from './guionesbla.png';
 import mobileapp from './app.png';
-import logohammer from './logohammerorange.png'
-import logoloading from './logoloading.png'
+import logohammer from './logohammerorange.png';
+import logoloading from './logoloading.png';
+import actividades from './tus_actividades.png';
 
 export {
   menu,
@@ -48,4 +49,5 @@ export {
   mobileapp,
   logohammer,
   logoloading,
+  actividades,
 };

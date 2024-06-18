@@ -13,6 +13,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/header/Navbar";
 import Footer from "../components/footer/Footer";
+import { logo } from "../images/svg/index.js";
 
 const Legales = () => {
   useEffect(() => {
@@ -22,11 +23,10 @@ const Legales = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-[#fc4b08] py-16">
-        <h1 className="text-white max-md:text-[40px] text-[50px] text-center font-bignoodle ">
-          Hammer
-        </h1>
-        <div className="px-10 lg:px-14 text-white">
+      <div className="bg-white py-16">
+        <img src={logo} alt="logo" width={500} className="mx-auto mb-5" />
+
+        <div className="px-10 lg:px-14 text-white bg-[#fc4b08] w-11/12 rounded-xl mx-auto py-5">
           <h3 className="text-xl">
             <b>Legales</b>
           </h3>

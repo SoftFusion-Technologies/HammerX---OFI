@@ -3,7 +3,7 @@
  * Fecha Cración: 01 / 04 / 2024
  * Versión: 1.0
  *
- * Descripción: Subpágina que contiene información sobre la mision, vision y objetivos de Hammer.
+ * Descripción: Subpágina que contiene información sobre la mision, vision y objetivos de HAMMERX.
  *
  *
  *  Tema: Nuestro Equipo
@@ -50,12 +50,12 @@ const Cards = () => {
 
           {/* <img
           className="w-8 h-80 absolute top-40 left-0 max-sm:hidden"
-          src={"https://www.hammer.ar/image/guiones1.png"}
+          src={"https://www.HAMMERX.ar/image/guiones1.png"}
           alt="Guiones"
         />
         <img
           className="w-8 h-80 absolute -bottom-80 right-0 max-sm:hidden"
-          src={"https://www.hammer.ar/image/guiones1.png"}
+          src={"https://www.HAMMERX.ar/image/guiones1.png"}
           alt="Guiones"
         /> */}
 
@@ -64,7 +64,7 @@ const Cards = () => {
               <div className="card1 max-md:max-w-full select-none ">
                 <p>MISIÓN</p>
                 <p className="small select-none">
-                  HAMMER es un centro social de entrenamiento y entretenimiento
+                  HAMMERX es un centro social de entrenamiento y entretenimiento
                   que brinda calidad en su servicio. Somos un lugar donde las
                   personas hacen ejercicio, pero también encuentran un momento
                   para pasarla bien, divertirse, generar vínculos y sentirse
@@ -84,9 +84,9 @@ const Cards = () => {
                 <p>VISIÓN</p>
                 <p className="small select-none">
                   Buscamos transformar el concepto tradicional de un gimnasio y
-                  convertirlo en un lugar donde no solo se entrena y mejorar la
+                  convertirlo en un lugar donde no solo se entrena y mejora la
                   salud física, sino también demostrar que puede ser un lugar
-                  donde se la pasa bien, se viven y se experimentan sensaciones
+                  donde se la pasa bien, se viven y experimentan sensaciones
                   positivas. De esta manera aspiramos a combatir el
                   sedentarismo, involucrando a cada vez más personas dentro de
                   este estilo de vida.
@@ -109,7 +109,7 @@ const Cards = () => {
                   edad o por tu experiencia. Todo aquel que nos elija para
                   alcanzar sus objetivos y respete a los demás es bienvenido.
                   Aquí no juzgamos y no existen miradas que desaprueben. La
-                  actividad física es para todos y HAMMER es para todos. Además
+                  actividad física es para todos y HAMMERX es para todos. Además
                   te demostraremos que entrenar es mucho más sencillo y
                   entretenido de lo que parece.
                 </p>

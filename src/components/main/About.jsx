@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { guionesnar } from "../../images/index";
 import "../../styles/main/about.css";
 
-
 const About = () => {
   return (
     <>
@@ -25,7 +24,7 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12 ">
               <div className="max-lg:flex-col flex items-center sm:-mx-4 justify-center max-lg:pt-20 lg:pt-0 ">
                 <div className="grid grid-cols-2 max-sm:flex max-sm:flex-col ">
-                  <Link to={'/clientes'} className="mx-auto">
+                  <Link to={"/clientes"} className="mx-auto">
                     <button
                       data-aos="fade-in"
                       data-aos-duration="2000"
@@ -34,7 +33,7 @@ const About = () => {
                       Ya soy cliente
                     </button>
                   </Link>
-                  <Link to={'/nosotros'} className="mx-auto">
+                  <Link to={"/nosotros"} className="mx-auto">
                     <button
                       data-aos="fade-in"
                       data-aos-duration="2000"
@@ -60,17 +59,18 @@ const About = () => {
                 </h2>
                 <p className="mb-8 text-base text-body-color dark:text-gray-200 font-messina">
                   Somos un lugar donde vas a ejercitarte, pero también vas a
-                  encontrar un momento para pasarla bien, divertirte, conocerás
-                  personas y te sentirás acompañado, así te demostraremos una
-                  manera diferente de hacerlo y te ayudaremos a incorporar la
-                  actividad física como parte de tu vida y por qué no, a
-                  convertirse en el momento que esperas de tu día.
+                  encontrar un momento para pasarla bien, divertirte y conocer
+                  personas. En HammerX te sentirás acompañado por nuestro
+                  personal y sobre todo por tu profesor/instructor, encontraras
+                  una manera diferente de hacer actividad fisica y te ayudaremos
+                  a incorporarla como parte de tu vida y por qué no, a que se
+                  transforme en el momento que esperas de tu día.
                 </p>
 
                 <p className="mb-8 text-base text-body-color dark:text-gray-200 font-messina">
                   Transformemos juntos el concepto tradicional de un gimnasio y
                   lo convirtamos en un lugar donde no solo se entrena, sino
-                  también donde serás feliz.
+                  también donde VIVIR SENSACIONES POSITIVAS.
                 </p>
               </div>
             </div>
