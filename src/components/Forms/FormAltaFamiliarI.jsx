@@ -23,12 +23,20 @@ import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import Alerta from '../Error';
 
-const FormAltaFamiliarI = ({ isOpen, onClose }) => {
+const FormAltaFamiliarI = ({
+  isOpen, onClose, precio,
+  descuento,
+  preciofinal
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const { id_integrante } = useParams(); // Obtener el id_integrante de la URL
 
   const textoModal = 'Familiar creado correctamente.';
+  const newPrecio = precio;
+  const newDescuento = descuento;
+  const newPrecioFinal = preciofinal;
+
 
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
@@ -108,9 +116,12 @@ const FormAltaFamiliarI = ({ isOpen, onClose }) => {
             email: '',
             sede: '',
             notas: '',
-            precio: '',
-            descuento: '0%',
-            preciofinal: ''
+            precio: newPrecio,
+            // precio !== null && precio !== undefined ? precio : '',
+            descuento: newDescuento,
+            // descuento || '0%', // Asegúrate de que descuento tenga un valor por defecto adecuado si puede ser null
+            preciofinal: newPrecioFinal
+            // precioFinal !== null && precioFinal !== undefined ? precioFinal : ''
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
@@ -214,8 +225,8 @@ const FormAltaFamiliarI = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Sede:
                       </option>
-                      <option value="monteros">Monteros</option>
-                      <option value="concepcion">Concepción</option>
+                      <option value="Monteros">Monteros</option>
+                      <option value="Concepción">Concepción</option>
                     </Field>
                     {errors.sede && touched.sede ? (
                       <Alerta>{errors.sede}</Alerta>

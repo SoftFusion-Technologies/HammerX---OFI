@@ -6,7 +6,15 @@ import FormAltaIntegranteConve from '../../../components/Forms/FormAltaIntegrant
 import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
 import { useAuth } from '../../../AuthContext';
 
-const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
+const IntegranteDetails = ({
+  id_conv,
+  user,
+  isOpen,
+  onClose,
+  obtenerIntegrantes2,
+  permiteFam,
+  cantFamiliares
+}) => {
   if (!isOpen) {
     return null;
   }
@@ -15,7 +23,6 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
 
   const { userLevel } = useAuth();
 
- 
   const abrirModal = () => {
     setmodalNewConve(true);
   };
@@ -88,14 +95,18 @@ const IntegranteDetails = ({ user, isOpen, onClose, obtenerIntegrantes2 }) => {
             user={user}
           />
 
-          <Link to={`/dashboard/integrantes/${user.id}/integrantesfam/`}>
-            <button
-              onClick={abrirModal2}
-              className=" ml-5 bg-[#298dc0] hover:bg-[#1a4469] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+          {Number(permiteFam) === 1 && (
+            <Link
+              to={`/dashboard/admconvenios/${id_conv}/integrantes/${user.id}/integrantesfam/`}
             >
-              Ver Familiar
-            </button>
-          </Link>
+              <button
+                // onClick={() => console.log('Ver familiar')}
+                className="ml-5 bg-[#298dc0] hover:bg-[#1a4469] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+              >
+                Ver Familiar
+              </button>
+            </Link>
+          )}
           {/*         
           <FormAltaFamiliarI
             isOpen={modalNewConve2}

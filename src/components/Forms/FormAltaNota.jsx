@@ -57,10 +57,10 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
       <div className={`container-inputs`}>
         <Formik
           initialValues={{
-            notas: '',
-            precio: '',
-            descuento: '',
-            preciofinal: ''
+            notas: ''
+            // precio: '',
+            // descuento: '',
+            // preciofinal: ''
           }}
           onSubmit={async (values, { resetForm }) => {
             try {
@@ -69,10 +69,10 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
                 {
                   method: 'PUT',
                   body: JSON.stringify({
-                    notas: values.notas,
-                    precio: parseFloat(values.precio),
-                    descuento: parseFloat(values.descuento),
-                    preciofinal: parseFloat(values.preciofinal)
+                     notas: values.notas
+                    // precio: parseFloat(values.precio),
+                    // descuento: parseFloat(values.descuento),
+                    // preciofinal: parseFloat(values.preciofinal)
                   }),
                   headers: {
                     'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
                   />
                   {/* <ErrorMessage name="observaciones" component={Alerta} /> */}
                 </div>
-                <div className="mb-4 px-4">
+                {/* <div className="mb-4 px-4">
                   <Field
                     id="precio"
                     name="precio"
@@ -172,7 +172,7 @@ const FormAltaNota = ( {isOpen, onClose, user }) => {
                     readOnly
                     value={values.preciofinal}
                   />
-                </div>
+                </div> */}
                 <div className="mx-auto flex justify-center my-5">
                   <button
                     type="submit"

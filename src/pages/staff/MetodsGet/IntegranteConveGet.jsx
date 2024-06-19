@@ -34,6 +34,13 @@ const IntegranteConveGet = ({ integrantes }) => {
   const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
   const { userLevel } = useAuth();
 
+  // Estado para tomar los nombres de los convenios
+  const [convenioNombre, setConvenioNombre] = useState('');
+
+  // Estado para tomar los valores de permiteFam de los convenios
+  const [permiteFam, setpermiteFam] = useState(0);
+  const [cantFam, setcantFam] = useState(0);
+
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
@@ -49,16 +56,63 @@ const IntegranteConveGet = ({ integrantes }) => {
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = 'http://localhost:8080/integrantes/';
-  const URL2 =`http://localhost:8080/admconvenios/${id_conv}/integrantes/`
+  const URL2 = `http://localhost:8080/admconvenios/${id_conv}/integrantes/`;
+  // para recuperar los valores de precio INI
+  const URL3 = 'http://localhost:8080/admconvenios/';
+  const URL4 = 'http://localhost:8080/admconvenios/';
 
+  const [precio, setPrecio] = useState('');
+  const [descuento, setDescuento] = useState('');
+  const [preciofinal, setPrecioFinal] = useState('');
 
   useEffect(() => {
-    // utilizamos get para obtenerPersonas los datos contenidos en la url
+    obtenerDatosAdmConvenio(id_conv);
+  }, [id_conv]);
+
+  const obtenerDatosAdmConvenio = async (id) => {
+    try {
+      // const response = await axios.get(URL3);
+      const response = await axios.get(`${URL4}${id}/`);
+
+      // console.log(`${URL4}${id_conv}/`);
+      const data = response.data;
+
+      // console.log('Datos del convenio:', data);
+
+      if (data && data.precio && data.descuento && data.preciofinal) {
+        setPrecio(data.precio);
+        setDescuento(data.descuento);
+        setPrecioFinal(data.preciofinal);
+      } else {
+        console.log('Datos del convenio incompletos o incorrectos:', data);
+      }
+    } catch (error) {
+      console.error('Error al obtener datos del convenio:', error);
+    }
+  };
+
+  // para recuperar los valores de precio FIN
+  useEffect(() => {
     axios.get(URL2).then((res) => {
       setIntegrantes(res.data);
       obtenerIntegrantes2();
     });
-  }, []);
+
+    const obtenerConvenio = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/admconvenios/${id_conv}`
+        );
+        setConvenioNombre(response.data.nameConve);
+        setpermiteFam(response.data.permiteFam);
+        setcantFam(response.data.cantFamiliares);
+      } catch (error) {
+        console.error('Error al obtener el convenio:', error);
+      }
+    };
+
+    obtenerConvenio();
+  }, [id_conv]);
 
   // Función para obtener todos los personClass desde la API
   const obtenerIntegrantes2 = async () => {
@@ -77,6 +131,9 @@ const IntegranteConveGet = ({ integrantes }) => {
         const response = await axios.get(
           `http://localhost:8080/admconvenios/${id_conv}/integrantes/`
         );
+        // Actualizar datos del convenio después de agregar el integrante
+        await obtenerDatosAdmConvenio(id_conv);
+
         setIntegrantes(response.data);
       } catch (error) {
         console.error('Error al obtener los integrantes:', error);
@@ -114,7 +171,7 @@ const IntegranteConveGet = ({ integrantes }) => {
       setSelectedUser(resultado);
       setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log("Error al obtener el integrante:", error);
+      console.log('Error al obtener el integrante:', error);
     }
   };
   const searcher = (e) => {
@@ -191,6 +248,11 @@ const IntegranteConveGet = ({ integrantes }) => {
                 Volver
               </button>
             </Link>
+          </div>
+          <div className="flex justify-center">
+            <h2 className="pb-5 font-bignoodle text-[#fc4b08] text-5xl">
+              {convenioNombre}
+            </h2>
           </div>
           <div className="flex justify-center">
             <h1 className="pb-5">
@@ -274,13 +336,19 @@ const IntegranteConveGet = ({ integrantes }) => {
                       </td>
 
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {formatearMoneda(integrante.precio)}
+                        {integrante.precio !== '0'
+                          ? formatearMoneda(integrante.precio)
+                          : 'Sin Precio'}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {integrante.descuento}
+                        {integrante.descuento !== '0'
+                          ? integrante.descuento
+                          : 'Sin descuento'}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {formatearMoneda(integrante.preciofinal)}
+                        {integrante.preciofinal !== '0'
+                          ? formatearMoneda(integrante.preciofinal)
+                          : 'Sin Precio Final'}
                       </td>
 
                       {/* <td onClick={() => obtenerIntegrante(i.id)}>
@@ -339,6 +407,9 @@ const IntegranteConveGet = ({ integrantes }) => {
           <FormAltaIntegranteConve
             isOpen={modalNewConve}
             onClose={cerarModal}
+            precio={precio}
+            descuento={descuento}
+            preciofinal={preciofinal}
           />
         </div>
       </div>
@@ -348,6 +419,9 @@ const IntegranteConveGet = ({ integrantes }) => {
           isOpen={modalUserDetails}
           onClose={() => setModalUserDetails(false)}
           obtenerIntegrantes2={obtenerIntegrantes2}
+          permiteFam={permiteFam}
+          id_conv={id_conv}
+          cantFam={cantFam}
         />
       )}
       <Footer />

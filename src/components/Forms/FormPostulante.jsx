@@ -146,7 +146,9 @@ const FormPostulante = ({ isOpen, onClose }) => {
         >
           {({ errors, touched }) => {
             return (
-              <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+              <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl">
+                {' '}
+                {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                 <Form className="formulario max-sm:w-[300px]">
                   <div className="flex justify-between">
                     <div className="tools">
@@ -160,8 +162,12 @@ const FormPostulante = ({ isOpen, onClose }) => {
                         <span className="green toolsbox"></span>
                       </div>
                     </div>
-                    <div className="pr-6 pt-3 text-[20px] cursor-pointer" onClick={onClose}>x</div>
-
+                    <div
+                      className="pr-6 pt-3 text-[20px] cursor-pointer"
+                      onClick={onClose}
+                    >
+                      x
+                    </div>
                   </div>
                   <div className="mb-4 px-4">
                     <Field
@@ -231,7 +237,9 @@ const FormPostulante = ({ isOpen, onClose }) => {
                       </option>
                       <option value="masculino">Masculino</option>
                       <option value="femenino">Femenino</option>
-                      <option value="prefieronodecirlo">Prefiero no decirlo</option>
+                      <option value="prefieronodecirlo">
+                        Prefiero no decirlo
+                      </option>
                     </Field>
                     {errors.sexo && touched.sexo ? (
                       <Alerta>{errors.sexo}</Alerta>
@@ -264,8 +272,12 @@ const FormPostulante = ({ isOpen, onClose }) => {
                       </option>
                       <option value="recepcionista">Recepcionista</option>
                       <option value="vendedor">Vendedor</option>
-                      <option value="instructormusculacion">Instructor de musculación</option>
-                      <option value="coachclasesgrupales">Coach de clases grupales</option>
+                      <option value="instructormusculacion">
+                        Instructor de musculación
+                      </option>
+                      <option value="coachclasesgrupales">
+                        Coach de clases grupales
+                      </option>
                       <option value="limpieza">Limpieza</option>
                       <option value="mantenimiento">Mantenimiento</option>
                       <option value="marketing">Marketing</option>
@@ -287,8 +299,8 @@ const FormPostulante = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Sede:
                       </option>
-                      <option value="monteros">Monteros</option>
-                      <option value="concepcion">Concepción</option>
+                      <option value="Monteros">Monteros</option>
+                      <option value="Concepción">Concepción</option>
                     </Field>
                     {errors.sede && touched.sede ? (
                       <Alerta>{errors.sede}</Alerta>

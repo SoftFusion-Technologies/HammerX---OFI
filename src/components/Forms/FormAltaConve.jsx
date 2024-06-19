@@ -43,6 +43,10 @@ const FormAltaConve = ({ isOpen, onClose }) => {
       if (valores.nameConve === '' || valores.descConve === '') {
         alert('Por favor, complete todos los campos obligatorios.');
       } else {
+         const transformedValues = {
+           ...valores,
+           permiteFam: valores.permiteFam ? 1 : 0
+         };
         // Realizamos la solicitud POST al servidor
         const respuesta = await fetch('http://localhost:8080/admconvenios/', {
           method: 'POST',
@@ -82,6 +86,13 @@ const FormAltaConve = ({ isOpen, onClose }) => {
     }
   };
 
+   const handlePrecioChange = (values, setFieldValue) => {
+     const precio = parseFloat(values.precio) || 0;
+     const descuento = parseFloat(values.descuento) || 0;
+     const precioFinal = precio - (precio * descuento) / 100;
+     setFieldValue('preciofinal', precioFinal);
+   };
+
   return (
     <div
       className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
@@ -99,18 +110,24 @@ const FormAltaConve = ({ isOpen, onClose }) => {
           // valores con los cuales el formulario inicia y este objeto tambien lo utilizo para cargar los datos en la API
           initialValues={{
             nameConve: '',
-            descConve: ''
+            descConve: '',
+            precio: '',
+            descuento: '',
+            preciofinal: '',
+            permiteFam: false,
+            cantFamiliares: 0 
           }}
           enableReinitialize={!isOpen}
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
           onSubmit={async (values, { resetForm }) => {
+            
             await handleSubmitConve(values);
 
             resetForm();
           }}
           validationSchema={nuevoConveSchema}
         >
-          {({ isSubmitting, setFieldValue, errors, touched }) => {
+          {({ isSubmitting, setFieldValue, errors, touched, values }) => {
             return (
               <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
                 {' '}
@@ -164,6 +181,90 @@ const FormAltaConve = ({ isOpen, onClose }) => {
                     ) : null}
                   </div>
 
+                  <div className="mb-4 px-4">
+                    <Field
+                      id="precio"
+                      name="precio"
+                      type="text"
+                      className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      placeholder="Precio"
+                      maxLength="14"
+                      onChange={(e) => {
+                        setFieldValue('precio', e.target.value);
+                        handlePrecioChange(
+                          { ...values, precio: e.target.value },
+                          setFieldValue
+                        );
+                      }}
+                    />
+                  </div>
+                  <div className="mb-4 px-4">
+                    <Field
+                      id="descuento"
+                      name="descuento"
+                      type="text"
+                      className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      placeholder="Descuento"
+                      maxLength="14"
+                      onChange={(e) => {
+                        setFieldValue('descuento', e.target.value);
+                        handlePrecioChange(
+                          { ...values, descuento: e.target.value },
+                          setFieldValue
+                        );
+                      }}
+                    />
+                  </div>
+                  <div className="mb-4 px-4">
+                    <Field
+                      id="preciofinal"
+                      name="preciofinal"
+                      type="text"
+                      className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+                      placeholder="Precio Final"
+                      maxLength="14"
+                      readOnly
+                      value={values.preciofinal}
+                    />
+                  </div>
+
+                  <div className="mb-3 px-4">
+                    <label>
+                      <Field
+                        type="checkbox"
+                        name="permiteFam"
+                        checked={values.permiteFam}
+                        onChange={() =>
+                          setFieldValue('permiteFam', !values.permiteFam)
+                        }
+                      />
+                      Permite Familiar
+                    </label>
+                   </div>
+
+                  {values.permiteFam && (
+                    <div className="mb-3 px-4">
+                      <label>Cant de familiares:</label>
+                      {[1, 2, 3, 4, 5].map((number) => (
+                        <label key={number} className="mx-2">
+                          <Field
+                            type="checkbox"
+                            name="cantFamiliares"
+                            checked={values.cantFamiliares === number}
+                            onChange={() =>
+                              setFieldValue('cantFamiliares', number)
+                            }
+                          />
+                          {number}
+                        </label>
+                      ))}
+                      {/* <ErrorMessage
+                        name="cantFamiliares"
+                        component="div"
+                        className="text-red-500"
+                      /> */}
+                    </div>
+                  )}
                   <div className="mx-auto flex justify-center my-5">
                     <input
                       type="submit"
