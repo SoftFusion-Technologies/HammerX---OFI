@@ -131,7 +131,7 @@ const App = memo(() => {
                 
                 
                 {/* <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/" element={<IntegranteConveGet />} />
+                <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/" element={ <IntegranteConveGet />} />
                 <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/:id_integrante/integrantesfam/" element={<FamIntegranteGet />} />
 
                 {/* Rutas para obtener por los registros por id*/}

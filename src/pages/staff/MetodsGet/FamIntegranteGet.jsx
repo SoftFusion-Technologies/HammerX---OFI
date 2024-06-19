@@ -289,9 +289,19 @@ const FamIntegranteGet = ({ integrantes }) => {
             </div>
           )}
 
-          {results.length == cantFam && (
+          {results.length == cantFam ? (
             <h1 className="flex justify-center pb-10">
               No se permite agregar mas familiares
+            </h1>
+          ) : (
+            <h1 className="flex justify-center pb-10 text-lg">
+              Puede agregar hasta:{' '}
+              <span className="font-bold ml-2 mr-2 "> {cantFam} </span>
+              Familiares, le queda{' '}
+              <span className="font-bold ml-2 mr-2 ">
+                {cantFam - results.length}{' '}
+              </span>
+              más para agregar
             </h1>
           )}
           {Object.keys(results).length === 0 ? (
@@ -343,7 +353,9 @@ const FamIntegranteGet = ({ integrantes }) => {
                         {formatearMoneda(integrante.precio)}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {integrante.descuento}
+                        {integrante.descuento !== '0'
+                          ? `%${integrante.descuento}`
+                          : 'Sin descuento'}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {formatearMoneda(integrante.preciofinal)}
@@ -362,6 +374,8 @@ const FamIntegranteGet = ({ integrantes }) => {
                       userLevel === 'convenio' ||
                       */
                         (userLevel === 'admin' ||
+                          userLevel === '' ||
+                          userLevel === 'convenio' ||
                           userLevel === 'administrador') && (
                           <td className="">
                             <button

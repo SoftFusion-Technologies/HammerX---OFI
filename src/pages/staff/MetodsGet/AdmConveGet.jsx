@@ -160,6 +160,7 @@ const AdmConveGet = () => {
         <div className=" rounded-lg w-11/12 mx-auto pb-2">
           <div className="bg-white mb-5">
             <div className="pl-5 pt-5">
+              
               <Link to="/dashboard">
                 <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                   Volver
@@ -239,7 +240,7 @@ const AdmConveGet = () => {
                       DESCUENTO:{' '}
                       <span className="font-semibold">
                         {conve.descuento
-                          ? `${conve.descuento}%`
+                          ? `%${conve.descuento}`
                           : 'Sin descuento'}
                       </span>
                     </p>

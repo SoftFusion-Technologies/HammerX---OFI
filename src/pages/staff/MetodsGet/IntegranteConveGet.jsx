@@ -277,6 +277,7 @@ const IntegranteConveGet = ({ integrantes }) => {
 
           {(userLevel === 'convenio' ||
             userLevel === 'admin' ||
+            userLevel === '' ||
             userLevel === 'administrador') && (
             <div className="flex justify-center pb-10">
               <Link to="#">
@@ -342,7 +343,7 @@ const IntegranteConveGet = ({ integrantes }) => {
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {integrante.descuento !== '0'
-                          ? integrante.descuento
+                          ? `%${integrante.descuento}`
                           : 'Sin descuento'}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
@@ -363,6 +364,8 @@ const IntegranteConveGet = ({ integrantes }) => {
                       userLevel === 'convenio' ||
                       */
                         (userLevel === 'admin' ||
+                         userLevel === 'convenio' ||
+                         userLevel === '' ||
                           userLevel === 'administrador') && (
                           <td className="">
                             <button
