@@ -22,19 +22,41 @@ import '../../../styles/MetodsGet/Tabla.css';
 import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
 import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
-import FamIntegranteGetId from './FarIntegranteGetId'
+import FamIntegranteGetId from './FamIntegranteGetId'
 import { useAuth } from '../../../AuthContext';
 
 const FamIntegranteGet = ({ integrantes }) => {
-  // Estado para almacenar la lista de personas
+  // variable global, para determinar los accesos a la parte del sistema
   const { userLevel } = useAuth();
+
+  // variables para obtener los parametros
   const { id_conv, id_integrante, id_adm } = useParams();
-  const [integrante, setIntegrantes] = useState([]);
-  const [modalNewConve, setmodalNewConve] = useState(false);
-  const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
+
+  //URL estatica, luego cambiar por variable de entorno
+  const URL = 'http://localhost:8080/integrantesfam/';
+  const URL2 = `http://localhost:8080/admconvenios/${id_conv}/integrantes/${id_integrante}/integrantesfam/`;
+
+  // para recuperar los valores de precio FIN
+  const URL4 = 'http://localhost:8080/admconvenios/';
 
   const location = useLocation();
   const currentPath = location.pathname; // Obtiene la ruta actual
+
+  // Estado para almacenar el término de búsqueda
+  const [search, setSearch] = useState('');
+
+  const [precio, setPrecio] = useState('');
+  const [descuento, setDescuento] = useState('');
+  const [preciofinal, setPrecioFinal] = useState('');
+
+  // Estado para almacenar la lista de Integrantes
+  const [integrante, setIntegrantes] = useState([]);
+
+  // Estado para manejar los modales
+  const [modalNewConve, setmodalNewConve] = useState(false);
+
+  // Estado para almacenar el precio final
+  const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
 
   // Extraer el primer segmento de la ruta actual (dashboard/admconvenios/23/integrantes)
   const basePath = currentPath.split('/').slice(0, -3).join('/');
@@ -54,19 +76,6 @@ const FamIntegranteGet = ({ integrantes }) => {
     setmodalNewConve(false);
     obtenerIntegrantes2();
   };
-  // Estado para almacenar el término de búsqueda
-  const [search, setSearch] = useState('');
-
-  //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/integrantesfam/';
-  const URL2 = `http://localhost:8080/admconvenios/${id_conv}/integrantes/${id_integrante}/integrantesfam/`;
-
-  const [precio, setPrecio] = useState('');
-  const [descuento, setDescuento] = useState('');
-  const [preciofinal, setPrecioFinal] = useState('');
-
-  // para recuperar los valores de precio FIN
-  const URL4 = 'http://localhost:8080/admconvenios/';
 
   useEffect(() => {
     obtenerDatosAdmConvenio(id_conv);
@@ -80,7 +89,7 @@ const FamIntegranteGet = ({ integrantes }) => {
       // console.log(`${URL4}${id_conv}/`);
       const data = response.data;
 
-       console.log('Datos del convenio:', data);
+      console.log('Datos del convenio:', data);
 
       if (data && data.precio && data.descuento && data.preciofinal) {
         setPrecio(data.precio);
