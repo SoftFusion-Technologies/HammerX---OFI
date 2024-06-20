@@ -364,8 +364,10 @@ const IntegranteConveGet = ({ integrantes }) => {
                       userLevel === 'convenio' ||
                       */
                         (userLevel === 'admin' ||
-                         userLevel === 'convenio' ||
-                         userLevel === '' ||
+                          userLevel === 'convenio' ||
+                          userLevel === '' ||
+                          userLevel === 'gerente' ||
+                          userLevel === 'vendedor' ||
                           userLevel === 'administrador') && (
                           <td className="">
                             <button

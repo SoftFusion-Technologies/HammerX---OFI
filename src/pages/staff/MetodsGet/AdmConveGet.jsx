@@ -160,7 +160,6 @@ const AdmConveGet = () => {
         <div className=" rounded-lg w-11/12 mx-auto pb-2">
           <div className="bg-white mb-5">
             <div className="pl-5 pt-5">
-              
               <Link to="/dashboard">
                 <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                   Volver
@@ -225,37 +224,48 @@ const AdmConveGet = () => {
                       DESCRIPCIÓN:{' '}
                       <span className="font-semibold">{conve.descConve}</span>
                     </p>
-                    <p>
-                      PRECIO:{' '}
-                      <span className="font-semibold">
-                        {conve.precio
-                          ? Number(conve.precio).toLocaleString('es-AR', {
-                              style: 'currency',
-                              currency: 'ARS'
-                            })
-                          : 'Sin precio'}
-                      </span>
-                    </p>
-                    <p>
-                      DESCUENTO:{' '}
-                      <span className="font-semibold">
-                        {conve.descuento
-                          ? `%${conve.descuento}`
-                          : 'Sin descuento'}
-                      </span>
-                    </p>
-                    <p>
-                      PRECIO FINAL:{' '}
-                      <span className="font-semibold">
-                        {conve.preciofinal
-                          ? Number(conve.preciofinal).toLocaleString('es-AR', {
-                              style: 'currency',
-                              currency: 'ARS'
-                            })
-                          : 'Sin precio final'}
-                      </span>
-                    </p>
-
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        PRECIO:{' '}
+                        <span className="font-semibold">
+                          {conve.precio
+                            ? Number(conve.precio).toLocaleString('es-AR', {
+                                style: 'currency',
+                                currency: 'ARS'
+                              })
+                            : 'Sin precio'}
+                        </span>
+                      </p>
+                    )}
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        DESCUENTO:{' '}
+                        <span className="font-semibold">
+                          {conve.descuento
+                            ? `%${conve.descuento}`
+                            : 'Sin descuento'}
+                        </span>
+                      </p>
+                    )}
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        PRECIO FINAL:{' '}
+                        <span className="font-semibold">
+                          {conve.preciofinal
+                            ? Number(conve.preciofinal).toLocaleString(
+                                'es-AR',
+                                {
+                                  style: 'currency',
+                                  currency: 'ARS'
+                                }
+                              )
+                            : 'Sin precio final'}
+                        </span>
+                      </p>
+                    )}
                     <p>
                       <span className="font-semibold">
                         {/* {console.log('permiteFam:', conve.permiteFam)} */}

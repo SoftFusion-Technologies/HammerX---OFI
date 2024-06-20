@@ -76,7 +76,10 @@ const IntegranteDetails = ({
                       userLevel === 'vendedor' ||
                       userLevel === 'convenio' ||
                       */
-            (userLevel === 'admin' || userLevel === 'administrador') && (
+            (userLevel === 'admin' ||
+              userLevel === 'administrador' ||
+              userLevel === 'gerente' ||
+              userLevel === 'vendedor') && (
               <Link to="#">
                 <button
                   onClick={abrirModal}

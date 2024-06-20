@@ -384,6 +384,8 @@ const FamIntegranteGet = ({ integrantes }) => {
                       */
                         (userLevel === 'admin' ||
                           userLevel === '' ||
+                          userLevel === 'vendedor' ||
+                          userLevel === 'gerente' ||
                           userLevel === 'convenio' ||
                           userLevel === 'administrador') && (
                           <td className="">
