@@ -20,7 +20,7 @@ import "../../../styles/MetodsGet/Tabla.css";
 import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import PostulanteDetails from "./PostulanteGetId";
-import { useAuth } from '../../../AuthContext';
+import { useAuth } from "../../../AuthContext";
 
 // Componente funcional que maneja la lógica relacionada con los postulantes
 const PostulanteGet = () => {
@@ -28,7 +28,7 @@ const PostulanteGet = () => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/postulantes/';
+  const URL = "http://localhost:8080/postulantes/";
 
   const { userLevel } = useAuth();
 
@@ -39,7 +39,7 @@ const PostulanteGet = () => {
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [sexoFilter, setSexoFilter] = useState(null);
   const [edadFilter, setEdadFilter] = useState(null);
 
@@ -67,10 +67,10 @@ const PostulanteGet = () => {
   };
 
   const calcularRangoEdad = (edad) => {
-    if (edad >= 18 && edad <= 21) return '18-21';
-    if (edad >= 21 && edad <= 23) return '21-23';
-    if (edad >= 23 && edad <= 25) return '23-25';
-    if (edad > 25) return '>25';
+    if (edad >= 18 && edad <= 21) return "18-21";
+    if (edad >= 21 && edad <= 23) return "21-23";
+    if (edad >= 23 && edad <= 25) return "23-25";
+    if (edad > 25) return ">25";
   };
 
   //Funcion de busqueda, en el cuadro
@@ -130,17 +130,17 @@ const PostulanteGet = () => {
       });
       setContactados(contactadosData);
     } catch (error) {
-      console.log('Error al obtener los postulantes:', error);
+      console.log("Error al obtener los postulantes:", error);
     }
   };
 
   const handleEliminarPostulante = async (id) => {
-    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    const confirmacion = window.confirm("¿Seguro que desea eliminar?");
     if (confirmacion) {
       try {
         const url = `${URL}${id}`;
         const respuesta = await fetch(url, {
-          method: 'DELETE'
+          method: "DELETE",
         });
         await respuesta.json();
         const arrayPostulantes = postulantes.filter(
@@ -162,7 +162,7 @@ const PostulanteGet = () => {
       setSelectedUser(resultado);
       setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log('Error al obtener el usuario:', error);
+      console.log("Error al obtener el usuario:", error);
     }
   };
 
@@ -171,13 +171,13 @@ const PostulanteGet = () => {
     try {
       await axios.put(`${URL}${id}`, { state }); // Cambiado a PUT en la URL correcta
     } catch (error) {
-      console.log('Error al actualizar el estado de contacto:', error);
+      console.log("Error al actualizar el estado de contacto:", error);
     }
   };
 
   const contactarPostulante = (celular, id) => {
     const link = `https://api.whatsapp.com/send/?phone=%2B549${celular}&text&type=phone_number&app_absent=0`;
-    const newWindow = window.open(link, '_blank');
+    const newWindow = window.open(link, "_blank");
 
     if (newWindow) {
       const interval = setInterval(async () => {
@@ -186,7 +186,7 @@ const PostulanteGet = () => {
           await updateContactState(id, true);
           setContactados((prevState) => ({
             ...prevState,
-            [id]: true
+            [id]: true,
           }));
         }
       }, 1000); // Check every second if the window is closed
@@ -266,7 +266,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="masculino"
-                    checked={sexoFilter === 'masculino'}
+                    checked={sexoFilter === "masculino"}
                     onChange={handleSexoChange}
                   />
                   &nbsp; Masculino
@@ -278,7 +278,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="femenino"
-                    checked={sexoFilter === 'femenino'}
+                    checked={sexoFilter === "femenino"}
                     onChange={handleSexoChange}
                   />
                   &nbsp; Femenino
@@ -306,7 +306,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="18-21"
-                    checked={edadFilter === '18-21'}
+                    checked={edadFilter === "18-21"}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 18 a 21
@@ -317,7 +317,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="21-23"
-                    checked={edadFilter === '21-23'}
+                    checked={edadFilter === "21-23"}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 21 a 23
@@ -328,7 +328,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value="23-25"
-                    checked={edadFilter === '23-25'}
+                    checked={edadFilter === "23-25"}
                     onChange={handleEdadChange}
                   />
                   &nbsp; 23 a 25
@@ -339,7 +339,7 @@ const PostulanteGet = () => {
                   <input
                     type="radio"
                     value=">25"
-                    checked={edadFilter === '>25'}
+                    checked={edadFilter === ">25"}
                     onChange={handleEdadChange}
                   />
                   &nbsp; Mayores a 25
@@ -362,7 +362,7 @@ const PostulanteGet = () => {
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Postulante NO Existe ||{' '}
+              El Postulante NO Existe ||{" "}
               <span className="text-span"> Postulante: {results.length}</span>
             </p>
           ) : (
@@ -403,9 +403,9 @@ const PostulanteGet = () => {
                         {postulante.sede}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
-                        {postulante.valoracion === '' ||
+                        {postulante.valoracion === "" ||
                         postulante.valoracion === null
-                          ? 'El postulante no tiene ninguna valoración'
+                          ? "El postulante no tiene ninguna valoración"
                           : postulante.valoracion}
                       </td>
                       <td onClick={() => obtenerPostulante(postulante.id)}>
@@ -413,9 +413,9 @@ const PostulanteGet = () => {
                       </td>
                       {/* ACCIONES */}
 
-                      {(userLevel === 'admin' ||
-                        userLevel === 'administrador') && (
-                        <td>
+                      {(userLevel === "admin" ||
+                        userLevel === "administrador") && (
+                        <td className="flex space-x-3 px-2">
                           <button
                             onClick={() =>
                               handleEliminarPostulante(postulante.id)
@@ -425,28 +425,26 @@ const PostulanteGet = () => {
                           >
                             Eliminar
                           </button>
+                          <button
+                            onClick={() =>
+                              contactarPostulante(
+                                postulante.celular,
+                                postulante.id
+                              )
+                            }
+                            type="button"
+                            className={`py-2 px-4 my-1 rounded-md text-white ${
+                              contactados[postulante.id]
+                                ? "bg-green-500 hover:bg-green-600"
+                                : "bg-blue-500 hover:bg-blue-600"
+                            }`}
+                          >
+                            {contactados[postulante.id]
+                              ? "Contactado"
+                              : "Contactar"}
+                          </button>
                         </td>
                       )}
-                      <td className="flex gap-2">
-                        <button
-                          onClick={() =>
-                            contactarPostulante(
-                              postulante.celular,
-                              postulante.id
-                            )
-                          }
-                          type="button"
-                          className={`py-2 px-4 my-1 rounded-md text-white ${
-                            contactados[postulante.id]
-                              ? 'bg-green-500 hover:bg-green-600'
-                              : 'bg-blue-500 hover:bg-blue-600'
-                          }`}
-                        >
-                          {contactados[postulante.id]
-                            ? 'Contactado'
-                            : 'Contactar'}
-                        </button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -461,7 +459,7 @@ const PostulanteGet = () => {
                   {numbers.map((number, index) => (
                     <li
                       className={`page-item ${
-                        currentPage === number ? 'active' : ''
+                        currentPage === number ? "active" : ""
                       }`}
                       key={index}
                     >

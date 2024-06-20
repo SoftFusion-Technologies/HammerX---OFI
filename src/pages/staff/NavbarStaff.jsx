@@ -91,7 +91,7 @@ const Links = [
           </div>
 
           <div className="hidden lg:flex flex-col xl:flex-row xl:items-center justify-between">
-            <h1 className="hidden xl:flex">Bienvenidido {displayUserName}!</h1>
+            <h1 className="hidden xl:flex">Bienvenido {displayUserName}!</h1>
             <button
               onClick={handleLogout}
               className="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 ml-4 xl:mt-0"
