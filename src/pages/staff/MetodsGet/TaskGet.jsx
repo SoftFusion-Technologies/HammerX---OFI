@@ -259,10 +259,16 @@ const TaskGet = () => {
                       <td onClick={() => obtenerTarea(task.id)}>{task.hora}</td>
                       <td onClick={() => obtenerTarea(task.id)}>{task.dias}</td>
                       <td onClick={() => obtenerTarea(task.id)}>{task.user}</td>
-                      <td onClick={() => obtenerTarea(task.id)}>
-                        {task.state}
-                      </td>
+                        <td
+                          className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
+                            task.state === 1 ? 'text-green-500' : 'text-red-500'
+                          }`}
+                          onClick={() => obtenerTarea(task.id)}
+                        >
+                          {task.state === 1 ? 'Activa' : 'Inactiva'}
+                        </td>
 
+                      {/* ACCIONES */}
                       {/* ACCIONES */}
                       <td className="">
                         <button

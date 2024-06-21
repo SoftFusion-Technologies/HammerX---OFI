@@ -27,6 +27,8 @@ const UserGet = () => {
   const [modalNewUser, setModalNewUser] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
+  const [filterSede, setFilterSede] = useState(''); // Estado para el filtro de sede
+  const [filterLevel, setFilterLevel] = useState(''); // Estado para el filtro de level (ROL)
 
   const abrirModal = () => {
     setModalNewUser(true);
@@ -38,7 +40,7 @@ const UserGet = () => {
   };
 
   //URL estatica, luego cambiar por variable de entorno
-  const URL = "http://localhost:8080/users/";
+  const URL = 'http://localhost:8080/users/';
 
   // Estado para almacenar la lista de users
   const [users, setUsers] = useState([]);
@@ -46,7 +48,7 @@ const UserGet = () => {
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   //Funcion de busqueda, en el cuadro
   const searcher = (e) => {
@@ -85,26 +87,26 @@ const UserGet = () => {
       const response = await axios.get(URL);
       setUsers(response.data);
     } catch (error) {
-      console.log("Error al obtener los usuarios:", error);
+      console.log('Error al obtener los usuarios:', error);
     }
   };
 
   const handleEliminarUser = async (id) => {
     const confirmacion = window.confirm('¿Seguro que desea eliminar?');
-      if (confirmacion) {
-        try {
-          const url = `${URL}${id}`;
-          const respuesta = await fetch(url, {
-            method: 'DELETE'
-          });
-          await respuesta.json();
-          const arrayUsers = users.filter((user) => user.id !== id);
+    if (confirmacion) {
+      try {
+        const url = `${URL}${id}`;
+        const respuesta = await fetch(url, {
+          method: 'DELETE'
+        });
+        await respuesta.json();
+        const arrayUsers = users.filter((user) => user.id !== id);
 
-          setUsers(arrayUsers);
-        } catch (error) {
-          console.log(error);
-        }
+        setUsers(arrayUsers);
+      } catch (error) {
+        console.log(error);
       }
+    }
   };
 
   const obtenerUser = async (id) => {
@@ -115,17 +117,43 @@ const UserGet = () => {
       setSelectedUser(resultado);
       setModalUserDetails(true); // Abre el modal de detalles del usuario
     } catch (error) {
-      console.log("Error al obtener el usuario:", error);
+      console.log('Error al obtener el usuario:', error);
     }
   };
 
-  // Función para ordenar los usuarios de forma creciente basado en el id
-  const ordenarUsersCreciente = (users) => {
-    return [...users].sort((a, b) => a.id - b.id);
+  // Función para manejar el cambio en el filtro de sede
+  const handleFilterSedeChange = (event) => {
+    setFilterSede(event.target.value);
+  };
+
+  // Función para aplicar el filtro por sede
+  const applySedeFilter = (user) => {
+    if (!filterSede) {
+      return true; // Si no hay filtro de sede seleccionado, mostrar todos los usuarios
+    }
+    return user.sede.toLowerCase().includes(filterSede.toLowerCase());
+  };
+
+  // Función para manejar el cambio en el filtro de level (ROL)
+  const handleFilterLevelChange = (event) => {
+    setFilterLevel(event.target.value);
+  };
+
+  // Función para aplicar el filtro por level (ROL)
+  const applyLevelFilter = (user) => {
+    if (!filterLevel) {
+      return true; // Si no hay filtro de level (ROL) seleccionado, mostrar todos los usuarios
+    }
+    return user.level.toLowerCase().includes(filterLevel.toLowerCase());
+  };
+
+  // Función para ordenar los integrantes de forma alfabética basado en el nombre
+  const ordenarIntegranteAlfabeticamente = (user) => {
+    return [...user].sort((a, b) => a.sede.localeCompare(b.sede));
   };
 
   // Llamada a la función para obtener los usuarios ordenados de forma creciente
-  const sortedUsers = ordenarUsersCreciente(results);
+  const sortedUsers = ordenarIntegranteAlfabeticamente(results);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -180,6 +208,29 @@ const UserGet = () => {
               placeholder="Buscar usuarios"
               className="border rounded-sm"
             />
+            <select
+              value={filterSede}
+              onChange={handleFilterSedeChange}
+              className="border rounded-sm ml-3"
+            >
+              <option value="">Todas las sedes</option>
+              <option value="Monteros">Monteros</option>
+              <option value="Concepción">Concepción</option>
+              {/* Agrega más opciones según tus necesidades */}
+            </select>
+
+            <select
+              value={filterLevel}
+              onChange={handleFilterLevelChange}
+              className="border rounded-sm ml-3"
+            >
+              <option value="">Todos los roles</option>
+              <option value="admin">Administrador</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="gerente">Gerente</option>
+              <option value="convenio">Convenio</option>
+              {/* Agrega más opciones según tus necesidades */}
+            </select>
           </form>
           {/* formulario de busqueda */}
 
@@ -196,7 +247,7 @@ const UserGet = () => {
 
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
-              El Usuario NO Existe ||{" "}
+              El Usuario NO Existe ||{' '}
               <span className="text-span"> Usuario: {results.length}</span>
             </p>
           ) : (
@@ -213,25 +264,36 @@ const UserGet = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {records.map((user) => (
-                    <tr key={user.id}>
-                      <td onClick={() => obtenerUser(user.id)}>{user.id}</td>
-                      <td onClick={() => obtenerUser(user.id)}>{user.name}</td>
-                      <td onClick={() => obtenerUser(user.id)}>{user.email}</td>
-                      <td onClick={() => obtenerUser(user.id)}>{user.level}</td>
-                      <td onClick={() => obtenerUser(user.id)}>{user.sede}</td>
-                      {/* ACCIONES */}
-                      <td>
-                        <button
-                          onClick={() => handleEliminarUser(user.id)}
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {records
+                    .filter(applySedeFilter)
+                    .filter(applyLevelFilter)
+                    .map((user) => (
+                      <tr key={user.id}>
+                        <td onClick={() => obtenerUser(user.id)}>{user.id}</td>
+                        <td onClick={() => obtenerUser(user.id)}>
+                          {user.name}
+                        </td>
+                        <td onClick={() => obtenerUser(user.id)}>
+                          {user.email}
+                        </td>
+                        <td onClick={() => obtenerUser(user.id)}>
+                          {user.level}
+                        </td>
+                        <td onClick={() => obtenerUser(user.id)}>
+                          {user.sede}
+                        </td>
+                        {/* ACCIONES */}
+                        <td>
+                          <button
+                            onClick={() => handleEliminarUser(user.id)}
+                            type="button"
+                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
               <nav className="flex justify-center items-center my-10">
@@ -244,7 +306,7 @@ const UserGet = () => {
                   {numbers.map((number, index) => (
                     <li
                       className={`page-item ${
-                        currentPage === number ? "active" : ""
+                        currentPage === number ? 'active' : ''
                       }`}
                       key={index}
                     >

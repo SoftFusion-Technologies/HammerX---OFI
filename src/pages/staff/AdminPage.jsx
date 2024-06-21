@@ -50,7 +50,10 @@ const AdminPage = () => {
       <section className="relative w-full h-contain mx-auto bg-white">
         <div className="dashboardbg">
           <div className="xl:px-0 sm:px-16 px-6 max-w-7xl mx-auto grid grid-cols-2 max-sm:grid-cols-1 max-md:gap-y-10 md:gap-10 py-28 sm:pt-44 lg:pt-28 md:w-5/6 ">
-            {(userLevel === 'admin' || userLevel === 'administrador') && (
+            {(userLevel === 'admin' ||
+              userLevel === 'administrador' ||
+              userLevel === 'gerente' ||
+              userLevel === 'vendedor') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/novedades">
                   <button className="btnstaff">Foro de Novedades</button>

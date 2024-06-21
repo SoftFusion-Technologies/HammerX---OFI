@@ -256,7 +256,7 @@ const PreguntasFrecuentesGet = () => {
                       </td>
 
                       <td
-                        className={`max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
+                        className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
                           frecAsk.estado === 1
                             ? 'text-green-500'
                             : 'text-red-500'

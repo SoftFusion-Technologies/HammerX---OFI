@@ -186,7 +186,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                     className="block font-medium left-0"
                   >
                     <span className="text-black text-base pl-1">
-                      Fecha de vencimiento
+                      Fecha de publicacion de la tarea
                     </span>
                   </label>
                   <Field
