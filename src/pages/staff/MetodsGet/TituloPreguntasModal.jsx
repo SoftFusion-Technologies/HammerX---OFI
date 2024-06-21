@@ -1,19 +1,11 @@
-/*
- * Programador: Emir Segovia
- * Fecha Cración: 05 / 06 / 2024
- * Versión: 1.0
- *
- * Descripción:
- * Este archivo (TituloPreguntasModal.jsx) es el componente el cual renderiza los titulos de la de las preguntas frecuentes.
- *
- * Tema: Renderizacion
- * Capa: Frontend
- * Contacto: emirvalles90f@gmail.com || 3865761910
- */
+import React, { useState } from 'react';
 
-import React,{useState} from 'react';
-
-const TituloPreguntasModal = ({ isOpen, onClose, preguntas, onPreguntaSelect }) => {
+const TituloPreguntasModal = ({
+  isOpen,
+  onClose,
+  preguntas,
+  onPreguntaSelect
+}) => {
   // Estado para almacenar el valor de búsqueda
   const [search, setSearch] = useState('');
 
@@ -22,16 +14,17 @@ const TituloPreguntasModal = ({ isOpen, onClose, preguntas, onPreguntaSelect }) 
     setSearch(e.target.value);
   };
 
-  // Función para filtrar las preguntas según el texto de búsqueda
-  const filteredPreguntas = preguntas.filter((pregunta) => {
-    // Si no hay texto de búsqueda, mostrar todas las preguntas
-    if (!search) {
-      return true;
-    }
-
-    // Filtrar preguntas por coincidencia parcial del título
-    return pregunta.titulo.toLowerCase().includes(search.toLowerCase());
-  });
+  // Función para ordenar las preguntas según el campo 'orden'
+  const sortedPreguntas = preguntas
+    .filter((pregunta) => {
+      // Si no hay texto de búsqueda, mostrar todas las preguntas
+      if (!search) {
+        return true;
+      }
+      // Filtrar preguntas por coincidencia parcial del título
+      return pregunta.titulo.toLowerCase().includes(search.toLowerCase());
+    })
+    .sort((a, b) => a.orden - b.orden); // Ordenar por 'orden' de menor a mayor
 
   if (!isOpen) return null;
 
@@ -71,7 +64,7 @@ const TituloPreguntasModal = ({ isOpen, onClose, preguntas, onPreguntaSelect }) 
         </form>
         {/* formulario de busqueda */}
         <ul>
-          {filteredPreguntas.map((pregunta) => (
+          {sortedPreguntas.map((pregunta) => (
             <li
               key={pregunta.id}
               onClick={() => onPreguntaSelect(pregunta)}

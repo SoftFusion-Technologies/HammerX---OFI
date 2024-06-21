@@ -196,7 +196,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Tipo de Usuario:
                       </option>
-                    {/* Cambio realizado por Benjamin Orellana 12/06/2024 - INICIO
+                      {/* Cambio realizado por Benjamin Orellana 12/06/2024 - INICIO
                       Se reemplaza el valor del administrador por el de Admin para que pueda tomar el level
                       <option value="administrador">Administrador</option>
                        */}
@@ -206,8 +206,7 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       {/* Se agrega nuevo rol para que los convenios puedan cargar sus Usuarios */}
                       <option value="convenio">Convenio</option>
 
-                    {/* Cambio realizado por Benjamin Orellana 12/06/2024 - FINAL */}
-
+                      {/* Cambio realizado por Benjamin Orellana 12/06/2024 - FINAL */}
                     </Field>
                     {errors.level && touched.level ? (
                       <Alerta>{errors.level}</Alerta>
@@ -225,8 +224,9 @@ const FormAltaUser = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Sede:
                       </option>
-                      <option value="monteros">Monteros</option>
-                      <option value="concepcion">Concepción</option>
+
+                      <option value="Monteros">Monteros</option>
+                      <option value="Concepción">Concepción</option>
                     </Field>
                     {errors.sede && touched.sede ? (
                       <Alerta>{errors.sede}</Alerta>

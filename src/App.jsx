@@ -29,6 +29,8 @@ import PreguntasFrecuentesGet from './pages/staff/MetodsGet/FrequentAsksGet';
 import UserDetails from './pages/staff/MetodsGet/UserGetId';
 import PostulanteDetails from './pages/staff/MetodsGet/PostulanteGetId';
 import IntegranteDetails from './pages/staff/MetodsGet/IntegranteConveGetId';
+import FrequentDetails from './pages/staff/MetodsGet/FrequentAsksGetId';
+import TaskDetails from './pages/staff/MetodsGet/TaskGetId';
 
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
@@ -55,7 +57,7 @@ const TaskGet = lazy(() => import('./pages/staff/MetodsGet/TaskGet'));
 const ClasesGet = lazy(() => import('./pages/staff/MetodsGet/FreeClassGet'));
 const UsersGet = lazy(() => import('./pages/staff/MetodsGet/UserGet'));
 const AdmConveGet = lazy(() => import('./pages/staff/MetodsGet/AdmConveGet'));
-const AdmPrecioGet = lazy(() => import('./pages/staff/MetodsGet/AdmPrecioGet'));
+// const AdmPrecioGet = lazy(() => import('./pages/staff/MetodsGet/AdmPrecioGet'));
 const IntegranteConveGet= lazy(() => import('./pages/staff/MetodsGet/IntegranteConveGet'));
 const FamIntegranteGet = lazy(() =>  import('./pages/staff/MetodsGet/FamIntegranteGet'));
 const VendedoresGet = lazy(() => import('./pages/staff/MetodsGet/VendedoresGet'))
@@ -89,60 +91,167 @@ const App = memo(() => {
   // Renderizado del componente
   return (
     <AuthProvider>
-    <Router>
-      {/* Componente de Suspense para manejar la carga de componentes lazy */}
-      <Suspense fallback={<Loading />}>
-        {/* Condición para mostrar el componente de carga o el contenido de la aplicación */}
-        {showLoading ? <Loading /> : (
-          <>
-
-            {/* Enrutamiento de las diferentes páginas */}
-            <Rutas>
-              <Ruta path="/" element={<HomePage />} /> {/* Página principal */}
-              <Ruta path="/clientes" element={<Clients />} /> {/* Página de clientes */}
-              <Ruta path="/nosotros" element={<AboutUs />} /> {/* Página "Nosotros" */}
-              <Ruta path="/nosotros/quienessomos" element={<OurTeam />} /> {/* Página "Quiénes somos" */}
-              <Ruta path="/nosotros/nuestrosvalores" element={<OurValues />} /> {/* Página "Nuestros valores" */}
-              <Ruta path="/Sedes/Concepcion" element={<Sedeconcepcion />} /> {/* Página de la sede de Concepción */}
-              <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} /> {/* Página de la sede de Monteros */}
-              <Ruta path="/pautas" element={<Pautas />} />  {/* Página de Pautas */}
-              <Ruta path="/legales" element={<Legales />} />  {/* Página de Legales */}
-              <Ruta path="/contacto" element={<Contacto />} /> {/* Página de Contacto */}
-              <Ruta path="/login" element={<LoginForm />} /> {/* Página de Logeo */}
-              {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
-             
-                
-              <Ruta path="/formusers" element={<AltaUserForm />} /> {/*  TABLA USERS Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formnovedad" element={<AltaNovedadForm />} /> {/* TABLA NOVEDAD Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formtask" element={<AltaTaskForm />} /> {/* TABLA SCHEDULERTASK Rutas de prueba para testear funcionamiento */}
-              <Ruta path="/formask" element={<AltaFreAskForm />} /> {/* TABLA FRECASK Rutas de prueba para testear funcionamiento */}
-
-              {/* Ruta para la página del staff */}
-              <Ruta path="/dashboard" element={ <ProtectedRoute> <AdminPage /> </ProtectedRoute> }/>
-                <Ruta path="/dashboard/postulantes" element={<ProtectedRoute> <PostulanteGet /></ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/testclass" element={<ProtectedRoute>  <ClasesGet /></ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/users" element={<ProtectedRoute>  <UsersGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/novedades" element={<ProtectedRoute>  <NovedadGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/frequent-asks" element={<ProtectedRoute>  <PreguntasFrecuentesGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/task" element={<ProtectedRoute>  <TaskGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/admconvenios" element={<ProtectedRoute>  <AdmConveGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/admprecio" element={<ProtectedRoute>  <AdmPrecioGet /> </ProtectedRoute> } /> {/* Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/vendedores" element={<ProtectedRoute>  <VendedoresGet /> </ProtectedRoute>} /> {/* Rutas de prueba para testear funcionamiento */}
-                
-                
+      <Router>
+        {/* Componente de Suspense para manejar la carga de componentes lazy */}
+        <Suspense fallback={<Loading />}>
+          {/* Condición para mostrar el componente de carga o el contenido de la aplicación */}
+          {showLoading ? (
+            <Loading />
+          ) : (
+            <>
+              {/* Enrutamiento de las diferentes páginas */}
+              <Rutas>
+                <Ruta path="/" element={<HomePage />} />{' '}
+                {/* Página principal */}
+                <Ruta path="/clientes" element={<Clients />} />{' '}
+                {/* Página de clientes */}
+                <Ruta path="/nosotros" element={<AboutUs />} />{' '}
+                {/* Página "Nosotros" */}
+                <Ruta
+                  path="/nosotros/quienessomos"
+                  element={<OurTeam />}
+                />{' '}
+                {/* Página "Quiénes somos" */}
+                <Ruta
+                  path="/nosotros/nuestrosvalores"
+                  element={<OurValues />}
+                />{' '}
+                {/* Página "Nuestros valores" */}
+                <Ruta
+                  path="/Sedes/Concepcion"
+                  element={<Sedeconcepcion />}
+                />{' '}
+                {/* Página de la sede de Concepción */}
+                <Ruta path="/Sedes/Monteros" element={<Sedemonteros />} />{' '}
+                {/* Página de la sede de Monteros */}
+                <Ruta path="/pautas" element={<Pautas />} />{' '}
+                {/* Página de Pautas */}
+                <Ruta path="/legales" element={<Legales />} />{' '}
+                {/* Página de Legales */}
+                <Ruta path="/contacto" element={<Contacto />} />{' '}
+                {/* Página de Contacto */}
+                <Ruta path="/login" element={<LoginForm />} />{' '}
+                {/* Página de Logeo */}
+                {/* <Ruta path="/form" element={<FormPostu />} /> Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/formusers" element={<AltaUserForm />} />{' '}
+                {/*  TABLA USERS Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/formnovedad" element={<AltaNovedadForm />} />{' '}
+                {/* TABLA NOVEDAD Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/formtask" element={<AltaTaskForm />} />{' '}
+                {/* TABLA SCHEDULERTASK Rutas de prueba para testear funcionamiento */}
+                <Ruta path="/formask" element={<AltaFreAskForm />} />{' '}
+                {/* TABLA FRECASK Rutas de prueba para testear funcionamiento */}
+                {/* Ruta para la página del staff */}
+                <Ruta
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <AdminPage />{' '}
+                    </ProtectedRoute>
+                  }
+                />
+                <Ruta
+                  path="/dashboard/postulantes"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <PostulanteGet />
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/testclass"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <ClasesGet />
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/users"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <UsersGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/novedades"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <NovedadGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/ask"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <PreguntasFrecuentesGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/task"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <TaskGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/admconvenios"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <AdmConveGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
+                {/* <Ruta path="/dashboard/admprecio" element={<ProtectedRoute>  <AdmPrecioGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}
+                <Ruta
+                  path="/dashboard/vendedores"
+                  element={
+                    <ProtectedRoute>
+                      {' '}
+                      <VendedoresGet />{' '}
+                    </ProtectedRoute>
+                  }
+                />{' '}
+                {/* Rutas de prueba para testear funcionamiento */}
                 {/* <Ruta path="/dashboard/integrantes" element={<ProtectedRoute>  <IntegranteConveGet /> </ProtectedRoute> } /> Rutas de prueba para testear funcionamiento */}
-                <Ruta path="/dashboard/admconvenios/:id_conv/integrantes/" element={<IntegranteConveGet />} />
-                <Ruta path="/dashboard/integrantes/:id_integrante/integrantesfam/" element={<FamIntegranteGet />} />
-
+                <Ruta
+                  path="/dashboard/admconvenios/:id_conv/integrantes/"
+                  element={<IntegranteConveGet />}
+                />
+                <Ruta
+                  path="/dashboard/admconvenios/:id_conv/integrantes/:id_integrante/integrantesfam/"
+                  element={<FamIntegranteGet />}
+                />
                 {/* Rutas para obtener por los registros por id*/}
-                <Ruta path="/users/:id" element={<UserDetails/>} />
-                <Ruta path="/postulantes/:id" element={<PostulanteDetails/>} />
-                <Ruta path="/integrantes/:id" element={<IntegranteDetails/>} />
+                <Ruta path="/users/:id" element={<UserDetails />} />
+                <Ruta path="/postulantes/:id" element={<PostulanteDetails />} />
+                <Ruta path="/integrantes/:id" element={<IntegranteDetails />} />
+                <Ruta path="/ask/:id" element={<FrequentDetails />} />
+                <Ruta path="/task/:id" element={<TaskDetails />} />
               </Rutas>
-          </>
-        )}
-      </Suspense>
-    </Router>
+            </>
+          )}
+        </Suspense>
+      </Router>
     </AuthProvider>
   );
 });

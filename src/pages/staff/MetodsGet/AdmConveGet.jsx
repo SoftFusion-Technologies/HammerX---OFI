@@ -157,54 +157,55 @@ const AdmConveGet = () => {
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
-          <div className="pl-5 pt-5">
-            <Link to="/dashboard">
-              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
-                Volver
-              </button>
-            </Link>
+        <div className=" rounded-lg w-11/12 mx-auto pb-2">
+          <div className="bg-white mb-5">
+            <div className="pl-5 pt-5">
+              <Link to="/dashboard">
+                <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
+                  Volver
+                </button>
+              </Link>
+            </div>
+            <div className="flex justify-center">
+              <h1 className="pb-5">
+                Listado de Convenios: &nbsp;
+                <span className="text-center">
+                  Cantidad de registros: {results.length}
+                </span>
+              </h1>
+            </div>
+
+            {/* formulario de busqueda */}
+            <form className="flex justify-center pb-5">
+              <input
+                value={search}
+                onChange={searcher}
+                type="text"
+                placeholder="Buscar convenio"
+                className="border rounded-sm"
+              />
+            </form>
+            {/* formulario de busqueda */}
+
+            {
+              /* userLevel === 'gerente' || */
+              /* userLevel === 'vendedor' || */
+              /* userLevel === 'convenio' || Se elimina la visualizacion para que  la persona que entre con este rol no pueda crear un convenio*/
+              /* Unicos roles que pueden dar Alta un nuevo convenio */
+              (userLevel === 'admin' || userLevel === 'administrador') && (
+                <div className="flex justify-center pb-10">
+                  <Link to="#">
+                    <button
+                      onClick={abrirModal}
+                      className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                    >
+                      Nuevo Convenio
+                    </button>
+                  </Link>
+                </div>
+              )
+            }
           </div>
-          <div className="flex justify-center">
-            <h1 className="pb-5">
-              Listado de Convenios: &nbsp;
-              <span className="text-center">
-                Cantidad de registros: {results.length}
-              </span>
-            </h1>
-          </div>
-
-          {/* formulario de busqueda */}
-          <form className="flex justify-center pb-5">
-            <input
-              value={search}
-              onChange={searcher}
-              type="text"
-              placeholder="Buscar convenio"
-              className="border rounded-sm"
-            />
-          </form>
-          {/* formulario de busqueda */}
-
-          {
-            /* userLevel === 'gerente' || */
-            /* userLevel === 'vendedor' || */
-            /* userLevel === 'convenio' || Se elimina la visualizacion para que  la persona que entre con este rol no pueda crear un convenio*/
-            /* Unicos roles que pueden dar Alta un nuevo convenio */
-            (userLevel === 'admin' || userLevel === 'administrador') && (
-              <div className="flex justify-center pb-10">
-                <Link to="#">
-                  <button
-                    onClick={abrirModal}
-                    className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-                  >
-                    Nuevo Convenio
-                  </button>
-                </Link>
-              </div>
-            )
-          }
-
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
               El Convenio NO Existe ||{' '}
@@ -212,11 +213,67 @@ const AdmConveGet = () => {
             </p>
           ) : (
             <div>
-              <div style={styles.container}>
+              <div className="grid grid-cols-3 gap-10 mx-auto pb-10 lg:grid-cols-3 max-sm:grid-cols-1 md:grid-cols-2">
                 {results.map((conve) => (
-                  <div key={conve.id} style={styles.conveBox}>
-                    <h2 className="font-semibold">{conve.nameConve}</h2>
-                    <p>{conve.descConve}</p>
+                  <div key={conve.id} className="bg-white p-6 rounded-md">
+                    <h2>
+                      CONVENIO:{' '}
+                      <span className="font-semibold">{conve.nameConve}</span>
+                    </h2>
+                    <p>
+                      DESCRIPCIÓN:{' '}
+                      <span className="font-semibold">{conve.descConve}</span>
+                    </p>
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        PRECIO:{' '}
+                        <span className="font-semibold">
+                          {conve.precio
+                            ? Number(conve.precio).toLocaleString('es-AR', {
+                                style: 'currency',
+                                currency: 'ARS'
+                              })
+                            : 'Sin precio'}
+                        </span>
+                      </p>
+                    )}
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        DESCUENTO:{' '}
+                        <span className="font-semibold">
+                          {conve.descuento
+                            ? `%${conve.descuento}`
+                            : 'Sin descuento'}
+                        </span>
+                      </p>
+                    )}
+                    {(userLevel === 'admin' ||
+                      userLevel === 'administrador') && (
+                      <p>
+                        PRECIO FINAL:{' '}
+                        <span className="font-semibold">
+                          {conve.preciofinal
+                            ? Number(conve.preciofinal).toLocaleString(
+                                'es-AR',
+                                {
+                                  style: 'currency',
+                                  currency: 'ARS'
+                                }
+                              )
+                            : 'Sin precio final'}
+                        </span>
+                      </p>
+                    )}
+                    <p>
+                      <span className="font-semibold">
+                        {/* {console.log('permiteFam:', conve.permiteFam)} */}
+                        {Number(conve.permiteFam) === 1
+                          ? `Permite familiar: ${conve.cantFamiliares}`
+                          : 'No permite familiar'}
+                      </span>
+                    </p>
                     <Link
                       to={`/dashboard/admconvenios/${conve.id}/integrantes/`}
                     >
@@ -227,20 +284,22 @@ const AdmConveGet = () => {
                       </button>
                     </Link>
 
-                    {(/*
+                    {
+                      /*
                       userLevel === 'gerente' ||
                       userLevel === 'vendedor' ||
                       userLevel === 'convenio' ||
                       */
-                      userLevel === 'admin' ||
-                      userLevel === 'administrador') && (
-                      <button
-                        onClick={() => handleEliminarConve(conve.id)}
-                        style={{ ...styles.button, backgroundColor: 'red' }}
-                      >
-                        Eliminar
-                      </button>
-                    )}
+                      (userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
+                        <button
+                          onClick={() => handleEliminarConve(conve.id)}
+                          style={{ ...styles.button, backgroundColor: 'red' }}
+                        >
+                          Eliminar
+                        </button>
+                      )
+                    }
                   </div>
                 ))}
                 {selectedConve && (

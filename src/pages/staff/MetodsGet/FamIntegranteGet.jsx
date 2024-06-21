@@ -16,25 +16,58 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { formatearFecha } from '../../../Helpers';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import NavbarStaff from '../NavbarStaff';
 import '../../../styles/MetodsGet/Tabla.css';
 import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
 import FormAltaFamiliarI from '../../../components/Forms/FormAltaFamiliarI';
-import FamIntegranteGetId from './FarIntegranteGetId'
+import FamIntegranteGetId from './FamIntegranteGetId'
 import { useAuth } from '../../../AuthContext';
 
 const FamIntegranteGet = ({ integrantes }) => {
-  // Estado para almacenar la lista de personas
+  // variable global, para determinar los accesos a la parte del sistema
   const { userLevel } = useAuth();
-  const { id_integrante, id_adm } = useParams();
+
+  // variables para obtener los parametros
+  const { id_conv, id_integrante, id_adm } = useParams();
+
+  //URL estatica, luego cambiar por variable de entorno
+  const URL = 'http://localhost:8080/integrantesfam/';
+  const URL2 = `http://localhost:8080/admconvenios/${id_conv}/integrantes/${id_integrante}/integrantesfam/`;
+
+  // para recuperar los valores de precio FIN
+  const URL4 = 'http://localhost:8080/admconvenios/';
+
+  const location = useLocation();
+  const currentPath = location.pathname; // Obtiene la ruta actual
+
+  // Estado para almacenar el término de búsqueda
+  const [search, setSearch] = useState('');
+
+  const [precio, setPrecio] = useState('');
+  const [descuento, setDescuento] = useState('');
+  const [preciofinal, setPrecioFinal] = useState('');
+
+  // Estado para almacenar la lista de Integrantes
   const [integrante, setIntegrantes] = useState([]);
+
+  // Estado para manejar los modales
   const [modalNewConve, setmodalNewConve] = useState(false);
+
+  // Estado para almacenar el precio final
   const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
+
+  // Extraer el primer segmento de la ruta actual (dashboard/admconvenios/23/integrantes)
+  const basePath = currentPath.split('/').slice(0, -3).join('/');
 
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
+
+  // Estado para tomar los nombres de los convenios
+  const [convenioNombre, setConvenioNombre] = useState('');
+
+  const [cantFam, setcantFam] = useState(0);
 
   const abrirModal = () => {
     setmodalNewConve(true);
@@ -43,20 +76,54 @@ const FamIntegranteGet = ({ integrantes }) => {
     setmodalNewConve(false);
     obtenerIntegrantes2();
   };
-  // Estado para almacenar el término de búsqueda
-  const [search, setSearch] = useState('');
-
-  //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/integrantesfam/';
-  const URL2 = `http://localhost:8080/integrantes/${id_integrante}/integrantesfam/`;
 
   useEffect(() => {
-    // utilizamos get para obtenerPersonas los datos contenidos en la url
+    obtenerDatosAdmConvenio(id_conv);
+  }, [id_conv]);
+
+  const obtenerDatosAdmConvenio = async (id) => {
+    try {
+      // const response = await axios.get(URL3);
+      const response = await axios.get(`${URL4}${id}/`);
+
+      // console.log(`${URL4}${id_conv}/`);
+      const data = response.data;
+
+      console.log('Datos del convenio:', data);
+
+      if (data && data.precio && data.descuento && data.preciofinal) {
+        setPrecio(data.precio);
+        setDescuento(data.descuento);
+        setPrecioFinal(data.preciofinal);
+      } else {
+        console.log('Datos del convenio incompletos o incorrectos:', data);
+      }
+    } catch (error) {
+      console.error('Error al obtener datos del convenio:', error);
+    }
+  };
+
+  // para recuperar los valores de precio FIN
+  useEffect(() => {
     axios.get(URL2).then((res) => {
       setIntegrantes(res.data);
       obtenerIntegrantes2();
     });
-  }, []);
+
+    const obtenerConvenio = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/admconvenios/${id_conv}`
+        );
+        setConvenioNombre(response.data.nameConve);
+        setcantFam(response.data.cantFamiliares);
+      } catch (error) {
+        console.error('Error al obtener el convenio:', error);
+      }
+    };
+
+    obtenerConvenio();
+  }, [id_conv]);
 
   // Función para obtener todos los personClass desde la API
   const obtenerIntegrantes2 = async () => {
@@ -73,7 +140,7 @@ const FamIntegranteGet = ({ integrantes }) => {
     const obtenerIntegrantes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/integrantes/${id_integrante}/integrantesfam/`
+          `http://localhost:8080/admconvenios/${id_conv}/integrantes/${id_integrante}/integrantesfam/`
         );
         setIntegrantes(response.data);
       } catch (error) {
@@ -178,17 +245,23 @@ const FamIntegranteGet = ({ integrantes }) => {
       minimumFractionDigits: 0
     })}`;
   };
+
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
         <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
           <div className="pl-5 pt-5">
-            <Link to="/dashboard/admconvenios">
+            <Link to={basePath}>
               <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
             </Link>
+          </div>
+          <div className="flex justify-center">
+            <h2 className="pb-5 font-bignoodle text-[#fc4b08] text-5xl">
+              {convenioNombre}
+            </h2>
           </div>
           <div className="flex justify-center">
             <h1 className="pb-5">
@@ -211,17 +284,35 @@ const FamIntegranteGet = ({ integrantes }) => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nuevo Familiar
-              </button>
-            </Link>
-          </div>
+          {/* Botón Nuevo Familiar condicional */}
+          {results.length < cantFam && (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nuevo Familiar
+                </button>
+              </Link>
+            </div>
+          )}
 
+          {results.length == cantFam ? (
+            <h1 className="flex justify-center pb-10">
+              No se permite agregar mas familiares
+            </h1>
+          ) : (
+            <h1 className="flex justify-center pb-10 text-lg">
+              Puede agregar hasta:{' '}
+              <span className="font-bold ml-2 mr-2 "> {cantFam} </span>
+              Familiares, le queda{' '}
+              <span className="font-bold ml-2 mr-2 ">
+                {cantFam - results.length}{' '}
+              </span>
+              más para agregar
+            </h1>
+          )}
           {Object.keys(results).length === 0 ? (
             <p className="text-center pb-10">
               El Integrante NO Tiene familiar ||{' '}
@@ -271,7 +362,9 @@ const FamIntegranteGet = ({ integrantes }) => {
                         {formatearMoneda(integrante.precio)}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
-                        {integrante.descuento}
+                        {integrante.descuento !== '0'
+                          ? `%${integrante.descuento}`
+                          : 'Sin descuento'}
                       </td>
                       <td onClick={() => obtenerIntegrante(integrante.id)}>
                         {formatearMoneda(integrante.preciofinal)}
@@ -290,6 +383,10 @@ const FamIntegranteGet = ({ integrantes }) => {
                       userLevel === 'convenio' ||
                       */
                         (userLevel === 'admin' ||
+                          userLevel === '' ||
+                          userLevel === 'vendedor' ||
+                          userLevel === 'gerente' ||
+                          userLevel === 'convenio' ||
                           userLevel === 'administrador') && (
                           <td className="">
                             <button
@@ -331,7 +428,13 @@ const FamIntegranteGet = ({ integrantes }) => {
               </nav>
             </>
           )}
-          <FormAltaFamiliarI isOpen={modalNewConve} onClose={cerarModal} />
+          <FormAltaFamiliarI
+            isOpen={modalNewConve}
+            onClose={cerarModal}
+            precio={precio}
+            descuento={descuento}
+            preciofinal={preciofinal}
+          />
         </div>
       </div>
       {selectedUser && (

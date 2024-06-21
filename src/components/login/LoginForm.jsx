@@ -76,7 +76,7 @@ const LoginForm = () => {
 
   return (
     <div className="h-screen w-full">
-      <div className="dashboardbg h-screen w-full flex justify-between items-center mx-auto">
+      <div className="loginbg h-screen w-full flex justify-between items-center mx-auto">
         <div className="py-5 bg-white rounded-xl mx-auto">
           <form
             className="w-[400px] max-w-[400px] mx-auto max-sm:w-[300px] max-sm:max-w-[300px]"

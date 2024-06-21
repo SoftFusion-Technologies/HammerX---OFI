@@ -28,12 +28,15 @@ import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import FormAltaFrecAsk from "../../../components/Forms/FormAltaFrecAsk";
 import { useAuth } from '../../../AuthContext';
+import FrequentDetails from "./FrequentAsksGetId";
 
 const PreguntasFrecuentesGet = () => {
   const [modalNewFrecAsk, setModalNewAsk] = useState(false);
 
   const { userLevel } = useAuth();
 
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
+  const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   const abrirModal = () => {
     setModalNewAsk(true);
@@ -45,7 +48,6 @@ const PreguntasFrecuentesGet = () => {
 
   //URL estatica, luego cambiar por variable de entorno
   const URL = "http://localhost:8080/ask/";
-
   // Estado para almacenar la lista de Novedad
   const [frecAsk, setFreAsk] = useState([]);
 
@@ -129,14 +131,14 @@ const PreguntasFrecuentesGet = () => {
     }
   };
   const ordernarFrecAsk = (frecAsk) => {
-    return [...frecAsk].sort((a, b) => b.id - a.id);
+    return [...frecAsk].sort  ((a, b) => a.orden - b.orden);
   };
 
   // Llamada a la función para obtener los postulantes ordenados de forma decreciente
   const sortedFrecAsk = ordernarFrecAsk(results);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const records = sortedFrecAsk.slice(firstIndex, lastIndex);
@@ -159,6 +161,18 @@ const PreguntasFrecuentesGet = () => {
     }
   }
 
+
+  const obtenerPregunta = async (id) => {
+    try {
+      const url = `${URL}${id}`;
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
+      setSelectedUser(resultado);
+      setModalUserDetails(true); // Abre el modal de detalles del usuario
+    } catch (error) {
+      console.log('Error al obtener el integrante:', error);
+    }
+  };
 
   return (
     <>
@@ -222,7 +236,6 @@ const PreguntasFrecuentesGet = () => {
                     <th className="thid">ID</th>
                     <th>Prioridad</th>
                     <th>Pregunta</th>
-                    <th>Respuesta</th>
                     <th>Estado</th>
                     {(userLevel === 'admin' ||
                       userLevel === 'administrador') && <th>Acciones</th>}
@@ -231,19 +244,15 @@ const PreguntasFrecuentesGet = () => {
                 <tbody>
                   {records.map((frecAsk) => (
                     <tr key={frecAsk.id}>
-                      <td>{frecAsk.id}</td>
-                      <td>{frecAsk.orden}</td>
-                      <td>{frecAsk.titulo}</td>
+                      <td onClick={() => obtenerPregunta(frecAsk.id)}>
+                        {frecAsk.id}
+                      </td>
 
-                      <td
-                        className="max-w-[100px] p-2 overflow-y-auto max-h-[100px]"
-                        onClick={() => obtenerAsk(frecAsk.id)}
-                      >
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: frecAsk.descripcion
-                          }}
-                        />
+                      <td onClick={() => obtenerPregunta(frecAsk.id)}>
+                        {frecAsk.orden}
+                      </td>
+                      <td onClick={() => obtenerPregunta(frecAsk.id)}>
+                        {frecAsk.titulo}
                       </td>
 
                       <td
@@ -266,6 +275,13 @@ const PreguntasFrecuentesGet = () => {
                             className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
                           >
                             Eliminar
+                          </button>
+                          <button
+                            onClick={() => handleEliminarAsk(frecAsk.id)}
+                            type="button"
+                            className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                          >
+                            Editar
                           </button>
                         </td>
                       )}
@@ -309,6 +325,13 @@ const PreguntasFrecuentesGet = () => {
           <FormAltaFrecAsk isOpen={modalNewFrecAsk} onClose={cerarModal} />
         </div>
       </div>
+      {selectedUser && (
+        <FrequentDetails
+          user={selectedUser}
+          isOpen={modalUserDetails}
+          onClose={() => setModalUserDetails(false)}
+        />
+      )}
       <Footer />
     </>
   );

@@ -20,49 +20,50 @@ import '../../../styles/MetodsGet/Tabla.css'
 import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
 import FormAltaTask from '../../../components/Forms/FormAltaTask';
+import TaskDetails from './TaskGetId';
 // Componente funcional que maneja la lógica relacionada con los Task
 const TaskGet = () => {
   const [modalNewTask, setModalNewTask] = useState(false);
 
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
+  const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
+
+  const [selectedUsers, setSelectedUsers] = useState([]); // Estado para usuarios seleccionados
+
   const abrirModal = () => {
-    setModalNewTask(true)
+    setModalNewTask(true);
   };
   const cerarModal = () => {
-    setModalNewTask(false)
-    obtenerAsk(); // Llama a la función para obtener los datos actualizados
-
+    setModalNewTask(false);
+    obtenerTasks(); // Llama a la función para obtener los datos actualizados
   };
 
-
-
   //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/schedulertask/'
+  const URL = 'http://localhost:8080/schedulertask/';
 
   // Estado para almacenar la lista de Task
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState([]);
 
   //------------------------------------------------------
   // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
   //------------------------------------------------------
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('');
 
   //Funcion de busqueda, en el cuadro
   const searcher = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
-  let results = []
+  let results = [];
 
   if (!search) {
-    results = task
+    results = task;
   } else {
     results = task.filter((dato) => {
-      const nameMatch = dato.sede.toLowerCase().includes(search.toLowerCase())
+      const nameMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
 
-      return (
-        nameMatch
-      )
-    })
+      return nameMatch;
+    });
   }
 
   //------------------------------------------------------
@@ -71,12 +72,11 @@ const TaskGet = () => {
 
   useEffect(() => {
     // utilizamos get para obtenerTask los datos contenidos en la url
-    axios.get(URL)
-      .then((res) => {
-        setTask(res.data);
-        obtenerTasks();
-      })
-  }, [])
+    axios.get(URL).then((res) => {
+      setTask(res.data);
+      obtenerTasks();
+    });
+  }, []);
 
   // Función para obtener todos las taskes desde la API
   const obtenerTasks = async () => {
@@ -86,45 +86,41 @@ const TaskGet = () => {
     } catch (error) {
       console.log('Error al obtener las tareas:', error);
     }
-  }
+  };
 
-  const handleEliminarTask = async id => {
+  const handleEliminarTask = async (id) => {
     const confirmacion = window.confirm('¿Seguro que desea eliminar?');
     if (confirmacion) {
       try {
-        const url = `${URL}${id}`
+        const url = `${URL}${id}`;
         const respuesta = await fetch(url, {
           method: 'DELETE'
-        })
-        await respuesta.json()
-        const arraytask = task.filter(task => task.id !== id)
+        });
+        await respuesta.json();
+        const arraytask = task.filter((task) => task.id !== id);
 
-        setTask(arraytask)
-      }
-      catch (error) {
-        console.log(error)
+        setTask(arraytask);
+      } catch (error) {
+        console.log(error);
       }
     }
-  }
+  };
 
-  const obtenerTask = async (id) => {
-    try {
+  // const obtenerTask = async (id) => {
+  //   try {
+  //     const url = `${URL}${id}`;
 
-      const url = `${URL}${id}`
+  //     console.log(url);
 
-      console.log(url)
+  //     const respuesta = await fetch(url);
 
-      const respuesta = await fetch(url)
+  //     const resultado = await respuesta.json();
 
-      const resultado = await respuesta.json()
-
-      settask(resultado)
-
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //     settask(resultado);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // Función para ordenar los tasks de forma decreciente basado en el id
   const ordenarTaskDecreciente = (task) => {
@@ -138,8 +134,8 @@ const TaskGet = () => {
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const records = sortedTask.slice(firstIndex, lastIndex)
-  const nPage = Math.ceil(sortedTask.length / itemsPerPage)
+  const records = sortedTask.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(sortedTask.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
@@ -149,7 +145,7 @@ const TaskGet = () => {
   }
 
   function changeCPage(id) {
-    setCurrentPage(id)
+    setCurrentPage(id);
   }
 
   function nextPage() {
@@ -158,19 +154,41 @@ const TaskGet = () => {
     }
   }
 
+  const obtenerTarea = async (id) => {
+    try {
+      const url = `${URL}${id}`;
+      const respuesta = await fetch(url);
+      const resultado = await respuesta.json();
+      setSelectedUser(resultado);
+      setModalUserDetails(true); // Abre el modal de detalles del usuario
+    } catch (error) {
+      console.log('Error al obtener el integrante:', error);
+    }
+  };
+
+  // Array de nombres de días de la semana
+  const diasSemana = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado'
+  ];
+
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
-        <div className='bg-white rounded-lg w-11/12 mx-auto pb-2'>
-          <div className='pl-5 pt-5'>
+        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
+          <div className="pl-5 pt-5">
             <Link to="/dashboard">
-              <button className='py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500'>
+              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                 Volver
               </button>
             </Link>
           </div>
-          <div className='flex justify-center'>
+          <div className="flex justify-center">
             <h1 className="pb-5">
               Listado de Tareas: &nbsp;
               <span className="text-center">
@@ -178,7 +196,6 @@ const TaskGet = () => {
               </span>
             </h1>
           </div>
-
 
           {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
@@ -192,9 +209,12 @@ const TaskGet = () => {
           </form>
           {/* formulario de busqueda */}
 
-          <div className='flex justify-center pb-10'>
+          <div className="flex justify-center pb-10">
             <Link to="#">
-              <button onClick={abrirModal} className='bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10'>
+              <button
+                onClick={abrirModal}
+                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+              >
                 Nueva Tarea
               </button>
             </Link>
@@ -207,47 +227,44 @@ const TaskGet = () => {
             </p>
           ) : (
             <>
-              <table className='w-11/12 mx-auto'>
+              <table className="w-11/12 mx-auto">
                 <thead className=" bg-[#fc4b08]  text-white">
                   <tr key={task.id}>
-                    <th className='thid'>ID</th>
+                    <th className="thid">ID</th>
                     <th>Tarea</th>
-                    <th>Descripcion</th>
+                    {/* <th>Descripcion</th> */}
                     <th>Hora</th>
                     <th>Días</th>
                     <th>Usuario</th>
                     <th>Estado</th>
                     <th>Acciones</th>
-
                   </tr>
                 </thead>
                 <tbody>
                   {records.map((task) => (
                     <tr key={task.id}>
-                      <td onClick={() => obtenerTask(task.id)}>
-                        {task.id}
-                      </td>
-                      <td className="max-w-[300px] w-[200px]" onClick={() => obtenerTask(task.id)}>
+                      <td onClick={() => obtenerTarea(task.id)}>{task.id}</td>
+                      <td
+                        className="max-w-[300px] w-[200px]"
+                        onClick={() => obtenerTarea(task.id)}
+                      >
                         {task.titulo}
                       </td>
-                      <td className="max-w-[300px] w-[300px]" onClick={() => obtenerTask(task.id)}>
+                      {/* <td
+                        className="max-w-[300px] w-[300px]"
+                        onClick={() => obtenerTarea(task.id)}
+                      >
                         {task.descripcion}
-                      </td>
-                      <td onClick={() => obtenerTask(task.id)}>
-                        {task.hora}
-                      </td>
-                      <td onClick={() => obtenerTask(task.id)}>
-                        {task.dias}
-                      </td>
-                      <td onClick={() => obtenerTask(task.id)}>
-                        {task.user}
-                      </td>
-                      <td onClick={() => obtenerTask(task.id)}>
+                      </td> */}
+                      <td onClick={() => obtenerTarea(task.id)}>{task.hora}</td>
+                      <td onClick={() => obtenerTarea(task.id)}>{task.dias}</td>
+                      <td onClick={() => obtenerTarea(task.id)}>{task.user}</td>
+                      <td onClick={() => obtenerTarea(task.id)}>
                         {task.state}
                       </td>
 
                       {/* ACCIONES */}
-                      <td className=''>
+                      <td className="">
                         <button
                           onClick={() => handleEliminarTask(task.id)}
                           type="button"
@@ -255,43 +272,65 @@ const TaskGet = () => {
                         >
                           Eliminar
                         </button>
+
+                        <button
+                          onClick={() => handleEliminarTask(task.id)}
+                          type="button"
+                          className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                        >
+                          Editar
+                        </button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <nav className='flex justify-center items-center my-10'>
-                <ul className='pagination'>
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={prevPage}>Prev</a>
+              <nav className="flex justify-center items-center my-10">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={prevPage}>
+                      Prev
+                    </a>
                   </li>
-                  {
-                    numbers.map((number, index) => (
-                      <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
-                        <a
-                          href="#"
-                          className='page-link'
-                          onClick={() => changeCPage(number)}>{number}</a>
-                      </li>
-                    ))}
-                  <li className='page-item'>
-                    <a href="#"
-                      className='page-link'
-                      onClick={nextPage}>Next</a>
+                  {numbers.map((number, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === number ? 'active' : ''
+                      }`}
+                      key={index}
+                    >
+                      <a
+                        href="#"
+                        className="page-link"
+                        onClick={() => changeCPage(number)}
+                      >
+                        {number}
+                      </a>
+                    </li>
+                  ))}
+                  <li className="page-item">
+                    <a href="#" className="page-link" onClick={nextPage}>
+                      Next
+                    </a>
                   </li>
                 </ul>
               </nav>
             </>
           )}
-           {/* Modal para abrir formulario de clase gratis */}
-           <FormAltaTask isOpen={modalNewTask} onClose={cerarModal} />
+          {/* Modal para abrir formulario de clase gratis */}
+          <FormAltaTask isOpen={modalNewTask} onClose={cerarModal} />
         </div>
       </div>
+      {selectedUser && (
+        <TaskDetails
+          user={selectedUser}
+          isOpen={modalUserDetails}
+          onClose={() => setModalUserDetails(false)}
+        />
+      )}
       <Footer />
     </>
-  )
+  );
 }
 
 export default TaskGet

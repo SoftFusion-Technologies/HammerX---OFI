@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import NavbarStaff from "./NavbarStaff";
-import "../../styles/staff/dashboard.css";
-import "../../styles/staff/background.css";
-import Footer from "../../components/footer/Footer";
-import TituloPreguntasModal from "./MetodsGet/TituloPreguntasModal";
-import PreguntaDetalleModal from "./MetodsGet/PreguntaDetalleModal";
-import { useAuth } from "../../AuthContext";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import NavbarStaff from './NavbarStaff';
+import '../../styles/staff/dashboard.css';
+import '../../styles/staff/background.css';
+import Footer from '../../components/footer/Footer';
+import TituloPreguntasModal from './MetodsGet/TituloPreguntasModal';
+import PreguntaDetalleModal from './MetodsGet/PreguntaDetalleModal';
+import { useAuth } from '../../AuthContext';
 
 const AdminPage = () => {
   const [modalPreguntasOpen, setModalPreguntasOpen] = useState(false);
@@ -16,7 +16,7 @@ const AdminPage = () => {
   const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(null);
   const URL = 'http://localhost:8080/ask/';
 
-   const { userLevel } = useAuth();
+  const { userLevel } = useAuth();
 
   const abrirModalPreguntas = async () => {
     try {
@@ -72,7 +72,7 @@ const AdminPage = () => {
             {(userLevel === 'gerente' ||
               userLevel === 'admin' ||
               userLevel === 'vendedor' ||
-              userLevel === 'convenio' ||
+              userLevel === '' ||
               userLevel === 'administrador') && (
               <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/admconvenios">
@@ -95,7 +95,7 @@ const AdminPage = () => {
               userLevel === 'admin' ||
               userLevel === 'vendedor' ||
               userLevel === 'administrador') && (
-              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tl-xl rounded-br-xl">
+              <div className="bg-white font-bignoodle w-[250px] h-[100px] text-[20px] lg:w-[400px] lg:h-[150px] lg:text-[30px] mx-auto flex justify-center items-center rounded-tr-xl rounded-bl-xl">
                 <Link to="/dashboard/vendedores">
                   <button className="btnstaff">Vendedores</button>
                 </Link>

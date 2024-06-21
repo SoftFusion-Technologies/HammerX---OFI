@@ -142,8 +142,9 @@ const FormTestClass = ({ isOpen, onClose }) => {
         >
           {({ errors, touched }) => {
             return (
-
-              <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl"> {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
+              <div className="py-0 max-h-[500px] overflow-y-auto bg-white rounded-xl">
+                {' '}
+                {/* Cuando se haga el modal, sacarle el padding o ponerle uno de un solo digito */}
                 <Form className="formulario max-sm:w-[300px] bg-white ">
                   <div className="flex justify-between">
                     <div className="tools">
@@ -157,9 +158,13 @@ const FormTestClass = ({ isOpen, onClose }) => {
                         <span className="green toolsbox"></span>
                       </div>
                     </div>
-                    <div className="pr-6 pt-3 text-[20px] cursor-pointer" onClick={onClose}>x</div>
+                    <div
+                      className="pr-6 pt-3 text-[20px] cursor-pointer"
+                      onClick={onClose}
+                    >
+                      x
+                    </div>
                   </div>
-
 
                   <div className="mb-3 px-4">
                     <Field
@@ -227,8 +232,8 @@ const FormTestClass = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         ¿En qué HAMMER querés entrenar?
                       </option>
-                      <option value="monteros">Monteros</option>
-                      <option value="concepcion">Concepción</option>
+                      <option value="Monteros">Monteros</option>
+                      <option value="Concepción">Concepción</option>
                     </Field>
                     {errors.sede && touched.sede ? (
                       <Alerta>{errors.sede}</Alerta>
@@ -246,16 +251,34 @@ const FormTestClass = ({ isOpen, onClose }) => {
                       <option value="" disabled>
                         Selecciona tu objetivo
                       </option>
-                      <option value="Quiero ganar masa muscular">Quiero ganar masa muscular</option>
-                      <option value="Quiero bajar la panza y marcar el abdomen">Quiero bajar la panza y marcar el abdomen</option>
-                      <option value="Quiero bajar de peso y tonificar">Quiero bajar de peso y tonificar</option>
-                      <option value="Quiero combinar con mi deporte">Quiero combinar con mi deporte</option>
-                      <option value="Quiero ganar fuerza">Quiero ganar fuerza</option>
-                      <option value="Quiero bajar el estrés">Quiero bajar el estrés</option>
+                      <option value="Quiero ganar masa muscular">
+                        Quiero ganar masa muscular
+                      </option>
+                      <option value="Quiero bajar la panza y marcar el abdomen">
+                        Quiero bajar la panza y marcar el abdomen
+                      </option>
+                      <option value="Quiero bajar de peso y tonificar">
+                        Quiero bajar de peso y tonificar
+                      </option>
+                      <option value="Quiero combinar con mi deporte">
+                        Quiero combinar con mi deporte
+                      </option>
+                      <option value="Quiero ganar fuerza">
+                        Quiero ganar fuerza
+                      </option>
+                      <option value="Quiero bajar el estrés">
+                        Quiero bajar el estrés
+                      </option>
                       <option value="Me aburro fácil">Me aburro fácil</option>
-                      <option value="Quiero entrenar sin impacto">Quiero entrenar sin impacto</option>
-                      <option value="Quiero quemar calorías">Quiero quemar calorías</option>
-                      <option value="Quiero una clase para mi niño">Quiero una clase para mi niño</option>
+                      <option value="Quiero entrenar sin impacto">
+                        Quiero entrenar sin impacto
+                      </option>
+                      <option value="Quiero quemar calorías">
+                        Quiero quemar calorías
+                      </option>
+                      <option value="Quiero una clase para mi niño">
+                        Quiero una clase para mi niño
+                      </option>
                       <option value="Otros">Otros</option>
                     </Field>
                     {errors.objetivo && touched.objetivo ? (
@@ -270,7 +293,6 @@ const FormTestClass = ({ isOpen, onClose }) => {
                       className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                       id="click2"
                     />
-
                   </div>
                 </Form>
               </div>

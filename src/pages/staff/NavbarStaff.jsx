@@ -44,7 +44,7 @@ const Links = [
   },
   {
     id: 3,
-    href: 'frequent-asks',
+    href: 'ask',
     title: 'Preguntas Frecuentes',
     roles: ['vendedor', 'admin', 'administrador', 'gerente']
   },
@@ -53,13 +53,13 @@ const Links = [
     href: 'task',
     title: 'Programar Tarea',
     roles: ['admin', 'administrador']
-  },
-  {
-    id: 5,
-    href: "admprecio",
-    title: "Administrar Precios",
-    roles: ['admin']
-  },
+  }
+  // {
+  //   id: 5,
+  //   href: "admprecio",
+  //   title: "Administrar Precios",
+  //   roles: ['admin']
+  // },
 ];
 
   const filteredLinks = Links.filter((link) => link.roles.includes(userLevel));
@@ -91,7 +91,7 @@ const Links = [
           </div>
 
           <div className="hidden lg:flex flex-col xl:flex-row xl:items-center justify-between">
-            <h1 className="hidden xl:flex">Bienvenidido {displayUserName}!</h1>
+            <h1 className="hidden xl:flex">Bienvenido {displayUserName}!</h1>
             <button
               onClick={handleLogout}
               className="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 ml-4 xl:mt-0"
