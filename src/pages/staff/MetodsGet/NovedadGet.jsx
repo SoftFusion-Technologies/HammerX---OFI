@@ -11,29 +11,40 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { formatearFecha } from "../../../Helpers";
-import { Link } from "react-router-dom";
-import NavbarStaff from "../NavbarStaff";
-import "../../../styles/MetodsGet/Tabla.css";
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { formatearFecha } from '../../../Helpers';
+import { Link } from 'react-router-dom';
+import NavbarStaff from '../NavbarStaff';
+import '../../../styles/MetodsGet/Tabla.css';
 import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import FormAltaNovedad from "../../../components/Forms/FormAltaNovedad";
 import { useAuth } from "../../../AuthContext";
 
-// Componente funcional que maneja la lógica relacionada con los Novedad
 const NovedadGet = () => {
   const [modalNewNovedad, setModalNewNovedad] = useState(false);
-
   const { userLevel } = useAuth();
+  const [search, setSearch] = useState("");
+  const [novedad, setNovedad] = useState([]);
+  const URL = 'http://localhost:8080/novedades/';
+
+  useEffect(() => {
+    obtenerNovedades();
+  }, []);
 
   const abrirModal = () => {
     setModalNewNovedad(true);
   };
+
   const cerarModal = () => {
     setModalNewNovedad(false);
     obtenerNovedades();
+  };
+
+  const searcher = (e) => {
+    setSearch(e.target.value);
   };
 
   //URL estatica, luego cambiar por variable de entorno
@@ -76,7 +87,7 @@ const NovedadGet = () => {
     });
   }, []);
 
-  // Función para obtener todos las novedades desde la API
+
   const obtenerNovedades = async () => {
     try {
       const response = await axios.get(URL);
@@ -91,12 +102,16 @@ const NovedadGet = () => {
     if (confirmacion) {
       try {
         const url = `${URL}${id}`;
+
+        await fetch(url, { method: 'DELETE' });
+
         const respuesta = await fetch(url, {
           method: "DELETE",
         });
         await respuesta.json();
 
         // Filtrar las novedades
+
         const arraynovedad = novedad.filter((novedad) => novedad.id !== id);
         setNovedad(arraynovedad);
       } catch (error) {
@@ -124,15 +139,19 @@ const NovedadGet = () => {
   // Función para ordenar los novedads de forma decreciente basado en el id
   const ordenarNovedadDecreciente = (novedads) => {
     return [...novedads].sort((a, b) => b.id - a.id);
+
   };
 
-  // Llamada a la función para obtener los novedads ordenados de forma decreciente
-  const sortednovedad = ordenarNovedadDecreciente(results);
+  const results = !search ? novedad : novedad.filter((dato) => {
+    return dato.sede.toLowerCase().includes(search.toLowerCase());
+  });
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
+  const records = results.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(results.length / itemsPerPage);
   const records = sortednovedad.slice(firstIndex, lastIndex);
   const nPage = Math.ceil(sortednovedad.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
@@ -152,16 +171,54 @@ const NovedadGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
+
   return (
     <>
       <NavbarStaff />
       <div className="dashboardbg h-contain pt-10 pb-10">
+
+        <div className="bg-white rounded-lg w-11/12 mx-auto pb-2">
+          <div className="pl-5 pt-5">
+            <Link to="/dashboard">
+              <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
+                Volver
+              </button>
+            </Link>
+          </div>
+          <div className="flex justify-center">
+            <h1 className="pb-5">
+              Listado de Novedades: &nbsp;
+              <span className="text-center">
+                Cantidad de registros: {results.length}
+              </span>
+            </h1>
+          </div>
+          <form className="flex justify-center pb-5">
+            <input
+              value={search}
+              onChange={searcher}
+              type="text"
+              placeholder="Buscar novedades"
+              className="border rounded-sm"
+            />
+          </form>
+
+          {(userLevel === 'admin' || userLevel === 'administrador') && (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nueva Novedad
+
         <div className=" rounded-lg w-11/12 mx-auto pb-2">
           <div className="bg-white mb-5">
             <div className="pl-5 pt-5">
               <Link to="/dashboard">
                 <button className="py-2 px-5 bg-[#fc4b08] rounded-lg text-sm text-white hover:bg-orange-500">
                   Volver
+
                 </button>
               </Link>
             </div>
@@ -209,12 +266,19 @@ const NovedadGet = () => {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
                 {records.map((novedad) => (
+
+                  <div key={novedad.id} className="border border-gray-300 p-4 rounded-lg">
                   <div
                     key={novedad.id}
                     className="bg-white border border-gray-300 p-4 rounded-lg"
                   >
                     <h2 className="text-xl font-semibold">{novedad.sede}</h2>
-                    <p className="text-gray-600 mb-2">{novedad.user}</p>
+                    <p className="text-gray-600 mb-2">{novedad.titulo}</p>
+                    <p className="text-gray-600 mb-2">
+                      {novedad.novedadUsers && novedad.novedadUsers.length > 0
+                        ? novedad.novedadUsers.map((novedadUser) => novedadUser.user.name).join(', ')
+                        : 'No users assigned'}
+                    </p>
                     <p className="text-gray-600 mb-2">
                       {formatearFecha(novedad.vencimiento)}
                     </p>
@@ -222,6 +286,7 @@ const NovedadGet = () => {
                       {novedad.mensaje}
                     </p>
                     <div className="flex justify-end space-x-4">
+                      {(userLevel === 'admin' || userLevel === 'administrador') && (
                       {(userLevel === "admin" ||
                         userLevel === "administrador") && (
                         <div>
@@ -232,7 +297,7 @@ const NovedadGet = () => {
                             Eliminar
                           </button>
                           <button
-                            // onClicsek={() => handleEditarNovedad(novedad.id)}
+                            // onClick={() => handleEditarNovedad(novedad.id)}
                             className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
                           >
                             Editar
@@ -254,6 +319,9 @@ const NovedadGet = () => {
                     </a>
                   </li>
                   {numbers.map((number, index) => (
+
+                    <li className={`page-item ${currentPage === number ? 'active' : ''}`} key={index}>
+                      <a href="#" className="page-link" onClick={() => changeCPage(number)}>
                     <li
                       className={`page-item ${
                         currentPage === number ? "active" : ""
@@ -278,7 +346,6 @@ const NovedadGet = () => {
               </nav>
             </>
           )}
-          {/* Modal para abrir formulario de clase gratis */}
           <FormAltaNovedad isOpen={modalNewNovedad} onClose={cerarModal} />
         </div>
       </div>
