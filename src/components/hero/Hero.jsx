@@ -148,15 +148,21 @@ const Hero = () => {
           data-aos="fade-left"
           className="relative dark:bg-gradient-to-r from-gray-700 to-gray-900"
         >
-          <video
+          {/* <video
             src={video}
             autoPlay
             loop
+            controls
             muted
-            className="w-full h-[500px] object-cover pt-10"
-          />
+            className="w-full h-[300px] object-cover pt-10"
+          /> */}
+          <iframe
+            src="https://www.youtube.com/embed/SQ_Lv07MOSg?autoplay=1&controls=1&showinfo=0&modestbranding=1"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="w-full h-[300px] object-cover pt-10"
+          ></iframe>
         </div>
-
 
         <img
           className="w-8 h-80 absolute bottom-10 left-0 sm:hidden max-sm:-ml-4"
