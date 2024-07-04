@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import Alerta from '../Error';
@@ -107,7 +109,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
           }}
           validationSchema={nuevoNovedadSchema}
         >
-          {({ errors, touched, setFieldValue }) => (
+          {({ errors, touched, setFieldValue, values }) => (
             <div className="py-0 max-h-[500px] max-w-[400px] w-[400px] overflow-y-auto bg-white rounded-xl">
               <Form className="formulario max-sm:w-[300px] bg-white">
                 <div className="flex justify-between">
@@ -143,7 +145,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                     required
                   >
                     <option value="" disabled>
-                      Sede: Todas
+                      Sucursal: Todas
                     </option>
                     <option value="todas">Todas</option>
                     <option value="monteros">Monteros</option>
@@ -209,13 +211,12 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                   ) : null}
                 </div>
                 <div className="mb-3 px-4">
-                  <Field
-                    id="mensaje"
-                    as="textarea"
+                  <ReactQuill
+                    theme="snow"
+                    value={values.mensaje}
+                    onChange={(content) => setFieldValue('mensaje', content)}
+                    placeholder='Ingrese el mensaje'
                     className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-                    placeholder="Mensaje"
-                    name="mensaje"
-                    maxLength="255"
                   />
                   {errors.mensaje && touched.mensaje ? (
                     <Alerta>{errors.mensaje}</Alerta>

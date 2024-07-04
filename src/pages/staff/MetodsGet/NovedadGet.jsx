@@ -8,23 +8,46 @@ import '../../../styles/staff/background.css';
 import Footer from '../../../components/footer/Footer';
 import FormAltaNovedad from '../../../components/Forms/FormAltaNovedad';
 import { useAuth } from '../../../AuthContext';
+import ModalNovedad from '../MetodsGet/ModalNovedad';
 
 const NovedadGet = () => {
   const [modalNewNovedad, setModalNewNovedad] = useState(false);
-  const { userLevel } = useAuth();
+  const [modalData, setModalData] = useState({ isOpen: false, mensaje: '' });
+  const { userLevel, userName } = useAuth(); // Se obtiene el userName del contexto
   const [search, setSearch] = useState('');
   const [novedad, setNovedad] = useState([]);
+  const [userId, setUserId] = useState(null); // Añadimos estado para userId
   const URL = 'http://localhost:8080/novedades/';
+  const USERS_URL = 'http://localhost:8080/users/';
 
   useEffect(() => {
-    obtenerNovedades();
-  }, []);
+    // Se obtiene el userId usando el userName (email)
+    const obtenerUserId = async () => {
+      try {
+        const response = await axios.get(USERS_URL);
+        const user = response.data.find(user => user.email === userName);
+        if (user) {
+          setUserId(user.id);
+        }
+      } catch (error) {
+        console.log('Error al obtener el userId:', error);
+      }
+    };
+
+    obtenerUserId();
+  }, [userName]);
+
+  useEffect(() => {
+    if (userId !== null) {
+      obtenerNovedades();
+    }
+  }, [userId]);
 
   const abrirModal = () => {
     setModalNewNovedad(true);
   };
 
-  const cerarModal = () => {
+  const cerrarModal = () => {
     setModalNewNovedad(false);
     obtenerNovedades();
   };
@@ -33,17 +56,15 @@ const NovedadGet = () => {
     setSearch(e.target.value);
   };
 
- const obtenerNovedades = async () => {
-   try {
-     const response = await axios.get(URL);
-     // Ordenar las novedades por id de forma decreciente
-     const novedadesOrdenadas = response.data.sort((a, b) => b.id - a.id);
-     setNovedad(novedadesOrdenadas);
-   } catch (error) {
-     console.log('Error al obtener las novedades:', error);
-   }
- };
-
+  const obtenerNovedades = async () => {
+    try {
+      const response = await axios.get(URL);
+      const novedadesOrdenadas = response.data.sort((a, b) => b.id - a.id);
+      setNovedad(novedadesOrdenadas);
+    } catch (error) {
+      console.log('Error al obtener las novedades:', error);
+    }
+  };
 
   const handleEliminarNovedad = async (id) => {
     const confirmacion = window.confirm('¿Seguro que desea eliminar?');
@@ -59,9 +80,26 @@ const NovedadGet = () => {
     }
   };
 
+  const handleOpenModal = (mensaje) => {
+    setModalData({ isOpen: true, mensaje });
+  };
+
+  const handleCloseModal = () => {
+    setModalData({ isOpen: false, mensaje: '' });
+  };
+
+  // Filtrar novedades basadas en el usuario autenticado y nivel de usuario
+  const filtrarNovedades = (novedades) => {
+    return novedades.filter((novedad) => {
+      const userAssigned = novedad.novedadUsers && novedad.novedadUsers.some(user => user.user.id === parseInt(userId));
+      const userAdminOrGerente = userLevel === 'admin' || userLevel === 'gerente';
+      return userAssigned || userAdminOrGerente;
+    });
+  };
+
   const results = !search
-    ? novedad
-    : novedad.filter((dato) => {
+    ? filtrarNovedades(novedad)
+    : filtrarNovedades(novedad).filter((dato) => {
         return dato.sede.toLowerCase().includes(search.toLowerCase());
       });
 
@@ -88,6 +126,13 @@ const NovedadGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
+
+  const novedadesProgramadas = records.filter(
+    (novedad) => new Date(novedad.vencimiento) > new Date()
+  );
+  const ultimasNovedades = records.filter(
+    (novedad) => new Date(novedad.vencimiento) <= new Date()
+  );
 
   return (
     <>
@@ -139,50 +184,105 @@ const NovedadGet = () => {
             </p>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-11/12 mx-auto">
-                {records.map((novedad) => (
-                  <div
-                    key={novedad.id}
-                    className="border border-gray-300 p-4 rounded-lg"
-                  >
-                    <h2 className="text-xl font-semibold">{novedad.sede}</h2>
-                    <p className="text-gray-600 mb-2">{novedad.titulo}</p>
-                    <p className="text-gray-600 mb-2">
-                      {novedad.novedadUsers && novedad.novedadUsers.length > 0
-                        ? novedad.novedadUsers
-                            .map((novedadUser) => novedadUser.user.name)
-                            .join(', ')
-                        : 'No users assigned'}
-                    </p>
-                    <p className="text-gray-600 mb-2">
-                      {formatearFecha(novedad.vencimiento)}
-                    </p>
-                    <p className="text-gray-600 mb-4 overflow-y-auto max-h-[100] h-[100px]">
-                      {novedad.mensaje}
-                    </p>
-                    <div className="flex justify-end space-x-4">
-                      {(userLevel === 'admin' ||
-                        userLevel === 'administrador') && (
-                        <div>
-                          <button
-                            onClick={() => handleEliminarNovedad(novedad.id)}
-                            className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
-                          >
-                            Eliminar
-                          </button>
-                          <button
-                            // onClick={() => handleEditarNovedad(novedad.id)}
-                            className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
-                          >
-                            Editar
-                          </button>
-                        </div>
-                      )}
+              <div className="mb-4">
+                <h2 className="text-xl font-semibold ml-4">NOVEDADES PROGRAMADAS</h2>
+                <div className="block space-y-4">
+                  {novedadesProgramadas.map((novedad) => (
+                    <div
+                      key={novedad.id}
+                      className="border m-5 border-gray-300 p-5 rounded-lg cursor-pointer mb-4"
+                      onClick={() => handleOpenModal(novedad.mensaje)}
+                    >
+                      <h2 className="text-xl text-gray-300 font-semibold mb-4">Sucursal: {novedad.sede}</h2>
+                      <b><p className="text-orange-500 mb-4">{novedad.titulo}</p></b>
+                      <p>Adjudicados a la novedad:</p>
+                      <b><p className="text-gray-600 mb-4">
+                        {novedad.novedadUsers && novedad.novedadUsers.length > 0
+                          ? novedad.novedadUsers
+                              .map((novedadUser) => novedadUser.user.name)
+                              .join(', ')
+                          : 'No users assigned'}
+                      </p></b>
+                      <p>Fecha de publicacion:</p>
+                      <b><p className="text-gray-600">
+                        {formatearFecha(novedad.vencimiento)}
+                      </p></b>
+                      
+                      <div className="flex justify-end space-x-4">
+                        {(userLevel === 'admin' ||
+                          userLevel === 'administrador') && (
+                          <div>
+                            <button
+                              onClick={() => handleEliminarNovedad(novedad.id)}
+                              className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                              Eliminar
+                            </button>
+                            <button
+                              // onClick={() => handleEditarNovedad(novedad.id)}
+                              className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                            >
+                              Editar
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-              <nav className="flex justify-center items-center my-10">
+              <div>
+                <h2 className="text-xl font-semibold ml-4">ÚLTIMAS NOVEDADES</h2>
+                <div className="block space-y-4">
+                  {ultimasNovedades.map((novedad) => (
+                    <div
+                      key={novedad.id}
+                      className="border m-5 border-gray-300 p-4 rounded-lg cursor-pointer mb-4"
+                      onClick={() => handleOpenModal(novedad.mensaje)}
+                    >
+                      <h2 className="text-xl text-gray-300 font-semibold mb-4">Sucursal: {novedad.sede}</h2>
+                      <b><p className="text-orange-500 mb-4">{novedad.titulo}</p></b>
+                      <p>Adjudicados a la novedad:</p>
+                      <b><p className="text-gray-600 mb-4">
+                        {novedad.novedadUsers && novedad.novedadUsers.length > 0
+                          ? novedad.novedadUsers
+                              .map((novedadUser) => novedadUser.user.name)
+                              .join(', ')
+                          : 'No users assigned'}
+                      </p></b>
+                      <p>Fecha de publicacion:</p>
+                      <b><p className="text-gray-600">
+                        {formatearFecha(novedad.vencimiento)}
+                      </p></b>
+                      
+                      <div className="flex justify-end space-x-4">
+                        {(userLevel === 'admin' ||
+                          userLevel === 'administrador') && (
+                          <div>
+                            <button
+                              onClick={() => handleEliminarNovedad(novedad.id)}
+                              className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                              Eliminar
+                            </button>
+                            <button
+                              // onClick={() => handleEditarNovedad(novedad.id)}
+                              className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                            >
+                              Editar
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="flex justify-center">
+          <nav className="flex justify-center items-center my-10">
                 <ul className="pagination">
                   <li className="page-item">
                     <a href="#" className="page-link" onClick={prevPage}>
@@ -192,7 +292,7 @@ const NovedadGet = () => {
                   {numbers.map((number, index) => (
                     <li
                       className={`page-item ${
-                        currentPage === number ? 'active' : ''
+                        currentPage === number ? "active" : ""
                       }`}
                       key={index}
                     >
@@ -212,12 +312,17 @@ const NovedadGet = () => {
                   </li>
                 </ul>
               </nav>
-            </>
-          )}
-          <FormAltaNovedad isOpen={modalNewNovedad} onClose={cerarModal} />
+          </div>
         </div>
       </div>
       <Footer />
+
+      <FormAltaNovedad isOpen={modalNewNovedad} onClose={cerrarModal} />
+      <ModalNovedad
+        isOpen={modalData.isOpen}
+        mensaje={modalData.mensaje}
+        onClose={handleCloseModal}
+      />
     </>
   );
 };
