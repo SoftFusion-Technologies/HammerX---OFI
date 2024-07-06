@@ -184,55 +184,97 @@ const NovedadGet = () => {
             </p>
           ) : (
             <>
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold ml-4">NOVEDADES PROGRAMADAS</h2>
-                <div className="block space-y-4">
-                  {novedadesProgramadas.map((novedad) => (
-                    <div
-                      key={novedad.id}
-                      className="border m-5 border-gray-300 p-5 rounded-lg cursor-pointer mb-4"
-                      onClick={() => handleOpenModal(novedad.mensaje)}
-                    >
-                      <h2 className="text-xl text-gray-300 font-semibold mb-4">Sucursal: {novedad.sede}</h2>
-                      <b><p className="text-orange-500 mb-4">{novedad.titulo}</p></b>
-                      <p>Adjudicados a la novedad:</p>
-                      <b><p className="text-gray-600 mb-4">
-                        {novedad.novedadUsers && novedad.novedadUsers.length > 0
-                          ? novedad.novedadUsers
-                              .map((novedadUser) => novedadUser.user.name)
-                              .join(', ')
-                          : 'No users assigned'}
-                      </p></b>
-                      <p>Fecha de publicacion:</p>
-                      <b><p className="text-gray-600">
-                        {formatearFecha(novedad.vencimiento)}
-                      </p></b>
-                      
-                      <div className="flex justify-end space-x-4">
-                        {(userLevel === 'admin' ||
-                          userLevel === 'administrador') && (
+              {(userLevel === 'admin' || userLevel === 'administrador') && (
+                <div className="mb-4">
+                  <h2 className="text-xl font-semibold ml-4">
+                    NOVEDADES PROGRAMADAS
+                  </h2>
+                  <div className="block space-y-4">
+                    {novedadesProgramadas.map((novedad) => (
+                      <div
+                        key={novedad.id}
+                        className="border m-5 border-gray-300 p-5 rounded-lg cursor-pointer mb-4"
+                        onClick={() => handleOpenModal(novedad.mensaje)}
+                      >
+                        <h2 className="text-xl text-gray-300 font-semibold mb-4">
+                          Sucursal: {novedad.sede}
+                        </h2>
+                        <b>
+                          <p className="text-orange-500 mb-4">
+                            {novedad.titulo}
+                          </p>
+                        </b>
+                        <p>Usuarios asignados a la novedad:</p>
+                        <b>
                           <div>
-                            <button
-                              onClick={() => handleEliminarNovedad(novedad.id)}
-                              className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
-                            >
-                              Eliminar
-                            </button>
-                            <button
-                              // onClick={() => handleEditarNovedad(novedad.id)}
-                              className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
-                            >
-                              Editar
-                            </button>
+                            <p className="text-gray-600 mb-4">
+                              {novedad.novedadUsers &&
+                              novedad.novedadUsers.length > 0
+                                ? novedad.novedadUsers
+                                    .map((novedadUser) => novedadUser.user.name)
+                                    .join(', ')
+                                : 'No users assigned'}
+                            </p>
+
+                            {novedad.novedadUsers &&
+                            novedad.novedadUsers.length > 0 ? (
+                              novedad.novedadUsers.map((novedadUser, index) => (
+                                <p
+                                  key={index}
+                                  className={
+                                    novedad.estado === 0
+                                      ? 'text-green-500 mb-4'
+                                      : 'text-red-500 mb-4'
+                                  }
+                                >
+                                  {novedadUser.user.name}:{' '}
+                                  {novedad.estado === 0 ? 'Leido' : 'No Leido'}
+                                </p>
+                              ))
+                            ) : (
+                              <p className="text-red-500 mb-4">
+                                Sin Usuarios asignados
+                              </p>
+                            )}
                           </div>
-                        )}
+                        </b>
+                        <p>Fecha de publicacion:</p>
+                        <b>
+                          <p className="text-gray-600">
+                            {formatearFecha(novedad.vencimiento)}
+                          </p>
+                        </b>
+
+                        <div className="flex justify-end space-x-4">
+                          {(userLevel === 'admin' ||
+                            userLevel === 'administrador') && (
+                            <div>
+                              <button
+                                onClick={() =>
+                                  handleEliminarNovedad(novedad.id)
+                                }
+                                className="py-2 px-4 mr-3 bg-red-500 text-white rounded-md hover:bg-red-600"
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                // onClick={() => handleEditarNovedad(novedad.id)}
+                                className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                              >
+                                Editar
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
               <div>
-                <h2 className="text-xl font-semibold ml-4">ÚLTIMAS NOVEDADES</h2>
+                <h2 className="text-xl font-semibold ml-4">
+                  ÚLTIMAS NOVEDADES
+                </h2>
                 <div className="block space-y-4">
                   {ultimasNovedades.map((novedad) => (
                     <div
@@ -240,21 +282,53 @@ const NovedadGet = () => {
                       className="border m-5 border-gray-300 p-4 rounded-lg cursor-pointer mb-4"
                       onClick={() => handleOpenModal(novedad.mensaje)}
                     >
-                      <h2 className="text-xl text-gray-300 font-semibold mb-4">Sucursal: {novedad.sede}</h2>
-                      <b><p className="text-orange-500 mb-4">{novedad.titulo}</p></b>
-                      <p>Adjudicados a la novedad:</p>
-                      <b><p className="text-gray-600 mb-4">
-                        {novedad.novedadUsers && novedad.novedadUsers.length > 0
-                          ? novedad.novedadUsers
-                              .map((novedadUser) => novedadUser.user.name)
-                              .join(', ')
-                          : 'No users assigned'}
-                      </p></b>
+                      <h2 className="text-xl text-gray-300 font-semibold mb-4">
+                        Sucursal: {novedad.sede}
+                      </h2>
+                      <b>
+                        <p className="text-orange-500 mb-4">{novedad.titulo}</p>
+                      </b>
+                      <p>Usuarios asignados a la novedad:</p>
+                      <b>
+                        <div>
+                          <p className="text-gray-600 mb-4">
+                            {novedad.novedadUsers &&
+                            novedad.novedadUsers.length > 0
+                              ? novedad.novedadUsers
+                                  .map((novedadUser) => novedadUser.user.name)
+                                  .join(', ')
+                              : 'No users assigned'}
+                          </p>
+
+                          {novedad.novedadUsers &&
+                          novedad.novedadUsers.length > 0 ? (
+                            novedad.novedadUsers.map((novedadUser, index) => (
+                              <p
+                                key={index}
+                                className={
+                                  novedad.estado === 0
+                                    ? 'text-green-500 mb-4'
+                                    : 'text-red-500 mb-4'
+                                }
+                              >
+                                {novedadUser.user.name}:{' '}
+                                {novedad.estado === 0 ? 'Leido' : 'No Leido'}
+                              </p>
+                            ))
+                          ) : (
+                            <p className="text-red-500 mb-4">
+                              Sin Usuarios asignados
+                            </p>
+                          )}
+                        </div>
+                      </b>
                       <p>Fecha de publicacion:</p>
-                      <b><p className="text-gray-600">
-                        {formatearFecha(novedad.vencimiento)}
-                      </p></b>
-                      
+                      <b>
+                        <p className="text-gray-600">
+                          {formatearFecha(novedad.vencimiento)}
+                        </p>
+                      </b>
+
                       <div className="flex justify-end space-x-4">
                         {(userLevel === 'admin' ||
                           userLevel === 'administrador') && (
@@ -282,36 +356,36 @@ const NovedadGet = () => {
           )}
 
           <div className="flex justify-center">
-          <nav className="flex justify-center items-center my-10">
-                <ul className="pagination">
-                  <li className="page-item">
-                    <a href="#" className="page-link" onClick={prevPage}>
-                      Prev
-                    </a>
-                  </li>
-                  {numbers.map((number, index) => (
-                    <li
-                      className={`page-item ${
-                        currentPage === number ? "active" : ""
-                      }`}
-                      key={index}
+            <nav className="flex justify-center items-center my-10">
+              <ul className="pagination">
+                <li className="page-item">
+                  <a href="#" className="page-link" onClick={prevPage}>
+                    Prev
+                  </a>
+                </li>
+                {numbers.map((number, index) => (
+                  <li
+                    className={`page-item ${
+                      currentPage === number ? 'active' : ''
+                    }`}
+                    key={index}
+                  >
+                    <a
+                      href="#"
+                      className="page-link"
+                      onClick={() => changeCPage(number)}
                     >
-                      <a
-                        href="#"
-                        className="page-link"
-                        onClick={() => changeCPage(number)}
-                      >
-                        {number}
-                      </a>
-                    </li>
-                  ))}
-                  <li className="page-item">
-                    <a href="#" className="page-link" onClick={nextPage}>
-                      Next
+                      {number}
                     </a>
                   </li>
-                </ul>
-              </nav>
+                ))}
+                <li className="page-item">
+                  <a href="#" className="page-link" onClick={nextPage}>
+                    Next
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

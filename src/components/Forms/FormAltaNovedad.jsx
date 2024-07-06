@@ -9,7 +9,7 @@ import ModalError from './ModalError';
 import Alerta from '../Error';
 
 const FormAltaNovedad = ({ isOpen, onClose }) => {
-  const [users, setUsers] = useState([]); // Asegurarse de que se inicializa como un array vacío
+  const [users, setUsers] = useState([]);
   const [selectedSede, setSelectedSede] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
 
@@ -43,7 +43,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
       setUsers(response.data);
     } catch (error) {
       console.log('Error al obtener los usuarios:', error);
-      setUsers([]); // Asegurarse de que users se establece como un array vacío en caso de error
+      setUsers([]);
     }
   };
 
@@ -215,7 +215,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                     theme="snow"
                     value={values.mensaje}
                     onChange={(content) => setFieldValue('mensaje', content)}
-                    placeholder='Ingrese el mensaje'
+                    placeholder="Ingrese el mensaje"
                     className="mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                   />
                   {errors.mensaje && touched.mensaje ? (
@@ -243,10 +243,6 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
       <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );
-};
-
-FormAltaNovedad.defaultProps = {
-  novedad: {}
 };
 
 export default FormAltaNovedad;
