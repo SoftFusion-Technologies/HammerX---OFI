@@ -307,9 +307,10 @@ const FormTestClass = ({ isOpen, onClose }) => {
   );
 };
 
-FormTestClass.defaultProps = {
-  testclass: {},
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormTestClass.defaultProps = {
+//   testclass: {},
+// };
 // defaultProps es una propiedad del componente React que le permite establecer valores predeterminados para el argumento props.
 // en este caso a nuestro objeto de cliente le asignamos por defecto que este vacio
 export default FormTestClass;

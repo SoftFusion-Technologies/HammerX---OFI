@@ -197,9 +197,9 @@ const FormAltaNotaFam = ({ isOpen, onClose, user }) => {
     </div>
   );
 };
-
-FormAltaNotaFam.defaultProps = {
-  notas: {}
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaNotaFam.defaultProps = {
+//   notas: {}
+// };
 
 export default FormAltaNotaFam;

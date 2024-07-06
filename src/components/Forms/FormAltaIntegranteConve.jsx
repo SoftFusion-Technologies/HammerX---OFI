@@ -258,9 +258,9 @@ const FormAltaIntegranteConve = ({
     </div>
   );
 };
-
-FormAltaIntegranteConve.defaultProps = {
-  integrante: {}
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaIntegranteConve.defaultProps = {
+//   integrante: {}
+// };
 
 export default FormAltaIntegranteConve;

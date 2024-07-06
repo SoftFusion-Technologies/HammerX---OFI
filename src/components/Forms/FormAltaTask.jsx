@@ -280,8 +280,9 @@ const FormAltaTask = ({ isOpen, onClose }) => {
     )
 }
 
-FormAltaTask.defaultProps = {
-    task: {},
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaTask.defaultProps = {
+//     task: {},
+// };
 
 export default FormAltaTask

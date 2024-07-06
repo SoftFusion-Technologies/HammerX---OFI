@@ -289,8 +289,9 @@ const FormAltaConve = ({ isOpen, onClose }) => {
   );
 };
 
-FormAltaConve.defaultProps = {
-  conve: {}
-};
+// Se elimina los default prosp, quedo desactualizado
+// FormAltaConve.defaultProps = {
+//   conve: {}
+// };
 
 export default FormAltaConve

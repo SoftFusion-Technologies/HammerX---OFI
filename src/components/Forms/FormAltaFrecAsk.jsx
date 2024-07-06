@@ -177,9 +177,9 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
     </div>
   );
 };
-
-FormAltaFrecAsk.defaultProps = {
-  frecask: {},
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaFrecAsk.defaultProps = {
+//   frecask: {},
+// };
 
 export default FormAltaFrecAsk;

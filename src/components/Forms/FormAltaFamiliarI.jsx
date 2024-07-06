@@ -256,9 +256,9 @@ const FormAltaFamiliarI = ({
     </div>
   );
 };
-
-FormAltaFamiliarI.defaultProps = {
-  familiar: {}
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaFamiliarI.defaultProps = {
+//   familiar: {}
+// };
 
 export default FormAltaFamiliarI;

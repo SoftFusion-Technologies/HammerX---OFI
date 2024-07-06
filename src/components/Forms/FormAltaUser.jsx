@@ -279,9 +279,9 @@ const FormAltaUser = ({ isOpen, onClose }) => {
     </div>
   )
 }
-
-FormAltaUser.defaultProps = {
-  users: {},
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaUser.defaultProps = {
+//   users: {},
+// };
 
 export default FormAltaUser

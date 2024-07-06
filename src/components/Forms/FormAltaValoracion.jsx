@@ -151,9 +151,9 @@ const FormAltaValoracion = ({ isOpen, onClose, user }) => {
     </div>
   );
 };
-
-FormAltaValoracion.defaultProps = {
-  valoracion: {},
-};
+//Se elimina los default prosp, quedo desactualizado
+// FormAltaValoracion.defaultProps = {
+//   valoracion: {},
+// };
 
 export default FormAltaValoracion;
