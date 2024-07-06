@@ -14,17 +14,6 @@ const ModalNovedad = ({ isOpen, onClose, mensaje }) => {
     obtenerNovedades();
   }, []); // Este efecto se ejecuta solo al montar el componente
 
-  const obtenerNovedades = async () => {
-    try {
-      const response = await axios.get(URL);
-      setNovedades(response.data);
-      setEstado(response.data.estado);// Actualiza el estado con los datos obtenidos
-    } catch (error) {
-      console.log('Error al obtener las novedades:', error);
-    }
-  };
-
-  const actualizarEstado = () => {};
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
@@ -47,7 +36,6 @@ const ModalNovedad = ({ isOpen, onClose, mensaje }) => {
                 : 'bg-green-500 hover:bg-green-600'
             }`}
           >
-            {console.log(estado)}
             {estado === 1 ? 'No Leído' : 'Leído'}
           </button>
         )}
