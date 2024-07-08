@@ -13,29 +13,34 @@
  *
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  * Contacto: emirvalles90@gmail.com || 3865761910
- * 
+ *
  * ----------------------------------------------------------------
- * 
- * Modificación : Se anexo editor de texto Quill y se elimino el limite de 70 caracteres.  
- * 
+ *
+ * Modificación : Se anexo editor de texto Quill y se elimino el limite de 70 caracteres.
+ *
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // (NUEVO)
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ModalSuccess from "./ModalSuccess";
 import ModalError from "./ModalError";
 import Alerta from "../Error";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-
-const FormAltaFrecAsk = ({ isOpen, onClose }) => {
-
+const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
-  const textoModal = "Pregunta frecuente creado correctamente."
+  const textoModal = "Pregunta frecuente creado correctamente.";
   const [descripcion, setDescripcion] = useState("");
+
+  // (NUEVO)
+  useEffect(() => {
+    if (ask) {
+      setDescripcion(ask.descripcion || "");
+    }
+  }, [ask]);
 
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
@@ -47,15 +52,22 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
     orden: Yup.string()
       .max(13, "El Orden es muy largo")
       .required("El Orden es Obligatorio"),
-  })
+  });
 
   const handleSubmitFreAsk = async (valores) => {
     try {
       if (valores.titulo === "" || descripcion === "" || valores.orden === "") {
         alert("Por favor, complete todos los campos obligatorios.");
+        return;
       } else {
-        const respuesta = await fetch("http://localhost:8080/ask/", {
-          method: "POST",
+        // (NUEVO)
+        const url = ask
+          ? `http://localhost:8080/ask/${ask.id}`
+          : "http://localhost:8080/ask/";
+        const method = ask ? "PUT" : "POST";
+
+        const respuesta = await fetch(url, {
+          method: method,
           body: JSON.stringify({ ...valores, descripcion }),
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +75,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
         });
 
         if (!respuesta.ok) {
-          throw new Error("Error en la solicitud POST: " + respuesta.status);
+          throw new Error("Error en la solicitud ${method}: " + respuesta.status);
         }
 
         const data = await respuesta.json();
@@ -71,6 +83,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
+          onClose();
         }, 3000);
       }
     } catch (error) {
@@ -81,18 +94,21 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
       }, 3000);
     }
   };
-
-
+  
   return (
-    <div className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${isOpen ? 'block' : 'hidden'} bg-gray-800 bg-opacity-75 z-50`}>
+    <div
+      className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
+        isOpen ? "block" : "hidden"
+      } bg-gray-800 bg-opacity-75 z-50`}
+    >
       <div className={`container-inputs`}>
         <Formik
           initialValues={{
-            titulo: "",
-            orden: "",
-            estado: 1,
+            titulo: ask ? ask.titulo : "",
+            orden: ask ? ask.orden : "",
+            estado: ask ? ask.estado : 1,
           }}
-          enableReinitialize={!isOpen}
+          enableReinitialize
           onSubmit={async (values, { resetForm }) => {
             await handleSubmitFreAsk(values);
             resetForm();
@@ -104,11 +120,22 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
               <Form className="formulario max-sm:w-[300px] bg-white">
                 <div className="flex justify-between">
                   <div className="tools">
-                    <div className="circle"><span className="red toolsbox"></span></div>
-                    <div className="circle"><span className="yellow toolsbox"></span></div>
-                    <div className="circle"><span className="green toolsbox"></span></div>
+                    <div className="circle">
+                      <span className="red toolsbox"></span>
+                    </div>
+                    <div className="circle">
+                      <span className="yellow toolsbox"></span>
+                    </div>
+                    <div className="circle">
+                      <span className="green toolsbox"></span>
+                    </div>
                   </div>
-                  <div className="pr-6 pt-3 text-[20px] cursor-pointer" onClick={onClose}>x</div>
+                  <div
+                    className="pr-6 pt-3 text-[20px] cursor-pointer"
+                    onClick={onClose}
+                  >
+                    x
+                  </div>
                 </div>
 
                 <div className="mb-3 px-4">
@@ -120,7 +147,9 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
                     name="titulo"
                     maxLength="70"
                   />
-                  {errors.titulo && touched.titulo ? <Alerta>{errors.titulo}</Alerta> : null}
+                  {errors.titulo && touched.titulo ? (
+                    <Alerta>{errors.titulo}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-3 px-4">
@@ -130,7 +159,9 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
                     className="mt-2 text-black formulario__input bg-slate-100 rounded-xl"
                     placeholder="Descripción"
                   />
-                  {descripcion === "" && touched.descripcion ? <Alerta>La descripción es obligatoria</Alerta> : null}
+                  {descripcion === "" && touched.descripcion ? (
+                    <Alerta>La descripción es obligatoria</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-3 px-4">
@@ -142,7 +173,9 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
                     name="orden"
                     maxLength="14"
                   />
-                  {errors.orden && touched.orden ? <Alerta>{errors.orden}</Alerta> : null}
+                  {errors.orden && touched.orden ? (
+                    <Alerta>{errors.orden}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-4 px-4">
@@ -153,11 +186,15 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
                     className="form-select mt-2 block w-full p-3 text-black formulario__input bg-slate-100 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
                     required
                   >
-                    <option value="" disabled>Estado:</option>
+                    <option value="" disabled>
+                      Estado:
+                    </option>
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
                   </Field>
-                  {errors.estado && touched.estado ? <Alerta>{errors.estado}</Alerta> : null}
+                  {errors.estado && touched.estado ? (
+                    <Alerta>{errors.estado}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mx-auto flex justify-center my-5">
@@ -172,7 +209,11 @@ const FormAltaFrecAsk = ({ isOpen, onClose }) => {
           )}
         </Formik>
       </div>
-      <ModalSuccess textoModal={textoModal} isVisible={showModal} onClose={() => setShowModal(false)} />
+      <ModalSuccess
+        textoModal={textoModal}
+        isVisible={showModal}
+        onClose={() => setShowModal(false)}
+      />
       <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );

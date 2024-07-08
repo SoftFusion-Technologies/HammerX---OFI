@@ -32,6 +32,7 @@ import FrequentDetails from "./FrequentAsksGetId";
 
 const PreguntasFrecuentesGet = () => {
   const [modalNewFrecAsk, setModalNewAsk] = useState(false);
+  const [selectedAsk, setSelectedAsk] = useState(null); // Estado para la pregunta seleccionada (NUEVO)
 
   const { userLevel } = useAuth();
 
@@ -43,6 +44,7 @@ const PreguntasFrecuentesGet = () => {
   };
   const cerarModal = () => {
     setModalNewAsk(false);
+    setSelectedAsk(null); // Resetear la pregunta seleccionada al cerrar el modal (NUEVO)
     obtenerAsk(); // Llama a la función para obtener los datos actualizados
   };
 
@@ -174,6 +176,11 @@ const PreguntasFrecuentesGet = () => {
     }
   };
 
+  const handleEditarAsk = (ask) => { // (NUEVO)
+    setSelectedAsk(ask);
+    setModalNewAsk(true);
+  };
+
   return (
     <>
       <NavbarStaff />
@@ -247,14 +254,12 @@ const PreguntasFrecuentesGet = () => {
                       <td onClick={() => obtenerPregunta(frecAsk.id)}>
                         {frecAsk.id}
                       </td>
-
                       <td onClick={() => obtenerPregunta(frecAsk.id)}>
                         {frecAsk.orden}
                       </td>
                       <td onClick={() => obtenerPregunta(frecAsk.id)}>
                         {frecAsk.titulo}
                       </td>
-
                       <td
                         className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
                           frecAsk.estado === 1
@@ -277,7 +282,7 @@ const PreguntasFrecuentesGet = () => {
                             Eliminar
                           </button>
                           <button
-                            onClick={() => handleEliminarAsk(frecAsk.id)}
+                            onClick={() => handleEditarAsk(frecAsk)} // (NUEVO)
                             type="button"
                             className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
                           >
@@ -321,8 +326,8 @@ const PreguntasFrecuentesGet = () => {
               </nav>
             </>
           )}
-          {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaFrecAsk isOpen={modalNewFrecAsk} onClose={cerarModal} />
+          {/* Modal para abrir formulario de clase gratis (NUEVO) */}  
+          <FormAltaFrecAsk isOpen={modalNewFrecAsk} onClose={cerarModal} ask={selectedAsk} />
         </div>
       </div>
       {selectedUser && (
