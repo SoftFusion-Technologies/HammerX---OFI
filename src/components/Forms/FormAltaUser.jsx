@@ -23,7 +23,7 @@ import ModalError from "./ModalError";
 import Alerta from "../Error";
 
 // isOpen y onCLose son los metodos que recibe para abrir y cerrar el modal
-const FormAltaUser = ({ isOpen, onClose, user }) => {
+const FormAltaUser = ({ isOpen, onClose, user, setSelectedUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
 
@@ -65,7 +65,6 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
       ) {
         alert('Por favor, complete todos los campos obligatorios.');
       } else {
-        
         // (NUEVO)
         const url = user
           ? `http://localhost:8080/users/${user.id}`
@@ -80,7 +79,7 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
           }
         });
 
-        if (method === "PUT") {
+        if (method === 'PUT') {
           // setName(null); // una vez que sale del metodo PUT, limpiamos el campo descripcion
           setTextoModal('Usuario actualizado correctamente.');
         } else {
@@ -92,15 +91,14 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
           throw new Error(
             'Error en la solicitud ${method}: ' + respuesta.status
           );
-          
         }
-          const data = await respuesta.json();
-          console.log('Registro insertado correctamente:', data);
-          setShowModal(true);
-          setTimeout(() => {
-            setShowModal(false);
-            onClose();
-          }, 3000);
+        const data = await respuesta.json();
+        console.log('Registro insertado correctamente:', data);
+        setShowModal(true);
+        setTimeout(() => {
+          setShowModal(false);
+          onClose();
+        }, 3000);
       }
     } catch (error) {
       console.error('Error al insertar el registro:', error.message);
@@ -117,6 +115,7 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
   const handleClose = () => {
     if (user && formikRef.current) {
       formikRef.current.resetForm();
+      setSelectedUser(null)
     }
     onClose();
   };
@@ -127,7 +126,6 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
         isOpen ? 'block' : 'hidden'
       } bg-gray-800 bg-opacity-75 z-50`}
     >
-      
       <div className={`container-inputs`}>
         {/*
                 Formik es una biblioteca de formularios React de terceros.
@@ -307,7 +305,7 @@ const FormAltaUser = ({ isOpen, onClose, user }) => {
       <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );
-}
+};
 //Se elimina los default prosp, quedo desactualizado
 // FormAltaUser.defaultProps = {
 //   users: {},

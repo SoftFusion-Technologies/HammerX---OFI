@@ -352,12 +352,14 @@ const UserGet = () => {
             isOpen={modalNewUser}
             onClose={cerarModal}
             user={selectedUser}
+            setSelectedUser={setSelectedUser}
           />
         </div>
       </div>
       {selectedUser && (
         <UserDetails
           user={selectedUser}
+          setSelectedUser={setSelectedUser}
           isOpen={modalUserDetails}
           onClose={() => setModalUserDetails(false)}
         />
