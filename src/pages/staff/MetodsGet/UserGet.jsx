@@ -20,6 +20,7 @@ import "../../../styles/staff/background.css";
 import Footer from "../../../components/footer/Footer";
 import FormAltaUser from "../../../components/Forms/FormAltaUser";
 import UserDetails from "./UserGetId";
+import { useAuth } from '../../../AuthContext';
 
 // Componente funcional que maneja la lógica relacionada con los Users
 const UserGet = () => {
@@ -29,6 +30,8 @@ const UserGet = () => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
   const [filterSede, setFilterSede] = useState(''); // Estado para el filtro de sede
   const [filterLevel, setFilterLevel] = useState(''); // Estado para el filtro de level (ROL)
+  const { userLevel } = useAuth();
+
 
   const abrirModal = () => {
     setModalNewUser(true);
@@ -178,6 +181,12 @@ const UserGet = () => {
       setCurrentPage(currentPage + 1);
     }
   }
+
+  const handleEditarUser = (user) => {
+    // (NUEVO)
+    setSelectedUser(user);
+    setModalNewUser(true);
+  };
   return (
     <>
       <NavbarStaff />
@@ -283,15 +292,25 @@ const UserGet = () => {
                           {user.sede}
                         </td>
                         {/* ACCIONES */}
-                        <td>
-                          <button
-                            onClick={() => handleEliminarUser(user.id)}
-                            type="button"
-                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md"
-                          >
-                            Eliminar
-                          </button>
-                        </td>
+                        {(userLevel === 'admin' ||
+                          userLevel === 'administrador') && (
+                          <td className="">
+                            <button
+                              onClick={() => handleEliminarUser(user.id)}
+                              type="button"
+                              className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                              Eliminar
+                            </button>
+                            <button
+                              onClick={() => handleEditarUser(user)} // (NUEVO)
+                              type="button"
+                              className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                            >
+                              Editar
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     ))}
                 </tbody>
@@ -329,7 +348,11 @@ const UserGet = () => {
             </>
           )}
           {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaUser isOpen={modalNewUser} onClose={cerarModal} />
+          <FormAltaUser
+            isOpen={modalNewUser}
+            onClose={cerarModal}
+            user={selectedUser}
+          />
         </div>
       </div>
       {selectedUser && (
