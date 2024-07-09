@@ -32,25 +32,25 @@ const NavbarStaff = () => {
 const Links = [
   {
     id: 1,
-    href: '',
+    href: 'dashboard',
     title: 'Dashboard',
     roles: ['gerente', 'admin', 'vendedor', 'administrador'] // Benjamin Orellana INI / 12/06/2024 /nueva forma de gestionar los accesos
   },
   {
     id: 2,
-    href: 'users',
+    href: 'dashboard/users',
     title: 'Usuarios',
     roles: ['admin', 'administrador']
   },
   {
     id: 3,
-    href: 'ask',
+    href: 'dashboard/ask',
     title: 'Preguntas Frecuentes',
     roles: ['vendedor', 'admin', 'administrador', 'gerente']
   },
   {
     id: 4,
-    href: 'task',
+    href: 'dashboard/task',
     title: 'Programar Tarea',
     roles: ['admin', 'administrador']
   }
@@ -84,7 +84,7 @@ const Links = [
                   } hover:text-orange-500 text-[16px] cursor-pointer `}
                   onClick={() => setActive(link.title)}
                 >
-                  <Link to={`/dashboard/${link.href}`}>{link.title}</Link>
+                  <Link to={`/${link.href}`}>{link.title}</Link>
                 </li>
               ))}
             </ul>
@@ -127,7 +127,7 @@ const Links = [
                       setActive(link.title);
                     }}
                   >
-                    <a href={`#${link.href}`}>{link.title}</a>
+                    <a href={`/${link.href}`}>{link.title}</a>
                   </li>
                 ))}
               </ul>
