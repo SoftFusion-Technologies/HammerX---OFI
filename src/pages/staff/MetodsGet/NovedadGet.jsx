@@ -396,6 +396,7 @@ const NovedadGet = () => {
         isOpen={modalData.isOpen}
         mensaje={modalData.mensaje}
         onClose={handleCloseModal}
+        obtenerNovedades={obtenerNovedades}
       />
     </>
   );

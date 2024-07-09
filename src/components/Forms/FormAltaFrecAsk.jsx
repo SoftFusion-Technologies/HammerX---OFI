@@ -20,7 +20,7 @@
  *
  */
 
-import React, { useState, useEffect } from "react"; // (NUEVO)
+import React, { useState, useEffect, useRef } from 'react'; // (NUEVO)
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import ModalSuccess from "./ModalSuccess";
@@ -32,13 +32,19 @@ import "react-quill/dist/quill.snow.css";
 const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
-  const textoModal = "Pregunta frecuente creado correctamente.";
-  const [descripcion, setDescripcion] = useState("");
+  // const textoModal = 'Pregunta frecuente creada correctamente.'; se elimina el texto
+  // nuevo estado para gestionar dinámicamente según el método (PUT o POST)
+  const [textoModal, setTextoModal] = useState('');
+
+  const [descripcion, setDescripcion] = useState('');
+
+  // nueva variable para administrar el contenido de formulario para saber cuando limpiarlo
+  const formikRef = useRef(null);
 
   // (NUEVO)
   useEffect(() => {
     if (ask) {
-      setDescripcion(ask.descripcion || "");
+      setDescripcion(ask.descripcion || '');
     }
   }, [ask]);
 
@@ -46,40 +52,50 @@ const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
   // este esquema de cliente es para utilizar su validacion en los inputs
   const nuevoFrecAskSchema = Yup.object().shape({
     titulo: Yup.string()
-      .min(3, "El titulo es muy corto")
-      .max(70, "El titulo es muy largo")
-      .required("El titulo es obligatorio"),
+      .min(3, 'El titulo es muy corto')
+      .max(70, 'El titulo es muy largo')
+      .required('El titulo es obligatorio'),
     orden: Yup.string()
-      .max(13, "El Orden es muy largo")
-      .required("El Orden es Obligatorio"),
+      .max(13, 'El Orden es muy largo')
+      .required('El Orden es Obligatorio')
   });
 
   const handleSubmitFreAsk = async (valores) => {
     try {
-      if (valores.titulo === "" || descripcion === "" || valores.orden === "") {
-        alert("Por favor, complete todos los campos obligatorios.");
+      if (valores.titulo === '' || descripcion === '' || valores.orden === '') {
+        alert('Por favor, complete todos los campos obligatorios.');
         return;
       } else {
         // (NUEVO)
         const url = ask
           ? `http://localhost:8080/ask/${ask.id}`
-          : "http://localhost:8080/ask/";
-        const method = ask ? "PUT" : "POST";
+          : 'http://localhost:8080/ask/';
+        const method = ask ? 'PUT' : 'POST';
 
         const respuesta = await fetch(url, {
           method: method,
           body: JSON.stringify({ ...valores, descripcion }),
           headers: {
-            "Content-Type": "application/json",
-          },
+            'Content-Type': 'application/json'
+          }
         });
 
+        if (method === "PUT") {
+          setDescripcion(null); // una vez que sale del metodo PUT, limpiamos el campo descripcion
+          setTextoModal('Pregunta frecuente actualizada correctamente.');
+        } else {
+          setTextoModal('Pregunta frecuente creada correctamente.');
+        }
+
+
         if (!respuesta.ok) {
-          throw new Error("Error en la solicitud ${method}: " + respuesta.status);
+          throw new Error(
+            `Error en la solicitud ${method}: ` + respuesta.status
+          );
         }
 
         const data = await respuesta.json();
-        console.log("Registro insertado correctamente:", data);
+        console.log('Registro insertado correctamente:', data);
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
@@ -87,26 +103,36 @@ const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
         }, 3000);
       }
     } catch (error) {
-      console.error("Error al insertar el registro:", error.message);
+      console.error('Error al insertar el registro:', error.message);
       setErrorModal(true);
       setTimeout(() => {
         setErrorModal(false);
       }, 3000);
     }
   };
-  
+
+  const handleClose = () => {
+    if (ask && formikRef.current) {
+      formikRef.current.resetForm();
+      setDescripcion(null); // una vez que sale del metodo PUT, limpiamos el campo descripcion
+    }
+    onClose();
+  };
+
   return (
     <div
       className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
-        isOpen ? "block" : "hidden"
+        isOpen ? 'block' : 'hidden'
       } bg-gray-800 bg-opacity-75 z-50`}
     >
       <div className={`container-inputs`}>
         <Formik
+          innerRef={formikRef}
           initialValues={{
-            titulo: ask ? ask.titulo : "",
-            orden: ask ? ask.orden : "",
-            estado: ask ? ask.estado : 1,
+            titulo: ask ? ask.titulo : '',
+            descripcion: ask ? ask.descripcion : '',
+            orden: ask ? ask.orden : '',
+            estado: ask ? ask.estado : 1
           }}
           enableReinitialize
           onSubmit={async (values, { resetForm }) => {
@@ -132,7 +158,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
                   </div>
                   <div
                     className="pr-6 pt-3 text-[20px] cursor-pointer"
-                    onClick={onClose}
+                    onClick={handleClose}
                   >
                     x
                   </div>
@@ -159,7 +185,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
                     className="mt-2 text-black formulario__input bg-slate-100 rounded-xl"
                     placeholder="Descripción"
                   />
-                  {descripcion === "" && touched.descripcion ? (
+                  {descripcion === '' && touched.descripcion ? (
                     <Alerta>La descripción es obligatoria</Alerta>
                   ) : null}
                 </div>
@@ -200,7 +226,7 @@ const FormAltaFrecAsk = ({ isOpen, onClose, ask }) => {
                 <div className="mx-auto flex justify-center my-5">
                   <input
                     type="submit"
-                    value="Guardar"
+                    value={ask ? 'Actualizar' : 'Guardar'}
                     className="bg-orange-500 py-2 px-5 rounded-xl text-white font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                   />
                 </div>

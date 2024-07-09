@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import { useAuth } from '../../../AuthContext';
 import axios from 'axios';
 
-const ModalNovedad = ({ isOpen, onClose, mensaje }) => {
+const ModalNovedad = ({ isOpen, onClose, mensaje, obtenerNovedades }) => {
   if (!isOpen) return null;
 
   const URL = 'http://localhost:8080/novedades/';
