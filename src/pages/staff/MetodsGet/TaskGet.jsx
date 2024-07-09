@@ -21,6 +21,8 @@ import "../../../styles/staff/background.css";
 import Footer from '../../../components/footer/Footer';
 import FormAltaTask from '../../../components/Forms/FormAltaTask';
 import TaskDetails from './TaskGetId';
+import { useAuth } from '../../../AuthContext';
+
 // Componente funcional que maneja la lógica relacionada con los Task
 const TaskGet = () => {
   const [modalNewTask, setModalNewTask] = useState(false);
@@ -28,13 +30,16 @@ const TaskGet = () => {
   const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
-  const [selectedUsers, setSelectedUsers] = useState([]); // Estado para usuarios seleccionados
+  const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada (NUEVO)
+
+  const { userLevel } = useAuth();
 
   const abrirModal = () => {
     setModalNewTask(true);
   };
   const cerarModal = () => {
     setModalNewTask(false);
+    setSelectedTask(null); // Resetear la pregunta seleccionada al cerrar el modal (NUEVO)
     obtenerTasks(); // Llama a la función para obtener los datos actualizados
   };
 
@@ -106,22 +111,6 @@ const TaskGet = () => {
     }
   };
 
-  // const obtenerTask = async (id) => {
-  //   try {
-  //     const url = `${URL}${id}`;
-
-  //     console.log(url);
-
-  //     const respuesta = await fetch(url);
-
-  //     const resultado = await respuesta.json();
-
-  //     settask(resultado);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   // Función para ordenar los tasks de forma decreciente basado en el id
   const ordenarTaskDecreciente = (task) => {
     return [...task].sort((a, b) => b.id - a.id);
@@ -176,6 +165,11 @@ const TaskGet = () => {
     'Sábado'
   ];
 
+  const handleEditarTask = (task) => {
+    // (NUEVO)
+    setSelectedTask(task);
+    setModalNewTask(true);
+  };
   return (
     <>
       <NavbarStaff />
@@ -259,34 +253,34 @@ const TaskGet = () => {
                       <td onClick={() => obtenerTarea(task.id)}>{task.hora}</td>
                       <td onClick={() => obtenerTarea(task.id)}>{task.dias}</td>
                       <td onClick={() => obtenerTarea(task.id)}>{task.user}</td>
-                        <td
-                          className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
-                            task.state === 1 ? 'text-green-500' : 'text-red-500'
-                          }`}
-                          onClick={() => obtenerTarea(task.id)}
-                        >
-                          {task.state === 1 ? 'Activa' : 'Inactiva'}
-                        </td>
-
-                      {/* ACCIONES */}
-                      {/* ACCIONES */}
-                      <td className="">
-                        <button
-                          onClick={() => handleEliminarTask(task.id)}
-                          type="button"
-                          className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Eliminar
-                        </button>
-
-                        <button
-                          onClick={() => handleEliminarTask(task.id)}
-                          type="button"
-                          className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
-                        >
-                          Editar
-                        </button>
+                      <td
+                        className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
+                          task.state === 1 ? 'text-green-500' : 'text-red-500'
+                        }`}
+                        onClick={() => obtenerTarea(task.id)}
+                      >
+                        {task.state === 1 ? 'Activa' : 'Inactiva'}
                       </td>
+
+                      {(userLevel === 'admin' ||
+                        userLevel === 'administrador') && (
+                        <td className="">
+                          <button
+                            onClick={() => handleEliminarTask(task.id)}
+                            type="button"
+                            className="py-2 px-4 my-1 bg-red-500 text-white rounded-md hover:bg-red-600"
+                          >
+                            Eliminar
+                          </button>
+                          <button
+                            onClick={() => handleEditarTask(task)} // (NUEVO)
+                            type="button"
+                            className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                          >
+                            Editar
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -324,7 +318,12 @@ const TaskGet = () => {
             </>
           )}
           {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaTask isOpen={modalNewTask} onClose={cerarModal} />
+          <FormAltaTask
+            isOpen={modalNewTask}
+            onClose={cerarModal}
+            task={selectedTask}
+            setSelectedTask={setSelectedTask}
+          />
         </div>
       </div>
       {selectedUser && (
