@@ -29,13 +29,17 @@ const AdmConveGet = () => {
   const [conve, setConve] = useState([]);
   const [modalNewConve, setmodalNewConve] = useState(false);
   const [integrantes, setIntegrantes] = useState([]);
+
   const [selectedConve, setSelectedConve] = useState(null);
+  const [selectedConve2, setSelectedConve2] = useState(null);
+  
   const navigate = useNavigate(); // Hook para navegación
 
   const { userLevel } = useAuth();
 
   const abrirModal = () => {
     setmodalNewConve(true);
+    setSelectedConve2(null);
   };
   const cerarModal = () => {
     setmodalNewConve(false);
@@ -153,6 +157,12 @@ const AdmConveGet = () => {
     }
   }
 
+  const handleEditarConve = (conve) => {
+    // (NUEVO)
+    // setSelectedConve(conve);
+    setSelectedConve2(conve);
+    setmodalNewConve(true);
+  };
   return (
     <>
       <NavbarStaff />
@@ -292,12 +302,20 @@ const AdmConveGet = () => {
                       */
                       (userLevel === 'admin' ||
                         userLevel === 'administrador') && (
-                        <button
-                          onClick={() => handleEliminarConve(conve.id)}
-                          style={{ ...styles.button, backgroundColor: 'red' }}
-                        >
-                          Eliminar
-                        </button>
+                        <div>
+                          <button
+                            onClick={() => handleEliminarConve(conve.id)}
+                            style={{ ...styles.button, backgroundColor: 'red' }}
+                          >
+                            Eliminar
+                          </button>
+                          <button
+                            onClick={() => handleEditarConve(conve)}
+                            className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                          >
+                            Editar
+                          </button>
+                        </div>
                       )
                     }
                   </div>
@@ -309,7 +327,12 @@ const AdmConveGet = () => {
             </div>
           )}
           {/* Modal para abrir formulario de clase gratis */}
-          <FormAltaConve isOpen={modalNewConve} onClose={cerarModal} />
+          <FormAltaConve
+            isOpen={modalNewConve}
+            onClose={cerarModal}
+            conve2={selectedConve2}
+            setConve2={setConve}
+          />
         </div>
       </div>
       <Footer />
