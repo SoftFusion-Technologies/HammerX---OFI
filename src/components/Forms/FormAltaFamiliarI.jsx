@@ -14,7 +14,7 @@
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
@@ -24,19 +24,27 @@ import ModalError from './ModalError';
 import Alerta from '../Error';
 
 const FormAltaFamiliarI = ({
-  isOpen, onClose, precio,
+  isOpen,
+  onClose,
+  precio,
   descuento,
-  preciofinal
+  preciofinal,
+  integrante,
+  setSelectedUser
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const { id_integrante } = useParams(); // Obtener el id_integrante de la URL
+  
+  // const textoModal = 'Familiar creado correctamente.'; se elimina el texto
+  // nuevo estado para gestionar dinámicamente según el método (PUT o POST)
+  const [textoModal, setTextoModal] = useState('');
 
-  const textoModal = 'Familiar creado correctamente.';
+  // nueva variable para administrar el contenido de formulario para saber cuando limpiarlo
+  const formikRef = useRef(null);
   const newPrecio = precio;
   const newDescuento = descuento;
   const newPrecioFinal = preciofinal;
-
 
   // yup sirve para validar formulario este ya trae sus propias sentencias
   // este esquema de cliente es para utilizar su validacion en los inputs
@@ -54,15 +62,25 @@ const FormAltaFamiliarI = ({
       if (valores.nombre === '' || valores.telefono === '') {
         alert('Por favor, complete todos los campos obligatorios.');
       } else {
-        // Realizamos la solicitud POST al servidor
-        const respuesta = await fetch('http://localhost:8080/integrantesfam/', {
-          method: 'POST',
-          body: JSON.stringify(valores),
+        // (NUEVO)
+        const url = integrante
+          ? `http://localhost:8080/integrantesfam/${integrante.id}`
+          : 'http://localhost:8080/integrantesfam/';
+        const method = integrante ? 'PUT' : 'POST';
+
+        const respuesta = await fetch(url, {
+          method: method,
+          body: JSON.stringify({ ...valores }),
           headers: {
             'Content-Type': 'application/json'
           }
         });
-
+          if (method === 'PUT') {
+            // setName(null); // una vez que sale del metodo PUT, limpiamos el campo descripcion
+            setTextoModal('Familiar actualizado correctamente.');
+          } else {
+            setTextoModal('Familiar creado correctamente.');
+          }
         // Verificamos si la solicitud fue exitosa
         if (!respuesta.ok) {
           throw new Error('Error en la solicitud POST: ' + respuesta.status);
@@ -93,6 +111,13 @@ const FormAltaFamiliarI = ({
     }
   };
 
+    const handleClose = () => {
+      if (integrante && formikRef.current) {
+        formikRef.current.resetForm();
+        setSelectedUser(null);
+      }
+      onClose();
+    };
   return (
     <div
       className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
@@ -110,20 +135,17 @@ const FormAltaFamiliarI = ({
           // valores con los cuales el formulario inicia y este objeto tambien lo utilizo para cargar los datos en la API
           initialValues={{
             id_integrante: id_integrante || '', // Usa el id_integrante obtenido de la URL
-            nombre: '',
-            dni: '',
-            telefono: '',
-            email: '',
-            sede: '',
-            notas: '',
-            precio: newPrecio,
-            // precio !== null && precio !== undefined ? precio : '',
-            descuento: newDescuento,
-            // descuento || '0%', // Asegúrate de que descuento tenga un valor por defecto adecuado si puede ser null
-            preciofinal: newPrecioFinal
-            // precioFinal !== null && precioFinal !== undefined ? precioFinal : ''
+            nombre: integrante ? integrante.nombre : '',
+            dni: integrante ? integrante.dni : '',
+            telefono: integrante ? integrante.telefono : '',
+            email: integrante ? integrante.email : '',
+            sede: integrante ? integrante.sede : '',
+            notas: integrante ? integrante.notas : '',
+            precio: integrante ? integrante.precio : newPrecio,
+            descuento: integrante ? integrante.descuento : newDescuento,
+            preciofinal: integrante ? integrante.preciofinal : newPrecioFinal
           }}
-          enableReinitialize={!isOpen}
+          enableReinitialize
           // cuando hacemos el submit esperamos a que cargen los valores y esos valores tomados se lo pasamos a la funcion handlesubmit que es la que los espera
           onSubmit={async (values, { resetForm }) => {
             await handleSubmitFamIntegrante(values);
@@ -152,7 +174,7 @@ const FormAltaFamiliarI = ({
                     </div>
                     <div
                       className="pr-6 pt-3 text-[20px] cursor-pointer"
-                      onClick={onClose}
+                      onClick={handleClose}
                     >
                       x
                     </div>
@@ -236,9 +258,8 @@ const FormAltaFamiliarI = ({
                   <div className="mx-auto flex justify-center my-5">
                     <input
                       type="submit"
-                      value="Agregar Familiar"
-                      className="bg-orange-500 py-2 px-5 rounded-xl text-white  font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
-                      id="click2"
+                      value={integrante ? 'Actualizar' : 'Crear Familiar'}
+                      className="bg-orange-500 py-2 px-5 rounded-xl text-white font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
                     />
                   </div>
                 </Form>

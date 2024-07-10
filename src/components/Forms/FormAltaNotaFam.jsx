@@ -29,7 +29,6 @@ const FormAltaNotaFam = ({ isOpen, onClose, user }) => {
   const textoModal = 'Nota agregada correctamente.';
 
   const nuevoNotaSchema = Yup.object().shape({
-    notas: Yup.string().required('Notas es requerido')
   });
 
   const handlePrecioChange = (values, setFieldValue) => {
@@ -57,10 +56,10 @@ const FormAltaNotaFam = ({ isOpen, onClose, user }) => {
       <div className={`container-inputs`}>
         <Formik
           initialValues={{
-            notas: '',
-            precio: '',
-            descuento: '',
-            preciofinal: ''
+            notas: user ? user.notas : '',
+            precio: user ? user.precio : '',
+            descuento: user ? user.descuento : '',
+            preciofinal: user ? user.preciofinal : ''
           }}
           onSubmit={async (values, { resetForm }) => {
             try {

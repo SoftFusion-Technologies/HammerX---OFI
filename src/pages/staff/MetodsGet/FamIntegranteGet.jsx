@@ -53,7 +53,7 @@ const FamIntegranteGet = ({ integrantes }) => {
   const [integrante, setIntegrantes] = useState([]);
 
   // Estado para manejar los modales
-  const [modalNewConve, setmodalNewConve] = useState(false);
+  const [modalNewIntegrant, setModalNewIntegrant] = useState(false);
 
   // Estado para almacenar el precio final
   const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
@@ -70,10 +70,11 @@ const FamIntegranteGet = ({ integrantes }) => {
   const [cantFam, setcantFam] = useState(0);
 
   const abrirModal = () => {
-    setmodalNewConve(true);
+    setModalNewIntegrant(true);
+    setSelectedUser(null)
   };
   const cerarModal = () => {
-    setmodalNewConve(false);
+    setModalNewIntegrant(false);
     obtenerIntegrantes2();
   };
 
@@ -246,6 +247,13 @@ const FamIntegranteGet = ({ integrantes }) => {
     })}`;
   };
 
+
+  const handleEditarIntegrante = (integrante) => {
+    // (NUEVO)
+    setSelectedUser(integrante);
+    setModalNewIntegrant(true);
+  };
+
   return (
     <>
       <NavbarStaff />
@@ -398,6 +406,13 @@ const FamIntegranteGet = ({ integrantes }) => {
                             >
                               Eliminar
                             </button>
+                            <button
+                              onClick={() => handleEditarIntegrante(integrante)} // (NUEVO)
+                              type="button"
+                              className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                            >
+                              Editar
+                            </button>
                           </td>
                         )
                       }
@@ -429,11 +444,13 @@ const FamIntegranteGet = ({ integrantes }) => {
             </>
           )}
           <FormAltaFamiliarI
-            isOpen={modalNewConve}
+            isOpen={modalNewIntegrant}
             onClose={cerarModal}
             precio={precio}
             descuento={descuento}
             preciofinal={preciofinal}
+            integrante={selectedUser}
+            setSelectedUser={setSelectedUser}
           />
         </div>
       </div>

@@ -30,7 +30,7 @@ const IntegranteConveGet = ({ integrantes }) => {
   // Estado para almacenar la lista de personas
   const { id_conv, id_adm } = useParams();
   const [integrante, setIntegrantes] = useState([]);
-  const [modalNewConve, setmodalNewConve] = useState(false);
+  const [modalNewIntegrante, setModalNewIntegrant] = useState(false);
   const [totalPrecioFinal, setTotalPrecioFinal] = useState(0);
   const { userLevel } = useAuth();
 
@@ -45,10 +45,11 @@ const IntegranteConveGet = ({ integrantes }) => {
   const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
 
   const abrirModal = () => {
-    setmodalNewConve(true);
+    setModalNewIntegrant(true);
+    setSelectedUser(null)
   };
   const cerarModal = () => {
-    setmodalNewConve(false);
+    setModalNewIntegrant(false);
     obtenerIntegrantes2();
   };
   // Estado para almacenar el término de búsqueda
@@ -237,6 +238,12 @@ const IntegranteConveGet = ({ integrantes }) => {
       minimumFractionDigits: 0
     })}`;
   };
+
+  const handleEditarIntegrante = (integrante) => {
+    // (NUEVO)
+    setSelectedUser(integrante);
+    setModalNewIntegrant(true);
+  };
   return (
     <>
       <NavbarStaff />
@@ -379,6 +386,13 @@ const IntegranteConveGet = ({ integrantes }) => {
                             >
                               Eliminar
                             </button>
+                            <button
+                              onClick={() => handleEditarIntegrante(integrante)} // (NUEVO)
+                              type="button"
+                              className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
+                            >
+                              Editar
+                            </button>
                           </td>
                         )
                       }
@@ -410,11 +424,13 @@ const IntegranteConveGet = ({ integrantes }) => {
             </>
           )}
           <FormAltaIntegranteConve
-            isOpen={modalNewConve}
+            isOpen={modalNewIntegrante}
             onClose={cerarModal}
             precio={precio}
             descuento={descuento}
             preciofinal={preciofinal}
+            integrante={selectedUser}
+            setSelectedUser={setSelectedUser}
           />
         </div>
       </div>
