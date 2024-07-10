@@ -20,12 +20,14 @@ const NovedadGet = () => {
   const URL = 'http://localhost:8080/novedades/';
   const USERS_URL = 'http://localhost:8080/users/';
 
+  const [selectednovedad, setSelectedNovedad] = useState(null); // Estado para el usuario seleccionado
+
   useEffect(() => {
     // Se obtiene el userId usando el userName (email)
     const obtenerUserId = async () => {
       try {
         const response = await axios.get(USERS_URL);
-        const user = response.data.find(user => user.email === userName);
+        const user = response.data.find((user) => user.email === userName);
         if (user) {
           setUserId(user.id);
         }
@@ -91,8 +93,11 @@ const NovedadGet = () => {
   // Filtrar novedades basadas en el usuario autenticado y nivel de usuario
   const filtrarNovedades = (novedades) => {
     return novedades.filter((novedad) => {
-      const userAssigned = novedad.novedadUsers && novedad.novedadUsers.some(user => user.user.id === parseInt(userId));
-      const userAdminOrGerente = userLevel === 'admin' || userLevel === 'gerente';
+      const userAssigned =
+        novedad.novedadUsers &&
+        novedad.novedadUsers.some((user) => user.user.id === parseInt(userId));
+      const userAdminOrGerente =
+        userLevel === 'admin' || userLevel === 'gerente';
       return userAssigned || userAdminOrGerente;
     });
   };
@@ -134,6 +139,11 @@ const NovedadGet = () => {
     (novedad) => new Date(novedad.vencimiento) <= new Date()
   );
 
+  const handleEditarNovedad = (novedad) => {
+    // (NUEVO)
+    setSelectedNovedad(novedad);
+    setModalNewNovedad(true);
+  };
   return (
     <>
       <NavbarStaff />
@@ -258,7 +268,7 @@ const NovedadGet = () => {
                                 Eliminar
                               </button>
                               <button
-                                // onClick={() => handleEditarNovedad(novedad.id)}
+                                onClick={() => handleEditarNovedad(novedad)}
                                 className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
                               >
                                 Editar
@@ -340,7 +350,8 @@ const NovedadGet = () => {
                               Eliminar
                             </button>
                             <button
-                              // onClick={() => handleEditarNovedad(novedad.id)}
+                              onClick={() => handleEditarNovedad(novedad)}
+                              
                               className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
                             >
                               Editar
@@ -391,13 +402,13 @@ const NovedadGet = () => {
       </div>
       <Footer />
 
-      <FormAltaNovedad isOpen={modalNewNovedad} onClose={cerrarModal} />
-      <ModalNovedad
-        isOpen={modalData.isOpen}
-        mensaje={modalData.mensaje}
-        onClose={handleCloseModal}
-        obtenerNovedades={obtenerNovedades}
+      <FormAltaNovedad
+        isOpen={modalNewNovedad}
+        onClose={cerrarModal}
+        novedad={selectednovedad}
+        setSelectedNovedad={setSelectedNovedad}
       />
+
     </>
   );
 };

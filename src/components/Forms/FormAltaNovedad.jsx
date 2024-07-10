@@ -1,4 +1,20 @@
-import React, { useState, useEffect } from 'react';
+/*
+ * Programadores: Benjamin Orellana (back) y Lucas Albornoz (front)
+ * Fecha Cración: 06 / 04 / 2024
+ * Versión: 1.0
+ *
+ * Descripción:
+ *  Este archivo (FormAltaUser.jsx) es el componente donde realizamos un formulario para
+ *  la tabla users, este formulario aparece en la web del staff
+ *
+ *
+ * Tema: Configuración del Formulario
+ * Capa: Frontend
+ *
+ * Contacto: benjamin.orellanaof@gmail.com || 3863531891
+ */
+
+import React, { useState, useEffect, useRef } from 'react'; // (NUEVO)
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -8,7 +24,7 @@ import ModalSuccess from './ModalSuccess';
 import ModalError from './ModalError';
 import Alerta from '../Error';
 
-const FormAltaNovedad = ({ isOpen, onClose }) => {
+const FormAltaNovedad = ({ isOpen, onClose, novedad, setSelectedNovedad }) => {
   const [users, setUsers] = useState([]);
   const [selectedSede, setSelectedSede] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -16,7 +32,12 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
 
-  const textoModal = 'Novedad creada correctamente.';
+  // const textoModal = 'Usuario creado correctamente.'; se elimina el texto
+  // nuevo estado para gestionar dinámicamente según el método (PUT o POST)
+  const [textoModal, setTextoModal] = useState('');
+
+  // nueva variable para administrar el contenido de formulario para saber cuando limpiarlo
+  const formikRef = useRef(null);
 
   const nuevoNovedadSchema = Yup.object().shape({
     titulo: Yup.string().required('El Titulo es obligatorio'),
@@ -56,35 +77,61 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
   };
 
   const handleSubmitNovedad = async (valores) => {
-    try {
-      const data = {
-        sede: valores.sede,
-        titulo: valores.titulo,
-        mensaje: valores.mensaje,
-        vencimiento: valores.vencimiento,
-        estado: valores.estado,
-        user: selectedUsers
-      };
+     try {
+       const data = {
+         sede: valores.sede,
+         titulo: valores.titulo,
+         mensaje: valores.mensaje,
+         vencimiento: valores.vencimiento,
+         estado: valores.estado,
+         user: selectedUsers
+       };
 
-      const respuesta = await fetch('http://localhost:8080/novedades/', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      });
+       // Definir URL y método basados en la existencia de novedad
+       const url = novedad
+         ? `http://localhost:8080/novedades/${novedad.id}`
+         : 'http://localhost:8080/novedades/';
+       const method = novedad ? 'PUT' : 'POST';
 
-      if (!respuesta.ok)
-        throw new Error('Error en la solicitud POST: ' + respuesta.status);
+       const respuesta = await fetch(url, {
+         method: method,
+         body: JSON.stringify(data),
+         headers: {
+           'Content-Type': 'application/json'
+         }
+       });
 
-      const result = await respuesta.json();
-      console.log('Registro insertado correctamente:', result);
+       if (method === 'PUT') {
+         // setName(null); // una vez que sale del metodo PUT, limpiamos el campo descripcion
+         setTextoModal('Novedad actualizada correctamente.');
+       } else {
+         setTextoModal('Novedad creada correctamente.');
+       }
 
-      setShowModal(true);
-      setTimeout(() => setShowModal(false), 3000);
-    } catch (error) {
-      console.error('Error al insertar el registro:', error.message);
-      setErrorModal(true);
-      setTimeout(() => setErrorModal(false), 3000);
+       // Verificamos si la solicitud fue exitosa
+       if (!respuesta.ok) {
+         throw new Error(
+           'Error en la solicitud ${method}: ' + respuesta.status
+         );
+       }
+
+       const result = await respuesta.json();
+       console.log('Registro insertado correctamente:', result);
+
+       setShowModal(true);
+       setTimeout(() => setShowModal(false), 3000);
+     } catch (error) {
+       console.error('Error al insertar el registro:', error.message);
+       setErrorModal(true);
+       setTimeout(() => setErrorModal(false), 3000);
+     }
+  };
+  const handleClose = () => {
+    if (novedad && formikRef.current) {
+      formikRef.current.resetForm();
+      setSelectedNovedad(null);
     }
+    onClose();
   };
 
   return (
@@ -95,11 +142,12 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
     >
       <div className="container-inputs">
         <Formik
+          innerRef={formikRef}
           initialValues={{
-            sede: '',
-            titulo: '',
-            mensaje: '',
-            vencimiento: '',
+            sede: novedad ? novedad.sede : '',
+            titulo: novedad ? novedad.titulo : '',
+            mensaje: novedad ? novedad.mensaje : '',
+            vencimiento: novedad ? novedad.vencimiento : '',
             estado: 1
           }}
           enableReinitialize
@@ -126,7 +174,7 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                   </div>
                   <div
                     className="pr-6 pt-3 text-[20px] cursor-pointer"
-                    onClick={onClose}
+                    onClick={handleClose}
                   >
                     x
                   </div>
@@ -222,12 +270,12 @@ const FormAltaNovedad = ({ isOpen, onClose }) => {
                     <Alerta>{errors.mensaje}</Alerta>
                   ) : null}
                 </div>
+
                 <div className="mx-auto flex justify-center my-5">
                   <input
                     type="submit"
-                    value="Subir Novedad"
+                    value={novedad ? 'Actualizar' : 'Crear Novedad'}
                     className="bg-orange-500 py-2 px-5 rounded-xl text-white font-bold hover:cursor-pointer hover:bg-[#fc4b08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-100"
-                    id="click2"
                   />
                 </div>
               </Form>
