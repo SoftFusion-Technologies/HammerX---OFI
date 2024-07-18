@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import '../../../styles/MetodsGet/GetUserId.css';
-import FormAltaNota from '../../../components/Forms/FormAltaNota';
 import { Link } from 'react-router-dom';
-import FormAltaNotaFam from '../../../components/Forms/FormAltaNotaFam';
 import { useAuth } from '../../../AuthContext';
 
 const TaskDetails = ({ user, isOpen, onClose }) => {
