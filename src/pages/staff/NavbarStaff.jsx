@@ -52,7 +52,7 @@ const Links = [
     id: 4,
     href: 'dashboard/task',
     title: 'Programar Tarea',
-    roles: ['admin', 'administrador']
+    roles: ['admin', 'administrador','vendedor','gerente']
   }
   // {
   //   id: 5,

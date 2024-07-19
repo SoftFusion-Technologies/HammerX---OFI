@@ -1,130 +1,134 @@
-/*
- * Programador: Benjamin Orellana
- * Fecha Cración: 01 / 04 / 2024
- * Versión: 1.0
- *
- * Descripción:
- * Este archivo (TaskGet.jsx) es el componente el cual renderiza los datos de los tasks
- * Estos datos llegan cuando se completa el formulario de Quiero trabajar con ustedes
- *
- * Tema: Configuración
- * Capa: Frontend
- * Contacto: benjamin.orellanaof@gmail.com || 3863531891
- */
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { formatearFecha } from '../../../Helpers'
-import { Link } from 'react-router-dom';
-import NavbarStaff from '../NavbarStaff';
-import '../../../styles/MetodsGet/Tabla.css'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import NavbarStaff from "../NavbarStaff";
+import "../../../styles/MetodsGet/Tabla.css";
 import "../../../styles/staff/background.css";
-import Footer from '../../../components/footer/Footer';
-import FormAltaTask from '../../../components/Forms/FormAltaTask';
-import TaskDetails from './TaskGetId';
-import { useAuth } from '../../../AuthContext';
+import Footer from "../../../components/footer/Footer";
+import FormAltaTask from "../../../components/Forms/FormAltaTask";
+import TaskDetails from "./TaskGetId";
+import { useAuth } from "../../../AuthContext";
 
-// Componente funcional que maneja la lógica relacionada con los Task
 const TaskGet = () => {
   const [modalNewTask, setModalNewTask] = useState(false);
-
-  const [selectedUser, setSelectedUser] = useState(null); // Estado para el usuario seleccionado
-  const [modalUserDetails, setModalUserDetails] = useState(false); // Estado para controlar el modal de detalles del usuario
-
-  const [selectedTask, setSelectedTask] = useState(null); // Estado para la tarea seleccionada (NUEVO)
-
-  const { userLevel } = useAuth();
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [modalUserDetails, setModalUserDetails] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [taskUsers, setTaskUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const { userLevel, userName } = useAuth(); // Se añade userName para identificar el usuario actual
+  const [search, setSearch] = useState("");
 
   const abrirModal = () => {
     setModalNewTask(true);
   };
-  const cerarModal = () => {
+
+  const cerrarModal = () => {
     setModalNewTask(false);
-    setSelectedTask(null); // Resetear la pregunta seleccionada al cerrar el modal (NUEVO)
-    obtenerTasks(); // Llama a la función para obtener los datos actualizados
+    setSelectedTask(null);
+    obtenerTasks();
   };
 
-  //URL estatica, luego cambiar por variable de entorno
-  const URL = 'http://localhost:8080/schedulertask/';
+  const URL = "http://localhost:8080/schedulertask/";
+  const USERS_URL = "http://localhost:8080/users";
+  const TASK_USERS_URL = "http://localhost:8080/schedulertask_user";
 
-  // Estado para almacenar la lista de Task
-  const [task, setTask] = useState([]);
-
-  //------------------------------------------------------
-  // 1.3 Relacion al Filtrado - Inicio - Benjamin Orellana
-  //------------------------------------------------------
-  const [search, setSearch] = useState('');
-
-  //Funcion de busqueda, en el cuadro
   const searcher = (e) => {
     setSearch(e.target.value);
   };
 
-  let results = [];
-
-  if (!search) {
-    results = task;
-  } else {
-    results = task.filter((dato) => {
-      const nameMatch = dato.sede.toLowerCase().includes(search.toLowerCase());
-
-      return nameMatch;
-    });
-  }
-
-  //------------------------------------------------------
-  // 1.3 Relacion al Filtrado - Final - Benjamin Orellana
-  //------------------------------------------------------
-
-  useEffect(() => {
-    // utilizamos get para obtenerTask los datos contenidos en la url
-    axios.get(URL).then((res) => {
-      setTask(res.data);
-      obtenerTasks();
-    });
-  }, []);
-
-  // Función para obtener todos las taskes desde la API
   const obtenerTasks = async () => {
     try {
       const response = await axios.get(URL);
-      setTask(response.data);
+      setTasks(response.data);
     } catch (error) {
-      console.log('Error al obtener las tareas:', error);
+      console.log("Error al obtener las tareas:", error);
     }
   };
 
+  const obtenerUsers = async () => {
+    try {
+      const response = await axios.get(USERS_URL);
+      setUsers(response.data);
+    } catch (error) {
+      console.log("Error al obtener los usuarios:", error);
+    }
+  };
+
+  const obtenerTaskUsers = async () => {
+    try {
+      const response = await axios.get(TASK_USERS_URL);
+      setTaskUsers(response.data);
+    } catch (error) {
+      console.log("Error al obtener los usuarios asignados a tareas:", error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerTasks();
+    obtenerUsers();
+    obtenerTaskUsers();
+  }, []);
+
   const handleEliminarTask = async (id) => {
-    const confirmacion = window.confirm('¿Seguro que desea eliminar?');
+    const confirmacion = window.confirm("¿Seguro que desea eliminar?");
     if (confirmacion) {
       try {
         const url = `${URL}${id}`;
-        const respuesta = await fetch(url, {
-          method: 'DELETE'
-        });
-        await respuesta.json();
-        const arraytask = task.filter((task) => task.id !== id);
-
-        setTask(arraytask);
+        await fetch(url, { method: "DELETE" });
+        setTasks(tasks.filter((task) => task.id !== id));
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  // Función para ordenar los tasks de forma decreciente basado en el id
-  const ordenarTaskDecreciente = (task) => {
-    return [...task].sort((a, b) => b.id - a.id);
+  const obtenerNombresUsuarios = (taskId) => {
+    const usuariosAsignados = taskUsers.filter(
+      (taskUser) => taskUser.schedulertask_id === taskId
+    );
+    return usuariosAsignados
+      .map((taskUser) => {
+        const usuario = users.find((user) => user.id === taskUser.user_id);
+        return usuario ? usuario.name : "Usuario no encontrado";
+      })
+      .join(", ");
   };
 
-  // Llamada a la función para obtener los task ordenados de forma decreciente
-  const sortedTask = ordenarTaskDecreciente(results);
+  const ordenarTasksDecreciente = (tasks) => {
+    return [...tasks].sort((a, b) => b.id - a.id);
+  };
+
+  const filtrarTasks = (tasks) => {
+    return tasks.filter((task) => {
+      const assignedUsers = taskUsers
+        .filter((tu) => tu.schedulertask_id === task.id)
+        .map((tu) => tu.user_id);
+      const currentUser = users.find((user) => user.email === userName);
+
+      return (
+        userLevel === "admin" ||
+        userLevel === "gerente" ||
+        assignedUsers.includes(currentUser?.id)
+      );
+    });
+  };
+
+  const results = !search
+    ? filtrarTasks(tasks)
+    : filtrarTasks(tasks).filter((task) =>
+        task.titulo.toLowerCase().includes(search.toLowerCase())
+      );
+
+  const sortedTasks = ordenarTasksDecreciente(results);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const records = sortedTask.slice(firstIndex, lastIndex);
-  const nPage = Math.ceil(sortedTask.length / itemsPerPage);
+  const records = sortedTasks.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(sortedTasks.length / itemsPerPage);
   const numbers = [...Array(nPage + 1).keys()].slice(1);
 
   function prevPage() {
@@ -149,27 +153,17 @@ const TaskGet = () => {
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
       setSelectedUser(resultado);
-      setModalUserDetails(true); // Abre el modal de detalles del usuario
+      setModalUserDetails(true);
     } catch (error) {
-      console.log('Error al obtener el integrante:', error);
+      console.log("Error al obtener el integrante:", error);
     }
   };
 
-  // Array de nombres de días de la semana
-  const diasSemana = [
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado'
-  ];
-
   const handleEditarTask = (task) => {
-    // (NUEVO)
     setSelectedTask(task);
     setModalNewTask(true);
   };
+
   return (
     <>
       <NavbarStaff />
@@ -191,7 +185,6 @@ const TaskGet = () => {
             </h1>
           </div>
 
-          {/* formulario de busqueda */}
           <form className="flex justify-center pb-5">
             <input
               value={search}
@@ -201,37 +194,39 @@ const TaskGet = () => {
               className="border rounded-sm"
             />
           </form>
-          {/* formulario de busqueda */}
 
-          <div className="flex justify-center pb-10">
-            <Link to="#">
-              <button
-                onClick={abrirModal}
-                className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
-              >
-                Nueva Tarea
-              </button>
-            </Link>
-          </div>
+          {userLevel === "admin" || userLevel === "gerente" ? (
+            <div className="flex justify-center pb-10">
+              <Link to="#">
+                <button
+                  onClick={abrirModal}
+                  className="bg-[#58b35e] hover:bg-[#4e8a52] text-white py-2 px-4 rounded transition-colors duration-100 z-10"
+                >
+                  Nueva Tarea
+                </button>
+              </Link>
+            </div>
+          ) : null}
 
-          {Object.keys(results).length === 0 ? (
+          {results.length === 0 ? (
             <p className="text-center pb-10">
-              La Tarea NO Existe ||{' '}
+              La Tarea NO Existe ||{" "}
               <span className="text-span"> Tarea: {results.length}</span>
             </p>
           ) : (
             <>
               <table className="w-11/12 mx-auto">
                 <thead className=" bg-[#fc4b08]  text-white">
-                  <tr key={task.id}>
+                  <tr key={tasks.id}>
                     <th className="thid">ID</th>
                     <th>Tarea</th>
-                    {/* <th>Descripcion</th> */}
                     <th>Hora</th>
                     <th>Días</th>
-                    <th>Usuario</th>
+                    <th>Usuarios</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    {userLevel === "admin" || userLevel === "gerente" ? (
+                      <th>Acciones</th>
+                    ) : null}
                   </tr>
                 </thead>
                 <tbody>
@@ -244,26 +239,22 @@ const TaskGet = () => {
                       >
                         {task.titulo}
                       </td>
-                      {/* <td
-                        className="max-w-[300px] w-[300px]"
-                        onClick={() => obtenerTarea(task.id)}
-                      >
-                        {task.descripcion}
-                      </td> */}
                       <td onClick={() => obtenerTarea(task.id)}>{task.hora}</td>
                       <td onClick={() => obtenerTarea(task.id)}>{task.dias}</td>
-                      <td onClick={() => obtenerTarea(task.id)}>{task.user}</td>
+                      <td onClick={() => obtenerTarea(task.id)}>
+                        {obtenerNombresUsuarios(task.id)}
+                      </td>
                       <td
                         className={`uppercase max-w-[100px] p-2 overflow-y-auto max-h-[100px] ${
-                          task.state === 1 ? 'text-green-500' : 'text-red-500'
+                          task.state === 1 ? "text-green-500" : "text-red-500"
                         }`}
                         onClick={() => obtenerTarea(task.id)}
                       >
-                        {task.state === 1 ? 'Activa' : 'Inactiva'}
+                        {task.state === 1 ? "Activa" : "Inactiva"}
                       </td>
 
-                      {(userLevel === 'admin' ||
-                        userLevel === 'administrador') && (
+                      {(userLevel === "admin" ||
+                        userLevel === "administrador") && (
                         <td className="">
                           <button
                             onClick={() => handleEliminarTask(task.id)}
@@ -273,7 +264,7 @@ const TaskGet = () => {
                             Eliminar
                           </button>
                           <button
-                            onClick={() => handleEditarTask(task)} // (NUEVO)
+                            onClick={() => handleEditarTask(task)}
                             type="button"
                             className="py-2 px-4 my-1 ml-5 bg-yellow-500 text-black rounded-md hover:bg-red-600"
                           >
@@ -295,7 +286,7 @@ const TaskGet = () => {
                   {numbers.map((number, index) => (
                     <li
                       className={`page-item ${
-                        currentPage === number ? 'active' : ''
+                        currentPage === number ? "active" : ""
                       }`}
                       key={index}
                     >
@@ -317,10 +308,9 @@ const TaskGet = () => {
               </nav>
             </>
           )}
-          {/* Modal para abrir formulario de clase gratis */}
           <FormAltaTask
             isOpen={modalNewTask}
-            onClose={cerarModal}
+            onClose={cerrarModal}
             task={selectedTask}
             setSelectedTask={setSelectedTask}
           />
@@ -336,6 +326,6 @@ const TaskGet = () => {
       <Footer />
     </>
   );
-}
+};
 
-export default TaskGet
+export default TaskGet;
