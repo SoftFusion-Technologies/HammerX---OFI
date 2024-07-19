@@ -326,8 +326,12 @@ const PreguntasFrecuentesGet = () => {
               </nav>
             </>
           )}
-          {/* Modal para abrir formulario de clase gratis (NUEVO) */}  
-          <FormAltaFrecAsk isOpen={modalNewFrecAsk} onClose={cerarModal} ask={selectedAsk} />
+          {/* Modal para abrir formulario de clase gratis (NUEVO) */}
+          <FormAltaFrecAsk
+            isOpen={modalNewFrecAsk}
+            onClose={cerarModal}
+            ask={selectedAsk}
+          />
         </div>
       </div>
       {selectedUser && (

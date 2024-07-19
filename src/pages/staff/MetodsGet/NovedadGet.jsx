@@ -204,19 +204,25 @@ const NovedadGet = () => {
                       <div
                         key={novedad.id}
                         className="border m-5 border-gray-300 p-5 rounded-lg cursor-pointer mb-4"
-                        onClick={() => handleOpenModal(novedad.mensaje)}
+                        // onClick={() => handleOpenModal(novedad.mensaje)} se elimina de este div, ya que al presionar en cualquier parte o en eliminar y editar se abre el modal
                       >
-                        <h2 className="text-xl text-gray-300 font-semibold mb-4">
+                        <h2
+                          className="text-xl text-gray-300 font-semibold mb-4"
+                          onClick={() => handleOpenModal(novedad.mensaje)}
+                        >
                           Sucursal: {novedad.sede}
                         </h2>
                         <b>
-                          <p className="text-orange-500 mb-4">
+                          <p
+                            className="text-orange-500 mb-4"
+                            onClick={() => handleOpenModal(novedad.mensaje)}
+                          >
                             {novedad.titulo}
                           </p>
                         </b>
                         <p>Usuarios asignados a la novedad:</p>
                         <b>
-                          <div>
+                          <div onClick={() => handleOpenModal(novedad.mensaje)}>
                             <p className="text-gray-600 mb-4">
                               {novedad.novedadUsers &&
                               novedad.novedadUsers.length > 0
@@ -230,6 +236,9 @@ const NovedadGet = () => {
                             novedad.novedadUsers.length > 0 ? (
                               novedad.novedadUsers.map((novedadUser, index) => (
                                 <p
+                                  onClick={() =>
+                                    handleOpenModal(novedad.mensaje)
+                                  }
                                   key={index}
                                   className={
                                     novedad.estado === 0
@@ -242,7 +251,10 @@ const NovedadGet = () => {
                                 </p>
                               ))
                             ) : (
-                              <p className="text-red-500 mb-4">
+                              <p
+                                className="text-red-500 mb-4"
+                                onClick={() => handleOpenModal(novedad.mensaje)}
+                              >
                                 Sin Usuarios asignados
                               </p>
                             )}
@@ -250,7 +262,10 @@ const NovedadGet = () => {
                         </b>
                         <p>Fecha de publicacion:</p>
                         <b>
-                          <p className="text-gray-600">
+                          <p
+                            className="text-gray-600"
+                            onClick={() => handleOpenModal(novedad.mensaje)}
+                          >
                             {formatearFecha(novedad.vencimiento)}
                           </p>
                         </b>
@@ -290,17 +305,25 @@ const NovedadGet = () => {
                     <div
                       key={novedad.id}
                       className="border m-5 border-gray-300 p-4 rounded-lg cursor-pointer mb-4"
-                      onClick={() => handleOpenModal(novedad.mensaje)}
+                      // onClick={() => handleOpenModal(novedad.mensaje)}
                     >
-                      <h2 className="text-xl text-gray-300 font-semibold mb-4">
+                      <h2
+                        className="text-xl text-gray-300 font-semibold mb-4"
+                        onClick={() => handleOpenModal(novedad.mensaje)}
+                      >
                         Sucursal: {novedad.sede}
                       </h2>
                       <b>
-                        <p className="text-orange-500 mb-4">{novedad.titulo}</p>
+                        <p
+                          className="text-orange-500 mb-4"
+                          onClick={() => handleOpenModal(novedad.mensaje)}
+                        >
+                          {novedad.titulo}
+                        </p>
                       </b>
                       <p>Usuarios asignados a la novedad:</p>
                       <b>
-                        <div>
+                        <div onClick={() => handleOpenModal(novedad.mensaje)}>
                           <p className="text-gray-600 mb-4">
                             {novedad.novedadUsers &&
                             novedad.novedadUsers.length > 0
@@ -314,6 +337,7 @@ const NovedadGet = () => {
                           novedad.novedadUsers.length > 0 ? (
                             novedad.novedadUsers.map((novedadUser, index) => (
                               <p
+                                onClick={() => handleOpenModal(novedad.mensaje)}
                                 key={index}
                                 className={
                                   novedad.estado === 0
@@ -334,7 +358,10 @@ const NovedadGet = () => {
                       </b>
                       <p>Fecha de publicacion:</p>
                       <b>
-                        <p className="text-gray-600">
+                        <p
+                          className="text-gray-600"
+                          onClick={() => handleOpenModal(novedad.mensaje)}
+                        >
                           {formatearFecha(novedad.vencimiento)}
                         </p>
                       </b>
@@ -351,7 +378,6 @@ const NovedadGet = () => {
                             </button>
                             <button
                               onClick={() => handleEditarNovedad(novedad)}
-                              
                               className="py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
                             >
                               Editar
@@ -408,7 +434,12 @@ const NovedadGet = () => {
         novedad={selectednovedad}
         setSelectedNovedad={setSelectedNovedad}
       />
-
+      <ModalNovedad
+        isOpen={modalData.isOpen}
+        mensaje={modalData.mensaje}
+        onClose={handleCloseModal}
+        obtenerNovedades={obtenerNovedades}
+      />
     </>
   );
 };
