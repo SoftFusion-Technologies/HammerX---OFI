@@ -14,8 +14,9 @@
  * Capa: Frontend
  * Contacto: benjamin.orellanaof@gmail.com || 3863531891
  */
-
+import axios from 'axios';
 import React, { lazy, Suspense, useState, useEffect , memo} from 'react';
+
 import {
   BrowserRouter as Router,
   Routes as Rutas,
@@ -32,6 +33,7 @@ import IntegranteDetails from './pages/staff/MetodsGet/IntegranteConveGetId';
 import FrequentDetails from './pages/staff/MetodsGet/FrequentAsksGetId';
 import TaskDetails from './pages/staff/MetodsGet/TaskGetId';
 
+import TaskReminder2 from './components/TaskReminder2.jsx';
 // Importa los diferentes componentes de las páginas usando lazy loading para mejorar el rendimiento
 // COMPONENTES PRINCIPALES DE LA PAGINA
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -76,8 +78,29 @@ const AltaFreAskForm = lazy(() => import('./components/Forms/FormAltaFrecAsk'));
 const App = memo(() => {
   // Estado para controlar si se debe mostrar el componente de carga
   const [showLoading, setShowLoading] = useState(true);
+  const [tasks, setTasks] = useState([]);
 
-  // Efecto para ocultar el componente de carga después de un cierto tiempo
+  // URL para obtener las tareas
+  const URL = 'http://localhost:8080/schedulertask/';
+
+  // Función para obtener las tareas
+  const obtenerTasks = async () => {
+    try {
+      const response = await axios.get(URL);
+      setTasks(response.data);
+    } catch (error) {
+      console.log('Error al obtener las tareas:', error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerTasks(); // Carga las tareas cuando el componente se monte
+    const timer = setTimeout(() => {
+      setShowLoading(false);
+    }, 1700);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     // Establece un temporizador para ocultar el componente de carga después de 2 segundos
     const timer = setTimeout(() => {
@@ -248,6 +271,7 @@ const App = memo(() => {
                 <Ruta path="/ask/:id" element={<FrequentDetails />} />
                 <Ruta path="/task/:id" element={<TaskDetails />} />
               </Rutas>
+              <TaskReminder2 tasks={tasks} />
             </>
           )}
         </Suspense>
