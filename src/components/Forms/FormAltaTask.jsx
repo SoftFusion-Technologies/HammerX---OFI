@@ -43,13 +43,12 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
     }
   };
 
-  const handleCheckboxChange = (userId, values, setFieldValue) => {
-    const selectedUsers = values.user.includes(userId)
-      ? values.user.filter((id) => id !== userId)
-      : [...values.user, userId];
-    setFieldValue("user", selectedUsers);
-  };
-
+ const handleCheckboxChange = (userId, values, setFieldValue) => {
+   const selectedUsers = (values.user || []).includes(userId)
+     ? (values.user || []).filter((id) => id !== userId)
+     : [...(values.user || []), userId];
+   setFieldValue('user', selectedUsers);
+ };
   const handleSubmitTask = async (valores) => {
     try {
       if (valores.titulo === "" || valores.descripcion === "") {
@@ -106,21 +105,21 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
   return (
     <div
       className={`h-screen w-screen mt-16 fixed inset-0 flex pt-10 justify-center ${
-        isOpen ? "block" : "hidden"
+        isOpen ? 'block' : 'hidden'
       } bg-gray-800 bg-opacity-75 z-50`}
     >
       <div className={`container-inputs`}>
         <Formik
           innerRef={formikRef}
           initialValues={{
-            titulo: task ? task.titulo : "",
-            descripcion: task ? task.descripcion : "",
-            hora: task ? task.hora : "",
+            titulo: task ? task.titulo : '',
+            descripcion: task ? task.descripcion : '',
+            hora: task ? task.hora : '',
             state: true,
-            dias: task ? task.dias : "",
+            dias: task ? task.dias : '',
             user: task ? task.user : [],
             created_at: null,
-            updated_at: null,
+            updated_at: null
           }}
           enableReinitialize
           onSubmit={async (values, { resetForm }) => {
@@ -144,7 +143,10 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                       <span className="green toolsbox"></span>
                     </div>
                   </div>
-                  <div className="pr-6 pt-3 text-[20px] cursor-pointer" onClick={handleClose}>
+                  <div
+                    className="pr-6 pt-3 text-[20px] cursor-pointer"
+                    onClick={handleClose}
+                  >
                     x
                   </div>
                 </div>
@@ -158,17 +160,21 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                     name="titulo"
                     maxLength="70"
                   />
-                  {errors.titulo && touched.titulo ? <Alerta>{errors.titulo}</Alerta> : null}
+                  {errors.titulo && touched.titulo ? (
+                    <Alerta>{errors.titulo}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-3 px-4">
                   <ReactQuill
                     value={values.descripcion}
-                    onChange={(value) => setFieldValue("descripcion", value)}
+                    onChange={(value) => setFieldValue('descripcion', value)}
                     placeholder="Descripcion"
                     className="bg-slate-100 rounded-xl"
                   />
-                  {errors.descripcion && touched.descripcion ? <Alerta>{errors.descripcion}</Alerta> : null}
+                  {errors.descripcion && touched.descripcion ? (
+                    <Alerta>{errors.descripcion}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-3 px-4">
@@ -180,11 +186,15 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                     name="hora"
                     maxLength="16"
                   />
-                  {errors.hora && touched.hora ? <Alerta>{errors.hora}</Alerta> : null}
+                  {errors.hora && touched.hora ? (
+                    <Alerta>{errors.hora}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-4 px-4">
-                  <label className="form-label">Selecciona uno o más usuarios:</label>
+                  <label className="form-label">
+                    Selecciona uno o más usuarios:
+                  </label>
                   {Array.isArray(users) && users.length > 0 ? (
                     users.map((user) => (
                       <div key={user.id} className="form-check">
@@ -193,10 +203,15 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                           id={`user-${user.id}`}
                           className="form-check-input"
                           value={user.id}
-                          onChange={() => handleCheckboxChange(user.id, values, setFieldValue)}
-                          checked={values.user.includes(user.id)}
+                          onChange={() =>
+                            handleCheckboxChange(user.id, values, setFieldValue)
+                          }
+                          checked={values.user && values.user.includes(user.id)} // Verificamos que 'values.user' no sea undefined
                         />
-                        <label htmlFor={`user-${user.id}`} className="form-check-label">
+                        <label
+                          htmlFor={`user-${user.id}`}
+                          className="form-check-label"
+                        >
                           {user.name}
                         </label>
                       </div>
@@ -204,7 +219,9 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                   ) : (
                     <p>No users available</p>
                   )}
-                  {errors.user && touched.user ? <Alerta>{errors.user}</Alerta> : null}
+                  {errors.user && touched.user ? (
+                    <Alerta>{errors.user}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-3 px-4">
@@ -216,7 +233,9 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                     name="dias"
                     maxLength="16"
                   />
-                  {errors.dias && touched.dias ? <Alerta>{errors.dias}</Alerta> : null}
+                  {errors.dias && touched.dias ? (
+                    <Alerta>{errors.dias}</Alerta>
+                  ) : null}
                 </div>
 
                 <div className="mb-4 px-4">
@@ -233,7 +252,9 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
                   </Field>
-                  {errors.state && touched.state ? <Alerta>{errors.state}</Alerta> : null}
+                  {errors.state && touched.state ? (
+                    <Alerta>{errors.state}</Alerta>
+                  ) : null}
                 </div>
                 <div className="mx-auto flex justify-center my-5">
                   <input
@@ -247,7 +268,11 @@ const FormAltaTask = ({ isOpen, onClose, task, setSelectedTask }) => {
           )}
         </Formik>
       </div>
-      <ModalSuccess textoModal={textoModal} isVisible={showModal} onClose={() => setShowModal(false)} />
+      <ModalSuccess
+        textoModal={textoModal}
+        isVisible={showModal}
+        onClose={() => setShowModal(false)}
+      />
       <ModalError isVisible={errorModal} onClose={() => setErrorModal(false)} />
     </div>
   );
