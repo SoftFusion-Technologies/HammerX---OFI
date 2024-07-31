@@ -14,6 +14,9 @@ const ModalNovedad = ({ isOpen, onClose, mensaje, obtenerNovedades }) => {
     obtenerNovedades();
   }, []); // Este efecto se ejecuta solo al montar el componente
 
+  const actualizarEstado = () => {
+    setEstado(0)
+  }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
